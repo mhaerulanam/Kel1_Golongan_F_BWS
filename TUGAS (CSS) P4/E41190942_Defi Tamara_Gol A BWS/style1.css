@@ -1,3 +1,14 @@
 .judul{
     color: blue;
+    text-align: center;
+    font-family: Segoe UI;
+}
+p{
+    font-family: sans-serif;
+}
+.t1{
+    font-family: Segoe UI;
+}
+h3{
+    font-family: Segoe UI;
 }

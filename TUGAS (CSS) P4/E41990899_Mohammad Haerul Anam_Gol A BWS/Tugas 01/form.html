@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+</head>
+<body>
+    <form>
+        <!-- atribut value -->
+        Nama Depan : <input type="text" name="nm" id="nm" value="nama">
+        Nama Belakang : <input type="text" name="nmb" id="nmb">
+        <br><br>
+        <!-- atribut readonly -->
+        Nama Depan : <input type="text" name="nm" id="nm" value="nama" readonly>
+        Nama Belakang : <input type="text" name="nmb" id="nmb">
+        <br><br>
+        <!-- atribut disable -->
+        Nama Depan : <input type="text" name="nm" id="nm" value="nama" disabled>
+        Nama Belakang : <input type="text" name="nmb" id="nmb">
+        <br><br>
+        <!-- atribut size -->
+        Nama Depan : <input type="text" name="nm" id="nm" value="nama" size="15%">
+        Nama Belakang : <input type="text" name="nmb" id="nmb">
+        <br><br>
+        <!-- atribut maxlegth -->
+        Nama Depan : <input type="text" name="nm" id="nm" value="nama" maxlength="10">
+        Nama Belakang : <input type="text" name="nmb" id="nmb">
+        <br><br>
+        <!-- atribut list -->
+        <input list="browser" name="internet">
+        <datalist id="browser">
+            <option value="chrome">
+            <option value="Mozilla">
+            <option value="Opera">
+        </datalist>
+        <br><br>
+        <!-- atribut min dan max -->
+        <input type="date" name="day" id="day1" min="1979-12-31">
+        <input type="date" name="day" id="day2" max="2000-01-02">
+        <br><br>
+        <!-- Contoh Placeholder -->
+        <input type="text" name="nama" placeholder="masukkan nama">
+    
+    </form>
+
+</body>
+</html>

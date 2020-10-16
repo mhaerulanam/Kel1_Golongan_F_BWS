@@ -1,0 +1,17 @@
+.judul{
+    color:brown;
+    text-align: center;
+    font-family: Segoe UI;
+    background-color: cornsilk;
+}
+p{
+    font-family: sans-serif;
+    font-size: 15px; 
+}
+.part4,.part5{
+    font-family: Segoe UI;
+    text-align: center;
+}
+h3{
+    font-family: Segoe UI;
+}

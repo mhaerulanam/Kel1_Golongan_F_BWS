@@ -249,7 +249,7 @@
                     <div class="form-group">
                         <input type="text" class="form-control form-control-user" id="usrnm" name="usrnm" placeholder="Username Anda" required>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <input type="text" class="form-control form-control-user" id="email"name="email" placeholder="Email Anda" required>
                     </div>
                     <div class="form-group">
@@ -278,7 +278,7 @@
 
                     <div class="form-group">
                     <textarea class="form-control" id="bio" name="bio" rows="3" required></textarea>
-                  </div>
+                  </div> -->
                     <button type="submit" class="btn btn-success" name="submit">Tambah</button>
                 </form>
                 <?php # membuka tag PHP

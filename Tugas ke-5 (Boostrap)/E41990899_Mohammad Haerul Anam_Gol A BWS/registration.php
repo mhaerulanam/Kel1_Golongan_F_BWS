@@ -304,7 +304,7 @@
                     echo "<strong>Email : </strong> {$email} <br>";
                 }
                 if ($psw || $jns || $agama || $bio) {
-                  echo "<strong>Password : </strong> {$psw} <br>";
+                  // echo "<strong>Password : </strong> {$psw} <br>";
                   echo "<strong>Jenis Kelamin : </strong> {$jns} <br>";
                   echo "<strong>Agama : </strong> {$agama} <br>";
                   echo "<strong>Biografi : </strong> {$bio} <br>";

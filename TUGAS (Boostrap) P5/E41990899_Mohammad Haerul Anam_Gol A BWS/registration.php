@@ -277,7 +277,6 @@
                     </div>
 
                     <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Example textarea</label>
                     <textarea class="form-control" id="bio" name="bio" rows="3" required></textarea>
                   </div>
                     <button type="submit" class="btn btn-success" name="submit">Tambah</button>

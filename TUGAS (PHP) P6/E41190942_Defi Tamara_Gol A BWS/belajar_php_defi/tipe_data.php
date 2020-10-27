@@ -19,9 +19,11 @@ $tinggi = 182.2;
 $menikah = false;
 
 echo "Nama: $nama_lengkap<br>";
-echo "Jenis Kelamin: $jenis_kelamin";
+echo "Jenis Kelamin: $jenis_kelamin<br>";
 echo "Umur: $umur tahun<br>";
 echo "Berat badan: $berat kg<br>";
 echo "Tinggi badan: $tinggi cm<br>";
 echo "menikah: $menikah";
 ?>
+
+

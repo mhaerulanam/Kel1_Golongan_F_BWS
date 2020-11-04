@@ -69,12 +69,11 @@
                                 </form>
                             </div>
                             <?php
-                            $username = 'Anam';
-                            $password = 'Anam2001';
+                            $login = Array("Anam","Anam2001");
                             if (isset($_POST['submit'])) {
-                                if ($_POST['usr'] == $username){
-                                    $_SESSION["usr"] = $username;
-                                    if ($_POST['psw'] == $password){
+                                if ($_POST['usr'] == $login[0]){
+                                    $_SESSION["usr"] = $login[0];
+                                    if ($_POST['psw'] == $login[1]){
                                         header("Location: Dashboard.php"); //Pindahkan Kehalaman Dashboard
                                         // echo "<script type='text/javascript'>alert('Anda Berhasil Login $username');</script>";
                                     }

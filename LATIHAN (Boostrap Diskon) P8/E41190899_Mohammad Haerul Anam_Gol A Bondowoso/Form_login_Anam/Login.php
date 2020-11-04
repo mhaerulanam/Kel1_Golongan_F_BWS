@@ -56,36 +56,35 @@
                         		</div>
                             </div>
                             <div class="form-bottom">
-			                    <form role="form" method="post" class="login-form" action="<?php echo $_SERVER['PHP_SELF'];?>">
+			                    <form role="form" method="post" class="login-form" action="login_data.php">
 			                    	<div class="form-group">
 			                    		<label class="sr-only" for="form-username">Username</label>
-			                        	<input type="text" name="usr" placeholder="Username..." class="form-username form-control" id="form-username" required>
+			                        	<input type="text" name="username" placeholder="Username..." class="form-username form-control" id="form-username" required>
 			                        </div>
 			                        <div class="form-group">
 			                        	<label class="sr-only" for="form-password">Password</label>
-			                        	<input type="password" name="psw" placeholder="Password..." class="form-password form-control" id="form-password" required>
+			                        	<input type="password" name="password" placeholder="Password..." class="form-password form-control" id="form-password" required>
 			                        </div>
-			                        <button type="submit" name="submit" class="btn">Sign in!</button>
+			                        <button type="submit" class="btn">Sign in!</button>
                                 </form>
                             </div>
-                            <?php
-                            $login = Array("Anam","Anam2001");
-                            if (isset($_POST['submit'])) {
-                                if ($_POST['usr'] == $login[0]){
-                                    $_SESSION["usr"] = $login[0];
-                                    if ($_POST['psw'] == $login[1]){
-                                        header("Location: Dashboard.php"); //Pindahkan Kehalaman Dashboard
-                                        // echo "<script type='text/javascript'>alert('Anda Berhasil Login $username');</script>";
-                                    }
-                                    else{
-                                        echo "<script type='text/javascript'>alert('Password Tidak Benar');</script>";
-                                    } 
-                                } else {
-                                    // Tampilkan Pesan Error
-                                    echo "<script type='text/javascript'>alert('Username Tidak Benar');</script>";
-                                }
-                            }       
-                            ?>
+                            <!-- // $login = Array("Anam","Anam2001");
+                            // if (isset($_POST['submit'])) {
+                            //     if ($_POST['usr'] == $login[0]){
+                            //         $_SESSION["usr"] = $login[0];
+                            //         if ($_POST['psw'] == $login[1]){
+                            //             header("Location: Dashboard.php"); //Pindahkan Kehalaman Dashboard
+                            //             // echo "<script type='text/javascript'>alert('Anda Berhasil Login $username');</script>";
+                            //         }
+                            //         else{
+                            //             echo "<script type='text/javascript'>alert('Password Tidak Benar');</script>";
+                            //         } 
+                            //     } else {
+                            //         // Tampilkan Pesan Error
+                            //         echo "<script type='text/javascript'>alert('Username Tidak Benar');</script>";
+                            //     }
+                            // }        -->
+                            
                         </div>
                     </div>
                     </div>

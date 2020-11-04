@@ -1,3 +1,8 @@
+<?php
+
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +12,7 @@
 </head>
 <body>
     <script>
-        alert ("Anam, Selamat Anda Berhasil Log in");    
+        alert ("<?php echo ($_SESSION['username']);?>, Selamat Anda Berhasil Log in sebagai <?php echo ($_SESSION['level']);?>");    
     </script>
     <center><h1>Selamat Datang</h1><a href="./Login.php"><- Kembali</a></center>
 </body>

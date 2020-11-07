@@ -1,3 +1,8 @@
+<?php
+// Start the session
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,10 +30,10 @@
 
         <ul class="nav navbar-right navbar-top-links">
             <li class="dropdown navbar-inverse">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <!-- <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="fa fa-bell fa-fw"></i> <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu dropdown-alerts">
+                </a> -->
+                <!-- <ul class="dropdown-menu dropdown-alerts">
                     <li>
                         <a href="#">
                             <div>
@@ -76,11 +81,11 @@
                             <i class="fa fa-angle-right"></i>
                         </a>
                     </li>
-                </ul>
+                </ul> -->
             </li>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i> secondtruth <b class="caret"></b>
+                    <i class="fa fa-user fa-fw"></i> <?php echo $_SESSION['username']?> <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
                     <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -99,32 +104,24 @@
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
-                    <li class="sidebar-search">
-                        <div class="input-group custom-search-form">
-                            <!-- <input type="text" class="form-control" placeholder="Search..."> -->
+                    <!-- <li class="sidebar-search"> -->
+                        <!-- <div class="input-group custom-search-form"> -->
+                            <!-- <input type="text" class="form-control" placeholder="Search...">
                             <span class="input-group-btn">
-                                <!-- <button class="btn btn-primary" type="button">
+                                <button class="btn btn-primary" type="button">
                                    <i class="fa fa-search"></i>
                                 </button> -->
-                        </span>
-                        </div>
-                        <!-- /input-group -->
-                    </li>
-                    
-<!-- <li>
-                                <a href="index.php" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                            </li> -->
+                        <!-- </span>
+                        </div> -->
+                    <!-- </li> -->
                             <li>
                                 <a href="tabel_mahasiswa.php"><i class="fa fa-table fa-fw"></i>Data Mahasiswa</a>
                             </li>
                             <li>
-                                <a href="tabel_dosen.html"><i class="fa fa-table fa-fw"></i>Data Dosen</a>
+                                <a href="tabel_dosen.php"><i class="fa fa-table fa-fw"></i>Data Dosen</a>
                             </li>
                             <li>
-                                <a href="tael_user.php"><i class="fa fa-edit fa-fw"></i>Data User</a>
-                            </li>
-                            <li>
-                                <a href="tabel_matkul.php"><i class="fa fa-edit fa-fw"></i>Data Mata Kuliah</a>
+                                <a href="tabel_user.php"><i class="fa fa-edit fa-fw"></i>Data User</a>
                             </li>
                 </ul>
             </div>

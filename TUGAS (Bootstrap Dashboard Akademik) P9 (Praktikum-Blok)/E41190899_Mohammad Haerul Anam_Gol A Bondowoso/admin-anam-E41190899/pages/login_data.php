@@ -20,7 +20,7 @@
     foreach ($masuk as $data) {
             if ($_POST['username'] == $data['username']){
                 if ($_POST['password'] == $data['password']){
-                header("Location: index.html"); //Pindahkan Kehalaman Dashboard
+                header("Location: index.php"); //Pindahkan Kehalaman Dashboard
                 session_start();
                 $_SESSION['username'] = $_POST['username'];
                 $_SESSION['level'] = ($data['level'] == "1")?'Admin':'Kasir';

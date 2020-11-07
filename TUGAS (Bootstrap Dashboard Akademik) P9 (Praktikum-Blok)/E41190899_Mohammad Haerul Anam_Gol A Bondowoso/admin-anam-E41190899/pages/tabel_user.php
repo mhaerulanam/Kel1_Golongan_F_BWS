@@ -1,3 +1,8 @@
+<?php
+// Start the session
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -11,8 +16,7 @@
 
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="/resources/demos/style.css">
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+       
 
         <!-- Bootstrap Core CSS -->
         <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -36,15 +40,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" media="screen" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script>
-    $(document).ready(function(){
-        $('#tabel-data').DataTable();
-    });
-</script>
+
 
 <style type="text/css">
     body {
@@ -292,122 +289,14 @@
 		}
 	});
 });
-        </script>
+
+</script>
 
     </head>
     <body>
 
         <div id="wrapper">
-            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html">Akademik</a>
-                </div>
-
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-
-                <!-- <ul class="nav navbar-nav navbar-left navbar-top-links">
-                    <li><a href="#"><i class="fa fa-home fa-fw"></i> Website</a></li>
-                </ul> -->
-
-                <ul class="nav navbar-right navbar-top-links">
-                    <li class="dropdown navbar-inverse">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-bell fa-fw"></i> <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu dropdown-alerts">
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="fa fa-comment fa-fw"></i> New Comment
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                        <span class="pull-right text-muted small">12 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="fa fa-tasks fa-fw"></i> New Task
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div>
-                                        <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a class="text-center" href="#">
-                                    <strong>See All Alerts</strong>
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-user fa-fw"></i> secondtruth <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-
-                <!-- /.navbar-top-links -->
-
-                <div class="navbar-default sidebar" role="navigation">
-                    <div class="sidebar-nav navbar-collapse">
-                        <ul class="nav" id="side-menu">
-                            <li class="sidebar-search">
-                                <div class="input-group custom-search-form">
-                                    <input type="text" class="form-control" placeholder="Search...">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-primary" type="button">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                </span>
-                                </div>
-                                <!-- /input-group -->
-                            </li><?php
-                            include "navbar.html";
-                            ?>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-
+		<?php include "navbar.php" ?>
             <!-- Page Content -->
             <div id="page-wrapper">
                 <div class="container-fluid">
@@ -420,17 +309,27 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 ini_set('max_execution_time', 0);
 date_default_timezone_set('Asia/Jakarta');
 include "koneksi.php";
-	$nim = $_POST['nim'];
-    $nama = $_POST['nama'];
-    $ttl = $_POST['date'];
-    $agama = $_POST['agama'];
+	$Id_user = $_POST['Id_user'];
     $username = $_POST['username'];
-    $password = $_POST['password'];
+	$password = $_POST['password'];
+	$level = $_POST['level'];
 
 if(isset($_POST['tambah']))
 {
+	/* cek input NIM apakah sudah ada nim yang digunakan */
+	$pilih="select * from user where Id_user='$Id_user'";
+	$cek=mysqli_query($mysqli, $pilih);
+  
+	$jumlah_data = mysqli_num_rows($cek);
+	if ($jumlah_data >= 1 ) 
+	{
+  
+   echo "<script>alert(' Id User yang sama sudah digunakan');history.go(-1);</script>";
+	 }
+	else
+ {
 	//tambah
-	$sql = "INSERT INTO mahasiswa (Nim,nama,ttl,agama,username,password) VALUES('$nim','$nama','$ttl','$agama','$username','$password')";
+	$sql = "INSERT INTO user (Id_user,username,password,level) VALUES('$Id_user','$username','$password','$level')";
 	if(mysqli_query($mysqli, $sql))
 	{
 		$nilaihasil = "Records inserted successfully.";
@@ -439,15 +338,12 @@ if(isset($_POST['tambah']))
 	{
 		echo "ERROR: Could not able to execute $sql. " . mysqli_error($mysqli);
 	}
-	
-
+}
 }
 if(isset($_POST['edit']))
 {
 	//edit
-	$sql = "UPDATE mahasiswa SET nama = '$nama' , ttl = '$ttl', agama = '$agama', username = '$username', password = '$password' WHERE Nim = '$nim'";
-	// $sql = "UPDATE mahasiswa SET nama = '$nama' , ttl = '$ttl', agama = '$agama', username = '$username', password = '$password' ,  WHERE Nim = '$nim'";
-	// $sql = "UPDATE mahasiswa SET nama = '$nama' , ttl = '$ttl', agama = '$agama', username = '$username', password = '$password', WHERE Nim = '$nim'";
+	$sql = "UPDATE user SET  username = '$username', password = '$password', level = '$level' WHERE Id_user = '$Id_user'";
 	if(mysqli_query($mysqli, $sql))
 	{
 		$nilaihasil = "Records updated successfully.";
@@ -460,7 +356,7 @@ if(isset($_POST['edit']))
 if(isset($_POST['delete']))
 {
 	//delete
-	$sql = "DELETE FROM mahasiswa WHERE Nim = '$nim'";
+	$sql = "DELETE FROM user WHERE Id_user = '$Id_user'";
 	if(mysqli_query($mysqli, $sql))
 	{
 		$nilaihasil = "Records deleted successfully.";
@@ -476,7 +372,7 @@ if(isset($_POST['deleteall']))
 {
 	//delete
 	$pilih = $_POST['pilih'];
-		$sql = "DELETE FROM mahasiswa WHERE Nim IN (".implode(",", $pilih).")";
+		$sql = "DELETE FROM user WHERE Id_user IN (".implode(",", $pilih).")";
 		if(mysqli_query($mysqli, $sql))
 		{
 			$nilaihasil = "Records deleted successfully.";
@@ -494,11 +390,11 @@ if(isset($_POST['deleteall']))
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
-						<h4><b>Data Mahasiswa</b></h4>
+						<h4><b>Data User</b></h4>
 					</div>
 					<div class="col-sm-6">
-						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">New Record</a>
-						<input type="submit" name="deleteall" value="Delete Selected" class="btn btn-danger" onclick="return confirm('Are you sure delete selected records?')">
+						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">++ Tambah Data	</a>
+						<!-- <input type="submit" name="deleteall" value="Delete Selected" class="btn btn-danger" onclick="return confirm('Are you sure delete selected records?')"> -->
 					</div>
                 </div>
 			</div>
@@ -506,58 +402,53 @@ if(isset($_POST['deleteall']))
             <table id="tabel-data" class="table table-striped table-hover" >
                 <thead>
                     <tr>
-						<th>
+						<!-- <th>
 							<span class="custom-checkbox">
 								<input type="checkbox" id="selectAll">
 								<label for="selectAll"></label>
 							</span>
-						</th>
-                        <th>NIM</th>
-						<th>Nama</th>
-                        <th>Tanggal Lahir</th>
-						<th>Agama</th>
+						</th> -->
+						<th>No</th>
+                        <th>ID User</th>
                         <th>Username</th>
 						<th>Password</th>
+						<th>Level</th>
 						<th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
 <?php
-$i = 0;
-$ksql="SELECT * FROM mahasiswa";
+$i = 1;
+$ksql="SELECT * FROM user";
 $khasil = mysqli_query($mysqli,$ksql);
 while($krow = mysqli_fetch_array($khasil))
 {
-$i++;
 ?>
+
 					<tr>
-						<td>
+						<!-- <td>
 							<span class="custom-checkbox">
-								<input type="checkbox" id="checkbox5" name="pilih[]" value="<?php echo $krow['Nim']; ?>">
+								<input type="checkbox" id="checkbox5" name="pilih[]" value="<?php echo $krow['Id_user']; ?>">
 								<label for="checkbox5"></label>
 							</span>
-						</td>
-						<td><?php echo $krow['Nim']; ?></td>
-						<td><?php echo $krow['nama']; ?></td>
-						<td><?php echo $krow['ttl']; ?></td>
-						<td><?php echo $krow['agama']; ?></td>
+						</td> -->
+						<td><?= $i ?></td>
+						<td><?php echo $krow['Id_user']; ?></td>
 						<td><?php echo $krow['username']; ?></td>
 						<td><?php echo $krow['password']; ?></td>
-						<td>
-						</td>
-                        <td><?php echo $krow['update_create']; ?></td>
+						<td><?php echo $krow['level']; ?></td>
                         <td>
-                            <a href="#editEmployeeModal<?php echo $krow['Nim']; ?>" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal<?php echo $krow['Nim']; ?>" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                            <a href="#editEmployeeModal<?php echo $krow['Id_user']; ?>" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                            <a href="#deleteEmployeeModal<?php echo $krow['Id_user']; ?>" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                     </tr>
 					
 	<!-- Edit Modal HTML -->
-	<div id="editEmployeeModal<?php echo $krow['Nim']; ?>" class="modal fade">
+	<div id="editEmployeeModal<?php echo $krow['Id_user']; ?>" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
 			<form role="form" method="POST">
-			<input type="hidden" class="form-control" value="<?php echo $krow['Nim']; ?>" name="nim" required>
+			<input type="hidden" class="form-control" value="<?php echo $krow['Id_user']; ?>" name="Id_user" required>
 					<div class="modal-header">
 						<h4 class="modal-title">Edit</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -567,27 +458,7 @@ $i++;
                                                     <label>Nim :</label>
                                                     <input type="text" name="nim" id="nim" class="form-control" placeholder="Masukkan NIM" required>
                                                 </div> -->
-                                                <div class="form-group">
-                                                    <label>Nama Lengkap :</label>
-                                                    <input type="text" name="nama" id="nama" class="form-control" value="<?php echo $krow['nama']; ?>"  placeholder="Masukkan Nama Lengkap" required>
-                                                </div>
-                                                
-                                                <div class="form-group">
-                                                    <label >Date :</label>
-                                                    <input type="date" name="date" id="date" class="form-control" value="<?php echo $krow['ttl']; ?>"  placeholder="Masukkan Tanggal Lahir" required>
-                                                </div>
-                                               
-                                                <div class="form-group">
-                                                    <label>Agama :</label>
-                                                    <select class="form-control" value="<?php echo $krow['agama']; ?>" name="agama">
-                                                        <option>Islam</option>
-                                                        <option>Protestan</option>
-                                                        <option>Katolik</option>
-                                                        <option>Hindu</option>
-                                                        <option>Buddha</option>
-                                                        <option>Khonghucu</option>
-                                                    </select>
-                                                </div>
+
                                                 <div class="form-group">
                                                     <label>Username :</label>
                                                     <input type="text" name="username" id="username" class="form-control" value="<?php echo $krow['username']; ?>"  placeholder="Masukkan Username" required>
@@ -595,6 +466,19 @@ $i++;
                                                 <div class="form-group">
                                                     <label>Password :</label>
                                                     <input type="password" name="password" id="password" class="form-control" value="<?php echo $krow['password']; ?>"  placeholder="Masukkan Password" required>
+												</div>
+												<div class="form-group">
+                                                    <label>Level</label>
+                                                    <div class="radio-inline">
+                                                        <label>
+                                                            <input type="radio" name="level" id="optionsRadios1" value="<?php echo $krow['level']; ?>" checked>1 (Admin)
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio-inline">
+                                                        <label>
+                                                            <input type="radio" name="level" id="optionsRadios2" value="<?php echo $krow['level']; ?>">2 (Kasir)
+                                                        </label>
+													</div>
 												</div>
 												<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
@@ -606,11 +490,11 @@ $i++;
 		</div>
 	</div>
 	<!-- Delete Modal HTML -->
-	<div id="deleteEmployeeModal<?php echo $krow['Nim']; ?>" class="modal fade">
+	<div id="deleteEmployeeModal<?php echo $krow['Id_user']; ?>" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
 			<form method="post" action="">
-				<input type="text" class="form-control" value="<?php echo $krow['Nim']; ?>" name="nim" required>
+				<input type="text" class="form-control" value="<?php echo $krow['Id_user']; ?>" name="Id_user" required>
 					<div class="modal-header">
 						<h4 class="modal-title">Delete</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -628,6 +512,8 @@ $i++;
 		</div>
 	</div>
 <?php
+
+$i++;
 }
 	// Close connection
 	mysqli_close($mysqli);
@@ -647,30 +533,10 @@ $i++;
 					</div>
 					<div class="modal-body">
                                                 <div class="form-group">
-                                                    <label>Nim :</label>
-                                                    <input type="text" name="nim" id="nim" class="form-control" placeholder="Masukkan NIM" required>
+                                                    <label>ID User :</label>
+                                                    <input type="text" name="Id_user" id="Id_user" min="8" max="8" class="form-control" placeholder="Masukkan ID User" required>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label>Nama Lengkap :</label>
-                                                    <input type="text" name="nama" id="nama" class="form-control" placeholder="Masukkan Nama Lengkap" required>
-                                                </div>
-                                                
-                                                <div class="form-group">
-                                                    <label >Date :</label>
-                                                    <input type="date" name="date" id="date" class="form-control" placeholder="Masukkan Tanggal Lahir" required>
-                                                </div>
-                                               
-                                                <div class="form-group">
-                                                    <label>Agama :</label>
-                                                    <select class="form-control" name="agama">
-                                                        <option>Islam</option>
-                                                        <option>Protestan</option>
-                                                        <option>Katolik</option>
-                                                        <option>Hindu</option>
-                                                        <option>Buddha</option>
-                                                        <option>Khonghucu</option>
-                                                    </select>
-                                                </div>
+                                     
                                                 <div class="form-group">
                                                     <label>Username :</label>
                                                     <input type="text" name="username" id="username" class="form-control" placeholder="Masukkan Username" required>
@@ -678,25 +544,30 @@ $i++;
                                                 <div class="form-group">
                                                     <label>Password :</label>
                                                     <input type="password" name="password" id="password" class="form-control" placeholder="Masukkan Password" required>
-                                                </div>
+												</div>
+												<div class="form-group">
+                                                    <label>Level</label>
+                                                    <div class="radio-inline">
+                                                        <label>
+                                                            <input type="radio" name="level" id="optionsRadios1"  value="1" checked>1 (Admin)
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio-inline">
+                                                        <label>
+                                                            <input type="radio" name="level" id="optionsRadios2" value="2" >2 (Kasir)
+                                                        </label>
+													</div>
+												</div>
                                                 
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-						<input type="submit" class="btn btn-success" value="Add" name="tambah">
+						<input type="submit" class="btn btn-success" onclick="" value="Add" name="tambah">
 					</div>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-</div>
-<div class="dataTables_paginate paging_simple_numbers" id="tabel-data_paginate">
-    <a class="paginate_button previous disabled" aria-controls="tabel-data" data-dt-idx="0" tabindex="0" id="tabel-data_previous">
-        Previous</a>
-        <span>
-</span>
-<a class="paginate_button next disabled" aria-controls="tabel-data" data-dt-idx="1" tabindex="0" id="tabel-data_next">
-    Next</a>
 </div>
 </table>
 </div>
@@ -719,7 +590,14 @@ $i++;
         <script src="../js/metisMenu.min.js"></script>
 
         <!-- Custom Theme JavaScript -->
-        <script src="../js/startmin.js"></script>
+		<script src="../js/startmin.js"></script>
+		
+		<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				$('#tabel-data').DataTable();
+			});
+		</script>
 
     </body>
 </html>

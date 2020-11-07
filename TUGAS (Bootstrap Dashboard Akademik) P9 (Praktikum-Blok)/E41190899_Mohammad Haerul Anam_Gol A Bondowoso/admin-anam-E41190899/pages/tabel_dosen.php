@@ -302,7 +302,7 @@ session_start();
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h1 class="page-header">Data Mahasiswa</h1>
+                            <h1 class="page-header">Data Dosen</h1>
                         </div>
 <?php                    
 error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
@@ -394,7 +394,7 @@ if(isset($_POST['deleteall']))
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
-						<h4><b>Data Mahasiswa</b></h4>
+						<h4><b>Data Dosen</b></h4>
 					</div>
 					<div class="col-sm-6">
 						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">++ Tambah Data	</a>

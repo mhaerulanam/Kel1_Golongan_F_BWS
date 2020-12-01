@@ -1,0 +1,110 @@
+body{
+    font-family: 'roboto';
+    color: #000;
+}
+
+.judul {
+    background: #0e004b;
+    padding: 10px ;
+    text-align: center;
+}
+
+.judul h1,h2 {
+    color: #d6d6d6;
+    height: 15px;
+    padding: 10px;
+}
+
+a{
+    padding: 5 px;
+    text-decoration: none;
+}
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table.table th  th, table.table tr td {
+    text-align: center;
+    padding: 10px;
+}
+table.table th{
+    background-color:#0e004b;
+    color: white;
+    padding: 10px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+table.table td{
+    background-color: #ffffff;
+    box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 3px solid #ccc;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}
+
+input[type=text]:focus {
+    background-color: lightblue;
+    border: 3px solid #555;
+}
+
+input[type=submit]{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+.tombol{
+    background-color: #dddddd;
+    border: none;
+    color: rgb(0, 0, 0);
+    padding: 10px 20px;
+    text-decoration: none;
+    margin: 30px 0px;
+    cursor: pointer;
+}
+
+  input[type=reset]{
+    background-color: #eeeeee;
+    border: none;
+    color: #000;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+  #batal{
+    background-color: #eeeeee;
+    border: none;
+    color: #000;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.box {
+	margin:10px auto;
+    /* max-width: 600px; */
+    max-width: 90%;
+	padding: 20px 12px 10px 20px;
+}
+.box-input {
+	margin:10px auto;
+	max-width: 400px;
+	padding: 20px 12px 10px 20px;
+}

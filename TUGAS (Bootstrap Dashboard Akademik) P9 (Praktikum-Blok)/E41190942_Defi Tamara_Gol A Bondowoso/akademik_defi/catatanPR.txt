@@ -1,0 +1,8 @@
+PELAJARI
+
+- Cara menampilkan kategori dalam bentuk combo box, yang datanya diambil dari database MySQL (Done)
+- Cara menampilkan tabel isi database (Done)
+
+
+Untuk membuka web saya, buka login.php terlebih dahulu.
+Masukkan username : defitamara dan password : 12345

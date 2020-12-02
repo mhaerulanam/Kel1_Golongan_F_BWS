@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 02 Des 2020 pada 04.21
--- Versi server: 10.4.11-MariaDB
--- Versi PHP: 7.4.3
+-- Waktu pembuatan: 02 Des 2020 pada 06.31
+-- Versi server: 10.4.14-MariaDB
+-- Versi PHP: 7.4.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -212,6 +211,8 @@ CREATE TABLE `rekam_medis` (
 --
 
 CREATE TABLE `respon_konsultasi` (
+  `id_respon` varchar(11) NOT NULL,
+  `id_konsultasi` varchar(11) NOT NULL,
   `kepada` varchar(30) NOT NULL,
   `keluhan` text NOT NULL,
   `respon` text NOT NULL
@@ -254,7 +255,9 @@ CREATE TABLE `user` (
 -- Indeks untuk tabel `artikel`
 --
 ALTER TABLE `artikel`
-  ADD PRIMARY KEY (`id_artikel`);
+  ADD PRIMARY KEY (`id_artikel`),
+  ADD UNIQUE KEY `id_pilihan` (`id_pilihan`),
+  ADD KEY `id_kategori` (`id_kategori`);
 
 --
 -- Indeks untuk tabel `data_hewan`
@@ -272,7 +275,8 @@ ALTER TABLE `data_obat`
 -- Indeks untuk tabel `dokter`
 --
 ALTER TABLE `dokter`
-  ADD PRIMARY KEY (`id_dokter`);
+  ADD PRIMARY KEY (`id_dokter`),
+  ADD KEY `id_jabatan` (`id_jabatan`);
 
 --
 -- Indeks untuk tabel `jabatan`
@@ -290,13 +294,17 @@ ALTER TABLE `jenis_hewan`
 -- Indeks untuk tabel `kat_hewan`
 --
 ALTER TABLE `kat_hewan`
-  ADD PRIMARY KEY (`id_kategori`);
+  ADD PRIMARY KEY (`id_kategori`),
+  ADD KEY `id_jenis` (`id_jenis`);
 
 --
 -- Indeks untuk tabel `konsultasi`
 --
 ALTER TABLE `konsultasi`
-  ADD PRIMARY KEY (`id_konsultasi`);
+  ADD PRIMARY KEY (`id_konsultasi`),
+  ADD KEY `id_peternak` (`id_peternak`),
+  ADD KEY `id_dokter` (`id_dokter`),
+  ADD KEY `id_kategori` (`id_kategori`);
 
 --
 -- Indeks untuk tabel `peternak`
@@ -314,13 +322,21 @@ ALTER TABLE `pilihan`
 -- Indeks untuk tabel `puskeswan`
 --
 ALTER TABLE `puskeswan`
-  ADD PRIMARY KEY (`id_pukeswan`);
+  ADD PRIMARY KEY (`id_pukeswan`),
+  ADD KEY `id_dokter` (`id_dokter`);
 
 --
 -- Indeks untuk tabel `rekam_medis`
 --
 ALTER TABLE `rekam_medis`
   ADD PRIMARY KEY (`id_rmd`);
+
+--
+-- Indeks untuk tabel `respon_konsultasi`
+--
+ALTER TABLE `respon_konsultasi`
+  ADD PRIMARY KEY (`id_respon`),
+  ADD KEY `id_konsultasi` (`id_konsultasi`);
 
 --
 -- Indeks untuk tabel `role`
@@ -332,7 +348,51 @@ ALTER TABLE `role`
 -- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`user_code`);
+  ADD PRIMARY KEY (`user_code`),
+  ADD KEY `id_role` (`id_role`);
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `artikel`
+--
+ALTER TABLE `artikel`
+  ADD CONSTRAINT `artikel_ibfk_1` FOREIGN KEY (`id_pilihan`) REFERENCES `pilihan` (`id_pilihan`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `artikel_ibfk_2` FOREIGN KEY (`id_kategori`) REFERENCES `kat_hewan` (`id_kategori`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `dokter`
+--
+ALTER TABLE `dokter`
+  ADD CONSTRAINT `dokter_ibfk_1` FOREIGN KEY (`id_jabatan`) REFERENCES `jabatan` (`id_jabatan`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `kat_hewan`
+--
+ALTER TABLE `kat_hewan`
+  ADD CONSTRAINT `kat_hewan_ibfk_1` FOREIGN KEY (`id_jenis`) REFERENCES `jenis_hewan` (`id_jenis`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `konsultasi`
+--
+ALTER TABLE `konsultasi`
+  ADD CONSTRAINT `konsultasi_ibfk_2` FOREIGN KEY (`id_dokter`) REFERENCES `dokter` (`id_dokter`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `konsultasi_ibfk_3` FOREIGN KEY (`id_peternak`) REFERENCES `peternak` (`id_peternak`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `konsultasi_ibfk_4` FOREIGN KEY (`id_kategori`) REFERENCES `kat_hewan` (`id_kategori`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `puskeswan`
+--
+ALTER TABLE `puskeswan`
+  ADD CONSTRAINT `puskeswan_ibfk_1` FOREIGN KEY (`id_dokter`) REFERENCES `dokter` (`id_dokter`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`id_role`) REFERENCES `role` (`id_role`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

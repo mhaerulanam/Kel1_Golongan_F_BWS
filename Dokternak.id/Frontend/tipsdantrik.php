@@ -51,7 +51,7 @@
                 $jumlahData = mysqli_num_rows($result);
                 $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
                 $halamanAktif = ( isset($_GET["halaman"]) ) ? $_GET["halaman"] : 1;
-                
+
                 // halaman 2, awalDatanya = 2. Dimulai indeks 0,1,2,3, dst
                 $awalData = ( $jumlahDataPerHalaman * $halamanAktif ) - $jumlahDataPerHalaman;
                 // Akhir dari Konfigurasi
@@ -78,8 +78,8 @@
                                 </div>
                                 <div class="blog-cap">
                                     <p>|   <?php echo $data['nama_penulis']; ?></p>
-                                    <h3><a href="single-blog.html"><?php echo $data['judul']; ?></a></h3>
-                                    <a href="#" class="more-btn">Read more »</a>
+                                    <h3><a href="detailartikel.php?id_artikel=<?php echo $data['id_artikel']; ?>"><?php echo $data['judul']; ?></a></h3>
+                                    <a href="detailartikel.php?id_artikel=<?php echo $data['id_artikel']; ?>" class="more-btn">Read more »</a>
                                 </div>
                             </div>
                         </div> 

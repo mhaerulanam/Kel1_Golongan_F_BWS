@@ -36,7 +36,7 @@
 	?>
             <!-- Mobile Menu -->
             <!-- <div class="slider-active"> -->
-                <div class="single-slider slider-height d-flex align-items-center" data-background="assets/img/galeri/s2.jpg">
+                <div class="single-slider slider-height d-flex align-items-center" data-background="assets/img/gallery/s2.jpg">
                     <div class="container">
                         <div class="row">
                             <div class="col-xl-6 col-lg-9 col-md-10">

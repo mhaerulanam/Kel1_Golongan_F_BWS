@@ -58,9 +58,6 @@
 
                 ?>
 
-                
-                
-
                 <div class="row d-flex justify-contnet-center">
                 <?php while ($data = mysqli_fetch_array($ambilData)) {?>
                 
@@ -68,7 +65,7 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="single-process text-center mb-30">
                             <div class="process-ion">
-                            <img src="gambar.php?id_tutorial=<?php echo $data['id_tutorial']; ?>"width="120px">
+                            <img src="gambartutorial.php?id_tutorial=<?php echo $data['id_tutorial']; ?>"width="120px">
                            
                             </div>
                             <div class="process-cap">

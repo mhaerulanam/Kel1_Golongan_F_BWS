@@ -145,8 +145,5 @@
 
         <!-- Link Js CkEditor -->
         <script type="text/javascript" src="./assets/ckeditor/ckeditor.js"></script>
-        <?php
-            include "footer.php";
-        ?>
 </body>
 </html>

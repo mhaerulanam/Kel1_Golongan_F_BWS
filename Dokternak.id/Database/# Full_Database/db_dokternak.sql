@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 05 Des 2020 pada 14.17
+-- Waktu pembuatan: 05 Des 2020 pada 15.46
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.3
 
@@ -202,17 +202,6 @@ CREATE TABLE `peternak` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pilihan`
---
-
-CREATE TABLE `pilihan` (
-  `id_pilihan` varchar(11) NOT NULL,
-  `nama_pilihan` varchar(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Struktur dari tabel `puskeswan`
 --
 
@@ -349,12 +338,6 @@ ALTER TABLE `konsultasi`
 --
 ALTER TABLE `peternak`
   ADD PRIMARY KEY (`id_peternak`);
-
---
--- Indeks untuk tabel `pilihan`
---
-ALTER TABLE `pilihan`
-  ADD PRIMARY KEY (`id_pilihan`);
 
 --
 -- Indeks untuk tabel `puskeswan`

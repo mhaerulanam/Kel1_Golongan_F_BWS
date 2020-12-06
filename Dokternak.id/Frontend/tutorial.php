@@ -45,23 +45,21 @@
 
                 
                 <?php
-                $jumlahDataPerHalaman = 3;
+                $jtph = 3;
                 $result = mysqli_query($koneksi, "SELECT * FROM tutorial");
-                $jumlahData = mysqli_num_rows($result);
-                $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
-                $halamanAktif = ( isset($_GET["halaman"]) ) ? $_GET["halaman"] : 1;
+                $banyakdata = mysqli_num_rows($result);
+                $banyakpage = ceil($banyakdata / $jtph);
+                $aktif = ( isset($_GET["hlmn"]) ) ? $_GET["hlmn"] : 1;
 
-                $awalData = ( $jumlahDataPerHalaman * $halamanAktif ) - $jumlahDataPerHalaman;
+                $awalData = ( $jtph * $aktif ) - $jtph;
                 
-                $ambilData=mysqli_query($koneksi, "SELECT * FROM tutorial order by id_tutorial ASC
-                LIMIT $awalData,$jumlahDataPerHalaman");
+                $datatutorial=mysqli_query($koneksi, "SELECT * FROM tutorial order by id_tutorial ASC
+                LIMIT $awalData,$jtph");
 
                 ?>
 
                 <div class="row d-flex justify-contnet-center">
-                <?php while ($data = mysqli_fetch_array($ambilData)) {?>
-                
-                
+                <?php while ($data = mysqli_fetch_array($datatutorial)) {?>
                     <div class="col-lg-4 col-md-6">
                         <div class="single-process text-center mb-30">
                             <div class="process-ion">
@@ -80,8 +78,8 @@
                     </div> 
                     <?php } ?>
                 </div> 
-
-        <!--Pagination End  -->
+            </div>
+  </div>
 
         <!-- JS here -->
 	

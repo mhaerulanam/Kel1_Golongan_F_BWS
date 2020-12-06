@@ -24,8 +24,7 @@
             <link rel="stylesheet" href="assets/css/style.css">
             <link rel="stylesheet" href="assets/css/style2.css">
 </head>
-<body>
-    <?php 
+<body><?php 
     include "koneksi.php";
 		$s_kecamatan="";
         $s_keyword="";
@@ -33,7 +32,7 @@
             $s_kecamatan = $_POST['s_kecamatan'];
             $s_keyword = $_POST['s_keyword'];
         }
-	?>
+?>
             <!-- Mobile Menu -->
             <!-- <div class="slider-active"> -->
                 <div class="single-slider slider-height d-flex align-items-center" data-background="assets/img/gallery/s2.jpg">
@@ -110,13 +109,13 @@
                     <?php
                         include 'koneksi.php';
                         //Penampilan daftar data dokter dan dibatasi 2 halaman
-                        $jumlahDataPerHalaman = 3;
+                        $jumPage = 3;
                         $result = mysqli_query($koneksi, "SELECT * FROM dokter");
-                        $jumlahData = mysqli_num_rows($result);
-                        $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
-                        $halamanAktif = ( isset($_GET["halaman"]) ) ? $_GET["halaman"] : 1;
-                        $awalData = ( $jumlahDataPerHalaman * $halamanAktif ) - $jumlahDataPerHalaman;
-                        $ambilData=mysqli_query($koneksi, "SELECT * FROM dokter, jabatan WHERE dokter.id_jabatan=jabatan.id_jabatan order by id_dokter DESC LIMIT $awalData,$jumlahDataPerHalaman");
+                        $jum = mysqli_num_rows($result);
+                        $jumHlmn = ceil($jum / $jumPage);
+                        $hlmnAktif = ( isset($_GET["hal"]) ) ? $_GET["hal"] : 1;
+                        $awalData = ( $jumPage * $hlmnAktif ) - $jumPage;
+                        $ambilData=mysqli_query($koneksi, "SELECT * FROM dokter, jabatan WHERE dokter.id_jabatan=jabatan.id_jabatan order by id_dokter DESC LIMIT $awalData,$jumPage");
 
                         //pencarian berdasarkan kategori kecamatan
                         $search_kecamatan = '%'. $s_kecamatan .'%';
@@ -206,29 +205,29 @@
                             <ul class="pagination justify-content-start">
 
                                     <!-- Memberi tombol prev -->
-                                    <?php if( $halamanAktif > 1) : ?>
+                                    <?php if( $hlmnAktif > 1) : ?>
                                         <li class="page-item">
-                                        <a class="page-link" href="?halaman=<?= $halamanAktif - 1; ?>">&lt; Sebelumnya</a></h4>
+                                        <a class="page-link" href="?hal=<?= $hlmnAktif - 1; ?>">&lt; Sebelumnya</a></h4>
                                         </li>
                                     <?php endif; ?>
 
                                     <!-- Navigasi Pages -->
-                                    <?php for($i = 1; $i <= $jumlahHalaman; $i++) : ?>
-                                        <?php if ($i == $halamanAktif ) : ?>
+                                    <?php for($i = 1; $i <= $jumHlmn; $i++) : ?>
+                                        <?php if ($i == $hlmnAktif ) : ?>
                                             <li class="page-item active">
-                                            <a href="?halaman=<?= $i; ?>" class="page-link"><?= $i; ?></a>
+                                            <a href="?hal=<?= $i; ?>" class="page-link"><?= $i; ?></a>
                                             </li>
                                         <?php else : ?>
                                             <li class="page-item">
-                                            <a href="?halaman=<?= $i; ?>" class="page-link"><?= $i; ?></a>
+                                            <a href="?hal=<?= $i; ?>" class="page-link"><?= $i; ?></a>
                                             </li>
                                         <?php endif; ?>
                                     <?php endfor; ?>
 
                                     <!-- Memberi tombol next -->
-                                    <?php if( $halamanAktif < $jumlahHalaman) : ?>
+                                    <?php if( $hlmnAktif < $jumHlmn) : ?>
                                         <li class="page-item">
-                                        <a class="page-link" href="?halaman=<?= $halamanAktif + 1; ?>">Selanjutnya &gt;</span></a>
+                                        <a class="page-link" href="?hal=<?= $hlmnAktif + 1; ?>">Selanjutnya &gt;</span></a>
                                         </li>
                                     <?php endif; ?>
 

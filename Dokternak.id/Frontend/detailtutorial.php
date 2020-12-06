@@ -103,7 +103,7 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="single-process text-center mb-30">
                             <div class="process-ion">
-                            <img src="gambar_tutorial.php?id_tutorial=<?php echo $data['id_tutorial']; ?>" width="100px">
+                            <img src="gambartutorial.php?id_tutorial=<?php echo $data['id_tutorial']; ?>" width="100px">
                                 <span class="flaticon-search"></span>
                             </div>
                             <div class="process-cap">

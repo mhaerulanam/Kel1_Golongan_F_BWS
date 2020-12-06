@@ -29,7 +29,7 @@
         <div class="footer-area footer-bg footer-padding">
             <div class="container">
                 <div class="row d-flex justify-content-between">
-                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                <div class="col-xl-3 col-lg-4 col-md-2 col-sm-7">
                        <div class="single-footer-caption mb-50">
                          <div class="single-footer-caption mb-30">
                              <div class="footer-tittle">
@@ -41,7 +41,7 @@
                          </div>
                        </div>
                     </div>
-                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                    <div class="col-xl-3 col-lg-5 col-md-4 col-sm-5">
                         <div class="single-footer-caption mb-50">
                             <div class="footer-tittle">
                                 <h4>TENTANG KAMI</h4>
@@ -56,7 +56,7 @@
                         </div>
                     </div>
                     
-                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-5">
                         <div class="single-footer-caption mb-50">
                             <div class="footer-tittle">
                                 <h4>KONTAK</h4>
@@ -68,15 +68,15 @@
 
                         </div>
                     </div>
-                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                    <!-- <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
                         <div class="single-footer-caption mb-50">
                             <div class="footer-tittle">
                                 <h4>TANGGAPAN</h4>
                                 <div class="footer-pera footer-pera2">
                                  <p>Berikan tanggapanmu tentang website kami :</p>
-                             </div>
+                             </div> -->
                              <!-- Form -->
-                             <div class="footer-form" >
+                             <!-- <div class="footer-form" >
                                  <div id="mc_embed_signup">
                                      <form target="_blank" action="https://mail.google.com/mail/u/1/?tab=om#inbox?compose=new"
                                      method="get" class="subscribe_form relative mail_part">
@@ -94,7 +94,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
         
     </footer>
 

@@ -38,6 +38,20 @@
                     </div>
                 </div>
 
+                <aside class="single_sidebar_widget search_widget">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder='Search Keyword'
+                                            onfocus="this.placeholder = ''"
+                                            onblur="this.placeholder = 'Search Keyword'">
+                                        <div class="input-group-append">
+                                            <button class="btns" type="button"><i class="ti-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </form>
+                        </aside>
                 
                 <?php
                 include 'koneksi.php';
@@ -80,7 +94,49 @@
                 </div> 
             </div>
   </div>
+  <!--Pagination Start  -->
+<div class="pagination-area pb-115 text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="single-wrap d-flex justify-content-center">
+                            <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-start">
 
+                                    <!-- Memberi tombol prev -->
+                                    <?php if( $aktif > 1) : ?>
+                                        <li class="page-item">
+                                        <a class="page-link" href="?hlmn=<?=$aktif - 1; ?>">&lt; Sebelumnya</a></h4>
+                                        </li>
+                                    <?php endif; ?>
+
+                                    <!-- Navigasi Pages -->
+                                    <?php for($i = 1; $i <= $banyakpage; $i++) : ?>
+                                        <?php if ($i == $aktif ) : ?>
+                                            <li class="page-item active">
+                                            <a href="?hlmn=<?= $i; ?>" class="page-link"><?= $i; ?></a>
+                                            </li>
+                                        <?php else : ?>
+                                            <li class="page-item">
+                                            <a href="?hlmn=<?= $i; ?>" class="page-link"><?= $i; ?></a>
+                                            </li>
+                                        <?php endif; ?>
+                                    <?php endfor; ?>
+
+                                    <!-- Memberi tombol next -->
+                                    <?php if( $aktif < $banyakpage) : ?>
+                                        <li class="page-item">
+                                        <a class="page-link" href="?hlmn=<?= $banyakpage + 1; ?>">Selanjutnya &gt;</span></a>
+                                        </li>
+                                    <?php endif; ?>
+
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- JS here -->
 	
 		<!-- All JS Custom Plugins Link Here here -->

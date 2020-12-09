@@ -45,7 +45,7 @@
                                             <li><a href="index.php">HOME</a></li>
                                             <li><a href="daftar_artikel.php">ARTIKEL </a></li>
                                             <li><a href="#">KONSULTASI</a></li>
-                                            <li><a href="daftar_tutorial">TUTORIAL</a></li>
+                                            <li><a href="daftar_tutorial.php">TUTORIAL</a></li>
                                             <li><a href="#">INFORMASI</a>
                                                 <ul class="submenu">
                                                     <li><a href="#">DAFTAR DOKTER</a></li>

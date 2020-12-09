@@ -25,6 +25,11 @@
 </head>
 
 <body>
+    <navbar>
+    <?php
+        include 'navbar.php';
+    ?>
+    </navbar>
    <!-- Hero Area Start-->
    <div class="slider-area ">
       <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="assets/img/gallery/s2.jpg">
@@ -159,6 +164,10 @@
 		<!-- Jquery Plugins, main Jquery -->	
       <script src="./assets/js/plugins.js"></script>
       <script src="./assets/js/main.js"></script>
-        
+      <footer>
+            <?php 
+                include 'footer.php';
+            ?>
+    </footer>
 </body>
 </html>

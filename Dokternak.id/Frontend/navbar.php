@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navbar</title>
+    <title>Dokternak.id</title>
     <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="manifest" href="site.webmanifest">
@@ -42,10 +42,10 @@
                                 <div class="main-menu">
                                     <nav class="d-none d-lg-block">
                                         <ul id="navigation">
-                                            <li><a href="index.html">HOME</a></li>
-                                            <li><a href="#">ARTIKEL </a></li>
+                                            <li><a href="index.php">HOME</a></li>
+                                            <li><a href="daftar_artikel.php">ARTIKEL </a></li>
                                             <li><a href="#">KONSULTASI</a></li>
-                                            <li><a href="#">TUTORIAL</a></li>
+                                            <li><a href="daftar_tutorial">TUTORIAL</a></li>
                                             <li><a href="#">INFORMASI</a>
                                                 <ul class="submenu">
                                                     <li><a href="#">DAFTAR DOKTER</a></li>

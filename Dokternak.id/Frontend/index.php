@@ -188,7 +188,7 @@
                                 <h5><?= $data['judul_tutorial']; ?></h5>
                                 <div class="btn_detail">
                             <div class="items-link f-center">
-                                <a href="detail_tutorial">Detail</a>
+                            <a href="detailtutorial.php?id_tutorial=<?= $data['id_tutorial']; ?>" class="genric-btn default radius">Detail</a>
                                 </div>
                             </div>
                             </div>

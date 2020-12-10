@@ -115,13 +115,13 @@
                         $jumHlmn = ceil($jum / $jumPage);
                         $hlmnAktif = ( isset($_GET["hal"]) ) ? $_GET["hal"] : 1;
                         $awalData = ( $jumPage * $hlmnAktif ) - $jumPage;
-                        $ambilData=mysqli_query($koneksi, "SELECT * FROM dokter, jabatan WHERE dokter.id_jabatan=jabatan.id_jabatan order by id_dokter DESC LIMIT $awalData,$jumPage");
+                        $ambilData=mysqli_query($koneksi, "SELECT * FROM dokter, jabatan WHERE dokter.id_jabatan=jabatan.id_jabatan order by id_dokter LIMIT $awalData,$jumPage");
 
                         //pencarian berdasarkan kategori kecamatan
                         $search_kecamatan = '%'. $s_kecamatan .'%';
                         $search_keyword = '%'. $s_keyword .'%';
                         $no = 1;
-                        $query = "SELECT * FROM dokter WHERE Tempat  LIKE ? AND (nama LIKE ? OR Tempat LIKE ? OR email LIKE ?) ORDER BY id_dokter DESC";
+                        $query = "SELECT * FROM dokter, jabatan WHERE dokter.id_jabatan=jabatan.id_jabatan AND Tempat  LIKE ? AND (nama LIKE ? OR Tempat LIKE ? OR email LIKE ?) ORDER BY id_dokter DESC";
                         $dewan1 = $koneksi->prepare($query);
                         $dewan1->bind_param('ssss', $search_kecamatan, $search_keyword, $search_keyword, $search_keyword);
                         $dewan1->execute();
@@ -147,6 +147,7 @@
                                     <div class="job-tittle">
                                         <a href="#"><h4><?php echo $nama; ?></a></h4></a>
                                         <ul>
+                                            <li><?php echo $row['jabatan']; ?></li>
                                             <li><i class="fas fa-map-marker-alt"></i><?php echo $Tempat; ?></li>
                                             <li><?php echo $telpon; ?></li>
                                         </ul>
@@ -195,6 +196,10 @@
             </div>
         </section>
 
+        <?php
+    if(isset($_POST['search'])) :
+    
+    else : ?>
          <!--Pagination Start  -->
          <div class="pagination-area pb-115 text-center">
             <div class="container">
@@ -239,6 +244,7 @@
             </div>
         </div>
         <!--Pagination End  -->
+        <?php endif; ?>
 
         
   <!-- JS here -->

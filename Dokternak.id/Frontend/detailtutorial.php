@@ -109,7 +109,6 @@
                         <div class="single-process text-center mb-30">
                             <div class="process-ion">
                             <img src="gambartutorial.php?id_tutorial=<?php echo $data['id_tutorial']; ?>" width="100px">
-                                <span class="flaticon-search"></span>
                             </div>
                             <div class="process-cap">
                                 <h5><?= $data['judul_tutorial']; ?></h5>

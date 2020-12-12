@@ -59,7 +59,7 @@
                                 <!-- Header-btn -->
                                 <div class="header-btn d-none f-right d-lg-block">
                                     <a href="#" class="btn head-btn1">DAFTAR</a>
-                                    <a href="#" class="btn head-btn2">MASUK</a>
+                                    <a href="#myModal" data-toggle="modal" class="btn head-btn2">MASUK</a>
                                 </div>
                             </div>
                         </div>

@@ -1,3 +1,7 @@
+<?php
+// Start the session
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +31,67 @@
 </head>
 <body>
 <?php include "modal/login.php"; ?>
-<?php include ('navbar.php'); ?>
+<div class="header-area header-transparrent">
+           <div class="headder-top header-sticky">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-3 col-md-2">
+                            <!-- Logo -->
+                            <div class="logo">
+                                <a href="index.php"><img src="assets/img/logo/logo.png" alt=""></a>
+                            </div>  
+                        </div>
+                        <div class="col-lg-15 col-md-9">
+                            <div class="menu-wrapper">
+                                <!-- Main-menu -->
+                                <div class="main-menu">
+                                    <nav class="d-none d-lg-block">
+                                        <ul id="navigation">
+                                            <li><a href="index.php">HOME</a></li>
+                                            <li><a href="#">ARTIKEL </a></li>
+                                            <li><a href="#">KONSULTASI</a></li>
+                                            <li><a href="#">TUTORIAL</a></li>
+                                            <li><a href="#">INFORMASI</a>
+                                                <ul class="submenu">
+                                                    <li><a href="#">DAFTAR DOKTER</a></li>
+                                                    <li><a href="#">PUSKESWAN</a></li>
+                                                    <li><a href="#">TENTANG KAMI</a></li>                                                 
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>          
+                                <!-- Header-btn -->
+                                <div class="main-menu f-right">
+                                        <ul id="navigation">
+                                        <a href="#">
+                                        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="rounded-circle z-depth-0"
+                                            alt="avatar image" height="35"></img>
+                                        </a> 
+                                            <li><a href="#" id="Nama" ><?php echo $_SESSION['username'];?> <span> (</span><?php echo $_SESSION['id_role'];?>)</a>
+                                                <ul class="submenu">
+                                                    <li><a id="Nama"  href="#">Akun Profile</a></li>
+                                                    <li><a id="Nama"  href="#myModal">Ubah Password</a></li>
+                                                    <li><a id="Nama"  href="modal/logout.php">Log Out</a></li>                                                 
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    
+                                    
+                                    <!-- <a href="#myModal" data-toggle="modal" class="btn head-btn2">MASUK</a> -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Mobile Menu -->
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+           </div>
+       </div>
+        <!-- Header End -->
+    </header>
     <section>
         <?php
             include 'pencarian.php';

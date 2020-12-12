@@ -26,6 +26,7 @@
 
 </head>
 <body>
+<?php include "modal/login.php"; ?>
 <?php include ('navbar.php'); ?>
     <section>
         <?php

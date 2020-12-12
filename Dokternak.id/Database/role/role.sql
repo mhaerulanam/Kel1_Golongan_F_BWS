@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 05 Des 2020 pada 15.43
+-- Waktu pembuatan: 12 Des 2020 pada 21.31
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.3
 
@@ -32,6 +32,15 @@ CREATE TABLE `role` (
   `id_role` int(2) NOT NULL,
   `role` varchar(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `role`
+--
+
+INSERT INTO `role` (`id_role`, `role`) VALUES
+(1, 'Admin'),
+(2, 'Dokter'),
+(3, 'Peternak');
 
 --
 -- Indexes for dumped tables

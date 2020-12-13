@@ -44,7 +44,7 @@
         <div class="col-lg-6 col-md-12">
           <div class="card-body">
             <div class="h4 mt-0 title">Jam Kerja</div>
-            <p><?= $d['jam_kerja']; ?></p>
+            <p><?= nl2br(str_replace(' ', ' ', htmlspecialchars($d['jam_kerja']))); ?></p>
             <div class="h4 mt-0 title">Dokumentasi</div>
             <p><img src="gambardokpuskeswan.php?id_puskeswan=<?php echo $d['id_puskeswan']; ?>" alt="Image"/></p>
           </div>

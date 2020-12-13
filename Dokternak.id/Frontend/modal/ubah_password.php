@@ -116,7 +116,7 @@ body {
 </head>
 <body>
 <!-- Modal HTML -->
-<div id="myModal" class="modal fade">
+<div id="ubahModal" class="modal fade">
 	<div class="modal-dialog modal_login">
 		<div class="modal-content">
 			<div class="modal-header">			
@@ -125,9 +125,6 @@ body {
 			</div>
 			<div class="modal-body">
 				<form action="../Frontend/modal/change-password.php" method="POST">
-					<div class="form-group">
-						<input type="text" class="form-control" name="username" placeholder="Username..." required="required">		
-					</div>
 					<div class="form-group">
 						<input type="password" class="form-control" name="old_pass" placeholder="Password Lama..." required="required">	
 					</div> 

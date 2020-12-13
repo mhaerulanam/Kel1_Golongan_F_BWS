@@ -1,3 +1,7 @@
+<?php
+// Start the session
+session_start();
+?>
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -25,10 +29,43 @@
 </head>
 
 <body>
-    <section class="blog_area single-post-area section-padding">
-      <div class="container">
-         <div class="row">
-
+    <navbar>
+    <?php include "modal/login.php"; ?>
+    <?php
+        include 'navbar.php';
+    ?>
+    </navbar>
+    
+    <?php
+        if (isset($_GET['pesan'])){
+            $pesan = $_GET['pesan'];
+            if ($pesan == 'gagal') {
+           ?>
+               <div class="alert alert-danger">
+                    <center><strong>Peringatan!</strong> Anda Harus Login Terlebih Dahulu</center>
+                </div>
+            <?php
+            }
+        }
+    ?>
+    <!-- Banner Atas Start-->
+   <div class="slider-area ">
+      <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="assets/img/gallery/s2.jpg">
+          <div class="container">
+              <div class="row">
+                  <div class="col-xl-12">
+                      <div class="hero-cap text-center">
+                          <h2>DAFTAR ARTIKEL</h2>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+   </div>
+   <!-- Banner End -->
+<section class="blog_area section-padding">
+        <div class="container">
+            <div class="row">
                 <div class="col-lg-8 mb-5 mb-lg-0">
                     <div class="blog_left_sidebar">
                     <?php
@@ -37,7 +74,7 @@
                 // Belajar paging : https://www.youtube.com/watch?v=Q1xJdoHrTj4
 
                 // Paging - Konfigurasi
-                $jdataperhalaman = 2;
+                $jdataperhalaman = 3;
                 $result = mysqli_query($koneksi, "SELECT * FROM artikel");
                 $jumlahData = mysqli_num_rows($result);
                 $jumlahHalaman = ceil($jumlahData / $jdataperhalaman);
@@ -49,82 +86,127 @@
 
                 // ambilData adalah variabel untuk menampilkan data dari 2 tabel, yaitu artikel dan kategori_artikel. 
                 // Sehingga kita dapat menampilkan kategorinya, sesuai id_ktg di kedua tabel
-                $ambilData=mysqli_query($koneksi, "SELECT * FROM artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg order by id_artikel 
+                $ambilData=mysqli_query($koneksi, "SELECT * FROM artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg order by id_artikel DESC
                 LIMIT $awalData,$jdataperhalaman");
 
+                $datakat=mysqli_query($koneksi, "SELECT *, COUNT( * ) as total FROM artikel inner join kategori_artikel on artikel.id_ktg=kategori_artikel.id_ktg GROUP BY kategori_artikel");
+                $jumlahkat = mysqli_num_rows($datakat);
+                if (ISSET($_POST['submit'])){
+                    $cari = $_POST['nt'];
+                   
+                    $query2 = " SELECT * FROM artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg AND judul LIKE '%$cari%' AND isi LIKE'%$cari%'";
+                    // $query2 = "SELECT * FROM artikel WHERE judul LIKE '%$cari%'";
 
-                while ($data = mysqli_fetch_array($ambilData)) { ?>
+                    $sql = mysqli_query($koneksi, $query2);
 
-                <div class="col-xl-8 col-lg-7 col-md-6">
-                        <div class="home-blog-single mb-30">
-                            <div class="blog-img-cap">
-                                <div class="blog-img">
-                                    <!-- <img src="assets/img/blog/home-blog1.jpg" alt=""> -->
-                                    <!-- Baris img src dibawah ini untuk memanggil gambar sesuai syntax di gambar.php -->
-                                    <img src="gambar.php?id_artikel=<?php echo $data['id_artikel']; ?>"width="700px"/>
-                                    <div class="blog_item_date">
-                                        <span><?php echo $data['tanggal']; ?></span>
-                                        <p>Kategori : <?php echo $data['kategori_artikel']; ?></p>
+                    while ($dt = mysqli_fetch_array($sql)) { ?>
+                        <?php
+                        $isi = $dt['isi'];
+                        $num_char  = 250;
+                        $isibts = substr($isi,0,$num_char)."...";
+                        ?>    
+                        <article class="blog_item">
+                                <div class="blog_item_img">
+                                            <img class="card-img rounded-0" src="gambar.php?id_artikel=<?php echo $dt['id_artikel']; ?>" alt="">
+                                            <a href="#" class="blog_item_date">
+                                                <h3><?php echo $dt['nama_penulis']; ?></h3>
+                                            </a>
+                                </div>
+                                <div class="blog_details">
+                                    <a class="d-inline-block" href="single-blog.html">
+                                        <h2><a href="detailartikel.php?id_artikel=<?php echo $t['id_artikel']; ?>"><?php echo $dt['judul']; ?></a></h2>
+                                    </a>
+                                    <p><?php echo $isibts ?><a href="detailartikel.php?id_artikel=<?php echo $t['id_artikel']; ?>" class="more-btn">  <strong> Read more » </strong></a></p>
+                                    <ul class="blog-info-link">
+                                        <li><a>Kategori : <?php echo $dt['kategori_artikel'];?></a></li>
+                                        <li><a><?php echo $dt['tanggal'];?></a></li>
+                                    </ul>
+                                </div>
+                        </article>
+                        <?php }
+                }elseif(isset($_GET["tampil"])){
+                $ktg = $_GET["tampil"];
+                $kat=mysqli_query($koneksi, "SELECT * FROM artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg AND artikel.id_ktg='$ktg'");      
+                while ($dat = mysqli_fetch_assoc($kat)) { ?>
+                <?php
+                $isi = $dat['isi'];
+                $num_char  = 250;
+                $isibts = substr($isi,0,$num_char)."...";
+                ?>
+                 <article class="blog_item">
+                            <div class="blog_item_img">
+                                        <img class="card-img rounded-0" src="gambar.php?id_artikel=<?php echo $dat['id_artikel']; ?>" alt="">
+                                        <a href="#" class="blog_item_date">
+                                            <h3><?php echo $dat['nama_penulis']; ?></h3>
+                                        </a>
+                            </div>
+                                    <div class="blog_details">
+                                        <a class="d-inline-block" href="single-blog.html">
+                                            <h2><a href="detailartikel.php?id_artikel=<?php echo $dat['id_artikel']; ?>"><?php echo $dat['judul']; ?></a></h2>
+                                        </a>
+                                        <p><?php echo $isibts ?><a href="detailartikel.php?id_artikel=<?php echo $dat['id_artikel']; ?>" class="more-btn">  <strong> Read more » </strong></a></p>
+                                        <ul class="blog-info-link">
+                                            <li><a>Kategori : <?php echo $dat['kategori_artikel'];?></a></li>
+                                            <li><a><?php echo $dat['tanggal'];?></a></li>
+                                        </ul>
                                     </div>
-                                </div>
-                                <div class="blog-cap">
-                                    <p>|   <?php echo $data['nama_penulis']; ?></p>
-                                    <h3><a href="detailartikel.php?id_artikel=<?php echo $data['id_artikel']; ?>"><?php echo $data['judul']; ?></a></h3>
-                                    <a href="detailartikel.php?id_artikel=<?php echo $data['id_artikel']; ?>" class="more-btn">Read more »</a>
-                                </div>
+                    </article>
+                        <?php } ?><?php
+                }else{ 
+                while ($data = mysqli_fetch_array($ambilData)) { ?>
+                    <?php
+                    $isi = $data['isi'];
+                    $num_char  = 250;
+                    $isibts = substr($isi,0,$num_char)."...";
+                    ?>    
+                    <article class="blog_item">
+                            <div class="blog_item_img">
+                                        <img class="card-img rounded-0" src="gambar.php?id_artikel=<?php echo $data['id_artikel']; ?>" alt="">
+                                        <a href="#" class="blog_item_date">
+                                            <h3><?php echo $data['nama_penulis']; ?></h3>
+                                        </a>
                             </div>
+                            <div class="blog_details">
+                                <a class="d-inline-block" href="single-blog.html">
+                                    <h2><a href="detailartikel.php?id_artikel=<?php echo $data['id_artikel']; ?>"><?php echo $data['judul']; ?></a></h2>
+                                </a>
+                                <p><?php echo $isibts ?><a href="detailartikel.php?id_artikel=<?php echo $data['id_artikel']; ?>" class="more-btn">  <strong> Read more » </strong></a></p>
+                                <ul class="blog-info-link">
+                                    <li><a>Kategori : <?php echo $data['kategori_artikel'];?></a></li>
+                                    <li><a><?php echo $data['tanggal'];?></a></li>
+                                </ul>
                             </div>
-                    <?php } ?>
-                    </div>
-                    </div>
-
-                        <!-- <nav class="blog-pagination justify-content-center d-flex">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a href="#" class="page-link" aria-label="Previous">
-                                        <i class="ti-angle-left"></i>
-                                    </a>
-                                </li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link">1</a>
-                                </li>
-                                <li class="page-item active">
-                                    <a href="#" class="page-link">2</a>
-                                </li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link" aria-label="Next">
-                                        <i class="ti-angle-right"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav> -->
+                    </article>
+                    <?php }} ?>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="blog_right_sidebar">
-                    <form action="#">
+                    <form method="POST">
                     <div class="btn_tulis">
                             <div class="items-link f-center">
-                                <a href="tulis_artikel.php">++ TULIS ARTIKEL</a>
+                                <a href="tulis_artikel.php" class="genric-btn primary">++ TULIS ARTIKEL</a>
                                 </div>
                             </div>
-                            </form>
-                            
-                            <!-- <form action="tulis_artikel.php" method="POST">
-                            <button>Submit</button>
-                            </form>'; -->
-                            
+                            <?php 
+                        include "koneksi.php";
+		                $s_judul="";
+                        $search_keyword="";
+                        if (isset($_POST['search'])) {
+                        $s_judul = $_POST['s_judul'];
+                        $search_keyword = $_POST['cari artikel'];
+                        }
+                        ?>                   
                         <aside class="single_sidebar_widget search_widget">
-                                <div class="form-group">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder='Search Keyword'
+                                <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder='cari artikel' name="nt" id="cari artikel" value="<?php echo $search_keyword; ?>"
                                             onfocus="this.placeholder = ''"
-                                            onblur="this.placeholder = 'Search Keyword'">
+                                            onblur="this.placeholder = 'search_keyword'">
                                         <div class="input-group-append">
-                                            <button class="btns" type="button"><i class="ti-search"></i></button>
+                                            <button class="btns" type="submit" name="submit"><i class="ti-search"></i></button>
                                         </div>
-                                    </div>
-                                </div>
+                                   </div>
+                                
                                 
                             </form>
                         </aside>
@@ -132,50 +214,24 @@
                         <aside class="single_sidebar_widget post_category_widget">
                             <h4 class="widget_title">KATEGORI</h4>
                             <ul class="list cat-list">
+                            <?php while ($kategori = mysqli_fetch_array($datakat)) { ?>
                                 <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Resaurant food</p>
-                                        <p>(37)</p>
+                                    <a href="?tampil=<?=$kategori['id_ktg']; ?>" class="d-flex">
+                                        <p><?php echo $kategori['kategori_artikel']; ?> </p>
+                                        <p>(<?php echo $kategori['total']; ?>)</p>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Travel news</p>
-                                        <p>(10)</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Modern technology</p>
-                                        <p>(03)</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Product</p>
-                                        <p>(11)</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Inspiration</p>
-                                        <p>21</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Health Care (21)</p>
-                                        <p>09</p>
-                                    </a>
-                                </li>
+                            <?php } ?>
                             </ul>
                         </aside>
-
                     </div>
                 </div>
             </div>
         </div>
     </section>
+<?php
+    if(isset($_POST['search'])||isset($_GET['tampil'])) :
+    else  :?>
 <!--Pagination Start  -->
 <div class="pagination-area pb-115 text-center">
             <div class="container">
@@ -219,6 +275,8 @@
                 </div>
             </div>
         </div>
+        <?php endif; ?>
+        
     <!-- JS here -->
 	
 		<!-- All JS Custom Plugins Link Here here -->
@@ -255,6 +313,11 @@
 		<!-- Jquery Plugins, main Jquery -->	
         <script src="./assets/js/plugins.js"></script>
         <script src="./assets/js/main.js"></script>
-
+        
+        <footer>
+            <?php 
+                include 'footer.php';
+            ?>
+        </footer>
 </body>
 </html>

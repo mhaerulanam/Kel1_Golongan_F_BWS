@@ -1,3 +1,7 @@
+<?php
+// Start the session
+session_start();
+?>
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -25,6 +29,8 @@
    </head>
 <body>
 <navbar>
+    <?php include "modal/login.php"; ?>
+    <?php include "modal/ubah_password.php"; ?>
     <?php
         include 'navbar.php';
     ?>
@@ -58,28 +64,56 @@
                         $search_keyword = $_POST['cari puskeswan'];
                         }
                         ?>            
-            <aside class="single_sidebar_widget search_widget">
+            <div class="pagination-area pb-200 text-center">
+                <div class="blog_right_sidebar">          
+                <aside class="single_sidebar_widget search_widget">
+                            <form method="POST">
                                 <div class="input-group mb-3">
                                         <input type="text" class="form-control" placeholder='cari puskeswan' name="nt" id="cari puskeswan" value="<?php echo $search_keyword; ?>"
                                             onfocus="this.placeholder = ''"
                                             onblur="this.placeholder = 'search_keyword'">
                                         <div class="input-group-append">
-                                            <button class="btns" type="submit" name="submit"><i class="ti-search"></i></button>
+                                            <button class="btns" type="submit" name="submit"><i class="ti-search"></i></button> 
                                         </div>
-                                   </div>
-                                
-                                
+                                   </div>      
                             </form>
                         </aside>
+                </div>
+                </div>
                 <?php
                 include 'koneksi.php';
                 ?>
-
-                
+                <div class="row d-flex justify-contnet-center"> 
                 <?php
+                    if (ISSET($_POST['submit'])){
+                        $cari = $_POST['nt'];
+                    
+                        $query2 = " SELECT * FROM puskeswan WHERE nama_puskeswan LIKE '%$cari%' OR alamat LIKE'%$cari%'";
+
+                        $sql = mysqli_query($koneksi, $query2);
+                        while ($data = mysqli_fetch_array($sql)) {?>
+                
+                            <div class="col-lg-4 col-md-6">
+                            <div class="single-services text-center mb-30">
+                                    <div class="services-ion">
+                                    <img src="gambarpuskeswan.php?id_puskeswan=<?php echo $data['id_puskeswan']; ?>"width="200px"><br>
+                                   
+                                    </div>
+                                    <div class="services-cap">
+                                        <h5><?= $data['nama_puskeswan']; ?></h5>
+                                        <?= $data['alamat']; ?><br><br>
+                                        <div class="btn_detail">
+                                    <div class="services-cap">
+                                        <a href="detailpuskeswan.php?id_puskeswan=<?= $data['id_puskeswan']; ?>" class="genric-btn primary radius">Detail</a>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div> 
+                            </div> 
+                            <?php }
+                    }else{
                 $datapuskeswan=mysqli_query($koneksi, "SELECT * FROM puskeswan");
-                ?>
-                <div class="row d-flex justify-contnet-center">  
+                ?> 
                 <?php while ($data = mysqli_fetch_array($datapuskeswan)) {?>
                 
                     <div class="col-lg-4 col-md-6">
@@ -99,7 +133,7 @@
                             </div>
                         </div> 
                     </div> 
-                    <?php } ?>
+                    <?php } }?>
                 </div> 
             </div>
   </div>

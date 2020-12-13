@@ -1,3 +1,7 @@
+<?php
+// Start the session
+session_start();
+?>
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -26,10 +30,24 @@
 
 <body>
     <navbar>
+    <?php include "modal/login.php"; ?>
     <?php
         include 'navbar.php';
     ?>
     </navbar>
+    
+    <?php
+        if (isset($_GET['pesan'])){
+            $pesan = $_GET['pesan'];
+            if ($pesan == 'gagal') {
+           ?>
+               <div class="alert alert-danger">
+                    <center><strong>Peringatan!</strong> Anda Harus Login Terlebih Dahulu</center>
+                </div>
+            <?php
+            }
+        }
+    ?>
     <!-- Banner Atas Start-->
    <div class="slider-area ">
       <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="assets/img/gallery/s2.jpg">
@@ -76,7 +94,7 @@
                 if (ISSET($_POST['submit'])){
                     $cari = $_POST['nt'];
                    
-                    $query2 = " SELECT * FROM artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg AND judul LIKE '%$cari%' OR isi LIKE'%$cari%'";
+                    $query2 = " SELECT * FROM artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg AND judul LIKE '%$cari%' AND isi LIKE'%$cari%'";
                     // $query2 = "SELECT * FROM artikel WHERE judul LIKE '%$cari%'";
 
                     $sql = mysqli_query($koneksi, $query2);
@@ -212,9 +230,8 @@
         </div>
     </section>
 <?php
-    if(isset($_GET['submit'])||isset($_GET['tampil'])) :
-    
-    else : ?>
+    if(isset($_POST['search'])||isset($_GET['tampil'])) :
+    else  :?>
 <!--Pagination Start  -->
 <div class="pagination-area pb-115 text-center">
             <div class="container">

@@ -121,7 +121,7 @@
                         $search_kecamatan = '%'. $s_kecamatan .'%';
                         $search_keyword = '%'. $s_keyword .'%';
                         $no = 1;
-                        $query = "SELECT * FROM dokter, jabatan WHERE dokter.id_jabatan=jabatan.id_jabatan AND Tempat  LIKE ? AND (nama LIKE ? OR Tempat LIKE ? OR email LIKE ?) ORDER BY id_dokter DESC";
+                        $query = "SELECT * FROM dokter, jabatan WHERE dokter.id_jabatan=jabatan.id_jabatan AND tempat  LIKE ? AND (nama LIKE ? OR tempat LIKE ? OR email LIKE ?) ORDER BY id_dokter DESC";
                         $dewan1 = $koneksi->prepare($query);
                         $dewan1->bind_param('ssss', $search_kecamatan, $search_keyword, $search_keyword, $search_keyword);
                         $dewan1->execute();
@@ -134,7 +134,7 @@
                             $email = $row['email'];
                             $jenis_kelamin = $row['jenis_kelamin'];
                             $alamat = $row['alamat'];
-                            $Tempat = $row['Tempat'];
+                            $tempat = $row['tempat'];
                             $telpon = $row['telpon'];
                             $foto = $row['foto'];
                             $id_jabatan = $row['id_jabatan'];
@@ -148,7 +148,7 @@
                                         <a href="#"><h4><?php echo $nama; ?></a></h4></a>
                                         <ul>
                                             <li><?php echo $row['jabatan']; ?></li>
-                                            <li><i class="fas fa-map-marker-alt"></i><?php echo $Tempat; ?></li>
+                                            <li><i class="fas fa-map-marker-alt"></i><?php echo $tempat; ?></li>
                                             <li><?php echo $telpon; ?></li>
                                         </ul>
                                     </div>
@@ -171,7 +171,7 @@
                                                 <a href="#"><h4><?php echo $data['nama']; ?></a></h4></a>
                                                 <ul>
                                                     <li><?php echo $data['jabatan']; ?></li>
-                                                    <li><i class="fas fa-map-marker-alt"></i><?php echo $data['Tempat']; ?></li>
+                                                    <li><i class="fas fa-map-marker-alt"></i><?php echo $data['tempat']; ?></li>
                                                     <li><?php echo $data['telpon']; ?></li>
                                                 </ul>
                                             </div>

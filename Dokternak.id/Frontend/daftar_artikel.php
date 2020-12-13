@@ -114,9 +114,9 @@ session_start();
                                 </div>
                                 <div class="blog_details">
                                     <a class="d-inline-block" href="single-blog.html">
-                                        <h2><a href="detailartikel.php?id_artikel=<?php echo $t['id_artikel']; ?>"><?php echo $dt['judul']; ?></a></h2>
+                                        <h2><a href="detailartikel.php?id_artikel=<?php echo $dt['id_artikel']; ?>"><?php echo $dt['judul']; ?></a></h2>
                                     </a>
-                                    <p><?php echo $isibts ?><a href="detailartikel.php?id_artikel=<?php echo $t['id_artikel']; ?>" class="more-btn">  <strong> Read more » </strong></a></p>
+                                    <p><?php echo $isibts ?><a href="detailartikel.php?id_artikel=<?php echo $dt['id_artikel']; ?>" class="more-btn">  <strong> Read more » </strong></a></p>
                                     <ul class="blog-info-link">
                                         <li><a>Kategori : <?php echo $dt['kategori_artikel'];?></a></li>
                                         <li><a><?php echo $dt['tanggal'];?></a></li>
@@ -230,7 +230,7 @@ session_start();
         </div>
     </section>
 <?php
-    if(isset($_POST['search'])||isset($_GET['tampil'])) :
+    if(isset($_POST['submit'])||isset($_GET['tampil'])) :
     else  :?>
 <!--Pagination Start  -->
 <div class="pagination-area pb-115 text-center">

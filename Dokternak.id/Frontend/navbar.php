@@ -58,7 +58,9 @@
                                 </div>
                                 <!-- Header-btn -->
                                 <?php
-                                    if(isset($_SESSION['username'])){?>
+                                    if(isset($_SESSION['username'])){
+                                        $nama = $_SESSION['username'];
+                                        ?>
                                         <div class="main-menu f-right">
                                         <ul id="navigation">
                                         <a href="#">
@@ -71,7 +73,7 @@
                                                 <ul class="submenu">
                                                     <li><a id="Nama"  href="#">Akun Profile</a></li>
                                                     <li><a id="Nama"  href="#ubahModal"  data-toggle="modal">Ubah Password</a></li>
-                                                    <li><a id="Nama"  href="modal/logout.php">Log Out</a></li>                                                 
+                                                    <li><a id="Nama"  href="modal/logout.php" onclick="return confirm('Apakah Anda yakin ingin keluar Akun?')">Keluar Akun</a></li>                                                 
                                                 </ul>
                                             </li>
                                         </ul>

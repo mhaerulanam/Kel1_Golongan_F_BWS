@@ -49,7 +49,7 @@
                                             <li><a href="#">INFORMASI</a>
                                                 <ul class="submenu">
                                                     <li><a href="#">DAFTAR DOKTER</a></li>
-                                                    <li><a href="#">PUSKESWAN</a></li>
+                                                    <li><a href="daftarpuskeswan.php">PUSKESWAN</a></li>
                                                     <li><a href="#">TENTANG KAMI</a></li>                                                 
                                                 </ul>
                                             </li>

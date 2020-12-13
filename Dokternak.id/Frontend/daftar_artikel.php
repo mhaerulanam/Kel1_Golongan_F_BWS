@@ -31,6 +31,7 @@ session_start();
 <body>
     <navbar>
     <?php include "modal/login.php"; ?>
+    <?php include "modal/ubah_password.php"; ?>
     <?php
         include 'navbar.php';
     ?>

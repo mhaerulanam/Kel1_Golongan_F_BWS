@@ -1,3 +1,7 @@
+<?php
+// Start the session
+session_start();
+?>
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -25,6 +29,8 @@
    </head>
 <body>
 <navbar>
+    <?php include "modal/login.php"; ?>
+    <?php include "modal/ubah_password.php"; ?>
     <?php
         include 'navbar.php';
     ?>

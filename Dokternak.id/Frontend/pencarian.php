@@ -154,7 +154,7 @@
                                     </div>
                                 </div>
                                 <div class="items-link f-right">
-                                    <a href="#.html">Detail</a>
+                                    <a href="detaildokter.php?id_dokter=<?= $id_dokter; ?>">Detail</a>
                                 </div>
                             </div>
                             <?php
@@ -177,7 +177,7 @@
                                             </div>
                                         </div>
                                         <div class="items-link f-right">
-                                            <a href="#.html">Detail</a>
+                                            <a href="detaildokter.php?id_dokter=<?= $data['id_dokter']; ?>">Detail</a>
                                         </div>
                                     </div>
                                     <?php

@@ -58,7 +58,7 @@
         <div class="col-lg-6 col-md-12">
           <div class="card-body">
             <div class="h4 mt-0 title">Jadwal Kerja</div>
-            <p><?= $data['jadwal_kerja']; ?></p>
+            <p><?= nl2br(str_replace(' ', ' ', htmlspecialchars($data['jadwal_kerja']))); ?></p>
             <div class="h4 mt-0 title">Sertifikasi</div>
             <p><?= $data['sertifikasi']; ?></p>
           </div>

@@ -25,11 +25,11 @@
 </head>
 
 <body>
-   <navbar>
-    <?php
-        include 'navbar.php';
-    ?>
-    </navbar>
+<header>
+         <?php 
+            include 'navbar.php';
+         ?>
+</header>
    <!-- Hero Area Start-->
    <div class="slider-area ">
       <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="assets/img/gallery/s2.jpg">
@@ -70,7 +70,10 @@
             } else {
                $id_artikel = $_GET["id_artikel"] = 1;
             }
-         
+            
+            // Pendeklarasian variabel kategori
+            $datakat=mysqli_query($koneksi, "SELECT *, COUNT( * ) as total FROM artikel inner join kategori_artikel on artikel.id_ktg=kategori_artikel.id_ktg GROUP BY kategori_artikel");
+            $jumlahkat = mysqli_num_rows($datakat);
 
             // $id_artikel = $_GET['id_artikel'];
             // $artikelAktif = ( isset($_GET["id_artikel"]) ) ? $_GET["id_artikel"] : 1;
@@ -91,7 +94,7 @@
                               <li><a href="#"><i class="fa fa-comments"></i><?php echo $data['tanggal']; ?></a></li>
                            </ul>
                            <p class="excert">
-                              <?php echo $data['isi']; ?>
+                              <?php echo nl2br(str_replace(' ', ' ', htmlspecialchars($data['isi']))); ?>
                            </p>
                            <div class="quote-wrapper">
                               <div class="quotes">
@@ -117,132 +120,34 @@
                   </div>
                </div>
 
-               <!-- Blog Komentar dan Tulis Komentar -->
-               <div class="comments-area">
-                  <h4>05 Comments</h4>
-                  <div class="comment-list">
-                     <div class="single-comment justify-content-between d-flex">
-                        <div class="user justify-content-between d-flex">
-                           <div class="thumb">
-                              <img src="assets/img/comment/comment_1.png" alt="">
-                           </div>
-                           <div class="desc">
-                              <p class="comment">
-                                 Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-                                 Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                              </p>
-                              <div class="d-flex justify-content-between">
-                                 <div class="d-flex align-items-center">
-                                    <h5>
-                                       <a href="#">Emilly Blunt</a>
-                                    </h5>
-                                    <p class="date">December 4, 2017 at 3:12 pm </p>
-                                 </div>
-                                 <div class="reply-btn">
-                                    <a href="#" class="btn-reply text-uppercase">reply</a>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                    <div class="comment-form">
-                        <h4>Leave a Reply</h4>
-                        <form class="form-contact comment_form" action="#" id="commentForm">
-                            <div class="row">
-                                <div class="col-12">
-                                <div class="form-group">
-                                    <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
-                                        placeholder="Write Comment"></textarea>
-                                </div>
-                                </div>
-                                <div class="col-sm-6">
-                                <div class="form-group">
-                                    <input class="form-control" name="name" id="name" type="text" placeholder="Name">
-                                </div>
-                                </div>
-                                <div class="col-sm-6">
-                                <div class="form-group">
-                                    <input class="form-control" name="email" id="email" type="email" placeholder="Email">
-                                </div>
-                                </div>
-                                <div class="col-12">
-                                <div class="form-group">
-                                    <input class="form-control" name="website" id="website" type="text" placeholder="Website">
-                                </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="button button-contactForm btn_1 boxed-btn">Send Message</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>  
+               
             </div>
 
             <!-- Sidebar kanan -->
             <div class="col-lg-4">
                <div class="blog_right_sidebar">
 
-               <!-- Pencarian -->
-                  <aside class="single_sidebar_widget search_widget">
-                     <form action="#">
-                        <div class="form-group">
-                           <div class="input-group mb-3">
-                              <input type="text" class="form-control" placeholder='Search Keyword'
-                                 onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'">
-                              <div class="input-group-append">
-                                 <button class="btns" type="button"><i class="ti-search"></i></button>
-                              </div>
-                           </div>
-                        </div>
-                        <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                           type="submit">Search</button>
-                     </form>
-                  </aside>
+               <!-- Tulis Artikel -->
+                    <div class="btn_tulis">
+                            <div class="items-link f-center">
+                                <a href="daftar_artikel.php" class="genric-btn primary">DAFTAR ARTIKEL</a>
+                                </div>
+                     </div>
 
-                  <!-- Kategori -->
-                  <aside class="single_sidebar_widget post_category_widget">
-                     <h4 class="widget_title">Category</h4>
-                     <ul class="list cat-list">
-                        <li>
-                           <a href="#" class="d-flex">
-                              <p>Restaurant Food</p>
-                              <p>(37)</p>
-                           </a>
-                        </li>
-                        <li>
-                           <a href="#" class="d-flex">
-                              <p>Travel news</p>
-                              <p>(10)</p>
-                           </a>
-                        </li>
-                        <li>
-                           <a href="#" class="d-flex">
-                              <p>Modern technology</p>
-                              <p>(03)</p>
-                           </a>
-                        </li>
-                        <li>
-                           <a href="#" class="d-flex">
-                              <p>Product</p>
-                              <p>(11)</p>
-                           </a>
-                        </li>
-                        <li>
-                           <a href="#" class="d-flex">
-                              <p>Inspiration</p>
-                              <p>(21)</p>
-                           </a>
-                        </li>
-                        <li>
-                           <a href="#" class="d-flex">
-                              <p>Health Care</p>
-                              <p>(21)</p>
-                           </a>
-                        </li>
-                     </ul>
-                  </aside>
+                        <aside class="single_sidebar_widget post_category_widget">
+                            <h4 class="widget_title">KATEGORI</h4>
+                            <ul class="list cat-list">
+                            <?php while ($kategori = mysqli_fetch_array($datakat)) { ?>
+                                <li>
+                                    <a href="daftar_artikel.php?tampil=<?=$kategori['id_ktg']; ?>" class="d-flex">
+                                        <p><?php echo $kategori['kategori_artikel']; ?> </p>
+                                        <p>(<?php echo $kategori['total']; ?>)</p>
+                                    </a>
+                                </li>
+                            <?php } ?>
+                            </ul>
+                        </aside>
+
 
                   <!-- Artikel Lainnya -->
                   <aside class="single_sidebar_widget popular_post_widget">
@@ -266,81 +171,7 @@
                     </div> 
                     <?php } ?>
                   </aside>
-                  <aside class="single_sidebar_widget tag_cloud_widget">
-                     <h4 class="widget_title">Tag Clouds</h4>
-                     <ul class="list">
-                        <li>
-                           <a href="#">project</a>
-                        </li>
-                        <li>
-                           <a href="#">love</a>
-                        </li>
-                        <li>
-                           <a href="#">technology</a>
-                        </li>
-                        <li>
-                           <a href="#">travel</a>
-                        </li>
-                        <li>
-                           <a href="#">restaurant</a>
-                        </li>
-                        <li>
-                           <a href="#">life style</a>
-                        </li>
-                        <li>
-                           <a href="#">design</a>
-                        </li>
-                        <li>
-                           <a href="#">illustration</a>
-                        </li>
-                     </ul>
-                  </aside>
-                  <aside class="single_sidebar_widget instagram_feeds">
-                     <h4 class="widget_title">Instagram Feeds</h4>
-                     <ul class="instagram_row flex-wrap">
-                        <li>
-                           <a href="#">
-                              <img class="img-fluid" src="assets/img/post/post_5.png" alt="">
-                           </a>
-                        </li>
-                        <li>
-                           <a href="#">
-                              <img class="img-fluid" src="assets/img/post/post_6.png" alt="">
-                           </a>
-                        </li>
-                        <li>
-                           <a href="#">
-                              <img class="img-fluid" src="assets/img/post/post_7.png" alt="">
-                           </a>
-                        </li>
-                        <li>
-                           <a href="#">
-                              <img class="img-fluid" src="assets/img/post/post_8.png" alt="">
-                           </a>
-                        </li>
-                        <li>
-                           <a href="#">
-                              <img class="img-fluid" src="assets/img/post/post_9.png" alt="">
-                           </a>
-                        </li>
-                        <li>
-                           <a href="#">
-                              <img class="img-fluid" src="assets/img/post/post_10.png" alt="">
-                           </a>
-                        </li>
-                     </ul>
-                  </aside>
-                  <aside class="single_sidebar_widget newsletter_widget">
-                     <h4 class="widget_title">Newsletter</h4>
-                     <form action="#">
-                        <div class="form-group">
-                           <input type="email" class="form-control" onfocus="this.placeholder = ''"
-                              onblur="this.placeholder = 'Enter email'" placeholder='Enter email' required>
-                        </div>
-                        <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                           type="submit">Subscribe</button>
-                     </form>
-                  </aside>
+                  
                </div>
             </div>
          </div>
@@ -385,6 +216,7 @@
 		<!-- Jquery Plugins, main Jquery -->	
       <script src="./assets/js/plugins.js"></script>
       <script src="./assets/js/main.js"></script>
+        
       <footer>
             <?php 
                 include 'footer.php';

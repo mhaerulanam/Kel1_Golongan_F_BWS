@@ -9,6 +9,6 @@ if(isset($_GET['id_puskeswan']))
 }
 else
 {
-    header('location:detailpuskeswan.php');
+    header('location:daftarpuskeswan.php');
 }
 ?>

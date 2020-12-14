@@ -18,30 +18,32 @@
 			$jumlah = mysqli_num_rows($hasil);
 
 			if ($jumlah>0){
-                $row = mysqli_fetch_assoc($hasil);
-                $_SESSION["username"]=$row["nama"];
+				$row = mysqli_fetch_assoc($hasil);
+				$nama=$row["nama"];
+				$_SESSION["username"]=$row["nama"];
+				$_SESSION["id"]=$row["id_user"];
                 $_SESSION["id_role"]=$row["role"];
 
                 if ($_SESSION["id_role"]=($row["id_role"]==1))
 				{
                     $level = "Admin";
-                    $_SESSION["id_role"] = $level; 
-					header("location:../LandingPagePeternak.php");
+					$_SESSION["id_role"] = $level;
+					echo "<script>alert('Selamat $nama, Anda Berhasil Login sebagai $level'); window.location='../LandingPagePeternak.php'</script>"; 
 				} else if ($_SESSION["id_role"]=$row["id_role"]==2)
 				{
                     $level = "Dokter";
                     $_SESSION["id_role"] = $level;
-					header("location:../LandingPagePeternak.php");
+					echo "<script>alert('Selamat $nama, Anda Berhasil Login sebagai $level'); window.location='../LandingPagePeternak.php'</script>"; 
                 }
                 else if ($_SESSION["id_role"]=$row["id_role"]==3)
 				{
                     $level = "Peternak";
                     $_SESSION["id_role"] = $level;
-					header("location:../LandingPagePeternak.php");
+					echo "<script>alert('Selamat $nama, Anda Berhasil Login sebagai $level'); window.location='../LandingPagePeternak.php'</script>"; 
 				}			
 			}else {
                 // alihkan ke halaman login kembali
-                header("location:../modal/Login.php?pesan=gagal");
+                echo "<script>alert('Maaf $nama, Login Anda gagal'); window.location='../LandingPagePeternak.php'</script>"; 
 			}
 		}
 	?>

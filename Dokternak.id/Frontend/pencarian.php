@@ -50,7 +50,7 @@
                                 <!-- form -->
                                 <form method="POST" action="#" class="search-box">
                                     <div class="input-form">
-                                        <input type="text" placeholder="Keyword" name="s_keyword" id="s_keyword" value="<?php echo $s_keyword; ?>">
+                                        <input type="text" placeholder="Masukkan Nama Dokter" name="s_keyword" id="s_keyword" value="<?php echo $s_keyword; ?>">
                                     </div>
                                     <div class="select-form">
                                         <div class="select-itms">
@@ -121,7 +121,7 @@
                         $search_kecamatan = '%'. $s_kecamatan .'%';
                         $search_keyword = '%'. $s_keyword .'%';
                         $no = 1;
-                        $query = "SELECT * FROM dokter, jabatan WHERE dokter.id_jabatan=jabatan.id_jabatan AND tempat  LIKE ? AND (nama LIKE ? OR tempat LIKE ? OR email LIKE ?) ORDER BY id_dokter DESC";
+                        $query = "SELECT * FROM dokter, jabatan WHERE dokter.id_jabatan=jabatan.id_jabatan AND alamat LIKE ? AND (nama LIKE ? OR tempat LIKE ? OR email LIKE ?) ORDER BY id_dokter DESC";
                         $dewan1 = $koneksi->prepare($query);
                         $dewan1->bind_param('ssss', $search_kecamatan, $search_keyword, $search_keyword, $search_keyword);
                         $dewan1->execute();

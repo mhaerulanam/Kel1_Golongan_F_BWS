@@ -1,3 +1,7 @@
+<?php
+// Start the session
+session_start();
+?>
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -26,10 +30,25 @@
 
 <body>
     <navbar>
+    <?php include "modal/login.php"; ?>
+    <?php include "modal/ubah_password.php"; ?>
     <?php
         include 'navbar.php';
     ?>
     </navbar>
+    
+    <?php
+        if (isset($_GET['pesan'])){
+            $pesan = $_GET['pesan'];
+            if ($pesan == 'gagal') {
+           ?>
+               <div class="alert alert-danger">
+                    <center><strong>Peringatan!</strong> Anda Harus Login Terlebih Dahulu</center>
+                </div>
+            <?php
+            }
+        }
+    ?>
     <!-- Banner Atas Start-->
    <div class="slider-area ">
       <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="assets/img/gallery/s2.jpg">
@@ -76,7 +95,7 @@
                 if (ISSET($_POST['submit'])){
                     $cari = $_POST['nt'];
                    
-                    $query2 = " SELECT * FROM artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg AND judul LIKE '%$cari%' OR isi LIKE'%$cari%'";
+                    $query2 = " SELECT * FROM artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg AND judul LIKE '%$cari%' AND isi LIKE'%$cari%'";
                     // $query2 = "SELECT * FROM artikel WHERE judul LIKE '%$cari%'";
 
                     $sql = mysqli_query($koneksi, $query2);
@@ -96,9 +115,9 @@
                                 </div>
                                 <div class="blog_details">
                                     <a class="d-inline-block" href="single-blog.html">
-                                        <h2><a href="detailartikel.php?id_artikel=<?php echo $t['id_artikel']; ?>"><?php echo $dt['judul']; ?></a></h2>
+                                        <h2><a href="detailartikel.php?id_artikel=<?php echo $dt['id_artikel']; ?>"><?php echo $dt['judul']; ?></a></h2>
                                     </a>
-                                    <p><?php echo $isibts ?><a href="detailartikel.php?id_artikel=<?php echo $t['id_artikel']; ?>" class="more-btn">  <strong> Read more » </strong></a></p>
+                                    <p><?php echo $isibts ?><a href="detailartikel.php?id_artikel=<?php echo $dt['id_artikel']; ?>" class="more-btn">  <strong> Read more » </strong></a></p>
                                     <ul class="blog-info-link">
                                         <li><a>Kategori : <?php echo $dt['kategori_artikel'];?></a></li>
                                         <li><a><?php echo $dt['tanggal'];?></a></li>
@@ -212,9 +231,8 @@
         </div>
     </section>
 <?php
-    if(isset($_GET['submit'])||isset($_GET['tampil'])) :
-    
-    else : ?>
+    if(isset($_POST['submit'])||isset($_GET['tampil'])) :
+    else  :?>
 <!--Pagination Start  -->
 <div class="pagination-area pb-115 text-center">
             <div class="container">

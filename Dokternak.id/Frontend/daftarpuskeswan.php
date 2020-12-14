@@ -8,7 +8,7 @@ session_start();
 <head>
    <meta charset="utf-8">
    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title> Dokternak.id - Daftar Tutorial </title>
+    <title> Dokternak.id - Daftar Puskeswan </title>
    <meta name="description" content="">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
@@ -42,7 +42,7 @@ session_start();
               <div class="row">
                   <div class="col-xl-12">
                       <div class="hero-cap text-center">
-                          <h2>DAFTAR TUTORIAL</h2>
+                          <h2>DAFTAR PUSKESWAN</h2>
                       </div>
                   </div>
               </div>
@@ -54,34 +54,86 @@ session_start();
   <!-- Our Services Start -->
   <div class="our-services section-pad-t30">
             <div class="container">
-                
+
+              <?php 
+                        include "koneksi.php";
+		                $s_nama="";
+                        $search_keyword="";
+                        if (isset($_POST['search'])) {
+                        $s_nama = $_POST['s_nama'];
+                        $search_keyword = $_POST['cari puskeswan'];
+                        }
+                        ?>            
+            <div class="pagination-area pb-200 text-center">
+                <div class="blog_right_sidebar">          
+                <aside class="single_sidebar_widget search_widget">
+                            <form method="POST">
+                                <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder='cari puskeswan' name="nt" id="cari puskeswan" value="<?php echo $search_keyword; ?>"
+                                            onfocus="this.placeholder = ''"
+                                            onblur="this.placeholder = 'search_keyword'">
+                                        <div class="input-group-append">
+                                            <button class="btns" type="submit" name="submit"><i class="ti-search"></i></button> 
+                                        </div>
+                                   </div>      
+                            </form>
+                        </aside>
+                </div>
+                </div>
                 <?php
                 include 'koneksi.php';
                 ?>
-
-                
+                <div class="row d-flex justify-contnet-center"> 
                 <?php
-                $datatutorial=mysqli_query($koneksi, "SELECT * FROM tutorial");
-                ?>
-                <div class="row d-flex justify-contnet-center">  
-                <?php while ($data = mysqli_fetch_array($datatutorial)) {?>
+                    if (ISSET($_POST['submit'])){
+                        $cari = $_POST['nt'];
+                    
+                        $query2 = " SELECT * FROM puskeswan WHERE nama_puskeswan LIKE '%$cari%' OR alamat LIKE'%$cari%'";
+
+                        $sql = mysqli_query($koneksi, $query2);
+                        while ($data = mysqli_fetch_array($sql)) {?>
+                
+                            <div class="col-lg-4 col-md-6">
+                            <div class="single-services text-center mb-30">
+                                    <div class="services-ion">
+                                    <img src="gambarpuskeswan.php?id_puskeswan=<?php echo $data['id_puskeswan']; ?>"width="200px"><br>
+                                   
+                                    </div>
+                                    <div class="services-cap">
+                                        <h5><?= $data['nama_puskeswan']; ?></h5>
+                                        <?= $data['alamat']; ?><br><br>
+                                        <div class="btn_detail">
+                                    <div class="services-cap">
+                                        <a href="detailpuskeswan.php?id_puskeswan=<?= $data['id_puskeswan']; ?>" class="genric-btn primary radius">Detail</a>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div> 
+                            </div> 
+                            <?php }
+                    }else{
+                $datapuskeswan=mysqli_query($koneksi, "SELECT * FROM puskeswan");
+                ?> 
+                <?php while ($data = mysqli_fetch_array($datapuskeswan)) {?>
+                
                     <div class="col-lg-4 col-md-6">
                     <div class="single-services text-center mb-30">
                             <div class="services-ion">
-                            <img src="gambartutorial.php?id_tutorial=<?php echo $data['id_tutorial']; ?>"width="80px"><br>
+                            <img src="gambarpuskeswan.php?id_puskeswan=<?php echo $data['id_puskeswan']; ?>"width="200px"><br>
                            
                             </div>
                             <div class="services-cap">
-                                <h5><?= $data['judul_tutorial']; ?></h5><br><br>
+                                <h5><?= $data['nama_puskeswan']; ?></h5>
+                                <?= $data['alamat']; ?><br><br>
                                 <div class="btn_detail">
                             <div class="services-cap">
-                                <a href="detailtutorial.php?id_tutorial=<?= $data['id_tutorial']; ?>" class="genric-btn primary radius">Detail</a>
+                                <a href="detailpuskeswan.php?id_puskeswan=<?= $data['id_puskeswan']; ?>" class="genric-btn primary radius">Detail</a>
                                 </div>
                             </div>
                             </div>
                         </div> 
                     </div> 
-                    <?php } ?>
+                    <?php } }?>
                 </div> 
             </div>
   </div>

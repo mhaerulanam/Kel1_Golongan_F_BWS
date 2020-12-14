@@ -33,7 +33,13 @@
    </head>
 
    <body>
-
+   <navbar>
+    <?php include "modal/login.php"; ?>
+    <?php include "modal/ubah_password.php"; ?>
+    <?php
+        include 'navbar.php';
+    ?>
+    </navbar>
     <!-- Preloader Start -->
     <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
@@ -290,4 +296,9 @@ Sistem Informasi Dokter Hewan merupakan sistem informasi berbasis website untuk 
         <script src="./assets/js/main.js"></script>
         
     </body>
+    <footer>
+            <?php 
+                include 'footer.php';
+            ?>
+        </footer>
 </html>

@@ -50,7 +50,7 @@
                                                 <ul class="submenu">
                                                     <li><a href="daftarpuskeswan.php">PUSKESWAN</a></li>
                                                     <li><a href="daftar_tutorial.php">TUTORIAL</a></li>
-                                                    <li><a href="#">TENTANG KAMI</a></li>                                                 
+                                                    <li><a href="aboutus.php">TENTANG KAMI</a></li>                                                 
                                                 </ul>
                                             </li>
                                         </ul>

@@ -37,8 +37,8 @@ if(isset($_POST['daftar']))
             $fp = addslashes(file_get_contents($_FILES['file_foto']['tmp_name']));
             $sertif = addslashes(file_get_contents($_FILES['file_sertifikat']['tmp_name']));
             mysqli_query($koneksi,"insert into dokter values ('$id_dokter','$nama','$email','$jk','$alamat','$tempat','$telpon', '$fp', '$sertif', '$jabatan', '$jadwal_kerja', '$username', '$password')");
-            echo $jadwal_kerja, $username, $password,$id_dokter, $nama, $email, $jk, $alamat, $tempat, $telpon, $fp, $sertif, $jabatan ;
-            // header("location:registrasi_dokter.php?pesan=berhasil");
+            // echo $jadwal_kerja, $username, $password,$id_dokter, $nama, $email, $jk, $alamat, $tempat, $telpon, $fp, $sertif, $jabatan ;
+            header("location:registrasi_dokter.php?pesan=berhasil");
         }
         else
         {

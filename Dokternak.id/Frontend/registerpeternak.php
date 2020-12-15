@@ -150,10 +150,16 @@ if(isset($_POST["daftarpeternak"])) {
       $no_wa = $_POST['no_wa'];
       $jenis_kelamin = $_POST["jenis_kelamin"];
       $alamat = $_POST["alamat"];
+      $fp_name = $_FILES['foto_ternak']['name'];
+      $fp_size = $_FILES['foto_ternak']['size'];
+      $fp_type = $_FILES['foto_ternak']['type'];
       $foto_peternak = $_POST["foto_peternak"];
       $username_peternak = $_POST["username_peternak"];
       $password_peternak = $_POST["password_peternak"];
-      
+      if ($fp_size < 2048000 and ($fp_type =='image/jpeg' or $fp_type == 'image/png'))
+      {
+        
+          $fp = addslashes(file_get_contents($_FILES['file_foto']['tmp_name']));
       $query = "INSERT INTO peternak VALUES('','$namadepan_peternak','$namabelakang_peternak','$email_peternak','$no_hp','$no_wa','$jenis_kelamin','$alamat','$foto_peternak','$username_peternak','$password_peternak')";
       mysqli_query($koneksi,$query);
       //cek keberhasilan
@@ -162,7 +168,13 @@ if(isset($_POST["daftarpeternak"])) {
       } else {
         echo "gagal";
       }
-}
+
+      }
+      else
+      {
+        header("location:registrasi_dokter.php?pesan=gagal");
+      }
+  }
 
 ?>
 
@@ -187,11 +199,11 @@ if(isset($_POST["daftarpeternak"])) {
             <input type="text" class="form-control" name="namabelakang_peternak" placeholder="Masukkan Nama Belakang">
           </div>
           <div class="form-group">
-            <label for="username_peternak"><span class="glyphicon glyphicon-eye-open"></span> Username</label>
+            <label for="username_peternak"><span class="glyphicon glyphicon-user"></span> Username</label>
             <input type="text" class="form-control" name="username_peternak" placeholder="Username Harus Terdiri Dari 6-16 Karakter">
           </div>
           <div class="form-group">
-            <label for="email_peternak"><span class="glyphicon glyphicon-eye-open"></span> Email</label>
+            <label for="email_peternak"><span class="glyphicon glyphicon-envelope"></span> Email</label>
             <input type="email" class="form-control" name="email_peternak" placeholder="Masukkan Email Dengan Benar">
           </div>
           <div class="form-group">
@@ -202,16 +214,19 @@ if(isset($_POST["daftarpeternak"])) {
             <label for="psws"><span class="glyphicon glyphicon-eye-open"></span> Ketik Ulang Password</label>
             <input type="password" class="form-control" name="" placeholder="Ketik ulang password Anda">
           </div>
+
+        <!-- Kanan Bang **************************************************************************************-->
+        <div id="right">
           <div class="form-group">
-            <label for="no_hp"><span class="glyphicon glyphicon-eye-open"></span> No Handphone</label>
+            <label for="no_hp"><span class="glyphicon glyphicon-earphone"></span> No Handphone</label>
             <input type="number" class="form-control" name="no_hp" placeholder="Masukkan Nomer Handphone">
           </div>
           <div class="form-group">
-            <label for="no_wa"><span class="glyphicon glyphicon-eye-open"></span> No Whatsapp</label>
+            <label for="no_wa"><span class="glyphicon glyphicon-earphone"></span> No Whatsapp</label>
             <input type="number" class="form-control" name="no_wa" placeholder="Masukkan Nomer Whatsapp">
           </div>
           <div class="form-group">
-            <label for="jenis_kelamin"><span class="glyphicon glyphicon-eye-open"></span> Jenis Kelamin</label>
+            <label for="jenis_kelamin"><span class="glyphicon glyphicon-star"></span> Jenis Kelamin</label>
             <br>
             <input type="radio" name="jenis_kelamin" value="Laki-Laki">
             <label for="laki">Laki - Laki</label><br>
@@ -220,15 +235,15 @@ if(isset($_POST["daftarpeternak"])) {
           </div>
 
           <div class="form-group">
-            <label for="alamat"><span class="glyphicon glyphicon-user"></span> Alamat Lengkap</label>
+            <label for="alamat"><span class="glyphicon glyphicon-road"></span> Alamat Lengkap</label>
             <input type="text" class="form-control" name="alamat" placeholder="Masukkan Alamat Lengkap">
           </div>
 
           <div class="form-group">
-            <label for="foto_peternak"><span class="glyphicon glyphicon-user"></span> Foto</label>
+            <label for="foto_peternak"><span class="glyphicon glyphicon-upload"></span> Upload Foto Profil</label>
             <input type="file" class="form-control" name="foto_peternak">
           </div>
-
+      </div>
 
           <div class="form-group">
           

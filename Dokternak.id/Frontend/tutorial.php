@@ -37,21 +37,6 @@
                         </div>
                     </div>
                 </div>
-
-                <aside class="single_sidebar_widget search_widget">
-                                <div class="form-group">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder='Search Keyword'
-                                            onfocus="this.placeholder = ''"
-                                            onblur="this.placeholder = 'Search Keyword'">
-                                        <div class="input-group-append">
-                                            <button class="btns" type="button"><i class="ti-search"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                            </form>
-                        </aside>
                 
                 <?php
                 include 'koneksi.php';
@@ -59,21 +44,27 @@
 
                 
                 <?php
-                $jtph = 3;
+                // Paging - Konfigurasi
+                $jumlahDataPerHalaman = 3;
                 $result = mysqli_query($koneksi, "SELECT * FROM tutorial");
-                $banyakdata = mysqli_num_rows($result);
-                $banyakpage = ceil($banyakdata / $jtph);
-                $aktif = ( isset($_GET["hlmn"]) ) ? $_GET["hlmn"] : 1;
+                $jumlahData = mysqli_num_rows($result);
+                $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
+                $halamanAktif = ( isset($_GET["halaman"]) ) ? $_GET["halaman"] : 1;
 
-                $awalData = ( $jtph * $aktif ) - $jtph;
-                
-                $datatutorial=mysqli_query($koneksi, "SELECT * FROM tutorial order by id_tutorial ASC
-                LIMIT $awalData,$jtph");
+                // halaman 2, awalDatanya = 2. Dimulai indeks 0,1,2,3, dst
+                $awalData = ( $jumlahDataPerHalaman * $halamanAktif ) - $jumlahDataPerHalaman;
+                // Akhir dari Konfigurasi
 
+                // ambilData adalah variabel untuk menampilkan data dari 2 tabel, yaitu artikel dan kategori_artikel. 
+                // Sehingga kita dapat menampilkan kategorinya, sesuai id_ktg di kedua tabel
+                $ambilData=mysqli_query($koneksi, "SELECT * FROM tutorial order by id_tutorial ASC
+                LIMIT $awalData,$jumlahDataPerHalaman");
                 ?>
 
-                <div class="row d-flex justify-contnet-center">
-                <?php while ($data = mysqli_fetch_array($datatutorial)) {?>
+                
+
+                    <div class="row d-flex justify-contnet-center">
+                    <?php while ($data = mysqli_fetch_array($ambilData)) { ?>
                     <div class="col-lg-4 col-md-6">
                         <div class="single-process text-center mb-30">
                             <div class="process-ion">
@@ -90,12 +81,14 @@
                             </div>
                         </div> 
                     </div> 
+
                     <?php } ?>
-                </div> 
-            </div>
-  </div>
-  <!--Pagination Start  -->
-<div class="pagination-area pb-115 text-center">
+                    </div>
+                    </div>
+                    </div>
+                   
+   <!--Pagination Start  -->
+   <div class="pagination-area pb-115 text-center">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
@@ -104,29 +97,29 @@
                             <ul class="pagination justify-content-start">
 
                                     <!-- Memberi tombol prev -->
-                                    <?php if( $aktif > 1) : ?>
+                                    <?php if( $halamanAktif > 1) : ?>
                                         <li class="page-item">
-                                        <a class="page-link" href="?hlmn=<?=$aktif - 1; ?>">&lt; Sebelumnya</a></h4>
+                                        <a class="page-link" href="?halaman=<?= $halamanAktif - 1; ?>">&lt; Sebelumnya</a></h4>
                                         </li>
                                     <?php endif; ?>
 
                                     <!-- Navigasi Pages -->
-                                    <?php for($i = 1; $i <= $banyakpage; $i++) : ?>
-                                        <?php if ($i == $aktif ) : ?>
+                                    <?php for($i = 1; $i <= $jumlahHalaman; $i++) : ?>
+                                        <?php if ($i == $halamanAktif ) : ?>
                                             <li class="page-item active">
-                                            <a href="?hlmn=<?= $i; ?>" class="page-link"><?= $i; ?></a>
+                                            <a href="?halaman=<?= $i; ?>" class="page-link"><?= $i; ?></a>
                                             </li>
                                         <?php else : ?>
                                             <li class="page-item">
-                                            <a href="?hlmn=<?= $i; ?>" class="page-link"><?= $i; ?></a>
+                                            <a href="?halaman=<?= $i; ?>" class="page-link"><?= $i; ?></a>
                                             </li>
                                         <?php endif; ?>
                                     <?php endfor; ?>
 
                                     <!-- Memberi tombol next -->
-                                    <?php if( $aktif < $banyakpage) : ?>
+                                    <?php if( $halamanAktif < $jumlahHalaman) : ?>
                                         <li class="page-item">
-                                        <a class="page-link" href="?hlmn=<?= $banyakpage + 1; ?>">Selanjutnya &gt;</span></a>
+                                        <a class="page-link" href="?halaman=<?= $halamanAktif + 1; ?>">Selanjutnya &gt;</span></a>
                                         </li>
                                     <?php endif; ?>
 
@@ -137,6 +130,7 @@
                 </div>
             </div>
         </div>
+        <!--Pagination End  -->
         <!-- JS here -->
 	
 		<!-- All JS Custom Plugins Link Here here -->

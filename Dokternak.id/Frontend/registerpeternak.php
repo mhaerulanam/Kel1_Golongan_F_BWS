@@ -112,9 +112,59 @@ body {
   opacity: 1;
   transition: all 0.35s;
 }
+/* The alert message box */
+.alert {
+  padding: 20px;
+  background-color: #f44336; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
 </style>
 </head>
 <body>
+<?php include 'koneksi.php';?>
+<?php
+if(isset($_POST["daftarpeternak"])) {
+
+      $namadepan_peternak = $_POST["namadepan_peternak"];
+      $namabelakang_peternak = $_POST["namabelakang_peternak"];
+      $email_peternak = $_POST["email_peternak"];
+      $no_hp = $_POST['no_hp'];
+      $no_wa = $_POST['no_wa'];
+      $jenis_kelamin = $_POST["jenis_kelamin"];
+      $alamat = $_POST["alamat"];
+      $foto_peternak = $_POST["foto_peternak"];
+      $username_peternak = $_POST["username_peternak"];
+      $password_peternak = $_POST["password_peternak"];
+      
+      $query = "INSERT INTO peternak VALUES('','$namadepan_peternak','$namabelakang_peternak','$email_peternak','$no_hp','$no_wa','$jenis_kelamin','$alamat','$foto_peternak','$username_peternak','$password_peternak')";
+      mysqli_query($koneksi,$query);
+      //cek keberhasilan
+      if(mysqli_affected_rows($koneksi) > 0){
+         echo"Berhasil";
+      } else {
+        echo "gagal";
+      }
+}
+
+?>
 
   <!-- Modal content -->
   <div class="modal-content">
@@ -126,57 +176,69 @@ body {
           <label for="tab-1" class="tab-label">Peternak</label>
         <div class="tab-content">
           <div class="modal-body" style="padding:40px 50px;">
-        <form role="form">
+        <form role="form" action="" method="post" action="uploadfotopeternak.php">
             <center><h2>Registrasi Akun Peternak</h2></center>
           <div class="form-group">
-            <label for="namadpn"><span class="glyphicon glyphicon-user"></span> Nama Depan</label>
-            <input type="text" class="form-control" id="namadpn" placeholder="Masukkan Nama Depan">
+            <label for="namadepan_peternak"><span class="glyphicon glyphicon-user"></span> Nama Depan</label>
+            <input type="text" class="form-control" name="namadepan_peternak" placeholder="Masukkan Nama Depan">
           </div>
           <div class="form-group">
-            <label for="namablkng"><span class="glyphicon glyphicon-user"></span> Nama Belakang</label>
-            <input type="text" class="form-control" id="namablkng" placeholder="Masukkan Nama Belakang">
+            <label for="namabelakang_peternak"><span class="glyphicon glyphicon-user"></span> Nama Belakang</label>
+            <input type="text" class="form-control" name="namabelakang_peternak" placeholder="Masukkan Nama Belakang">
           </div>
           <div class="form-group">
-            <label for="username"><span class="glyphicon glyphicon-eye-open"></span> Username</label>
-            <input type="text" class="form-control" id="username" placeholder="Username Harus Terdiri Dari 6-16 Karakter">
+            <label for="username_peternak"><span class="glyphicon glyphicon-eye-open"></span> Username</label>
+            <input type="text" class="form-control" name="username_peternak" placeholder="Username Harus Terdiri Dari 6-16 Karakter">
           </div>
           <div class="form-group">
-            <label for="email"><span class="glyphicon glyphicon-eye-open"></span> Email</label>
-            <input type="email" class="form-control" id="email" placeholder="Masukkan Email Dengan Benar">
+            <label for="email_peternak"><span class="glyphicon glyphicon-eye-open"></span> Email</label>
+            <input type="email" class="form-control" name="email_peternak" placeholder="Masukkan Email Dengan Benar">
           </div>
           <div class="form-group">
-            <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
-            <input type="password" class="form-control" id="psw" placeholder="Enter password">
+            <label for="password_peternak"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+            <input type="password" class="form-control" name="password_peternak" placeholder="Masukkan angka dan huruf">
           </div>
           <div class="form-group">
-            <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Ketik Ulang Password</label>
-            <input type="password" class="form-control" id="psw" placeholder="Enter password">
+            <label for="psws"><span class="glyphicon glyphicon-eye-open"></span> Ketik Ulang Password</label>
+            <input type="password" class="form-control" name="" placeholder="Ketik ulang password Anda">
           </div>
           <div class="form-group">
-            <label for="jk"><span class="glyphicon glyphicon-eye-open"></span> Jenis Kelamin</label>
+            <label for="no_hp"><span class="glyphicon glyphicon-eye-open"></span> No Handphone</label>
+            <input type="number" class="form-control" name="no_hp" placeholder="Masukkan Nomer Handphone">
+          </div>
+          <div class="form-group">
+            <label for="no_wa"><span class="glyphicon glyphicon-eye-open"></span> No Whatsapp</label>
+            <input type="number" class="form-control" name="no_wa" placeholder="Masukkan Nomer Whatsapp">
+          </div>
+          <div class="form-group">
+            <label for="jenis_kelamin"><span class="glyphicon glyphicon-eye-open"></span> Jenis Kelamin</label>
             <br>
-            <input type="radio" id="cowok" name="jk" value="cowok">
+            <input type="radio" name="jenis_kelamin" value="Laki-Laki">
             <label for="laki">Laki - Laki</label><br>
-            <input type="radio" id="cewek" name="jk" value="cewek">
+            <input type="radio" name="jenis_kelamin" value="Perempuan">
             <label for="laki">Perempuan</label><br>
           </div>
 
           <div class="form-group">
-          <label for="upload"><span class="glyphicon glyphicon-eye-open"></span> Foto Profil</label>
-          <form method="post" enctype="multipart/form-data" action="upload.php">
-          <input type="file" name="gambar">
-          <input type="submit" value="Upload">
+            <label for="alamat"><span class="glyphicon glyphicon-user"></span> Alamat Lengkap</label>
+            <input type="text" class="form-control" name="alamat" placeholder="Masukkan Alamat Lengkap">
+          </div>
+
+          <div class="form-group">
+            <label for="foto_peternak"><span class="glyphicon glyphicon-user"></span> Foto</label>
+            <input type="file" class="form-control" name="foto_peternak">
+          </div>
+
+
+          <div class="form-group">
+          
+          
+          <!-- <div class="checkbox">
+            <label><input type="checkbox" value="" checked>Menerima Persyaratan Yang Berlaku</label>
+          </div> -->
+          <button type="submit" name ="daftarpeternak" class="btn btn-success btn-block"> Daftar</button>
           </form>
           </div>
-         
-          <div class="form-group">
-            <label for="alamat"><span class="glyphicon glyphicon-user"></span> Alamat Lengkap</label>
-            <input type="text" class="form-control" id="alamat" placeholder="Masukkan Alamat Lengkap">
-          </div>
-          <div class="checkbox">
-            <label><input type="checkbox" value="" checked>Menerima Persyaratan Yang Berlaku</label>
-          </div>
-            <button type="submit" class="btn btn-success btn-block"><span class=""></span> Daftar</button>
         </form>
       </div>
         </div>

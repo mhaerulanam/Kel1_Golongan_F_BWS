@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 12 Des 2020 pada 15.31
+-- Waktu pembuatan: 15 Des 2020 pada 12.38
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.3
 
@@ -32,12 +32,12 @@ CREATE TABLE `dokter` (
   `id_dokter` varchar(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `email` varchar(30) NOT NULL,
-  `jenis_kelamin` char(30) NOT NULL,
+  `jenis_kelamin` varchar(30) NOT NULL,
   `alamat` text NOT NULL,
   `tempat` varchar(50) NOT NULL,
   `telpon` varchar(20) NOT NULL,
   `foto` mediumblob NOT NULL,
-  `sertifikasi` mediumtext NOT NULL,
+  `sertifikasi` mediumblob NOT NULL,
   `id_jabatan` varchar(11) NOT NULL,
   `jadwal_kerja` text NOT NULL,
   `username` varchar(50) NOT NULL,

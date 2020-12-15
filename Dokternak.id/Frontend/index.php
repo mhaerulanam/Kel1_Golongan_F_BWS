@@ -168,21 +168,27 @@ session_start();
 
                 
                 <?php
-                $jtph = 3;
+                // Paging - Konfigurasi
+                $jumlahDataPerHalaman = 3;
                 $result = mysqli_query($koneksi, "SELECT * FROM tutorial");
-                $banyakdata = mysqli_num_rows($result);
-                $banyakpage = ceil($banyakdata / $jtph);
-                $aktif = ( isset($_GET["hlmn"]) ) ? $_GET["hlmn"] : 1;
+                $jumlahData = mysqli_num_rows($result);
+                $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
+                $halamanAktif = ( isset($_GET["halaman"]) ) ? $_GET["halaman"] : 1;
 
-                $awalData = ( $jtph * $aktif ) - $jtph;
-                
-                $datatutorial=mysqli_query($koneksi, "SELECT * FROM tutorial order by id_tutorial ASC
-                LIMIT $awalData,$jtph");
+                // halaman 2, awalDatanya = 2. Dimulai indeks 0,1,2,3, dst
+                $awalData = ( $jumlahDataPerHalaman * $halamanAktif ) - $jumlahDataPerHalaman;
+                // Akhir dari Konfigurasi
 
+                // ambilData adalah variabel untuk menampilkan data dari 2 tabel, yaitu artikel dan kategori_artikel. 
+                // Sehingga kita dapat menampilkan kategorinya, sesuai id_ktg di kedua tabel
+                $ambilData=mysqli_query($koneksi, "SELECT * FROM tutorial order by id_tutorial ASC
+                LIMIT $awalData,$jumlahDataPerHalaman");
                 ?>
 
-                <div class="row d-flex justify-contnet-center">
-                <?php while ($data = mysqli_fetch_array($datatutorial)) {?>
+                
+
+                    <div class="row d-flex justify-contnet-center">
+                    <?php while ($data = mysqli_fetch_array($ambilData)) { ?>
                     <div class="col-lg-4 col-md-6">
                         <div class="single-process text-center mb-30">
                             <div class="process-ion">
@@ -193,16 +199,62 @@ session_start();
                                 <h5><?= $data['judul_tutorial']; ?></h5>
                                 <div class="btn_detail">
                             <div class="items-link f-center">
-                            <a href="detailtutorial.php?id_tutorial=<?= $data['id_tutorial']; ?>" class="genric-btn default radius">Detail</a>
+                                <a href="detailtutorial.php?id_tutorial=<?= $data['id_tutorial']; ?>">Detail</a>
                                 </div>
                             </div>
                             </div>
                         </div> 
                     </div> 
+
                     <?php } ?>
-                </div> 
+                    </div>
+                    </div>
+                    </div>
+
+                     <!--Pagination Start  -->
+   <div class="pagination-area pb-115 text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="single-wrap d-flex justify-content-center">
+                            <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-start">
+
+                                    <!-- Memberi tombol prev -->
+                                    <?php if( $halamanAktif > 1) : ?>
+                                        <li class="page-item">
+                                        <a class="page-link" href="?halaman=<?= $halamanAktif - 1; ?>">&lt; Sebelumnya</a></h4>
+                                        </li>
+                                    <?php endif; ?>
+
+                                    <!-- Navigasi Pages -->
+                                    <?php for($i = 1; $i <= $jumlahHalaman; $i++) : ?>
+                                        <?php if ($i == $halamanAktif ) : ?>
+                                            <li class="page-item active">
+                                            <a href="?halaman=<?= $i; ?>" class="page-link"><?= $i; ?></a>
+                                            </li>
+                                        <?php else : ?>
+                                            <li class="page-item">
+                                            <a href="?halaman=<?= $i; ?>" class="page-link"><?= $i; ?></a>
+                                            </li>
+                                        <?php endif; ?>
+                                    <?php endfor; ?>
+
+                                    <!-- Memberi tombol next -->
+                                    <?php if( $halamanAktif < $jumlahHalaman) : ?>
+                                        <li class="page-item">
+                                        <a class="page-link" href="?halaman=<?= $halamanAktif + 1; ?>">Selanjutnya &gt;</span></a>
+                                        </li>
+                                    <?php endif; ?>
+
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        <!--Pagination End  -->
         </section>
 
         <footer>

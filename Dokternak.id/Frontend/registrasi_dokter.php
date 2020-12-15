@@ -284,11 +284,11 @@ form {
         <div id="left">
           <div class="form-group">
             <label for="nama"><span class="glyphicon glyphicon-user"></span> Nama Lengkap</label>
-            <input type="text" class="form-control" id="nama" placeholder="Masukkan nama lengkap (disertai gelar)" required>
+            <input type="text" class="form-control" name="nama" placeholder="Masukkan nama lengkap (disertai gelar)" required>
           </div>
           <div class="form-group">
             <label for="email"><span class="glyphicon glyphicon-envelope"></span> Akun Email</label>
-            <input type="email" class="form-control" id="email" placeholder="Masukkan email" required>
+            <input type="email" class="form-control" name="email" placeholder="Masukkan email" required>
           </div>
           <div class="form-group">
             <label for="jk"><span class="glyphicon glyphicon-star"></span> Jenis Kelamin</label>
@@ -310,15 +310,15 @@ form {
 
           <div class="form-group">
             <label for="alamat"><span class="glyphicon glyphicon-road"></span> Alamat</label><br>
-            <textarea name="alamat" id="alamat" class="form-control" placeholder="Masukkan alamat" required></textarea>
+            <textarea name="alamat" name="alamat" class="form-control" placeholder="Masukkan alamat" required></textarea>
           </div>
           <div class="form-group">
             <label for="kec"><span class="glyphicon glyphicon-road"></span> Kecamatan (Tempat Dinas/Praktek)</label><br>
-            <input type="text" name="kec" id="kec" class="form-control" placeholder="Masukkan kecamatan" required>
+            <input type="text" name="kec" name="kec" class="form-control" placeholder="Masukkan kecamatan" required>
           </div>
           <div class="form-group">
             <label for="telpon"><span class="glyphicon glyphicon-envelope"></span> No. Telpon / WhatsApp</label>
-            <input type="number" class="form-control" id="telpon" placeholder="Masukkan nomor telpon" required>
+            <input type="number" class="form-control" name="telpon" placeholder="Masukkan nomor telpon" required>
           </div>
 
           </div>
@@ -348,63 +348,34 @@ form {
           </div>
 
           <!-- TAB untuk memilih pekerjaan -->
-          <div class="tabs-2">
-              <div class="tab">
+          
+                <!-- Tab memilih jenis kelamin -->
+            <div class="wrapper">
+            <div class="tabs-2">
+                <div class="tab">
                 <input type="radio" name="jabatan" id="tab-param" class="tab-switch" value="J01" selected>
                 <label for="tab-param" class="tab-label">Paramedis</label>
-                <div class="tab-content">
-                  <div class="form-group">
-                    <label for="telpon"><span class="glyphicon glyphicon-briefcase"></span> Jadwal Kerja</label>
-                    <textarea class="form-control" id="jadwal_kerja" placeholder="Masukkan jadwal kerja anda"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <label for="telpon"><span class="glyphicon glyphicon-user"></span> Username</label>
-                    <input type="text" class="form-control" id="username" placeholder="Masukkan username">
-                  </div>
-                  <div class="form-group">
-                    <label for="telpon"><span class="glyphicon glyphicon-asterisk"></span> Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Masukkan password">
-                  </div>
                 </div>
-              </div>
-              <div class="tab">
+                <div class="tab">
                 <input type="radio" name="jabatan" id="tab-dok" class="tab-switch" value="J02" selected>
                 <label for="tab-dok" class="tab-label">Dokter</label>
-                <div class="tab-content">
-                <div class="form-group">
-                    <label for="telpon"><span class="glyphicon glyphicon-briefcase"></span> Jadwal Kerja</label>
-                    <textarea class="form-control" id="jadwal_kerja" placeholder="Masukkan jadwal kerja anda"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <label for="telpon"><span class="glyphicon glyphicon-user"></span> Username</label>
-                    <input type="text" class="form-control" id="username" placeholder="Masukkan username">
-                  </div>
-                  <div class="form-group">
-                    <label for="telpon"><span class="glyphicon glyphicon-asterisk"></span> Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Masukkan password">
-                  </div>
-                </div>
-              </div>
-              <div class="tab">
                 <input type="radio" name="jabatan" id="tab-ib" class="tab-switch" value="J03" selected>
                 <label for="tab-ib" class="tab-label">Petugas IB</label>
-                <div class="tab-content">
-                <div class="form-group">
+                </div>
+            </div>
+            <div class="form-group">
                     <label for="telpon"><span class="glyphicon glyphicon-briefcase"></span> Jadwal Kerja</label>
-                    <textarea class="form-control" id="jadwal_kerja" placeholder="Masukkan jadwal kerja anda"></textarea>
+                    <textarea class="form-control" name="jadwal_kerja" placeholder="Masukkan jadwal kerja anda"></textarea>
                   </div>
                   <div class="form-group">
                     <label for="telpon"><span class="glyphicon glyphicon-user"></span> Username</label>
-                    <input type="text" class="form-control" id="username" placeholder="Masukkan username">
+                    <input type="text" class="form-control" name="username" placeholder="Masukkan username">
                   </div>
                   <div class="form-group">
                     <label for="telpon"><span class="glyphicon glyphicon-asterisk"></span> Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Masukkan password">
+                    <input type="password" class="form-control" name="password" placeholder="Masukkan password">
                   </div>
-                </div>
-              </div>
-          </div>
-
+            </div>
           </div>  
           <!--akhir dari kanan **************************************************************************************-->
 

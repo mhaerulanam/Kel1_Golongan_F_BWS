@@ -1,3 +1,10 @@
+<?php
+// Start the session
+session_start();
+if (!isset($_SESSION["username"])) {
+    header("location:daftar_dokter.php?pesan=gagal");
+}
+?>
 <!DOCTYPE html>
 <html lang="en-US">
   <head>

@@ -248,6 +248,7 @@ if(isset($_POST["daftarpeternak"])) {
       //}
   }
 
+
 ?>
 <!-- <h2>Modal Example</h2> -->
 

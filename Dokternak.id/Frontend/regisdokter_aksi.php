@@ -16,8 +16,8 @@ if(isset($_POST['daftar']))
         // $datadokter = mysqli_query($koneksi, "SELECT max(id_dokter) from dokter");
         // $id_tertinggi = mysqli_fetch_array($datadokter);
 
-        $kode = date('H:i:s'); //tanggal, bulan, detik
-        $id_dokter= "Doc $kode";
+        $kode = date('His'); //jam,menit,detik
+        $id_dokter= "DOC$kode";
         $fp_name = $_FILES['file_foto']['name'];
         $fp_size = $_FILES['file_foto']['size'];
         $fp_type = $_FILES['file_foto']['type'];

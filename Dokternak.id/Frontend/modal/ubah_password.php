@@ -139,10 +139,6 @@ body {
 					</div>
 				</form>
 			</div>
-			<div class="modal_footer">
-                <br>
-				<a href="login.php">Login</a>
-			</div>
 		</div>
 	</div>
 </div>

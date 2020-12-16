@@ -147,7 +147,6 @@ session_start();
         <!--Pagination End  -->
   
              <!-- Our Services Start -->
-        <div class="apply-process-area apply-bg pt-150 pb-150" data-background="assets/img/gallery/how-applybg.png">
             <div class="container">
                 <!-- Section Tittle -->
          
@@ -244,12 +243,8 @@ session_start();
             </div>
         </div>
         <!--Pagination End  -->
-                 </div>
-                    </div>
-                    
-                     <!--Pagination Start  -->
-  
-                    </div>
+        </div>
+    </div>                  <!--Pagination Start  -->
 
         </section>
 

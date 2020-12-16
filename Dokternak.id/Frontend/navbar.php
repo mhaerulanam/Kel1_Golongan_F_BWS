@@ -33,7 +33,7 @@
                         <div class="col-lg-2 col-md-2">
                             <!-- Logo -->
                             <div class="logo">
-                                <a href="index.php"><img src="assets/img/logo/logo.png" alt=""></a>
+                                <a href="index.php"><img src="assets/img/logo/logo1.png" alt=""></a>
                             </div>  
                         </div>
                         <div class="col-lg-10 col-md-13">

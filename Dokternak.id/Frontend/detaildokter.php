@@ -10,6 +10,14 @@
     <link href="./css_dokter/css/aos.css" rel="stylesheet">
     <link href="./css_dokter/css/bootstrap.min.css" rel="stylesheet">
     <link href="./css_dokter/styles/main.css" rel="stylesheet">
+
+<style type="text/css">
+.label-telpon {
+  font-size: 80%;
+  margin-bottom: 0%
+}
+</style>
+
   </head>
   <body id="top">
     <div class="page-content">
@@ -45,7 +53,10 @@
       </div>
       <div class="section">
         <div class="container">
-          <div class="button-container"><a class="btn btn-default btn-round btn-lg btn-icon" href="#" rel="tooltip" title="Follow me on Facebook"><i class="fa fa-facebook"></i></a><a class="btn btn-default btn-round btn-lg btn-icon" href="#" rel="tooltip" title="Follow me on Twitter"><i class="fa fa-twitter"></i></a><a class="btn btn-default btn-round btn-lg btn-icon" href="#" rel="tooltip" title="Follow me on Google+"><i class="fa fa-google-plus"></i></a><a class="btn btn-default btn-round btn-lg btn-icon" href="#" rel="tooltip" title="Follow me on Instagram"><i class="fa fa-instagram"></i></a></div>
+          <div class="button-container"><a class="btn btn-default btn-round btn-lg btn-icon" href="#" rel="tooltip" title="Follow me on Facebook"><i class="fa fa-facebook"></i></a>
+          <a class="btn btn-default btn-round btn-lg btn-icon" href="#" rel="tooltip" title="Follow me on Twitter"><i class="fa fa-twitter"></i></a>
+          <a class="btn btn-default btn-round btn-lg btn-icon" href="#" rel="tooltip" title="Follow me on Google+"><i class="fa fa-google-plus"></i></a>
+          <a class="btn btn-default btn-round btn-lg btn-icon" href="#" rel="tooltip" title="Follow me on Instagram"><i class="fa fa-instagram"></i></a></div>
         </div>
       </div>
     </div>
@@ -76,7 +87,11 @@
             </div>
             <div class="row mt-3">
               <div class="col-sm-4"><strong class="text-uppercase">Telepon</strong></div>
-              <div class="col-sm-8"><?= $data['telpon']; ?></div>
+              <div class="col-sm-8">
+              <a class="btn btn-primary" href="tel:<?php echo $d2['telpon']; ?>" rel="tooltip" title="Telpon Langsung"><span class="fa fa-phone"></span></a>
+              <?= $data['telpon']; ?><br>
+              <p class="label-telpon">Tekan tombol telpon untuk melakukan panggilan langsung</p>
+              </div>
             </div>
             <div class="row mt-3">
               <div class="col-sm-4"><strong class="text-uppercase">Alamat</strong></div>

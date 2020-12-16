@@ -32,6 +32,36 @@ session_start();
 <body>
 <?php include "modal/login.php"; ?>
 <?php include ('navbar.php'); ?>
+    <?php
+        if (isset($_GET['pesan'])){
+            $pesan = $_GET['pesan'];
+                if ($pesan == 'berhasil') {
+        ?>
+                  <div class="alert alert-success">
+                    <center>Pendaftaran berhasil! Selanjutnya dimohon untuk menunggu verifikasi dari Admin via Gmail.
+                    <!-- <a href="daftar.php"><b>Kembali</b></a> -->
+                    </center>
+                  </div>
+        <?php
+                }elseif($pesan == 'kurang-foto'){
+        ?>
+                  <div class="alert alert-danger">
+                    <center>Mohon untuk mengupload foto profil/scan sertifikat.
+                    <a href="daftar.php"><b>Ulangi Mendaftar</b></a>
+                    </center>
+                  </div>
+        <?php
+                }elseif($pesan == 'gagal'){
+        ?>
+                  <div class="alert alert-danger">
+                    <center>Mohon maaf, pendaftaran anda gagal! Silahkan mendaftar ulang atau hubungi kami via gmail.
+                    <a href="daftar.php"><b>Ulangi Mendaftar</b></a>
+                    </center>
+                  </div>
+        <?php
+          }
+        }
+        ?>
     <section>
         <?php
             include 'pencarian.php';

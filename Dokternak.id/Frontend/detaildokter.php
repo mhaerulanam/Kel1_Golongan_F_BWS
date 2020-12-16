@@ -70,17 +70,13 @@
           <div class="card-body">
             <div class="h4 mt-0 title">Jadwal Kerja</div>
             <p><?= nl2br(str_replace(' ', ' ', htmlspecialchars($data['jadwal_kerja']))); ?></p>
-            <div class="h4 mt-0 title">Sertifikasi</div>
-            <p><?= $data['sertifikasi']; ?></p>
+            <div class="h4 mt-0 title">Wilayah Kerja</div>
+            <p><?= $data['tempat']; ?></p>
           </div>
         </div>
         <div class="col-lg-6 col-md-12">
           <div class="card-body">
             <div class="h4 mt-0 title">Profil</div>
-            <div class="row">
-              <div class="col-sm-4"><strong class="text-uppercase">Wilayah Kerja</strong></div>
-              <div class="col-sm-8"><?= $data['tempat']; ?></div>
-            </div>
             <div class="row mt-3">
               <div class="col-sm-4"><strong class="text-uppercase">Jenis Kelamin</strong></div>
               <div class="col-sm-8"><?= $data['jenis_kelamin']; ?></div>

@@ -235,7 +235,8 @@ if(isset($_POST["daftarpeternak"])) {
       mysqli_query($koneksi,$query1);
       //cek keberhasilan
       if(mysqli_affected_rows($koneksi) > 0){
-        header("location:index.php?pesan=berhasil");
+        session_start();
+        header("location:index.php?pesan=sukses");
       } else {
         header("location:index.php?pesan=gagal");
       }

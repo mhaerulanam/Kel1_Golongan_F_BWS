@@ -43,15 +43,23 @@ session_start();
                     </center>
                   </div>
         <?php
-                }elseif($pesan == 'kurang-foto'){
+                }elseif($pesan == 'sukses'){
         ?>
-                  <div class="alert alert-danger">
-                    <center>Mohon untuk mengupload foto profil/scan sertifikat.
-                    <a href="daftar.php"><b>Ulangi Mendaftar</b></a>
+                  <div class="alert alert-success">
+                    <center>Pendaftaran berhasil! Selanjutnya silahkan Login (Masuk) menggunakan akun yang telah terdaftar.
                     </center>
                   </div>
         <?php
-                }elseif($pesan == 'gagal'){
+                }elseif($pesan == 'kurang-foto'){
+        ?>
+                    <div class="alert alert-danger">
+                        <center>Mohon untuk mengupload foto profil/scan sertifikat.
+                        <a href="daftar.php"><b>Ulangi Mendaftar</b></a>
+                        </center>
+                    </div>
+        <?php
+                }
+                elseif($pesan == 'gagal'){
         ?>
                   <div class="alert alert-danger">
                     <center>Mohon maaf, pendaftaran anda gagal! Silahkan mendaftar ulang atau hubungi kami via gmail.

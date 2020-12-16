@@ -138,11 +138,14 @@
                             $telpon = $row['telpon'];
                             $foto = $row['foto'];
                             $id_jabatan = $row['id_jabatan'];
-                            if ($search_kecamatan = $s_kecamatan){?>
+                            if ($search_kecamatan = $s_kecamatan){
+                                ?>
                                 <div class="single-job-items mb-30">
                                 <div class="job-items">
                                     <div class="company-img">
-                                        <a href="#"><img src="profil.php?id_dokter=<?php echo $id_dokter; ?>"  alt=""></a>
+                                  
+                                        <a href="#"><img src="profil.php?id_dokter=<?php echo $id_dokter; ?>"  class="rounded-circle z-depth-0"
+                                            alt="fotoakun" height="100"></a>
                                     </div>
                                     <div class="job-tittle">
                                         <a href="#"><h4><?php echo $nama; ?></a></h4></a>
@@ -165,7 +168,8 @@
                                     <div class="single-job-items mb-30">
                                         <div class="job-items">
                                             <div class="company-img">
-                                                <a href="#"><img src="profil.php?id_dokter=<?php echo $data['id_dokter']; ?>"  alt=""></a>
+                                                <a href="#"><img src="profil.php?id_dokter=<?php echo $data['id_dokter']; ?>"   class="rounded-circle z-depth-0"
+                                            alt="fotoakun" height="100"></a>
                                             </div>
                                             <div class="job-tittle">
                                                 <a href="#"><h4><?php echo $data['nama']; ?></a></h4></a>
@@ -197,7 +201,7 @@
         </section>
 
         <?php
-    if(isset($_POST['search'])) :
+    if(isset($_POST['s_keyword'])) :
     
     else : ?>
          <!--Pagination Start  -->

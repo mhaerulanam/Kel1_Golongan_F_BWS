@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 15 Des 2020 pada 17.32
+-- Waktu pembuatan: 16 Des 2020 pada 03.25
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.3
 
@@ -41,9 +41,12 @@ CREATE TABLE `dokumentasi_puskeswan` (
 INSERT INTO `dokumentasi_puskeswan` (`id_dokpus`, `id_puskeswan`, `id_dokumentasi`) VALUES
 (1, 'P01', 'pc1'),
 (2, 'P01', 'pc2'),
-(3, 'P01', 'pc5'),
-(4, 'P02', 'ptm3'),
-(5, 'P03', 'ptp4');
+(3, 'P01', 'pc3'),
+(4, 'P02', 'ptm1'),
+(5, 'P03', 'ptp1'),
+(6, 'P01', 'pc4'),
+(7, 'P02', 'ptm2'),
+(8, 'P03', 'ptp2');
 
 --
 -- Indexes for dumped tables
@@ -65,7 +68,7 @@ ALTER TABLE `dokumentasi_puskeswan`
 -- AUTO_INCREMENT untuk tabel `dokumentasi_puskeswan`
 --
 ALTER TABLE `dokumentasi_puskeswan`
-  MODIFY `id_dokpus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_dokpus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

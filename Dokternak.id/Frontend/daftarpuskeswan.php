@@ -26,6 +26,116 @@ session_start();
             <link rel="stylesheet" href="assets/css/slick.css">
             <link rel="stylesheet" href="assets/css/nice-select.css">
             <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+.col-md-4{
+      padding-bottom:20px;
+  }
+  
+  .white {
+    color: #fff !important;
+  }
+  .mt{float: left;margin-top: -20px;padding-top: 20px;}
+  .bg-blue-ui {
+    background-color: #708198 !important;
+  }
+  figure img{width:300px;
+  height: 300px;
+  }
+  
+  #blogCarousel {
+    padding-bottom: 100px;
+  }
+  
+  .blog .carousel-indicators {
+    left: 0;
+    top: -50px;
+    height: 50%;
+  }
+  
+  
+  /* The colour of the indicators */
+  
+  .blog .carousel-indicators li {
+    background: #708198;
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+  }
+  
+  .blog .carousel-indicators .active {
+    background: #0fc9af;
+  }
+
+  .item-carousel-blog-block {
+    outline: medium none;
+    padding: 15px;
+  }
+  
+  .item-box-blog {
+    border: 1px solid #dadada;
+    text-align: center;
+    z-index: 4;
+    height: 560px;
+    padding: 20px;
+  }
+  
+  .item-box-blog-image {
+    position: relative;
+    /* mask-image:; */
+  }
+  
+  .item-box-blog-image figure img {
+    width: 100%;
+    /* height: auto; */
+    height: 270px;
+  }
+  
+  
+  .item-box-blog-body {
+    padding: 10px;
+  }
+  
+  .item-heading-blog a h5 {
+    margin: 0;
+    line-height: 1;
+    text-decoration:none;
+    transition: color 0.3s;
+  }
+  
+  .item-box-blog-heading a {
+      text-decoration: none;
+  }
+  
+  .item-box-blog-data p {
+    font-size: 13px;
+  }
+  
+  .item-box-blog-data p i {
+    font-size: 12px;
+  }
+  
+  .item-box-blog-text {
+    max-height: 100px;
+    overflow: hidden;
+  }
+  
+  .mt-10 {
+    float: left;
+    margin-top: -10px;
+    padding-top: 10px;
+  }
+  
+  .btn.bg-blue-ui.white.read {
+    cursor: pointer;
+    padding: 4px 20px;
+    float: left;
+    margin-top: 10px;
+  }
+  
+  .btn.bg-blue-ui.white.read:hover {
+    box-shadow: 0px 5px 15px inset #4d5f77;
+  }
+    </style>
    </head>
 <body>
 <navbar>
@@ -82,6 +192,15 @@ session_start();
                 </div>
                 <?php
                 include 'koneksi.php';
+                $jdataperhalaman = 3;
+                $result = mysqli_query($koneksi, "SELECT * FROM artikel");
+                $jumlahData = mysqli_num_rows($result);
+                $jumlahHalaman = ceil($jumlahData / $jdataperhalaman);
+                $halamanAktif = ( isset($_GET["halaman"]) ) ? $_GET["halaman"] : 1 ;
+
+                // halaman 2, awalDatanya = 2. Dimulai indeks 0,1,2,3, dst
+                $awalData = ( $jdataperhalaman * $halamanAktif ) - $jdataperhalaman;
+                $datapuskeswan=mysqli_query($koneksi, "SELECT * FROM puskeswan LIMIT $awalData,$jdataperhalaman");
                 ?>
                 <div class="row d-flex justify-contnet-center"> 
                 <?php
@@ -94,50 +213,114 @@ session_start();
                         while ($data = mysqli_fetch_array($sql)) {?>
                 
                             <div class="col-lg-4 col-md-6">
-                            <div class="single-services text-center mb-30">
-                                    <div class="services-ion">
-                                    <img src="gambarpuskeswan.php?id_puskeswan=<?php echo $data['id_puskeswan']; ?>"width="200px"><br>
-                                   
+                                <div class="item-box-blog">
+                                <div class="item-box-blog-image">
+                                    <!--Image-->
+                                    <figure> <img alt="" src="gambarpuskeswan.php?id_puskeswan=<?php echo $data['id_puskeswan']; ?>" > </figure>
+                                </div>
+                                <div class="item-box-blog-body">
+                                    <!--Heading-->
+                                    <div class="item-box-blog-heading">
+                                    <a href="#" tabindex="0">
+                                        <h4><b><?= $data['nama_puskeswan']; ?></b></h4>
+                                    </a>
                                     </div>
-                                    <div class="services-cap">
-                                        <h5><?= $data['nama_puskeswan']; ?></h5>
-                                        <?= $data['alamat']; ?><br><br>
-                                        <div class="btn_detail">
+                                
+                                    <!--Text-->
+                                    <div class="item-box-blog-text">
+                                    <p><?= $data['alamat']; ?></p>
+                                    </div>
                                     <div class="services-cap">
                                         <a href="detailpuskeswan.php?id_puskeswan=<?= $data['id_puskeswan']; ?>" class="genric-btn primary radius">Detail</a>
-                                        </div>
                                     </div>
-                                    </div>
-                                </div> 
+                                </div>
+                                </div>
                             </div> 
                             <?php }
                     }else{
-                $datapuskeswan=mysqli_query($koneksi, "SELECT * FROM puskeswan");
                 ?> 
                 <?php while ($data = mysqli_fetch_array($datapuskeswan)) {?>
-                
                     <div class="col-lg-4 col-md-6">
-                    <div class="single-services text-center mb-30">
-                            <div class="services-ion">
-                            <img src="gambarpuskeswan.php?id_puskeswan=<?php echo $data['id_puskeswan']; ?>"width="200px"><br>
-                           
-                            </div>
-                            <div class="services-cap">
-                                <h5><?= $data['nama_puskeswan']; ?></h5>
-                                <?= $data['alamat']; ?><br><br>
-                                <div class="btn_detail">
-                            <div class="services-cap">
-                                <a href="detailpuskeswan.php?id_puskeswan=<?= $data['id_puskeswan']; ?>" class="genric-btn primary radius">Detail</a>
+                                <div class="item-box-blog">
+                                <div class="item-box-blog-image">
+                                    <!--Image-->
+                                    <figure> <img alt="" src="gambarpuskeswan.php?id_puskeswan=<?php echo $data['id_puskeswan']; ?>" > </figure>
+                                </div>
+                                <div class="item-box-blog-body">
+                                    <!--Heading-->
+                                    <div class="item-box-blog-heading">
+                                    <a href="#" tabindex="0">
+                                        <h4><b><?= $data['nama_puskeswan']; ?></b></h4>
+                                    </a>
+                                    </div>
+                                
+                                    <!--Text-->
+                                    <div class="item-box-blog-text">
+                                    <p><?= $data['alamat']; ?></p>
+                                    </div>
+                                    <div class="services-cap">
+                                        <a href="detailpuskeswan.php?id_puskeswan=<?= $data['id_puskeswan']; ?>" class="genric-btn primary radius">Detail</a>
+                                    </div>
+                                </div>
                                 </div>
                             </div>
-                            </div>
-                        </div> 
-                    </div> 
                     <?php } }?>
                 </div> 
             </div>
   </div>
   
+  <?php
+    if(isset($_POST['submit'])) :
+    else  :
+        if($jumlahData=3) :
+        else:
+    ?>
+<!--Pagination Start  -->
+<div class="pagination-area pb-115 text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="single-wrap d-flex justify-content-center">
+                            <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-start">
+                                    <!-- Memberi tombol prev -->
+                                    <?php if( $halamanAktif > 1) : ?>
+                                        <li class="page-item">
+                                        <a class="page-link" href="?halaman=<?= $halamanAktif - 1; ?>">&lt; Sebelumnya</a></h4>
+                                        </li>
+                                    <?php endif; ?>    
+                                    
+                                     <!-- Navigasi Pages -->
+                                     <?php for($i = 1; $i <= $jumlahHalaman; $i++) : ?>
+                                        <?php if ($i == $halamanAktif ) : ?>
+                                            <li class="page-item active">
+                                            <a href="?halaman=<?= $i; ?>" class="page-link"><?= $i; ?></a>
+                                            </li>
+                                        <?php else : ?>
+                                            <li class="page-item">
+                                            <a href="?halaman=<?= $i; ?>" class="page-link"><?= $i; ?></a>
+                                            </li>
+                                        <?php endif; ?>
+                                    <?php endfor; ?>
+
+                                    <!-- Memberi tombol next -->
+                                    <?php if( $halamanAktif < $jumlahHalaman) : ?>
+                                        <li class="page-item">
+                                        <a class="page-link" href="?halaman=<?= $halamanAktif + 1; ?>">Selanjutnya &gt;</span></a>
+                                        </li>
+                                    <?php endif; ?>
+                                    
+                                
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
+    <?php endif; ?>
+
         <!-- JS here -->
 	
 		<!-- All JS Custom Plugins Link Here here -->

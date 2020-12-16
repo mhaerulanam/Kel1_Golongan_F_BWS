@@ -353,12 +353,14 @@ form {
             <div class="wrapper">
             <div class="tabs-2">
                 <div class="tab">
-                <input type="radio" name="jabatan" id="tab-param" class="tab-switch" value="J01" selected>
+                <input type="radio" name="jabatan" id="tab-param" class="tab-switch" value="J02" selected>
                 <label for="tab-param" class="tab-label">Paramedis</label>
                 </div>
                 <div class="tab">
-                <input type="radio" name="jabatan" id="tab-dok" class="tab-switch" value="J02" selected>
+                <input type="radio" name="jabatan" id="tab-dok" class="tab-switch" value="J01" selected>
                 <label for="tab-dok" class="tab-label">Dokter</label>
+                </div>
+                <div class="tab">
                 <input type="radio" name="jabatan" id="tab-ib" class="tab-switch" value="J03" selected>
                 <label for="tab-ib" class="tab-label">Petugas IB</label>
                 </div>

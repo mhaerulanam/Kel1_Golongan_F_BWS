@@ -200,7 +200,7 @@ session_start();
                         <div class="col-lg-4 col-md-6">
                     <div class="single-services text-center mb-30">
                             <div class="services-ion">
-                            <img src="gambartutorial.php?id_tutorial=<?php echo $data['id_tutorial']; ?>"width="80px"><br>
+                            <img src="../gambartutorial.php?id_tutorial=<?php echo $data['id_tutorial']; ?>"width="80px"><br>
                            
                             </div>
                             <div class="services-cap">

@@ -22,18 +22,19 @@
 				$nama=$row["nama"];
 				$_SESSION["username"]=$row["nama"];
 				$_SESSION["id"]=$row["id_user"];
+				$_SESSION["foto"]=$row["foto"];
                 $_SESSION["id_role"]=$row["role"];
 
                 if ($_SESSION["id_role"]=($row["id_role"]==1))
 				{
                     $level = "Admin";
 					$_SESSION["id_role"] = $level;
-					echo "<script>alert('Selamat $nama, Anda Berhasil Login sebagai $level'); window.location='../LandingPagePeternak.php'</script>"; 
+					echo "<script>alert('Selamat $nama, Anda Berhasil Login sebagai $level'); window.location='../../Backend/pages/Dashboard.php'</script>"; 
 				} else if ($_SESSION["id_role"]=$row["id_role"]==2)
 				{
                     $level = "Dokter";
                     $_SESSION["id_role"] = $level;
-					echo "<script>alert('Selamat $nama, Anda Berhasil Login sebagai $level'); window.location='../LandingPagePeternak.php'</script>"; 
+					echo "<script>alert('Selamat $nama, Anda Berhasil Login sebagai $level'); window.location='../dokter/LandingPageDokter.php'</script>"; 
                 }
                 else if ($_SESSION["id_role"]=$row["id_role"]==3)
 				{

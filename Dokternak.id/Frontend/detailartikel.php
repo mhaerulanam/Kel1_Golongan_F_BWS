@@ -100,7 +100,7 @@ session_start();
                               <li><a href="#"><i class="fa fa-comments"></i><?php echo $data['tanggal']; ?></a></li>
                            </ul>
                            <p class="excert">
-                              <?php echo nl2br(str_replace(' ', ' ', htmlspecialchars($data['isi']))); ?>
+                              <?php echo $data['isi']; ?>
                            </p>
                            <div class="quote-wrapper">
                               <div class="quotes">

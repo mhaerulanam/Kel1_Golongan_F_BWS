@@ -1,4 +1,8 @@
 <?php
+// Start the session
+session_start();
+?>
+<?php
 // include "koneksi.php";
 
 include('koneksi.php');
@@ -17,9 +21,9 @@ if(isset($_POST['tombol']))
         $judul = $_POST['judul'];
         $isi = $_POST['isi'];
         $sumber = $_POST['Sumber'];
-        $id_artikel= "A";
+        // $id_artikel= "A";
         // $id_ktg= "KAT01";
-        $nama = "Admin";
+        $nama = $_SESSION['username'];
         if ($file_size < 2048000 and ($file_type =='image/jpeg' or $file_type == 'image/png'))
         {
             $image   = addslashes(file_get_contents($_FILES['gambar']['tmp_name']));

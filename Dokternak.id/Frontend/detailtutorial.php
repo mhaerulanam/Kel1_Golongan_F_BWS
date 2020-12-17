@@ -98,35 +98,38 @@ session_start();
         <div class="apply-process-area apply-bg pt-150 pb-150" data-background="assets/img/gallery/how-applybg.png">
             <div class="container">
                 <!-- Section Tittle -->
-                <div class="row">
                     <div class="col-lg-12">
                         <div class="section-tittle white-text text-center">
-                            <span>Tutorial Lainnya</span>
+                            <h4><b>Tutorial Lainnya</b><h4>
                         </div>
                     </div>
-                </div>
                 <!-- Apply Process Caption -->
-                <div class="row">
+  <div class="our-services section-pad-t30">
+            <div class="container">
+                <div class="row d-flex justify-contnet-center">
                     <?php 
-                    $query_mysql = mysqli_query($koneksi,"SELECT * FROM tutorial");
+                    $query_mysql = mysqli_query($koneksi,"SELECT * FROM tutorial where id_tutorial != '$id_tutorial'");
                     while ($data = mysqli_fetch_array($query_mysql)) { 
                     ?>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="single-process text-center mb-30">
-                            <div class="process-ion">
-                            <img src="gambartutorial.php?id_tutorial=<?php echo $data['id_tutorial']; ?>" width="100px">
-                            </div>
-                            <div class="process-cap">
-                                <h5><?= $data['judul_tutorial']; ?></h5>
-                                <div class="btn_detail">
-                            <div class="items-link f-center">
-                                <a href="detailtutorial.php?id_tutorial=<?= $data['id_tutorial']; ?>">Detail</a>
+                        <div class="col-lg-4 col-md-6">
+                        <div class="single-services text-center mb-30">
+                                <div class="services-ion">
+                                <img src="gambartutorial.php?id_tutorial=<?php echo $data['id_tutorial']; ?>"width="80px"><br>
+                            
                                 </div>
-                            </div>
-                            </div>
+                                <div class="services-cap">
+                                    <h5><?= $data['judul_tutorial']; ?></h5><br><br>
+                                    <div class="btn_detail">
+                                <div class="services-cap">
+                                    <a href="detailtutorial.php?id_tutorial=<?= $data['id_tutorial']; ?>" class="genric-btn primary radius">Detail</a>
+                                    </div>
+                                </div>
+                                </div>
+                            </div> 
                         </div> 
-                    </div> <?php } ?>
-            
+                    <?php } ?>
+                </div>
+                </div>
                 </div>
             </div>
         </div>

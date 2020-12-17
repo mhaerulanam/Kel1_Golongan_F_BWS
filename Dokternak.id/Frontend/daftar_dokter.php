@@ -124,7 +124,6 @@ session_start();
         include 'navbar.php';
     ?>
     </navbar>
-    
     <?php
         if (isset($_GET['pesan'])){
             $pesan = $_GET['pesan'];

@@ -5,11 +5,12 @@ include "koneksi.php";
 
 if(isset($_POST['daftar']))
 {
+    echo $_POST['nama'];
     if(!isset($_FILES['file_foto']['tmp_name'])) { 
-        header("location:registrasi_dokter.php?pesan=kurang-foto");
+        header("location:index.php?pesan=kurang-foto");
     }
     elseif(!isset($_FILES['file_sertifikat']['tmp_name'])) { 
-        header("location:registrasi_dokter.php?pesan=kurang-foto");
+        header("location:index.php?pesan=kurang-foto");
     }
     else
     {
@@ -38,11 +39,11 @@ if(isset($_POST['daftar']))
             $sertif = addslashes(file_get_contents($_FILES['file_sertifikat']['tmp_name']));
             mysqli_query($koneksi,"insert into dokter values ('$id_dokter','$nama','$email','$jk','$alamat','$tempat','$telpon', '$fp', '$sertif', '$jabatan', '$jadwal_kerja', '$username', '$password')");
             // echo $jadwal_kerja, $username, $password,$id_dokter, $nama, $email, $jk, $alamat, $tempat, $telpon, $fp, $sertif, $jabatan ;
-            header("location:registrasi_dokter.php?pesan=berhasil");
+            header("location:index.php?pesan=berhasil");
         }
         else
         {
-            header("location:registrasi_dokter.php?pesan=gagal");
+            header("location:index.php?pesan=gagal");
         }
     }
 }

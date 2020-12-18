@@ -52,7 +52,7 @@
                                     <nav class="d-none d-lg-block">
                                         <ul id="navigation">
                                             <li><a href="LandingPageDokter.php">HOME</a></li>
-                                            <li><a href="#">REKAM MEDIK </a></li>
+                                            <li><a href="daftar_artikel.php">ARTIKEL </a></li>
                                             <li><a href="#">DATA</a>
                                             <ul class="submenu">
                                                     <li><a href="#">REKAM MEDIK</a></li>

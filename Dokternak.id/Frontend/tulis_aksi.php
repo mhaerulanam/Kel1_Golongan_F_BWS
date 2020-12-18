@@ -23,7 +23,7 @@ if(isset($_POST['tombol']))
         $sumber = $_POST['Sumber'];
         // $id_artikel= "A";
         // $id_ktg= "KAT01";
-        $nama = $_SESSION['username'];
+        $nama = $_SESSION['nama'];
         if ($file_size < 2048000 and ($file_type =='image/jpeg' or $file_type == 'image/png'))
         {
             $image   = addslashes(file_get_contents($_FILES['gambar']['tmp_name']));

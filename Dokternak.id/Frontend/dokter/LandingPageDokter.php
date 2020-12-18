@@ -41,7 +41,7 @@ session_start();
                         <div class="row">
                             <div class="col-xl-12">
                                 <div class="hero-cap text-center">
-                                   <h2>Hallo Dokter! <br></h2>
+                                   <h2>Hallo <?php echo $_SESSION["jabatan"];?>!<br></h2>
                                    <h2><?php echo $_SESSION['username'];?></h2>
                                 </div>
                             </div>

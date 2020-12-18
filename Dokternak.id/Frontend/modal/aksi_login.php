@@ -34,7 +34,7 @@
                     $level = "Admin";
 					$_SESSION["id_role"] = $level;
 					$_SESSION["nama"]=$nama;
-					echo "<script>alert('Selamat $nama, Anda Berhasil Login sebagai $level'); window.location='../LandingPagePeternak.php'</script>"; 
+					echo "<script>alert('Selamat $nama, Anda Berhasil Login sebagai $level'); window.location='../../Backend/pages/Dashboard.php'</script>"; 
 				} else if ($_SESSION["id_role"]=$row["id_role"]==2)
 				{
 					$id = $_SESSION["id"];
@@ -45,7 +45,7 @@
                     $level = "Dokter";
 					$_SESSION["id_role"] = $level;
 					$_SESSION["nama"]=$nama;
-					echo "<script>alert('Selamat $nama, Anda Berhasil Login sebagai $level'); window.location='../LandingPagePeternak.php'</script>"; 
+					echo "<script>alert('Selamat $nama, Anda Berhasil Login sebagai $level'); window.location='../dokter/LandingPageDokter.php'</script>"; 
                 }
                 else if ($_SESSION["id_role"]=$row["id_role"]==3)
 				{

@@ -69,7 +69,7 @@ session_start();
               <div class="cc-profile-image"><a href="#"><img src="gambar_puskeswan.php?id_puskeswan=<?php echo $d['id_puskeswan']; ?>" alt="Image"/></a></div>
               <div class="h2 title"><?= $d['nama_puskeswan']; ?></div>
               <p class="capt"><?= $d['alamat']; ?></p>
-              <a class="genric-btn primary" href="#">Cek Lokasi</a>
+              <a class="genric-btn primary" href="<?= $d['maps']; ?>">Cek Lokasi</a>
             </div>
           </div>
           <div class="section">

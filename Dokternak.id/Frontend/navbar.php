@@ -31,36 +31,50 @@
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-2 col-md-2">
-                            <!-- Logo -->
-                            <div class="logo">
-                                <a href="index.php"><img src="assets/img/logo/logo1.png" alt=""></a>
-                            </div>  
+                            <?php
+                            if(isset($_SESSION['username'])){
+                            $nama = $_SESSION['username'];
+                            ?>
+                                <!-- Logo -->
+                                <div class="logo">
+                                    <a href="LandingPagePeternak.php"><img src="assets/img/logo/logo1.png" alt=""></a>
+                                </div>
+                            <?php    
+                            }else{
+                            ?>
+                                <!-- Logo -->
+                                <div class="logo">
+                                        <a href="index.php"><img src="assets/img/logo/logo1.png" alt=""></a>
+                                </div>
+                            <?php
+                            }
+                            ?> 
                         </div>
                         <div class="col-lg-10 col-md-13">
                             <div class="menu-wrapper">
-                                <!-- Main-menu -->
-                                <div class="main-menu">
-                                    <nav class="d-none d-lg-block">
-                                        <ul id="navigation">
-                                            <li><a href="index.php">HOME</a></li>
-                                            <li><a href="daftar_artikel.php">ARTIKEL </a></li>
-                                            <li><a href="#">KONSULTASI</a></li>
-                                            <li><a href="daftar_dokter.php">DAFTAR DOKTER</a></li>
-                                            <li><a href="#">INFORMASI</a>
-                                                <ul class="submenu">
-                                                    <li><a href="daftarpuskeswan.php">PUSKESWAN</a></li>
-                                                    <li><a href="daftar_tutorial.php">TUTORIAL</a></li>
-                                                    <li><a href="aboutus.php">TENTANG KAMI</a></li>                                                 
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
                                 <!-- Header-btn -->
                                 <?php
                                     if(isset($_SESSION['username'])){
                                         $nama = $_SESSION['username'];
                                         ?>
+                                         <!-- Main-menu -->
+                                        <div class="main-menu">
+                                            <nav class="d-none d-lg-block">
+                                                <ul id="navigation">
+                                                    <li><a href="LandingPagePeternak.php">HOME</a></li>
+                                                    <li><a href="daftar_artikel.php">ARTIKEL </a></li>
+                                                    <li><a href="#">KONSULTASI</a></li>
+                                                    <li><a href="daftar_dokter.php">DAFTAR DOKTER</a></li>
+                                                    <li><a href="#">INFORMASI</a>
+                                                        <ul class="submenu">
+                                                            <li><a href="daftarpuskeswan.php">PUSKESWAN</a></li>
+                                                            <li><a href="daftar_tutorial.php">TUTORIAL</a></li>
+                                                            <li><a href="aboutus.php">TENTANG KAMI</a></li>                                                 
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </nav>
+                                        </div>
                                         <div class="main-menu f-right">
                                         <ul id="navigation">
                                         <a href="#">
@@ -81,6 +95,24 @@
                                     <?php    
                                     }else{
                                         ?>
+                                        <!-- Main-menu -->
+                                        <div class="main-menu">
+                                            <nav class="d-none d-lg-block">
+                                                <ul id="navigation">
+                                                    <li><a href="index.php">HOME</a></li>
+                                                    <li><a href="daftar_artikel.php">ARTIKEL </a></li>
+                                                    <li><a href="#">KONSULTASI</a></li>
+                                                    <li><a href="daftar_dokter.php">DAFTAR DOKTER</a></li>
+                                                    <li><a href="#">INFORMASI</a>
+                                                        <ul class="submenu">
+                                                            <li><a href="daftarpuskeswan.php">PUSKESWAN</a></li>
+                                                            <li><a href="daftar_tutorial.php">TUTORIAL</a></li>
+                                                            <li><a href="aboutus.php">TENTANG KAMI</a></li>                                                 
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </nav>
+                                        </div>
                                         <div class="header-btn d-none f-right d-lg-block">
                                             <a href="daftar.php" class="btn head-btn1">DAFTAR</a>
                                             <a href="#myModal" data-toggle="modal" class="btn head-btn2">MASUK</a>

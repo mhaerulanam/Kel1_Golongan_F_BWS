@@ -38,7 +38,7 @@
 				} else if ($_SESSION["id_role"]=$row["id_role"]==2)
 				{
 					$id = $_SESSION["id"];
-					$sdata2 = "SELECT * FROM dokter, user WHERE dokter.id_user = '$id' AND dokter.id_user=user.id_user";
+					$sdata2 = "SELECT * FROM dokter, user, dokter_user WHERE dokter_user.id_user = '$id' AND dokter_user.id_user=user.id_user AND dokter_user.id_dokter=dokter.id_dokter";
 					$hasil = mysqli_query($koneksi,$sdata2);
 					$row2 = mysqli_fetch_array($hasil);
 					$nama = $row2["nama"];

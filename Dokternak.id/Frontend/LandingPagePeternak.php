@@ -167,7 +167,7 @@ session_start();
                 $rslt = mysqli_query($koneksi, "SELECT * FROM tutorial");
                 $jumlahDt = mysqli_num_rows($rslt);
                 $jumlahhlm = ceil($jumlahDt / $jmlhhal);
-                $halamanon = ( isset($_GET["hal"]) ) ? $_GET["hal"] : 1;
+                $halamanon = ( isset($_GET["hl"]) ) ? $_GET["hl"] : 1;
 
                 // halaman 2, awalDatanya = 2. Dimulai indeks 0,1,2,3, dst
                 $aData = ( $jmlhhal* $halamanon ) - $jmlhhal;
@@ -218,7 +218,7 @@ session_start();
                                     <!-- Memberi tombol prev -->
                                     <?php if( $halamanon > 1) : ?>
                                         <li class="page-item">
-                                        <a class="page-link" href="?hal=<?= $halamanon - 1; ?>">&lt; Sebelumnya</a></h4>
+                                        <a class="page-link" href="?hl=<?= $halamanon - 1; ?>">&lt; Sebelumnya</a></h4>
                                         </li>
                                     <?php endif; ?>
 
@@ -226,11 +226,11 @@ session_start();
                                     <?php for($i = 1; $i <= $jumlahhlm ; $i++) : ?>
                                         <?php if ($i == $halamanon ) : ?>
                                             <li class="page-item active">
-                                            <a href="?hal=<?= $i; ?>" class="page-link"><?= $i; ?></a>
+                                            <a href="?hl=<?= $i; ?>" class="page-link"><?= $i; ?></a>
                                             </li>
                                         <?php else : ?>
                                             <li class="page-item">
-                                            <a href="?hal=<?= $i; ?>" class="page-link"><?= $i; ?></a>
+                                            <a href="?hl=<?= $i; ?>" class="page-link"><?= $i; ?></a>
                                             </li>
                                         <?php endif; ?>
                                     <?php endfor; ?>
@@ -238,7 +238,7 @@ session_start();
                                     <!-- Memberi tombol next -->
                                     <?php if( $halamanon < $jumlahhlm ) : ?>
                                         <li class="page-item">
-                                        <a class="page-link" href="?hal=<?= $halamanon+ 1; ?>">Selanjutnya &gt;</span></a>
+                                        <a class="page-link" href="?hl=<?= $halamanon+ 1; ?>">Selanjutnya &gt;</span></a>
                                         </li>
                                     <?php endif; ?>
 

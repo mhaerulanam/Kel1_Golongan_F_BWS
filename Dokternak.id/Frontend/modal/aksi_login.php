@@ -53,12 +53,14 @@
 					$sdata3 = "SELECT * FROM peternak, user WHERE peternak.id_user = '$id' AND peternak.id_user=user.id_user";
 					$hasil = mysqli_query($koneksi,$sdata3);
 					$row3 = mysqli_fetch_array($hasil);
+					$id = $row3["id_peternak"];
 					$nmd = $row3["namadepan_peternak"];
 					$nmb = $row3["namabelakang_peternak"];
 					$nama = "$nmd $nmb";
                     $level = "Peternak";
 					$_SESSION["id_role"] = $level;
 					$_SESSION["nama"]=$nama;
+					$_SESSION["id"]=$id;
 					echo "<script>alert('Selamat $nama, Anda Berhasil Login sebagai $level'); window.location='../LandingPagePeternak.php'</script>"; 
 				}				
 			}else {

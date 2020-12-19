@@ -1,11 +1,11 @@
 <?php
 include('koneksi.php');
-if(isset($_GET['id_user'])) 
+if(isset($_GET['id_peternak'])) 
 {
-    $query = mysqli_query($koneksi,"select * from user where id_user='".$_GET['id_user']."'");
+    $query = mysqli_query($koneksi,"select * from peternak where id_peternak='".$_GET['id_peternak']."'");
     $data = mysqli_fetch_array($query);
     header("Content-type: image");
-    echo $data["foto"];
+    echo $data["foto_peternak"];
 }
 else
 {

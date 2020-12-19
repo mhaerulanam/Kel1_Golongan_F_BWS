@@ -37,12 +37,12 @@ session_start();
 .card {
   /* position:absolute; */
   margin-top: 400px;
-  margin-bottom: -200px;
+  margin-bottom: -400px;
   top:80%;
   left:50%;
   transform:translate(-50%,-50%);
-  width:400px;
-  min-height:700px;
+  width:80%;
+  min-height:820px;
   background:#fff;
   box-shadow:0 20px 50px rgba(0,0,0,.1);
   border-radius:10px;
@@ -118,6 +118,7 @@ session_start();
 <?php
 include 'koneksi.php';
 include 'navbar.php';
+include "modal/ubah_password.php"; 
 $id = $_SESSION['id'];
 $query = mysqli_query($koneksi,"select * from peternak, user where peternak.id_user=user.id_user AND id_peternak=$id");
 $data = mysqli_fetch_assoc($query);
@@ -160,13 +161,16 @@ $id_peternak = $data['id_peternak'];
                           </div>
                           <br><h3><b><?php echo $nama; ?></b><br></h3>
                           <h2><span><?php echo $data["jenis_kelamin"]; ?></span></h2><hr>
-                          <center>
                           <span>Email :</span><br>
                           <span><b><?php echo $data["email_peternak"]; ?></b></span> <BR><hr>
                           <span>No. HP/WA :</span><br>
                           <span><b><?php echo $data["no_hp"]; ?></b></span><HR>
                           <span>Alamat :</span><br>
-                          <span><b><?php echo $data["alamat"]; ?></b></span><HR></center>
+                          <span><b><?php echo $data["alamat"]; ?></b></span><HR>
+                          <span>Usenrame : </span>
+                          <span><b><?php echo $data["username"]; ?></b></span> <BR>
+                          <span>Password : </span>
+                          <span><b><?php echo $data["password"]; ?></b></span><HR>
                           <span>
                               <ul>
                                   <li><a href="#" ><i class="fas fa-edit" aria-hidden="true"></i><span>Edit Akun</span></a></li>

@@ -41,10 +41,12 @@
 					$sdata2 = "SELECT * FROM dokter, user, jabatan, dokter_user WHERE dokter_user.id_user = '$id' AND dokter_user.id_user=user.id_user AND dokter_user.id_dokter=dokter.id_dokter AND dokter.id_jabatan=jabatan.id_jabatan";
 					$hasil = mysqli_query($koneksi,$sdata2);
 					$row2 = mysqli_fetch_array($hasil);
+					$id = $row2["id_dokter"];
 					$nama = $row2["nama"];
 					$jabatan = $row2["jabatan"];
 					$_SESSION["nama"]=$nama;
 					$_SESSION["jabatan"]=$jabatan;
+					$_SESSION["id"]=$id;
 					echo "<script>alert('Selamat $nama, Anda Berhasil Login sebagai $jabatan'); window.location='../dokter/LandingPageDokter.php'</script>"; 
                 }
                 else if ($_SESSION["id_role"]=$row["id_role"]==3)

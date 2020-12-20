@@ -60,16 +60,8 @@ session_start();
         <div class="section-top-border">
             <div class="kotak">
                 <div class="row">
-
-                    <?php 
-                    if (isset($_GET["id_dokter"])) {
-                        $id_dokter = $_GET["id_dokter"];
-                    } else {
-                        $id_dokter = $_GET["id_dokter"] = "DOC001";
-                    }
-
-                    $query_dok = mysqli_query($koneksi,"SELECT * FROM dokter 
-                    where id_dokter = '$id_dokter' ");
+                    <?php
+                   
                     
                     // Query 2
                     // if(isset($_SESSION['username'])){
@@ -80,39 +72,61 @@ session_start();
                     // WHERE id_peternak = '$id_peternak'");
                     // } else {
                     // }
+                    $s_nama="";
+                    $search_keyword="";
+                    if (isset($_POST['search'])) {
+                        $s_nama = $_POST['nama'];
+                        $search_keyword = $_POST['nama'];
+                    }
                     ?>
 
                     <div class="col-lg-12 ">
                         <form method="POST" action="konsultasi_aksi.php">
                             
                                 <input type="hidden" name="id_peternak" required class="single-input"
-                                value="<?php echo $_SESSION['id_peternak']; ?>">
+                                value="<?php echo $_SESSION['id']; ?>">
                             
                                 
-                                <input type="hidden" name="tanggal" value="<?php echo date("y-m-d"); ?>">
-                                <input type="hidden" name="komentar" value="">
+                                <input type="hidden" name="tanggal" value="<?php echo date("d-m-Y"); ?>">
+                                <!-- <input type="hidden" name="komentar" value=""> -->
                                 
 
                             <div class="mt-30">
-                                <?php while ($dok = mysqli_fetch_array($query_dok)) { ?>
-                                    <input type="hidden" name="id_dokter" value="<?= $dok['id_dokter']; ?>">
-                                    <h5 class="mb-15">Kepada</h5>
-                                    <input type="text" name="kepada" placeholder="Masukkan Nama Dokter Tujuan"
-                                        required class="single-input-primary" value="<?php echo $dok['nama']; ?>" disabled>
-                                    <a href="daftar_dokter.php" class="genric-btn info radius">Ganti Dokter</a>
+                            <h5 class="mb-15">Kepada</h5>
+                            <input list="id_dokter" class="form-control" placeholder='Masukkan nama Dokter tujuan' value="<?php echo $search_keyword; ?>" name="id_dokter">
+                            <datalist id="id_dokter" name="id_dokter">
+                                <?php 
+                                $query_dok = mysqli_query($koneksi,"SELECT * FROM dokter");
+                                while ($dok = mysqli_fetch_array($query_dok)) { ?>
+                                    
+                                <option value="<?= $dok['id_dokter']; ?>" ><?php echo $dok['nama']; ?></option>
+                            
                                 <?php } ?>
+                                </datalist>
                             </div>
                             <div class="mt-30">
                                 <h5 class="mb-15">Kategori Hewan</h5>
-                                <select class="form-select" id="default-select">
+                                <select name="id_kategori" class="form-select" id="default-select">
                                     <option disabled selected> Pilih </option>
                                     <?php 
                                     $sql = mysqli_query($koneksi, "SELECT * FROM kategori_hewan");
                                     while ($kat = mysqli_fetch_array($sql)) { ?>
-                                    <option name="id_kategori" value="<?=$kat['id_kategori']?>"><?=$kat['kategori_hewan']?></option> 
+                                    <option value="<?=$kat['id_kategori']?>"><?=$kat['kategori_hewan']?></option> 
                                     <?php } ?>
                                 </select><br>
                                 <!-- https://www.maribelajarcoding.com/2019/05/menampilkan-dropdown-select-option-dari.html -->
+                            </div>
+                            <div class="mt-30">
+                                <h5 class="mb-15">Jenis Hewan</h5>
+                                <select name="id_ktg" class="form-select" id="default-select">
+                                    <option disabled selected> Pilih </option>
+                                    <?php 
+                                    $sql_2 = mysqli_query($koneksi, "SELECT * FROM kategori_artikel");
+                                    while ($kat_2 = mysqli_fetch_array($sql_2)) { ?>
+                                    <option value="<?=$kat_2['id_ktg']?>"><?=$kat_2['kategori_artikel']?></option> 
+                                    <!-- Menggunakan tabel kategori artikel, karena isinya adalah jenis hewan, jadi bisa dipake di form ini juga selain di tulis artikel -->
+                                    <?php } ?>
+                                </select><br>
                             </div>
                             <div class="mt-30">
                                 <h5 class="mb-15">Nama Hewan</h5>

@@ -539,6 +539,9 @@ if(isset($_POST["daftarpeternak"])) {
 </div>
 
 <script>
+document.getElementById("tab-1").click();
+
+
 // Get the modal
 var modal = document.getElementById("myModal");
 

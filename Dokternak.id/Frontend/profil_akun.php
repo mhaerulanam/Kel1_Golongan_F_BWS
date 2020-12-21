@@ -167,7 +167,7 @@ $id_peternak = $data['id_peternak'];
                           <span><b><?php echo $data["no_hp"]; ?></b></span><HR>
                           <span>Alamat :</span><br>
                           <span><b><?php echo $data["alamat"]; ?></b></span><HR>
-                          <span>Usenrame : </span>
+                          <span>Username : </span>
                           <span><b><?php echo $data["username"]; ?></b></span> <BR>
                           <span>Password : </span>
                           <span><b><?php echo $data["password"]; ?></b></span><HR>

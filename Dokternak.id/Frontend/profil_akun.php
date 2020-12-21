@@ -173,7 +173,7 @@ $id_peternak = $data['id_peternak'];
                           <span><b><?php echo $data["password"]; ?></b></span><HR>
                           <span>
                               <ul>
-                                  <li><a href="#" ><i class="fas fa-edit" aria-hidden="true"></i><span>Edit Akun</span></a></li>
+                                  <li><a href="editprofilpeternak.php" ><i class="fas fa-edit" aria-hidden="true"></i><span>Edit Akun</span></a></li>
                               </ul>
                           </span>
                       </div>

@@ -173,26 +173,6 @@ form {
 
     ?>
 
-    <!-- Script Alert Pemberitahuan -->
-    <?php
-        if (isset($_GET['pesan'])){
-            $pesan = $_GET['pesan'];
-                if ($pesan == 'berhasil') {
-    ?>
-                <div class="alert alert-success">
-                    <center>Biodata anda berhasil dirubah. <a href="landingpagedokter.php">Kembali</a></center>
-                </div>
-    <?php
-                }elseif($pesan == 'gagal'){
-    ?>
-                <div class="alert alert-danger">
-                    <center>Mohon maaf, perubahan biodata anda gagal. <a href="landingpagedokter.php">Kembali</a></center>
-                </div>
-    <?php
-                }
-        }
-    ?>
-
   <!-- Modal content -->
   <div id="editModal">
     <div class="modal-content">

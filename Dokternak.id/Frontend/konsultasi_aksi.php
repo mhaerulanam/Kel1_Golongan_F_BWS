@@ -12,12 +12,13 @@ include "koneksi.php";
         $nama_hewan = $_POST['nama_hewan'];
         $keluhan = $_POST['keluhan'];
         $tanggal = $_POST['tanggal'];
+        $status_kirim = "norespon";
 
         mysqli_query($koneksi,"insert into konsultasi values 
-        ('$id_konsultasi','$id_peternak','$id_dokter','$id_kategori','$id_ktg','$nama_hewan','$keluhan','$tanggal')");
+        ('$id_konsultasi','$id_peternak','$id_dokter','$id_kategori','$id_ktg','$nama_hewan','$keluhan','$tanggal','$status_kirim')");
         
         // echo $id_konsultasi, $id_peternak, $id_dokter, $id_kategori, $id_ktg, $nama_hewan, $keluhan, $tanggal;
 
-        header("location:form_konsultasi.php?pesan=berhasil");
+        header("location:riwayat_konsultasi.php?pesan=berhasil");
 
 ?>

@@ -19,6 +19,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 .modal-content {
   background-color: #fefefe;
   margin: auto;
+  margin-top: 5%;
   padding: 20px;
   border: 1px solid #888;
   width: 50%;
@@ -49,12 +50,13 @@ body {
   line-height: 1.618em;
 }
 
-/* .tabs {
-  position: relative;
-  margin: 3rem 0;
+.tabs {
+  /* position: relative;
+  margin: 2rem 0;
   background: #ffffff;
-  height: 40rem;
-} */
+  height: 40rem; */
+  margin-left: 10%;
+}
 .tabs::before,
 .tabs::after {
   content: "";
@@ -133,7 +135,7 @@ body {
 form {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 20px;
+  grid-gap: 30px;
 
 .left{
   position: absolute;
@@ -154,176 +156,160 @@ form {
   height: 400px;
 } 
 
-/* Choose File Style */
-
-.input-group {
-  position: relative;
-  margin: 0;
-}
-
-.label--desc {
-  font-size: 20px;
-  color: #999;
-  margin-top: 10px;
-}
-
-.input-file {
-  display: none;
-}  
 
 </style>
 </head>
 <body>
 
 
-<?php include 'koneksi.php';?>
+    <?php include '../koneksi.php';?>
 
-<?php
-  session_start();
+    <?php
+      session_start();
 
-// $id = $_SESSION['id'];
-$id ='DOC006';
-$query = mysqli_query($koneksi,"select * from dokter_user, dokter, user  where dokter_user.id_user=user.id_user AND dokter_user.id_dokter= dokter.id_dokter and dokter_user.id_dokter='$id'");
-$data = mysqli_fetch_assoc($query);
-$nama = $data["nama"];
-$email = $data["email"];
-$jadwal_kerja = $_data['jadwal_kerja'];
-$id_dokter = $data['id_dokter'];
-$id_user = $data['id_user'];
+      $id = $_SESSION['id'];
+      $query = mysqli_query($koneksi,"select * from dokter_user, dokter, user  where dokter_user.id_user=user.id_user AND dokter_user.id_dokter= dokter.id_dokter and dokter_user.id_dokter='$id'");
 
-?>
 
-<?php
-			if(isset($_POST['edit'])){
+    ?>
 
-            $nama = $_POST['nama'];
-            $email = $_POST['email'];
-            $jk = $_POST['jenis_kelamin'];
-			$alamat = $_POST['alamat'];
-            $tempat = $_POST['tempat'];
-            $telpon = $_POST['telpon'];
-            $jadwal_kerja = $_POST['jadwal_kerja'];
-            $username = $_POST['username'];
-            
-			//edit
-			$sql1 = "UPDATE  SET nama = '$nama',  email = '$email',  jenis_kelamin = '$jk', alamat = '$alamat', telpon = '$telpon', jadwal_kerja = '$jadwal_kerja' WHERE id_dokter = '$id_dokter'";
-            $sql = "UPDATE user SET  username = '$username' WHERE id_user = '$id_user'";
-            if(mysqli_query($koneksi, $sql)){
-							$nilaihasil = "Records updated successfully.";
-						} 
-						else{
-							echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
-						}
-          }
-          ?>
+    <!-- Script Alert Pemberitahuan -->
+    <?php
+        if (isset($_GET['pesan'])){
+            $pesan = $_GET['pesan'];
+                if ($pesan == 'berhasil') {
+    ?>
+                <div class="alert alert-success">
+                    <center>Biodata anda berhasil dirubah. <a href="landingpagedokter.php">Kembali</a></center>
+                </div>
+    <?php
+                }elseif($pesan == 'gagal'){
+    ?>
+                <div class="alert alert-danger">
+                    <center>Mohon maaf, perubahan biodata anda gagal. <a href="landingpagedokter.php">Kembali</a></center>
+                </div>
+    <?php
+                }
+        }
+    ?>
 
   <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <div class="wrapper">
-      <div class="tabs">
-        <div class="tab">
-          <!-- <input type="radio" name="css-tabs" id="tab-1" class="tab-switch">
-          <label for="tab-1" class="tab-label">Peternak</label> -->
-        <!-- <div class="tab-content">
-          <div class="modal-body" style="padding:40px 50px;">
-        <form role="form" action="" method="post"> -->
+  <div id="editModal">
+    <div class="modal-content">
+    <a href="landingpagedokter.php" class="close">&times;</a>
+    <!-- <span class="close">&times;</span> -->
+      <div class="wrapper">
+        <div class="tabs">
+          <div class="tab">
 
-        <center><h1> Edit Biodata</h1></center>
-        <form method="post" action="">
-          <div class="form-group">
-            <label for="nama"><span class="glyphicon glyphicon-user"></span> Nama </label>
-            <input type="text" class="form-control" name="nama" value="<?php echo $nama; ?>">
-          </div>
-          <div class="form-group">
-            <label for="email"><span class="glyphicon glyphicon-user"></span> Email </label>
-            <input type="text" class="form-control" name="email" value="<?php echo $email; ?>">
-          </div>
+            <center><h1> Edit Biodata</h1></center>
+            <form method="POST" action="editbiodokter_aksi.php">
+              <?php while($data = mysqli_fetch_assoc($query)) { ?>
 
-          <div class="form-group">
-            <label for="jenis_kelamin"><span class="glyphicon glyphicon-star"></span> Jenis Kelamin</label>
-          <div class="wrapper">
-            <div class="tabs-2">
-                <div class="tab">
-                  <input type="radio" name="jenis_kelamin" id="tab-l" class="tab-switch" value="Laki-Laki" <?php if($data['jenis_kelamin']=='Laki-Laki') echo 'checked' ?>>
-                  <label for="tab-l" class="tab-label">Laki-Laki</label>
+              <input type="hidden" class="form-control" name="id_dokter" value="<?php echo $data['id_dokter']; ?>">
+              <input type="hidden" class="form-control" name="id_user" value="<?php echo $data['id_user']; ?>">
+              
+              <!-- Kiri  **************************************************************************************-->
+              <div id="left">
+                <div class="form-group">
+                  <label for="nama"><span class="glyphicon glyphicon-user"></span> Nama </label>
+                  <input type="text" class="form-control" name="nama" value="<?php echo $data['nama']; ?>">
                 </div>
-                <div class="tab">
-                  <input type="radio" name="jenis_kelamin" id="tab-p" class="tab-switch" value="Perempuan" <?php if($data['jenis_kelamin']=='Perempuan') echo 'checked' ?>>
-                  <label for="tab-p" class="tab-label">Perempuan</label>
+                <div class="form-group">
+                  <label for="email"><span class="glyphicon glyphicon-user"></span> Email </label>
+                  <input type="text" class="form-control" name="email" value="<?php echo $data['email']; ?>">
                 </div>
-            </div>
-            </div>
-          </div>
 
-          <div class="form-group">
-            <label for="alamat"><span class="glyphicon glyphicon-road"></span> Alamat </label>
-            <input type="text" class="form-control" name="alamat" value="<?php echo $data['alamat'];?>">
-          </div>
+                <div class="form-group">
+                  <label for="jenis_kelamin"><span class="glyphicon glyphicon-star"></span> Jenis Kelamin</label>
+                <div class="wrapper">
+                  <div class="tabs-2">
+                      <div class="tab">
+                        <input type="radio" name="jenis_kelamin" id="tab-l" class="tab-switch" value="Laki-Laki" <?php if($data['jenis_kelamin']=='Laki-Laki') echo 'checked' ?>>
+                        <label for="tab-l" class="tab-label">Laki-Laki</label>
+                      </div>
+                      <div class="tab">
+                        <input type="radio" name="jenis_kelamin" id="tab-p" class="tab-switch" value="Perempuan" <?php if($data['jenis_kelamin']=='Perempuan') echo 'checked' ?>>
+                        <label for="tab-p" class="tab-label">Perempuan</label>
+                      </div>
+                  </div>
+                  </div>
+                </div>
 
-          <div class="form-group">
-            <label for="tempat"><span class="glyphicon glyphicon-earphone"></span> Tempat Dinas</label>
-            <input type="text" class="form-control" name="tempat" value="<?php echo $data['tempat'];?>">
-          </div>
+                <div class="form-group">
+                  <label for="alamat"><span class="glyphicon glyphicon-road"></span> Alamat </label>
+                  <input type="text" class="form-control" name="alamat" value="<?php echo $data['alamat'];?>">
+                </div>
 
-        <!-- Kanan Bang **************************************************************************************-->
-        <div id="right">
-          <div class="form-group">
-            <label for="jadwal_kerja"><span class="glyphicon glyphicon-earphone"></span> Jadwal_Kerja</label>
-            <textarea class="form-control" name="jadwal_kerja" value="<?php echo $data['jadwal_kerja'];?>"></textarea>
-          </div>
+              </div>
 
-          <div class="form-group">
-            <label for="telpon"><span class="glyphicon glyphicon-earphone"></span> No Telpon</label>
-            <input type="text" class="form-control" name="telpon" value="<?php echo $data['telpon'];?>">
-          </div>
+              <!-- Kanan  **************************************************************************************-->
 
-          <div class="form-group">
-            <label for="username_peternak"><span class="glyphicon glyphicon-user"></span> Username</label>
-            <input type="text" class="form-control" name="username" value="<?php echo $data['username'];?>">
-          </div>
+              <div id="right">
 
-          <div class="form-group">
-          
-          
-          <!-- <div class="checkbox">
-            <label><input type="checkbox" value="" checked>Menerima Persyaratan Yang Berlaku</label>
-          </div> -->
-          <input type="submit" class="btn btn-info" value="Edit" name="edit">
-          <input type="reset" class="btn btn-info" value="Batal" name="edit">
-          </div>
-        </form>
+                <div class="form-group">
+                  <label for="tempat"><span class="glyphicon glyphicon-road"></span> Tempat Dinas</label>
+                  <input type="text" class="form-control" name="tempat" value="<?php echo $data['tempat'];?>">
+                </div>
+                
+                <div class="form-group">
+                  <label for="jadwal_kerja"><span class="glyphicon glyphicon-briefcase"></span> Jadwal_Kerja</label>
+                  <textarea class="form-control" name="jadwal_kerja"><?php echo $data['jadwal_kerja'];?></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label for="telpon"><span class="glyphicon glyphicon-earphone"></span> No Telpon</label>
+                  <input type="text" class="form-control" name="telpon" value="<?php echo $data['telpon'];?>">
+                </div>
+
+                <div class="form-group">
+                  <label for="username_peternak"><span class="glyphicon glyphicon-user"></span> Username</label>
+                  <input type="text" class="form-control" name="username" value="<?php echo $data['username'];?>">
+                </div>
+                <?php } ?>
+                <div class="form-group">
+                
+                
+                <!-- <div class="checkbox">
+                  <label><input type="checkbox" value="" checked>Menerima Persyaratan Yang Berlaku</label>
+                </div> -->
+                <input type="submit" class="btn btn-info" value="Edit" name="edit">
+                <input type="reset" class="btn btn-info" value="Batal" name="edit">
+                </div>
+              </div>
+            </form>
+          </div> 
+        </div>
       </div>
-        </div>
-        </div>
-        </div>
-<script>
-// Get the modal
-var modal = document.getElementById("myModal");
+    </div>
+  </div>
+  <script>
+      // Get the modal
+      var modal = document.getElementById("myModal");
 
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+      // Get the button that opens the modal
+      // var btn = document.getElementById("myBtn");
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
-}
+      // When the user clicks the button, open the modal 
+      btn.onclick = function() {
+        modal.style.display = "block";
+      }
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function() {
+        modal.style.display = "none";
+      }
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-</script>
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+  </script>
 
 </body>
 </html>

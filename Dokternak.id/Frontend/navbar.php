@@ -63,7 +63,7 @@
                                                 <ul id="navigation">
                                                     <li><a href="LandingPagePeternak.php">HOME</a></li>
                                                     <li><a href="daftar_artikel.php">ARTIKEL </a></li>
-                                                    <li><a href="form_konsultasi.php">KONSULTASI</a></li>
+                                                    <li><a href="riwayat_konsultasi.php">KONSULTASI</a></li>
                                                     <li><a href="daftar_dokter.php">DAFTAR DOKTER</a></li>
                                                     <li><a href="#">INFORMASI</a>
                                                         <ul class="submenu">
@@ -101,7 +101,7 @@
                                                 <ul id="navigation">
                                                     <li><a href="index.php">HOME</a></li>
                                                     <li><a href="daftar_artikel.php">ARTIKEL </a></li>
-                                                    <li><a href="#">KONSULTASI</a></li>
+                                                    <li><a href="riwayat_konsultasi.php">KONSULTASI</a></li>
                                                     <li><a href="daftar_dokter.php">DAFTAR DOKTER</a></li>
                                                     <li><a href="#">INFORMASI</a>
                                                         <ul class="submenu">

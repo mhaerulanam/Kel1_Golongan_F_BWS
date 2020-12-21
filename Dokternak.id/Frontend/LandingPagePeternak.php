@@ -37,6 +37,18 @@ session_start();
             include 'navbar.php';
         ?>
     </header>
+    <?php
+        if (isset($_GET['pesan'])){
+            $pesan = $_GET['pesan'];
+            if ($pesan == 'gagal') {
+           ?>
+               <div class="alert alert-danger">
+                    <center><strong>Peringatan!</strong> Anda Harus Login Terlebih Dahulu</center>
+                </div>
+            <?php
+            }
+        }
+    ?>
     <section>
         <?php
             include 'pencarian.php';

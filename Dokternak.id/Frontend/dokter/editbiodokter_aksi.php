@@ -9,7 +9,7 @@ include "../koneksi.php";
             $nama = $_POST['nama'];
             $email = $_POST['email'];
             $jk = $_POST['jenis_kelamin'];
-			$alamat = $_POST['alamat'];
+			      $alamat = $_POST['alamat'];
             $tempat = $_POST['tempat'];
             $telpon = $_POST['telpon'];
             $jadwal_kerja = $_POST['jadwal_kerja'];
@@ -21,9 +21,9 @@ include "../koneksi.php";
             if(mysqli_query($koneksi, $sql1)){
               if(mysqli_query($koneksi, $sql)){
                 $nilaihasil = "Records updated successfully.";
-                header("location:editbiodatadokter.php?pesan=berhasil");
+                header("location:LandingPageDokter.php?pesan=berhasil");
               }else{
-                header("location:editbiodatadokter.php?pesan=gagal");
+                header("location:LandingPageDokter.php?pesan=gagal");
               }	
 			} else{
 				echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);

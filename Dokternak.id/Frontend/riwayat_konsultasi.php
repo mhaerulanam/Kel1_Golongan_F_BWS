@@ -335,7 +335,7 @@ include "modal/ubah_password.php";
 
             <!-- Daftar Pesan yang belum direspon -->
             <?php
-            $RData=mysqli_query($koneksi, "SELECT * FROM konsultasi WHERE id_peternak='$id' AND status_kirim='norespon' ORDER by tanggal");
+            $RData=mysqli_query($koneksi, "SELECT * FROM konsultasi, peternak, dokter WHERE konsultasi.id_peternak=peternak.id_peternak AND konsultasi.id_dokter=dokter.id_dokter AND konsultasi.id_peternak='3' AND status_kirim='norespon' ORDER by tanggal DESC");
             while ($data3 = mysqli_fetch_array($RData)) {
                 $ambilData1=mysqli_query($koneksi, "SELECT * FROM riwayat_konsultasi, konsultasi, respon_konsultasi, peternak, dokter WHERE riwayat_konsultasi.id_konsultasi=konsultasi.id_konsultasi AND riwayat_konsultasi.id_respon=respon_konsultasi.id_respon AND konsultasi.id_peternak=peternak.id_peternak AND respon_konsultasi.id_dokter=dokter.id_dokter AND 
                 konsultasi.id_peternak='$id' ORDER by respon_konsultasi.tanggal_respon");
@@ -347,10 +347,10 @@ include "modal/ubah_password.php";
                     <input type="hidden" name="stt" value="off">
                         <div class="chat_list">
                         <div class="chat_people">
-                            <div class="chat_img" name="klik"> <img src="profil.php?id_dokter=<?php echo $data2['id_dokter']; ?>" class="rounded-circle z-depth-0"
-                                                        alt="<?php echo $data2['nama']; ?>" height="50"></img></div>
+                            <div class="chat_img" name="klik"> <img src="profil.php?id_dokter=<?php echo $data3['id_dokter']; ?>" class="rounded-circle z-depth-0"
+                                                        alt="<?php echo $data3['nama']; ?>" height="50"></img></div>
                             <div class="chat_ib">
-                            <h5> Kepada : <?php echo $data2['nama']; ?> <span class="chat_date" name="klik"><?php echo $data2['tanggal']; ?><br></span></h5>
+                            <h5> Kepada : <?php echo $data3['nama']; ?> <span class="chat_date" name="klik"><?php echo $data3['tanggal']; ?><br></span></h5>
                             <p name="klik">-- No Respon --</p><button name="klok" class="lihat" onclick="openCity(event, 'terkirim')"  id="defaultOpen"><p>Lihat</p></button>
                             </div>
                         </div>
@@ -369,7 +369,7 @@ include "modal/ubah_password.php";
             $ambilData1=mysqli_query($koneksi, "SELECT * FROM riwayat_konsultasi, konsultasi, respon_konsultasi, peternak, dokter WHERE riwayat_konsultasi.id_konsultasi=konsultasi.id_konsultasi AND riwayat_konsultasi.id_respon=respon_konsultasi.id_respon AND konsultasi.id_peternak=peternak.id_peternak AND respon_konsultasi.id_dokter=dokter.id_dokter AND 
             konsultasi.id_peternak='$id' ORDER by respon_konsultasi.tanggal_respon");
             $data2 = mysqli_fetch_array($ambilData1); 
-            $aData=mysqli_query($koneksi, "SELECT * FROM konsultasi,peternak, kategori_hewan, kategori_artikel WHERE konsultasi.id_peternak=peternak.id_peternak AND konsultasi.id_kategori=kategori_hewan.id_kategori AND konsultasi.id_ktg=kategori_artikel.id_ktg AND
+            $aData=mysqli_query($koneksi, "SELECT * FROM konsultasi,peternak, kategori_hewan, kategori_artikel, dokter WHERE konsultasi.id_peternak=peternak.id_peternak AND konsultasi.id_kategori=kategori_hewan.id_kategori AND konsultasi.id_ktg=kategori_artikel.id_ktg AND konsultasi.id_dokter=dokter.id_dokter AND
             konsultasi.id_konsultasi='$idds'");
             $dt = mysqli_fetch_array($aData);
             $update_pwd=mysqli_query($koneksi,"update riwayat_konsultasi set status='$st' where id_konsultasi='$idds'");
@@ -383,7 +383,7 @@ include "modal/ubah_password.php";
 		<!-- <div class="collapse" id="riwayat"> -->
         <div class="mesgs">
           <div class="msg_history">
-          <h5>Kepada : <?php echo $data2['nama']; ?></h5>
+          <h5>Kepada : <?php echo $dt['nama']; ?></h5>
 				<!-- Post Begins -->
 				<section class="card mt-4">
 					<div class="border p-2">

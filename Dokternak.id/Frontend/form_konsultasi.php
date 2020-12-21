@@ -38,24 +38,6 @@ session_start();
     ?>
     <h1>Konsultasi</h1>
     <p align="center">Temukan jawaban atas masalahmu, dengan berkonsultasi kepada dokter ahli.</p>
-    <?php
-        if (isset($_GET['pesan'])){
-            $pesan = $_GET['pesan'];
-                if ($pesan == 'berhasil') {
-    ?>
-                <div class="alert alert-success">
-                    <center>Konsultasi terkirim, mohon bersabar karena dokter akan membalasnya setelah membuka website.</center>
-                </div>
-    <?php
-                }elseif($pesan == 'gagal'){
-    ?>
-                <div class="alert alert-danger">
-                    <center>Mohon maaf, konsultasi anda gagal terkirim.</center>
-                </div>
-    <?php
-                }
-        }
-    ?>
     <div class="slider-active">
         <div class="section-top-border">
             <div class="kotak">

@@ -126,6 +126,33 @@ include "modal/ubah_password.php";
                 <b>Riwayat Konsultasi</b>
         </h1></center>
     <hr>
+
+                <?php if(isset($_POST['hps'])){
+                  include 'koneksi.php';
+                  $idds = $_POST['idk'];
+                  $sql = "DELETE FROM konsultasi WHERE id_konsultasi = '$idds'";
+                  if(mysqli_query($koneksi, $sql)){
+                      echo "<script>alert('Pesan Konsultasi Berhasil Dihapus ..');</script>";
+                  } 
+                  else{
+                      echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+                  }
+                } ?>
+                
+                <?php if(isset($_POST['hapus'])){
+                  include 'koneksi.php';
+                  $idds = $_POST['idkr'];
+                  $idk = $_POST['idk'];
+                  $sql = "DELETE FROM riwayat_konsultasi WHERE id_riwayat = '$idds'";
+                  $sql1 = "DELETE FROM konsultasi WHERE id_konsultasi = '$idk'";
+                  if(mysqli_query($koneksi, $sql)){
+                      echo "<script>alert('Pesan Konsultasi Berhasil Dihapus ..');</script>";
+                  } 
+                  else{
+                      echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+                  }
+                } ?>  
+
 </section>
 <div class="container">
 <div class="tab">
@@ -162,7 +189,7 @@ include "modal/ubah_password.php";
               <!-- Daftar Pesan yang sudah di respon -->
             <?php
                 $ambilData=mysqli_query($koneksi, "SELECT * FROM riwayat_konsultasi, konsultasi, respon_konsultasi, peternak, dokter WHERE riwayat_konsultasi.id_konsultasi=konsultasi.id_konsultasi AND riwayat_konsultasi.id_respon=respon_konsultasi.id_respon AND konsultasi.id_peternak=peternak.id_peternak AND respon_konsultasi.id_dokter=dokter.id_dokter AND 
-                konsultasi.id_peternak='$id' ORDER by respon_konsultasi.tanggal_respon DESC");
+                konsultasi.id_peternak='$id' ORDER by respon_konsultasi.tanggal_respon DESC, respon_konsultasi.id_respon DESC");
                 while ($data = mysqli_fetch_array($ambilData)) { 
                         $isi = $data['respon'];
                         $num_char  =35;
@@ -196,7 +223,7 @@ include "modal/ubah_password.php";
                             <div class="chat_img" name="klik"> <img src="profil.php?id_dokter=<?php echo $data['id_dokter']; ?>" class="rounded-circle z-depth-0"
                                                         alt="<?php echo $data['nama']; ?>" height="50"></img></div>
                             <div class="chat_ib">
-                            <h5> Kepada : <?php echo $data['nama']; ?> <span class="chat_date" name="klik">Dec 25<br><?php echo $data['status']?></span></h5>
+                            <h5> Kepada : <?php echo $data['nama']; ?> <span class="chat_date" name="klik"><?php echo $data['tanggal_respon']; ?></span></h5>
                             <p name="klik"><?php echo $data['respon']; ?></p><input type="submit" name="klik" class="lihat" value="Lihat">
                             </div>
                         </div>
@@ -217,6 +244,7 @@ include "modal/ubah_password.php";
             $aData=mysqli_query($koneksi, "SELECT * FROM riwayat_konsultasi, konsultasi, respon_konsultasi, peternak, dokter, kategori_hewan, kategori_artikel WHERE riwayat_konsultasi.id_konsultasi=konsultasi.id_konsultasi AND riwayat_konsultasi.id_respon=respon_konsultasi.id_respon AND konsultasi.id_peternak=peternak.id_peternak AND respon_konsultasi.id_dokter=dokter.id_dokter AND konsultasi.id_kategori=kategori_hewan.id_kategori AND konsultasi.id_ktg=kategori_artikel.id_ktg AND
             riwayat_konsultasi.id_konsultasi='$idd'");
             $dt = mysqli_fetch_array($aData);
+            $idr = $dt['id_riwayat'];
             $update_pwd=mysqli_query($koneksi,"update riwayat_konsultasi set status='$st' where id_konsultasi='$idd'");
 
             //     $R=mysqli_query($koneksi, "SELECT * FROM konsultasi WHERE id_peternak='$id' AND status_kirim='norespon' ORDER by tanggal DESC");
@@ -228,7 +256,18 @@ include "modal/ubah_password.php";
 		<!-- <div class="collapse" id="riwayat"> -->
         <div class="mesgs">
           <div class="msg_history">
-              <h5>Kepada : <?php echo $dt['nama']; ?></h5>
+                <form method="POST" action="">
+                <div class="row m-0">
+                    <div class="flex-grow-1 pl-3">
+                    <h5>Kepada : <?php echo $dt['nama']; ?></h5></h5>
+                    </div>
+                    <div class="flex-grow-4 pl-1">
+                    <input type="hidden" name="idkr" value="<?php echo $idr ?>">
+                    <input type="hidden" name="idk" value="<?php echo $idd ?>">
+                    <input type="submit" name="hapus" class="genric-btn second" onclick="return confirm('Apakah Anda yakin ingin menghapus pesan ini?')" value="HAPUS"> 
+                    </div>
+                </div>
+                </form>
 				<!-- Post Begins -->
 				<section class="card mt-4">
 					<div class="border p-2">
@@ -352,7 +391,7 @@ include "modal/ubah_password.php";
                                                         alt="<?php echo $data3['nama']; ?>" height="50"></img></div>
                             <div class="chat_ib">
                             <h5> Kepada : <?php echo $data3['nama']; ?> <span class="chat_date" name="klik"><?php echo $data3['tanggal']; ?><br></span></h5>
-                            <p name="klik">-- No Respon --</p><button name="klok" class="lihat" onclick="openCity(event, 'terkirim')"  id="defaultOpen"><p>Lihat</p></button>
+                            <p name="klik">-- Belum Ada Balasan --</p><button name="klok" class="lihat" onclick="openCity(event, 'terkirim')"  id="defaultOpen"><p>Lihat</p></button>
                             </div>
                         </div>
                         </div>
@@ -384,7 +423,17 @@ include "modal/ubah_password.php";
 		<!-- <div class="collapse" id="riwayat"> -->
         <div class="mesgs">
           <div class="msg_history">
-          <h5>Kepada : <?php echo $dt['nama']; ?></h5>
+                <form method="POST" action="">
+                <div class="row m-0">
+                    <div class="flex-grow-1 pl-3">
+                    <h5>Kepada : <?php echo $dt['nama']; ?></h5></h5>
+                    </div>
+                    <div class="flex-grow-4 pl-1">
+                    <input type="hidden" name="idk" value="<?php echo $idds ?>">
+                    <input type="submit" name="hps" class="genric-btn second" onclick="return confirm('Apakah Anda yakin ingin menghapus pesan ini?')" value="HAPUS"> 
+                    </div>
+                </div>
+                </form>
 				<!-- Post Begins -->
 				<section class="card mt-4">
 					<div class="border p-2">
@@ -405,7 +454,6 @@ include "modal/ubah_password.php";
                             <div class="flex-grow-2 pl-2">
                                 <p class="small text-secondary m-0 mt-1"><?php echo $dt['kategori_hewan']; ?> <br><?php echo $dt['kategori_artikel']; ?> : <?php echo $dt['nama_hewan']; ?></p>
                             </div>
-						</div>
 						<!-- post body -->
 						<div class="">
 							<p class="my-2">

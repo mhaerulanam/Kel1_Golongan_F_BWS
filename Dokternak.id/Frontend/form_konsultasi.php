@@ -69,7 +69,7 @@ session_start();
                                 value="<?php echo $_SESSION['id']; ?>">
                             
                                 
-                                <input type="hidden" name="tanggal" value="<?php echo date("y-m-d"); ?>">
+                                <input type="hidden" name="tanggal" value="<?php echo date("d-m-y"); ?>">
                                 <!-- <input type="hidden" name="komentar" value=""> -->
                                 
 

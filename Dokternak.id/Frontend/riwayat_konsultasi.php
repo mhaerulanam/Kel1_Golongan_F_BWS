@@ -335,7 +335,7 @@ include "modal/ubah_password.php";
 
             <!-- Daftar Pesan yang belum direspon -->
             <?php
-            $RData=mysqli_query($koneksi, "SELECT * FROM konsultasi, peternak, dokter WHERE konsultasi.id_peternak=peternak.id_peternak AND konsultasi.id_dokter=dokter.id_dokter AND konsultasi.id_peternak='3' AND status_kirim='norespon' ORDER by tanggal DESC, id_konsultasi DESC");
+            $RData=mysqli_query($koneksi, "SELECT * FROM konsultasi, peternak, dokter WHERE konsultasi.id_peternak=peternak.id_peternak AND konsultasi.id_dokter=dokter.id_dokter AND konsultasi.id_peternak='3' AND status_kirim='norespon' konsultasi.id_peternak='$id' ORDER by tanggal DESC, id_konsultasi DESC");
             while ($data3 = mysqli_fetch_array($RData)) {
                 $ambilData1=mysqli_query($koneksi, "SELECT * FROM riwayat_konsultasi, konsultasi, respon_konsultasi, peternak, dokter WHERE riwayat_konsultasi.id_konsultasi=konsultasi.id_konsultasi AND riwayat_konsultasi.id_respon=respon_konsultasi.id_respon AND konsultasi.id_peternak=peternak.id_peternak AND respon_konsultasi.id_dokter=dokter.id_dokter AND 
                 konsultasi.id_peternak='$id' ORDER by respon_konsultasi.tanggal_respon");

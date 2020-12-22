@@ -58,7 +58,13 @@ session_start();
                         </center>
                     </div>
         <?php
-                }
+                }elseif($pesan == 'login'){
+                    ?>
+                    <div class="alert alert-danger">
+                        <center><strong>Peringatan!</strong> Anda Harus Login Terlebih Dahulu</center>
+                    </div>
+                    <?php
+                 }
                 elseif($pesan == 'gagal'){
         ?>
                   <div class="alert alert-danger">

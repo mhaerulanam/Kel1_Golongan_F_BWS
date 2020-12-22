@@ -181,7 +181,14 @@
                                             </div>
                                         </div>
                                         <div class="items-link f-right">
-                                            <a href="detaildokter.php?id_dokter=<?= $data['id_dokter']; ?>">Detail</a>
+                                        <?php 
+                                            if (!isset($_SESSION["username"])) {?>
+                                                <a href="index.php?pesan=login">Detail</a>
+                                            <?php
+                                            }else{?>
+                                                <a href="detaildokter.php?id_dokter=<?= $data['id_dokter']; ?>">Detail</a>
+                                            <?php }
+                                        ?>
                                         </div>
                                     </div>
                                     <?php

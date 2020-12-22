@@ -6,7 +6,17 @@ include "koneksi.php";
 
         $id_konsultasi = "KONS$kode";
         $id_peternak = $_POST['id_peternak'];
-        $id_dokter = $_POST['id_dokter'];
+
+        if (isset($_POST['id_dokter'])){
+                $dokter = $_POST['id_dokter'];
+                $query = mysqli_query($koneksi,"select * from dokter where nama='$dokter'");
+                $data = mysqli_fetch_assoc($query);
+                $id_dokter = $data['id_dokter'];
+         }else{
+                 echo 'no value';
+        }
+
+        // $id_dokter = $_POST['id_dokter'];
         $id_kategori = $_POST['id_kategori']; // ternak atau pets
         $id_ktg = $_POST['id_ktg']; //Dengan kata lain, ktg disini adalah jenis hewan seperti kucing, kambing, dll
         $nama_hewan = $_POST['nama_hewan'];

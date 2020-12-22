@@ -81,7 +81,9 @@ session_start();
                                 $query_dok = mysqli_query($koneksi,"SELECT * FROM dokter");
                                 while ($dok = mysqli_fetch_array($query_dok)) { ?>
                                     
-                                <option value="<?= $dok['id_dokter']; ?>" ><?php echo $dok['nama']; ?></option>
+                                <!-- <option value="<?= $dok['id_dokter']; ?>" ><?php echo $dok['nama']; ?></option> -->
+                                <option value="<?= $dok['nama']; ?>" ></option>
+
                             
                                 <?php } ?>
                                 </datalist>

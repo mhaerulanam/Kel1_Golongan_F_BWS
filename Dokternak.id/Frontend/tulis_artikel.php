@@ -74,9 +74,14 @@ if (!isset($_SESSION["username"])) {
                         <div class="single-element-widget mt-10">
                         <h5 class="mb-15">Kategori</h5>
                             <div class="form-select" id="default-select"">
-                                <select name="s_kategori" class="form-control" id="exampleFormControlSelect1">
-                                    <option value="KAT02" <?php if ($s_kategori=="Kambing"){ echo "selected"; } ?>>Kambing</option>
-                                    <option value="KAT01" <?php if ($s_kategori=="Kucing"){ echo "selected"; } ?>>Kucing</option>
+                                <select name="s_kategori" class="form-control" id="exampleFormControlSelect1">  
+                                    <option disabled selected> Pilih </option>
+                                    <?php 
+                                    $sql_2 = mysqli_query($koneksi, "SELECT * FROM kategori_artikel");
+                                    while ($kat_2 = mysqli_fetch_array($sql_2)) { ?>
+                                    <option value="<?=$kat_2['id_ktg']?>"><?=$kat_2['kategori_artikel']?></option> 
+                                    <!-- Menggunakan tabel kategori artikel, karena isinya adalah jenis hewan, jadi bisa dipake di form ini juga selain di tulis artikel -->
+                                    <?php } ?>
                                 </select>
                             </div>
                         </div>

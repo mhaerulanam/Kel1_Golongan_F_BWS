@@ -75,7 +75,7 @@ session_start();
                                 <h5><?= $data['judul_tutorial']; ?></h5><br><br>
                                 <div class="btn_detail">
                             <div class="services-cap">
-                                <a href="../detailtutorial.php?id_tutorial=<?= $data['id_tutorial']; ?>" class="genric-btn primary radius">Detail</a>
+                                <a href="detailtutorial.php?id_tutorial=<?= $data['id_tutorial']; ?>" class="genric-btn primary radius">Detail</a>
                                 </div>
                             </div>
                             </div>

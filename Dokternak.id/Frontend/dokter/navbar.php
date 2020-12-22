@@ -60,7 +60,7 @@
                                                     <li><a href="#">HEWAN</a></li>                                                 
                                                 </ul>
                                             </li>
-                                            <li><a href="#">NOTIFIKASI</a></li>
+                                            <li><a href="respon_konsultasi.php">NOTIFIKASI</a></li>
                                             <li><a href="#">LAPORAN</a></li>
                                             <li><a href="daftar_tutorial.php">TUTORIAL</a></li>
                                             

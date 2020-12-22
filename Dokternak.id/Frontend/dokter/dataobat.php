@@ -278,7 +278,7 @@ session_start();
 
                                         <div class="form-group">
                                             <label>Stok :</label>
-                                            <input type="number" name="" id="stok" class="form-control" value="<?php echo $krow['stok']; ?>"  required>
+                                            <input type="number" name="stok" id="stok" class="form-control" value="<?php echo $krow['stok']; ?>"  required>
 										</div>
 										<div class="form-group">
                                             <label>Supplier :</label>

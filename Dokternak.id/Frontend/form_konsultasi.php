@@ -75,6 +75,15 @@ session_start();
 
                             <div class="mt-30">
                             <h5 class="mb-15">Kepada</h5>
+                            <?php if(isset($_GET['id_dokter'])){
+                                $nama = $_GET['id_dokter'];
+                                $query_dok = mysqli_query($koneksi,"SELECT * FROM dokter WHERE nama='$nama'");
+                                $dok = mysqli_fetch_array($query_dok)
+                                ?>
+                            <input list="id_dokter" class="form-control" placeholder='Masukkan nama Dokter tujuan' value="<?= $dok['nama']; ?>" name="id_dokter">
+                            <?php } 
+                            else{?>
+
                             <input list="id_dokter" class="form-control" placeholder='Masukkan nama Dokter tujuan' value="<?php echo $search_keyword; ?>" name="id_dokter">
                             <datalist id="id_dokter" name="id_dokter">
                                 <?php 
@@ -85,7 +94,7 @@ session_start();
                                 <option value="<?= $dok['nama']; ?>" ></option>
 
                             
-                                <?php } ?>
+                                <?php } }?>
                                 </datalist>
                             </div>
                             <div class="mt-30">

@@ -70,7 +70,7 @@ if (!isset($_SESSION["username"])) {
               <div class="h2 title"><?= $data['nama']; ?></div>
               <p class="capt"><?= $data['jabatan']; ?></p>
               <a class="genric-btn primary" href="https://api.whatsapp.com/send?phone=<?= $data['telpon']; ?>">WhatsApp</a>
-              <a class="genric-btn primary" href="form_konsultasi.php?id_dokter=<?= $data['id_dokter']; ?>">Konsultasi</a>
+              <a class="genric-btn primary" href="form_konsultasi.php?id_dokter=<?= $data['nama']; ?>">Konsultasi</a>
             </div>
           </div>
           <div class="section">

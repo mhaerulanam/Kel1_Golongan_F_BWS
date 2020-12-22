@@ -221,7 +221,7 @@ $id_user = $data['id_user']
 
   <!-- Modal content -->
   <div class="modal-content">
-    <span class="close">&times;</span>
+  <a href="profil_akun.php" class="close">&times;</a>
     <div class="wrapper">
       <div class="tabs">
         <div class="tab">

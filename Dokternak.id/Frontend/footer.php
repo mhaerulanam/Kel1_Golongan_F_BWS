@@ -46,7 +46,7 @@
                             <div class="footer-tittle">
                                 <h4>TENTANG KAMI</h4>
                                 <ul>
-                                <p>Website Dokternak dikembangkan oleh mahasiswa Teknik Informatika, Politeknik Negeri Jember Kampus Bondowoso ,website ini bertujuan sebagai wadah komunikasi
+                                <p>Website Dokternak dikembangkan oleh mahasiswa Teknik Informatika, Politeknik Negeri Jember Kampus Bondowoso. Website ini bertujuan sebagai wadah komunikasi
                                     Dokter Hewan, Peternak, dan Petlovers.</p>
                                     <!-- #ganti nama file  -->
                                     <li><a href="aboutus.php"> selengkapnya-></a></li> 
@@ -61,7 +61,7 @@
                             <div class="footer-tittle">
                                 <h4>KONTAK</h4>
                                 <ul>
-                                    <li><a href="#">Telepon : +62 812-3254-4553</a></li>
+                                    <li><a href="https://api.whatsapp.com/send?phone=+62 812-3254-4553">Telepon : +62 812-3254-4553</a></li>
                                     <li><a href="#">Email : kel01golabws@gmail.com</a></li>
                                 </ul>
                             </div>

@@ -35,7 +35,7 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                      <img src="../../Frontend/fotoakun.php?id_user=<?php echo $_SESSION['id']; ?>" class="Avatar"
                         alt="fotoakun" height="35"></img>
-                    <span><?php echo $_SESSION['username'];?> <span> (</span><?php echo $_SESSION['id_role'];?>)</span>
+                    <span><?php echo $_SESSION['nama'];?> <span> (</span><?php echo $_SESSION['id_role'];?>)</span>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
                     <li><a href="logout.php" onclick="return confirm('Apakah anda yakin ingin keluar ?')"><i class="fa fa-sign-out fa-fw"></i> Logout</a>

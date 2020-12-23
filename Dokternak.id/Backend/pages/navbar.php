@@ -52,14 +52,14 @@
                              <li>
                                 <a href="Dashboard.php"><i class="fa fa-table fa-fw"> </i> DASHBOARD</a>
                             </li>
-                            <!-- <li>
-                                <a href="tabel_mahasiswa.php"><i class="fa fa-table fa-fw"></i>Data Mahasiswa</a>
-                            </li>
-                            <li>
-                                <a href="tabel_dosen.php"><i class="fa fa-table fa-fw"></i>Data Dosen</a>
-                            </li>-->
                             <li>
                                 <a href="tabel_user.php"><i class="fa fa-table fa-fw"> </i> Data User</a>
+                            </li>
+                            <li>
+                                <a href="tabel_dokter.php"><i class="fa fa-table fa-fw"> </i> Data Dokter</a>
+                            </li>
+                            <li>
+                                <a href="tabel_artikel.php"><i class="fa fa-table fa-fw"> </i> Data Artikel</a>
                             </li>
                 </ul>
             </div>

@@ -18,7 +18,9 @@ body {font-family: Arial, Helvetica, sans-serif;}
 /* Modal Content */
 .modal-content {
   background-color: #fefefe;
-  margin: auto;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
   padding: 20px;
   border: 1px solid #888;
   width: 45%;
@@ -64,7 +66,11 @@ body {
   clear: both;
 }
 .tab {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
   float: left;
+  position: relative;
 }
 .tab-switch {
   display: none;
@@ -135,14 +141,6 @@ form {
   grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
 
-.left{
-  position: absolute;
-  top: 0;
-  left: 0;
-  box-sizing: border-box;
-  padding: 40px;
-  width: 300px;
-  height: 400px;
 }
 .right{
   position: absolute;
@@ -170,7 +168,10 @@ form {
 .input-file {
   display: none;
 }  
-
+.btn btn-info {
+  margin-left: auto;
+  margin-right: ;
+}
 </style>
 </head>
 <body>
@@ -211,14 +212,14 @@ $id_user = $data['id_user']
 						$sql1 = "UPDATE peternak SET namadepan_peternak = '$namadepan', namabelakang_peternak = '$namabelakang', email_peternak = '$email',  no_hp = '$no_telpon', jenis_kelamin = '$jk', alamat = '$alamat' WHERE id_peternak = '$id_peternak'";
             $sql = "UPDATE user SET  username = '$username' WHERE id_user = '$id_user'";
             if(mysqli_query($koneksi, $sql1)){
-							$nilaihasil = "Records updated successfully.";
+							header("location:profil_akun.php?pesan=berhasil");
 						} 
 						else{
 							echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
 						}
           }
           ?>
-
+<section>
   <!-- Modal content -->
   <div class="modal-content">
   <a href="profil_akun.php" class="close">&times;</a>
@@ -251,7 +252,7 @@ $id_user = $data['id_user']
           </div>
 
         <!-- Kanan Bang **************************************************************************************-->
-        <div id="right">
+        <!-- <div id="right"> -->
           <div class="form-group">
             <label for="no_hp"><span class="glyphicon glyphicon-earphone"></span> No Handphone</label>
             <input type="number" class="form-control" name="no_hp" value="<?php echo $data['no_hp'];?>">
@@ -290,20 +291,22 @@ $id_user = $data['id_user']
             <input type="file" class="form-control" name="foto_peternak">
           </div> -->
 
-          <div class="form-group">
+          <!-- <div class="form-group"> -->
           
           
           <!-- <div class="checkbox">
             <label><input type="checkbox" value="" checked>Menerima Persyaratan Yang Berlaku</label>
           </div> -->
           <input type="submit" class="btn btn-info" value="Edit" name="edit">
-          <input type="reset" class="btn btn-info" value="Batal" name="edit">
-          </div>
+          <a href="profil_akun.php" class="btn btn-info" >Batal</a>
+          <!-- <input type="reset" class="btn btn-info" value="Batal" name=""> -->
+          <!-- </div> -->
         </form>
       </div>
         </div>
         </div>
         </div>
+        </section>
 <script>
 // Get the modal
 var modal = document.getElementById("myModal");

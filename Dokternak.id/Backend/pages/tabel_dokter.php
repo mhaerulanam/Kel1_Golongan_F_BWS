@@ -97,7 +97,7 @@ session_start();
 					date_default_timezone_set('Asia/Jakarta');
 					include "koneksi.php";
 
-						$kode = date['His'];
+						$kode = date('His');
 						$id_dok = "DOC$kode";
 
 						$id_dokter= $_POST['id_dokter'];
@@ -189,7 +189,7 @@ session_start();
 					</div>
 					<div class="col-sm-6">
 						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">++ Tambah Data	</a>
-						<input type="submit" name="deleteall" value="Hapus Semua" class="btn btn-danger" onclick="return confirm('Are you sure delete selected records?')">
+						<input type="submit" name="deleteall" value="Hapus Semua" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
 					</div>
 				</div>
 				<div class="row">
@@ -282,7 +282,7 @@ session_start();
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 									</div>
 									<div class="modal-body">
-									<div class="form-group">
+										<div class="form-group">
                                             <label>Nama :</label>
                                             <input type="text" name="nama" id="nama" class="form-control" value="<?php echo $krow['nama']; ?>" required>
                                         </div>
@@ -293,16 +293,15 @@ session_start();
                                         <div class="form-group">
                                             <label>Jenis Kelamin :</label><br>
                                             		<div class="radio-inline">
-													<input type="radio" name="jenis_kelamin" id="jk" value="Laki-Laki" selected> Laki-Laki
+													<input type="radio" name="jenis_kelamin" id="jk" value="Laki-Laki" <?php if($krow['jenis_kelamin']=='Laki-Laki') echo 'checked' ?>> Laki-Laki
                                                     </div>
                                                     <div class="radio-inline">
-													<input type="radio" name="jenis_kelamin" id="jk" value="Perempuan" selected> Perempuan
+													<input type="radio" name="jenis_kelamin" id="jk" value="Perempuan" <?php if($krow['jenis_kelamin']=='Perempuan') echo 'checked' ?>> Perempuan
 													</div>
-											</div>
 										</div>
                                         <div class="form-group">
                                             <label>Alamat :</label>
-                                            <textarea name="alamat" id="alamat" class="form-control" value="<?php echo $krow['alamat']; ?>"  required></textarea>
+                                            <textarea name="alamat" id="alamat" class="form-control" required><?php echo $krow['alamat']; ?></textarea>
 										</div>
 										<div class="form-group">
                                             <label>Tempat :</label>
@@ -321,12 +320,20 @@ session_start();
                                             <input type="file" name="sertifikasi" id="sertifikasi" class="form-control">
                                         </div>
                                         <div class="form-group">
-                                            <label>ID Jabatan :</label>
-                                            <input type="text" name="id_jabatan" id="id_jabatan" class="form-control" value="<?php echo $krow['id_jabatan']; ?>" required>
+											<label>Jabatan :</label><br>
+                                            		<div class="radio-inline">
+													<input type="radio" name="id_jabatan" id="id_jabatan" value="J01" <?php if($krow['id_jabatan']=='J01') echo 'checked' ?>> Dokter
+                                                    </div>
+                                                    <div class="radio-inline">
+													<input type="radio" name="id_jabatan" id="id_jabatan" value="J02" <?php if($krow['id_jabatan']=='J02') echo 'checked' ?>> Paramedis
+													</div>
+													<div class="radio-inline">
+													<input type="radio" name="id_jabatan" id="id_jabatan" value="J03" <?php if($krow['id_jabatan']=='J03') echo 'checked' ?>> Petugas IB
+													</div>
 										</div>  
                                         <div class="form-group">
                                             <label>Jadwal Kerja :</label>
-                                            <textarea name="jadwal_kerja" id="jadwal_kerja" class="form-control" value="<?php echo $krow['jadwal_kerja']; ?>"  required></textarea>
+                                            <textarea name="jadwal_kerja" id="jadwal_kerja" class="form-control" required><?php echo $krow['jadwal_kerja']; ?></textarea>
 										</div>
                                         <div class="form-group">
                                             <label>Username :</label>
@@ -337,8 +344,8 @@ session_start();
                                             <input type="password" name="password" id="password" class="form-control" value="<?php echo $krow['password']; ?>" required>
 										</div>
 										<div class="modal-footer">
-													<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-													<input type="submit" class="btn btn-info" value="Save" name="edit">
+											<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+											<input type="submit" class="btn btn-info" value="Save" name="edit">
 										</div>
 									</div>
 								</form>
@@ -358,8 +365,8 @@ session_start();
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 									</div>
 									<div class="modal-body">
-										<p>Are you sure you want to delete these Records <?php echo $krow['nama']; ?>?</p>
-										<p class="text-warning"><small>This action cannot be undone.</small></p>
+										<p>Apakah anda yakin ingin menghapus data dengan nama <?php echo $krow['nama']; ?>?</p>
+										<p class="text-warning"><small>Data yang terhapus tidak dapat dikembalikan.</small></p>
 									</div>
 									<div class="modal-footer">
 										<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
@@ -407,11 +414,10 @@ session_start();
                                                     <div class="radio-inline">
 													<input type="radio" name="jenis_kelamin" id="jk" value="Perempuan" selected> Perempuan
 													</div>
-											</div>
 										</div>
                                         <div class="form-group">
                                             <label>Alamat :</label>
-                                            <textarea name="alamat" id="alamat" class="form-control" required>
+                                            <textarea name="alamat" id="alamat" class="form-control" required></textarea>
 										</div>
 										<div class="form-group">
                                             <label>Tempat :</label>
@@ -431,11 +437,21 @@ session_start();
                                         </div>
                                         <div class="form-group">
                                             <label>ID Jabatan :</label>
-                                            <input type="text" name="id_jabatan" id="id_jabatan" class="form-control" required>
+											<select name="id_jabatan" class="form-control" id="default-select">
+												<option disabled selected> Pilih </option>
+												<?php 
+												include "koneksi.php";
+												$sql="SELECT * FROM jabatan";
+												$jab = mysqli_query($koneksi,$sql);
+												while($data = mysqli_fetch_array($jab))
+												{ ?>
+												<option value="<?=$data['id_jabatan']?>"><?=$data['jabatan']?></option> 
+												<?php } ?>
+											</select><br>
 										</div>  
                                         <div class="form-group">
                                             <label>Jadwal Kerja :</label>
-                                            <textarea name="jadwal_kerja" id="jadwal_kerja" class="form-control" required>
+                                            <textarea name="jadwal_kerja" id="jadwal_kerja" class="form-control" required></textarea>
 										</div>
                                         <div class="form-group">
                                             <label>Username :</label>

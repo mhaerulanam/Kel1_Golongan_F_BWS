@@ -199,13 +199,13 @@ session_start();
 						</th>
 						<!-- <th>No</th> -->
                         <th>ID User</th>
-						<th>Nama</th>
+						<!-- <th>Nama</th> -->
 						<th>Username</th>
-						<th>Email</th>
+						<!-- <th>Email</th>
 						<th>Address</th>
-						<th>Telepon</th>
+						<th>Telepon</th> -->
 						<th>Password</th>
-						<th>Foto</th>
+						<!-- <th>Foto</th> -->
 						<th>ID role</th>
 						<th>Actions</th>
                     </tr>
@@ -230,16 +230,16 @@ session_start();
 
 						<!-- Code menampilkan data -->
 						<td><?php echo $krow['id_user']; ?></td>
-						<td><?php echo $krow['nama']; ?></td>
+						<!-- <td><?php echo $krow['nama']; ?></td> -->
 						<td><?php echo $krow['username']; ?></td>
-						<td><?php echo $krow['email']; ?></td>
+						<!-- <td><?php echo $krow['email']; ?></td>
 						<td><?php echo $krow['address']; ?></td>
-						<td><?php echo $krow['telepon']; ?></td>
+						<td><?php echo $krow['telepon']; ?></td> -->
 						<td><?php echo $krow['password']; ?></td>
-						<td>
+						<!-- <td>
 							<img src="foto/foto_user.php?id_user=<?php echo $krow['id_user']; ?>"
 											alt="<?php echo $krow['nama']; ?>" height="5"></img>
-						</td>
+						</td> -->
 						<td><?php echo $krow['id_role']; ?></td>
 
 						<!-- Tombol Action -->
@@ -262,16 +262,16 @@ session_start();
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 									</div>
 									<div class="modal-body">
-                                        <div class="form-group">
+                                        <!-- <div class="form-group">
                                             <label>Nama :</label>
                                             <input type="text" name="nama" id="nama" class="form-control" value="<?php echo $krow['nama']; ?>" >
-                                        </div>
+                                        </div> -->
 
                                         <div class="form-group">
                                             <label>Username :</label>
                                             <input type="text" name="username" id="username" class="form-control" value="<?php echo $krow['username']; ?>"  required>
 										</div>
-										<div class="form-group">
+										<!-- <div class="form-group">
                                             <label>Email :</label>
                                             <input type="email" name="email" id="email" class="form-control" value="<?php echo $krow['email']; ?>" required>
 										</div>
@@ -282,15 +282,15 @@ session_start();
 										<div class="form-group">
                                             <label>Telepone :</label>
                                             <input type="number" name="telepon" id="telepon" class="form-control" value="<?php echo $krow['telepon']; ?>" required>
-										</div>
+										</div> -->
 										<div class="form-group">
                                             <label>Password :</label>
                                             <input type="password" name="password" id="password" class="form-control" value="<?php echo $krow['password']; ?>" required>
 										</div>
-										<div class="form-group">
+										<!-- <div class="form-group">
                                             <label>Foto :</label>
                                             <input type="file" name="foto" id="foto" class="form-control">
-                                        </div>     
+                                        </div>      -->
 												<div class="form-group">
                                                     <label>Role</label><br>
                                                     <div class="radio-inline">
@@ -358,15 +358,15 @@ session_start();
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 									</div>
 									<div class="modal-body">
-                                        <div class="form-group">
+                                        <!-- <div class="form-group">
                                             <label>Nama :</label>
                                             <input type="text" name="nama" id="nama" class="form-control" required >
-                                        </div>
+                                        </div> -->
 
                                         <div class="form-group">
                                             <label>Username :</label>
                                             <input type="text" name="username" id="username" class="form-control" required>
-										</div>
+										<!-- </div>
 										<div class="form-group">
                                             <label>Email :</label>
                                             <input type="email" name="email" id="email" class="form-control" required>
@@ -378,15 +378,15 @@ session_start();
 										<div class="form-group">
                                             <label>Telepone :</label>
                                             <input type="number" name="telepon" id="telepon" class="form-control" required>
-										</div>
+										</div> -->
 										<div class="form-group">
                                             <label>Password :</label>
                                             <input type="password" name="password" id="password" class="form-control"  required>
 										</div>
-										<div class="form-group">
+										<!-- <div class="form-group">
                                             <label>Foto :</label>
                                             <input type="file" name="foto" id="foto" class="form-control">
-                                        </div>     
+                                        </div>      -->
 												<div class="form-group">
                                                     <label>Role</label><br>
                                                     <div class="radio-inline">

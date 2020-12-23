@@ -9,6 +9,6 @@ if(isset($_GET['id_admin']))
 }
 else
 {
-    header('location:../tabel_dokter.php');
+    header('location:../tabel_user.php');
 }
 ?>

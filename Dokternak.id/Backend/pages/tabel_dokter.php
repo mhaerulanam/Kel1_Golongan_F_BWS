@@ -128,7 +128,9 @@ session_start();
 						}
 						else{
 							//tambah
-							$sql = "INSERT INTO dokter VALUES ('$id_dok','$nama','$email','$jk','$alamat','$tempat','$telpon','$foto','$sertifikasi','$id_jabatan','$jadwal_kerja','$username','$password')";
+							$ambilFoto   = addslashes(file_get_contents($_FILES['foto']['tmp_name']));
+							$ambilSertif   = addslashes(file_get_contents($_FILES['sertifikasi']['tmp_name']));
+							$sql = "INSERT INTO dokter VALUES ('$id_dok','$nama','$email','$jk','$alamat','$tempat','$telpon','$ambilFoto','$ambilSertif','$id_jabatan','$jadwal_kerja','$username','$password')";
 							if(mysqli_query($koneksi, $sql)){
 								$nilaihasil = "Records inserted successfully.";
 							} 
@@ -138,17 +140,92 @@ session_start();
 						}
 					}
 
-					// code tombol edit
+					// BISMILLAH ***********************************************************************************************************************************************************************************************************************************************************************************************************************************
+					// code tombol edit 
 					if(isset($_POST['edit'])){
 						//edit
-						$sql = "UPDATE dokter SET nama = '$nama', email = '$email', jenis_kelamin = '$jk', alamat = '$alamat', tempat = '$tempat', telpon = '$telpon', foto = '$foto', sertifikasi = '$sertifikasi', id_jabatan = '$id_jabatan', jadwal_kerja = '$jadwal_kerja', username = '$username', password = '$password' WHERE id_dokter = '$id_dokter'";
-						if(mysqli_query($koneksi, $sql)){
-							$nilaihasil = "Records updated successfully.";
-						} 
-						else{
-							echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+						$cek_tabel = mysqli_query($koneksi, "SELECT * FROM dokter WHERE id_dokter='$id_dokter'");
+						while ($cek_gambar = mysqli_fetch_array($cek_tabel)) {
+							$fotoDatabase = $cek_gambar['foto'];
+							$sertifDatabase = $cek_gambar['sertifikasi'];
+						} //end while
+						
+						$foto = $_POST['foto'];
+						$sertifikasi = $_POST['sertifikasi'];
+
+						$lokasiFoto = $_FILES['foto']['tmp_name'];
+						$namaFoto = $_FILES['foto']['name'];
+						$lokasiSertif = $_FILES['sertifikasi']['tmp_name'];
+						$namaSertif = $_FILES['sertifikasi']['name'];
+
+						if (!isset($fotoDatabase) && !isset($sertifDatabase)){
+							if (!$lokasiFoto=="" && !$lokasiSertif==""){
+								$ambilFoto   = addslashes(file_get_contents($_FILES['foto']['tmp_name']));
+								$ambilSertif   = addslashes(file_get_contents($_FILES['sertifikasi']['tmp_name']));
+								$sql = "UPDATE dokter SET nama = '$nama', email = '$email', jenis_kelamin = '$jk', alamat = '$alamat', tempat = '$tempat', telpon = '$telpon', foto = '$ambilFoto', sertifikasi = '$ambilSertif', id_jabatan = '$id_jabatan', jadwal_kerja = '$jadwal_kerja', username = '$username', password = '$password' WHERE id_dokter = '$id_dokter'";
+								if(mysqli_query($koneksi, $sql)){
+									$nilaihasil = "Records updated successfully.";
+								} 
+								else{
+									echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+								}
+							}else{
+								?><script> alert ("Masukkan Foto/Sertifikat terlebih dahulu"); </script><?php
+							}
+						}else if(isset($fotoDatabase) && isset($sertifDatabase)){
+							if (!$lokasiFoto=="" && !$lokasiSertif==""){
+								$ambilFoto   = addslashes(file_get_contents($_FILES['foto']['tmp_name']));
+								$ambilSertif   = addslashes(file_get_contents($_FILES['sertifikasi']['tmp_name']));
+								$sql = "UPDATE dokter SET nama = '$nama', email = '$email', jenis_kelamin = '$jk', alamat = '$alamat', tempat = '$tempat', telpon = '$telpon', foto = '$ambilFoto', sertifikasi = '$ambilSertif', id_jabatan = '$id_jabatan', jadwal_kerja = '$jadwal_kerja', username = '$username', password = '$password' WHERE id_dokter = '$id_dokter'";
+								if(mysqli_query($koneksi, $sql)){
+									$nilaihasil = "Records updated successfully.";
+								} 
+								else{
+									echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+								}
+							}else if($lokasiFoto=="" && !$lokasiSertif==""){
+								$ambilSertif   = addslashes(file_get_contents($_FILES['sertifikasi']['tmp_name']));
+								$sql = "UPDATE dokter SET nama = '$nama', email = '$email', jenis_kelamin = '$jk', alamat = '$alamat', tempat = '$tempat', telpon = '$telpon', sertifikasi = '$ambilSertif', id_jabatan = '$id_jabatan', jadwal_kerja = '$jadwal_kerja', username = '$username', password = '$password' WHERE id_dokter = '$id_dokter'";
+								if(mysqli_query($koneksi, $sql)){
+									$nilaihasil = "Records updated successfully.";
+								} 
+								else{
+									echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+								}
+							}else if (!$lokasiFoto=="" && $lokasiSertif==""){
+								$ambilFoto   = addslashes(file_get_contents($_FILES['foto']['tmp_name']));
+								$sql = "UPDATE dokter SET nama = '$nama', email = '$email', jenis_kelamin = '$jk', alamat = '$alamat', tempat = '$tempat', telpon = '$telpon', foto = '$ambilFoto', id_jabatan = '$id_jabatan', jadwal_kerja = '$jadwal_kerja', username = '$username', password = '$password' WHERE id_dokter = '$id_dokter'";
+								if(mysqli_query($koneksi, $sql)){
+									$nilaihasil = "Records updated successfully.";
+								} 
+								else{
+									echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+								}
+							}else{
+								$sql = "UPDATE dokter SET nama = '$nama', email = '$email', jenis_kelamin = '$jk', alamat = '$alamat', tempat = '$tempat', telpon = '$telpon', id_jabatan = '$id_jabatan', jadwal_kerja = '$jadwal_kerja', username = '$username', password = '$password' WHERE id_dokter = '$id_dokter'";
+								if(mysqli_query($koneksi, $sql)){
+									$nilaihasil = "Records updated successfully.";
+								} 
+								else{
+									echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+								}
+							}
+						}else{
+							?><script> alert ("Anda harus mengupload foto/sertifikat"); </script><?php
 						}
+
+						// $ambilFoto   = addslashes(file_get_contents($_FILES['foto']['tmp_name']));
+						// $ambilSertif   = addslashes(file_get_contents($_FILES['sertifikasi']['tmp_name']));
+						// $sql = "UPDATE dokter SET nama = '$nama', email = '$email', jenis_kelamin = '$jk', alamat = '$alamat', tempat = '$tempat', telpon = '$telpon', foto = '$ambilFoto', sertifikasi = '$ambilSertif', id_jabatan = '$id_jabatan', jadwal_kerja = '$jadwal_kerja', username = '$username', password = '$password' WHERE id_dokter = '$id_dokter'";
+						// if(mysqli_query($koneksi, $sql)){
+						// 	$nilaihasil = "Records updated successfully.";
+						// } 
+						// else{
+						// 	echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+						// }
+						
 					}
+					// ALHAMDULILLAH ***********************************************************************************************************************************************************************************************************************************************************************************************************************************
 
 					//code delete per item
 					if(isset($_POST['delete'])){
@@ -189,7 +266,7 @@ session_start();
 					</div>
 					<div class="col-sm-6">
 						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">++ Tambah Data	</a>
-						<input type="submit" name="deleteall" value="Hapus Semua" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+						<input type="submit" name="deleteall" value="Delete Selected" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
 					</div>
 				</div>
 				<div class="row">
@@ -251,11 +328,11 @@ session_start();
 						<td><?php echo $krow['telpon']; ?></td>
                         <td>
 							<img src="foto/foto_dokter.php?id_dokter=<?php echo $krow['id_dokter']; ?>"
-											alt="<?php echo $krow['nama']; ?>" height="5"></img>
+											alt="<?php echo "Belum upload foto" ?>" height="100"></img>
 						</td>
                         <td>
 							<img src="foto/sertifikasi.php?id_dokter=<?php echo $krow['id_dokter']; ?>"
-											alt="<?php echo $krow['nama']; ?>" height="5"></img>
+											alt="<?php echo "Belum upload sertifikasi" ?>" height="100"></img>
 						</td>
                         <td><?php echo $krow['id_jabatan']; ?></td>
                         <td><?php echo $krow['jadwal_kerja']; ?></td>
@@ -275,7 +352,7 @@ session_start();
 					<div id="editEmployeeModal<?php echo $krow['id_dokter']; ?>" class="modal fade">
 						<div class="modal-dialog">
 							<div class="modal-content">
-								<form role="form" method="POST">
+								<form role="form" method="POST" enctype="multipart/form-data">
 									<input type="hidden" class="form-control" value="<?php echo $krow['id_dokter']; ?>" name="id_dokter" required>
 									<div class="modal-header">
 										<h4 class="modal-title">Edit</h4>
@@ -313,10 +390,14 @@ session_start();
 										</div>
                                         <div class="form-group">
                                             <label>Foto :</label>
-                                            <input type="file" name="foto" id="foto" class="form-control">
+											<img src="foto/foto_dokter.php?id_dokter=<?php echo $krow['id_dokter']; ?>"
+											alt="<?php echo "Belum upload foto"; ?>" height="50"></img>
+											<input type="file" name="foto" id="foto" class="form-control"> 
                                         </div>     
                                         <div class="form-group">
                                             <label>Sertifikasi :</label>
+											<img src="foto/sertifikasi.php?id_dokter=<?php echo $krow['id_dokter']; ?>"
+											alt="<?php echo "Belum upload sertifikasi"; ?>" height="50"></img>
                                             <input type="file" name="sertifikasi" id="sertifikasi" class="form-control">
                                         </div>
                                         <div class="form-group">
@@ -392,7 +473,7 @@ session_start();
 					<div id="addEmployeeModal" class="modal fade">
 						<div class="modal-dialog">
 							<div class="modal-content">
-							<form role="form" method="POST" action="">
+							<form role="form" method="POST" action="" enctype="multipart/form-data">
 									<div class="modal-header">
 										<h4 class="modal-title">Tambah Data</h4>
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

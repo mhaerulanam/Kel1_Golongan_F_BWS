@@ -294,13 +294,13 @@ session_start();
 												<div class="form-group">
                                                     <label>Role</label><br>
                                                     <div class="radio-inline">
-														<input type="radio" name="id_role" id="l" value="1" selected> 1 (Admin)
+														<input type="radio" name="id_role" id="l" value="1" <?php if($krow['id_role']=='1') echo 'checked' ?>> 1 (Admin)
                                                     </div>
                                                     <div class="radio-inline">
-													<input type="radio" name="id_role" id="2" value="2" selected> 2 (Dokter)
+													<input type="radio" name="id_role" id="2" value="2" <?php if($krow['id_role']=='2') echo 'checked' ?>> 2 (Dokter)
 													</div>
 													<div class="radio-inline">
-													<input type="radio" name="id_role" id="3" value="3" selected> 3 (Peternak)
+													<input type="radio" name="id_role" id="3" value="3" <?php if($krow['id_role']=='3') echo 'checked' ?>> 3 (Peternak)
 													</div>
 												</div>
 												<div class="modal-footer">

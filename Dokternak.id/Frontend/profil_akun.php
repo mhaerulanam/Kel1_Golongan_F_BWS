@@ -130,7 +130,24 @@ $id_peternak = $data['id_peternak'];
 ?>
 <!-- Our Services Start -->
  <!-- Banner Atas Start-->
-   
+ <?php
+        if (isset($_GET['pesan'])){
+            $pesan = $_GET['pesan'];
+                if ($pesan == 'berhasil') {
+    ?>
+                <div class="alert alert-success">
+                    <center>Edit data Anda berhasil</center>
+                </div>
+    <?php
+                }elseif($pesan == 'gagal'){
+    ?>
+                <div class="alert alert-danger">
+                    <center>Mohon maaf, Edit data anda gagal</center>
+                </div>
+    <?php
+                }
+        }
+    ?>
  <div class="slider-area ">
       <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="assets/img/gallery/s2.jpg">
           <div class="container">

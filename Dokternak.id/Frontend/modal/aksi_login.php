@@ -31,9 +31,11 @@
 					$hasil = mysqli_query($koneksi,$sdata1);
 					$row1 = mysqli_fetch_array($hasil);
 					$nama = $row1["nama"];
+					$id = $row1["id_admin"];
                     $level = "Admin";
 					$_SESSION["id_role"] = $level;
 					$_SESSION["nama"]=$nama;
+					$_SESSION["id"]=$id;
 					echo "<script>alert('Selamat $nama, Anda Berhasil Login sebagai $level'); window.location='../../Backend/pages/Dashboard.php'</script>"; 
 				} else if ($_SESSION["id_role"]=$row["id_role"]==2)
 				{

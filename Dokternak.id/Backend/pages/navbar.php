@@ -33,7 +33,7 @@
         <ul class="nav navbar-right navbar-top-links">
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                     <img src="../../Frontend/fotoakun.php?id_user=<?php echo $_SESSION['id']; ?>" class="Avatar"
+                     <img src="foto/foto_admin.php?id_admin=<?php echo $_SESSION['id']; ?>" class="Avatar"
                         alt="fotoakun" height="35"></img>
                     <span><?php echo $_SESSION['nama'];?> <span> (</span><?php echo $_SESSION['id_role'];?>)</span>
                 </a>

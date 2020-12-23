@@ -1,5 +1,5 @@
 <?php
-include('koneksi.php');
+include('../koneksi.php');
 if(isset($_GET['id_user'])) 
 {
     $query = mysqli_query($koneksi,"select * from user where id_user='".$_GET['id_user']."'");

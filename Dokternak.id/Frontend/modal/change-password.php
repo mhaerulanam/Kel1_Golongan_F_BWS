@@ -18,7 +18,7 @@
 				echo "<script>alert('Perubahan Password Berhasil'); window.location='../LandingPagePeternak.php'</script>";
 			}
 			else{
-				echo "<script>alert('Password Baru dan Password Baru Ulang Anda Tidak Sama'); window.location='../LandingPagePeternak.php'</script>";
+				echo "<script>alert('Password Baru dan Ulang Password Baru Anda Tidak Sama'); window.location='../LandingPagePeternak.php'</script>";
 			}
 			}
 		else

@@ -224,7 +224,7 @@ Sistem Informasi Dokter Hewan merupakan sistem informasi berbasis website untuk 
                                     <div class="testimonial-founder  ">
                                         <div class="founder-img mb-30">
                                             <img src="aboutus/profil/widya.png" class="radiuz" alt="">
-                                            <span>Yuristika Widya</span>
+                                            <span>Widya Yuristika Oktavia</span>
                                             <p>Developer Team</p>
                                         </div>
                                     </div>

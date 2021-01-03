@@ -56,10 +56,17 @@
                                 <a href="tabel_user.php"><i class="fa fa-table fa-fw"> </i> Data User</a>
                             </li>
                             <li>
-                                <a href="tabel_dokter.php"><i class="fa fa-table fa-fw"> </i> Data Dokter</a>
+                                <a><i class="fa fa-table fa-fw"> </i> Data Dokter</a>
+                                <ul>
+                                <li><a href="tabel_dokter.php"> Data Dokter</a></li>
+                                <li><a href="tabel_dokterpuskeswan.php"> Data Dokter Puskeswan</a></li>
+                                </ul>
                             </li>
                             <li>
                                 <a href="tabel_artikel.php"><i class="fa fa-table fa-fw"> </i> Data Artikel</a>
+                            </li>
+                            <li>
+                                <a href="tabel_tutorial.php"><i class="fa fa-table fa-fw"> </i> Data Tutorial</a>
                             </li>
                 </ul>
             </div>

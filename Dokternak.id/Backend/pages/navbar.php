@@ -68,6 +68,9 @@
                             <li>
                                 <a href="tabel_tutorial.php"><i class="fa fa-table fa-fw"> </i> Data Tutorial</a>
                             </li>
+                            <li>
+                                <a href="tabel_dokumentasi.php"><i class="fa fa-table fa-fw"> </i> Data Dokumentasi</a>
+                            </li>
                 </ul>
             </div>
         </div>

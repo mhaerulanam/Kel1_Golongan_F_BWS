@@ -284,7 +284,7 @@ session_start();
 										</div>
 										<div class="form-group">
                                             <label>Expired :</label>
-                                            <input type="text" name="expired" id="expired" class="form-control" value="<?php echo $krow['expired']; ?>" required>
+                                            <input type="date" name="expired" id="expired" class="form-control" value="<?php echo $krow['expired']; ?>" required>
 										</div> 
 										<div class="form-group">
                                             <label>Keterangan :</label>

@@ -85,7 +85,7 @@ session_start();
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h1 class="page-header">Data User</h1>
+                            <h1 class="page-header">Data User - Admin</h1>
 						</div>
 						
 
@@ -96,21 +96,21 @@ session_start();
 					ini_set('max_execution_time', 0);
 					date_default_timezone_set('Asia/Jakarta');
 					include "koneksi.php";
-						$id_user = $_POST['id_user'];
+						$id_admin = $_POST['id_admin'];
 						$nama = $_POST['nama'];
-						$username = $_POST['username'];
-						$email = $_POST['email'];
-						$address = $_POST['address'];
-						$telepon = $_POST['telepon'];
-						$password = $_POST['password'];
+						$jenis_kelamin = $_POST['jenis_kelamin'];
+						$alamat = $_POST['alamat'];
 						$foto = $_POST['foto'];
+						$id_user = $_POST['id_user'];
+						$username = $_POST['username'];
+						$password = $_POST['password'];
 						$id_role = $_POST['id_role'];
 						
 
 					//Code tombol tambah	
 					if(isset($_POST['tambah'])){
 						/* cek input NIM apakah sudah ada nim yang digunakan */
-						$pilih="select * from user where id_user='$id_user'";
+						$pilih="select * from admin where id_admin='$id_admin'";
 						$cek=mysqli_query($koneksi, $pilih);
 					
 						$jumlah_data = mysqli_num_rows($cek);
@@ -120,7 +120,8 @@ session_start();
 						}
 						else{
 							//tambah
-							$sql = "INSERT INTO user VALUES ('','$nama','$username','$email','$address','$telepon','$password','$foto','$id_role')";
+							$sql = "INSERT INTO user VALUES ('','$username','$password','$id_role')";
+							$sql = "INSERT INTO admin VALUES ('','$nama','$jenis_kelamin','$alamat','$foto','$id_user')";
 							if(mysqli_query($koneksi, $sql)){
 								$nilaihasil = "Records inserted successfully.";
 							} 
@@ -133,7 +134,8 @@ session_start();
 					// code tombol edit
 					if(isset($_POST['edit'])){
 						//edit
-						$sql = "UPDATE user SET nama = '$nama', username = '$username', email = '$email', address = '$address', telepon = '$telepon', password = '$password', foto = '$foto', id_role = '$id_role' WHERE id_user = '$id_user'";
+						$sql = "UPDATE user SET  username = '$username', password = '$password', id_role = '$id_role' WHERE id_user = '$id_user'";
+						$sql2 = "UPDATE admin SET  nama = '$nama', jenis_kelamin = '$jenis_kelamin', alamat = '$alamat', foto = '$foto', id_user = '$id_user' WHERE id_admin = '$id_admin'";
 						if(mysqli_query($koneksi, $sql)){
 							$nilaihasil = "Records updated successfully.";
 						} 
@@ -145,7 +147,7 @@ session_start();
 					//code delete per item
 					if(isset($_POST['delete'])){
 						//delete
-						$sql = "DELETE FROM user WHERE id_user = '$id_user'";
+						$sql = "DELETE FROM user WHERE id_admin = '$id_admin'";
 						if(mysqli_query($koneksi, $sql)){
 							$nilaihasil = "Records deleted successfully.";
 						} 
@@ -160,7 +162,7 @@ session_start();
 					{
 						//delete
 						$pilih = $_POST['pilih'];
-							$sql = "DELETE FROM user WHERE id_user IN (".implode(",", $pilih).")";
+							$sql = "DELETE FROM user WHERE id_admin IN (".implode(",", $pilih).")";
 							if(mysqli_query($koneksi, $sql))
 							{
 								$nilaihasil = "Records deleted successfully.";
@@ -197,23 +199,23 @@ session_start();
 								<label for="selectAll"></label>
 							</span>
 						</th>
-						<!-- <th>No</th> -->
+						<th>No</th>
+						<th>ID Admin</th>
+						<th>Nama Lengkap</th>
+						<th>Jenis Kelamin</th>
+						<th>Alamat</th>
+						<th>Foto</th>
                         <th>ID User</th>
-						<!-- <th>Nama</th> -->
 						<th>Username</th>
-						<!-- <th>Email</th>
-						<th>Address</th>
-						<th>Telepon</th> -->
 						<th>Password</th>
-						<!-- <th>Foto</th> -->
-						<th>ID role</th>
+						<th>ID Role</th>
 						<th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
 					<?php
-					// $i = 1;
-					$ksql="SELECT * FROM user";
+					$i = 1;
+					$ksql="SELECT * FROM admin,user where admin.id_user=user.id_user order by admin.id_admin";
 					$khasil = mysqli_query($koneksi,$ksql);
 					while($krow = mysqli_fetch_array($khasil))
 					{
@@ -222,75 +224,79 @@ session_start();
 					<tr>
 						<td>
 							<span class="custom-checkbox">
-								<input type="checkbox" id="checkbox5" name="pilih[]" value="<?php echo $krow['id_user']; ?>">
+								<input type="checkbox" id="checkbox5" name="pilih[]" value="<?php echo $krow['id_admin']; ?>">
 								<label for="checkbox5"></label>
 							</span>
 						</td>
-						<!-- <td><?= $i ?></td> -->
+						<td><?= $i ?></td>
 
 						<!-- Code menampilkan data -->
+						<td><?php echo $krow['id_admin']; ?></td>
+						<td><?php echo $krow['nama']; ?></td>
+						<td><?php echo $krow['jenis_kelamin']; ?></td>
+						<td><?php echo $krow['alamat']; ?></td>
+						<td>
+							<img src="foto/foto_admin.php?id_admin=<?php echo $krow['id_admin']; ?>"
+											alt="<?php echo "Belum upload foto" ?>" height="100"></img>
+						</td>
 						<td><?php echo $krow['id_user']; ?></td>
-						<!-- <td><?php echo $krow['nama']; ?></td> -->
 						<td><?php echo $krow['username']; ?></td>
-						<!-- <td><?php echo $krow['email']; ?></td>
-						<td><?php echo $krow['address']; ?></td>
-						<td><?php echo $krow['telepon']; ?></td> -->
 						<td><?php echo $krow['password']; ?></td>
-						<!-- <td>
-							<img src="foto/foto_user.php?id_user=<?php echo $krow['id_user']; ?>"
-											alt="<?php echo $krow['nama']; ?>" height="5"></img>
-						</td> -->
 						<td><?php echo $krow['id_role']; ?></td>
 
 						<!-- Tombol Action -->
                         <td>
-                            <a href="#editEmployeeModal<?php echo $krow['id_user']; ?>" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal<?php echo $krow['id_user']; ?>" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                            <a href="#editEmployeeModal<?php echo $krow['id_admin']; ?>" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                            <a href="#deleteEmployeeModal<?php echo $krow['id_admin']; ?>" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                     </tr>
 					
 
 
 					<!-- Edit Modal HTML -->
-					<div id="editEmployeeModal<?php echo $krow['id_user']; ?>" class="modal fade">
+					<div id="editEmployeeModal<?php echo $krow['id_admin']; ?>" class="modal fade">
 						<div class="modal-dialog">
 							<div class="modal-content">
 								<form role="form" method="POST">
-									<input type="hidden" class="form-control" value="<?php echo $krow['id_user']; ?>" name="id_user" required>
+									<input type="hidden" class="form-control" value="<?php echo $krow['id_admin']; ?>" name="id_admin" required>
 									<div class="modal-header">
 										<h4 class="modal-title">Edit</h4>
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 									</div>
 									<div class="modal-body">
-                                        <!-- <div class="form-group">
+                                        <div class="form-group">
                                             <label>Nama :</label>
                                             <input type="text" name="nama" id="nama" class="form-control" value="<?php echo $krow['nama']; ?>" >
-                                        </div> -->
-
+                                        </div>
+										<div class="form-group">
+                                            <label>Jenis Kelamin :</label><br>
+                                            		<div class="radio-inline">
+													<input type="radio" name="jenis_kelamin" id="jenis_kelamin" value="Laki-Laki" <?php if($krow['jenis_kelamin']=='Laki-Laki') echo 'checked' ?>> Laki-Laki
+                                                    </div>
+                                                    <div class="radio-inline">
+													<input type="radio" name="jenis_kelamin" id="jenis_kelamin" value="Perempuan" <?php if($krow['jenis_kelamin']=='Perempuan') echo 'checked' ?>> Perempuan
+													</div>
+										</div>
+										<div class="form-group">
+                                            <label>Alamat :</label>
+                                            <textarea name="alamat" id="alamat" class="form-control" required><?php echo $krow['alamat']; ?></textarea>
+										</div>
+										<div class="form-group">
+											<label>Foto :</label>
+											<img src="foto/foto_admin.php?id_admin=<?php echo $krow['id_admin']; ?>"
+											alt="<?php echo "Belum upload foto" ?>" height="100"></img>
+                                            <input type="file" name="foto" id="foto" class="form-control">
+                                        </div>     
                                         <div class="form-group">
                                             <label>Username :</label>
                                             <input type="text" name="username" id="username" class="form-control" value="<?php echo $krow['username']; ?>"  required>
 										</div>
-										<!-- <div class="form-group">
-                                            <label>Email :</label>
-                                            <input type="email" name="email" id="email" class="form-control" value="<?php echo $krow['email']; ?>" required>
-										</div>
-										<div class="form-group">
-                                            <label>Tempat :</label>
-                                            <input type="text" name="address" id="address" class="form-control" value="<?php echo $krow['address']; ?>" required>
-										</div> 
-										<div class="form-group">
-                                            <label>Telepone :</label>
-                                            <input type="number" name="telepon" id="telepon" class="form-control" value="<?php echo $krow['telepon']; ?>" required>
-										</div> -->
+									
 										<div class="form-group">
                                             <label>Password :</label>
                                             <input type="password" name="password" id="password" class="form-control" value="<?php echo $krow['password']; ?>" required>
 										</div>
-										<!-- <div class="form-group">
-                                            <label>Foto :</label>
-                                            <input type="file" name="foto" id="foto" class="form-control">
-                                        </div>      -->
+										
 												<div class="form-group">
                                                     <label>Role</label><br>
                                                     <div class="radio-inline">
@@ -315,11 +321,11 @@ session_start();
 
 
 					<!-- Delete Modal HTML -->
-					<div id="deleteEmployeeModal<?php echo $krow['id_user']; ?>" class="modal fade">
+					<div id="deleteEmployeeModal<?php echo $krow['id_admin']; ?>" class="modal fade">
 						<div class="modal-dialog">
 							<div class="modal-content">
 							<form method="post" action="">
-								<input type="text" class="form-control" value="<?php echo $krow['id_user']; ?>" name="id_user" required>
+								<input type="text" class="form-control" value="<?php echo $krow['id_admin']; ?>" name="id_admin" required>
 									<div class="modal-header">
 										<h4 class="modal-title">Delete</h4>
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

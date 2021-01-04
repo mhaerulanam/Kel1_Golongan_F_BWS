@@ -97,7 +97,7 @@ session_start();
 					date_default_timezone_set('Asia/Jakarta');
 					include "koneksi.php";
 						$id_artikel = $_POST['id_artikel'];
-						$id_kategori = $_POST['id_kategori'];
+						$id_kategori = $_POST['id_ktg'];
 						$tanggal = $_POST['tanggal'];
 						$nama_penulis = $_POST['nama_penulis'];
 						$judul = $_POST['judul'];
@@ -108,6 +108,7 @@ session_start();
 
 					//Code tombol tambah	
 					if(isset($_POST['tambah'])){
+						include "koneksi.php";
 						/* cek input NIM apakah sudah ada nim yang digunakan */
 						$pilih="select * from artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg and artikel.id_artikel='$id_artikel'";
 						$cek=mysqli_query($koneksi, $pilih);
@@ -119,7 +120,8 @@ session_start();
 						}
 						else{
 							//tambah
-							$sql = "INSERT INTO artikel VALUES ('','$id_kategori','$tanggal','$nama_penulis','$judul','$isi','$gambar','$sumber')";
+							$gambar2   = addslashes(file_get_contents($_FILES['gambar']['tmp_name']));
+							$sql = "INSERT INTO artikel VALUES ('','$id_kategori','$tanggal','$nama_penulis','$judul','$isi','$gambar2','$sumber')";
 							if(mysqli_query($koneksi, $sql)){
 								$nilaihasil = "Records inserted successfully.";
 							} 
@@ -131,13 +133,37 @@ session_start();
 
 					// code tombol edit
 					if(isset($_POST['edit'])){
+						$cek_tabel = mysqli_query($koneksi, "SELECT * FROM artikel WHERE id_artikel='$id_artikel'");
+						while ($cek_gambar = mysqli_fetch_array($cek_tabel)) {
+							$fotoDatabase = $cek_gambar['gambar'];
+						}
+						$lokasiFoto = $_FILES['gambar']['tmp_name'];
 						//edit
-						$sql = "UPDATE artikel SET id_ktg = '$id_kategori', tanggal = '$tanggal', nama_penulis = '$nama_penulis', judul = '$judul', isi = '$isi', gambar = '$gambar', sumber = '$sumber' WHERE id_artikel = '$id_artikel'";
-						if(mysqli_query($koneksi, $sql)){
-							$nilaihasil = "Records updated successfully.";
-						} 
-						else{
-							echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+						if (!isset($fotoDatabase)){
+							if (!$lokasiFoto==""){
+							$gambar   = addslashes(file_get_contents($_FILES['gambar']['tmp_name']));
+							$sql = "UPDATE artikel SET id_ktg = '$id_kategori', tanggal = '$tanggal', nama_penulis = '$nama_penulis', judul = '$judul', isi = '$isi', gambar = '$gambar', sumber = '$sumber' WHERE id_artikel = '$id_artikel'";
+								if(mysqli_query($koneksi, $sql)){
+									$nilaihasil = "Records updated successfully.";
+								} 
+								else{
+									echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+								}
+							}else{
+								?><script> alert ("Masukkan Gambar terlebih dahulu"); </script><?php
+							}
+						}
+						elseif(isset($fotoDatabase)){
+							$gambar   = addslashes(file_get_contents($_FILES['gambar']['tmp_name']));
+							$sql = "UPDATE artikel SET id_ktg = '$id_kategori', tanggal = '$tanggal', nama_penulis = '$nama_penulis', judul = '$judul', isi = '$isi', gambar = '$gambar', sumber = '$sumber' WHERE id_artikel = '$id_artikel'";
+								if(mysqli_query($koneksi, $sql)){
+									$nilaihasil = "Records updated successfully.";
+								} 
+								else{
+									echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+								}
+						}else{
+								?><script> alert ("Anda harus mengupload foto/sertifikat"); </script><?php
 						}
 					}
 
@@ -235,7 +261,7 @@ session_start();
 						<td><?php echo $krow['isi']; ?></td>
 						<td>
 							<img src="foto/foto_artikel.php?id_artikel=<?php echo $krow['id_artikel']; ?>"
-											alt="<?php echo $krow['nama']; ?>" height="5"></img>
+											alt="<?php echo $krow['nama']; ?>" height="200"></img>
 						</td>
 						<td><?php echo $krow['sumber']; ?></td>
 
@@ -260,17 +286,20 @@ session_start();
 									</div>
 									<div class="modal-body">
 									<div class="form-group">
-										<label>Kategori Hewan</label><br>
+										<label>Kategori Hewan</label>
+										<select name="id_ktg" class="form-control" id="default-select">
+										<option disabled selected> Pilih </option>
 										<?php 
-										$query_kat = mysqli_query($koneksi,"SELECT * FROM kategori_artikel");
-										while ($rw = mysqli_fetch_array($query_kat)) { ?>
-                                            <div class="radio-inline">
-												<input type="radio" name="id_kategori" id="$id_kategori" value="$id_kategori" <?php if($rw['id_ktg'] == $id_kategori) echo 'checked' ?>> <?php echo $rw['kategori_artikel']; ?>
-											</div>
-											<?php } ?>
+												include "koneksi.php";
+												$query_kat = mysqli_query($koneksi,"SELECT * FROM kategori_artikel");
+													while($data = mysqli_fetch_array($query_kat))
+												{ ?>
+												<option value="<?php echo $data['id_ktg']?>" <?php if($data['id_ktg']==$krow['id_ktg']) echo 'selected' ?>><?=$data['kategori_artikel']?></option> 
+										<?php } ?>
+										</select>
 									</div>
-									<div class="form-group">
-                                            <label>Tanggal :</label>
+										<div class="form-group">
+                                            <label>Tanggal :</label><br>
                                             <input type="date" name="tanggal" id="tanggal" class="form-control" value="<?php echo $krow['tanggal']; ?>" >
                                         </div>
                                         <div class="form-group">
@@ -284,10 +313,12 @@ session_start();
 										</div>
 										<div class="form-group">
 											<label>Isi :</label>
-											<textarea name="isi" id="isi" cols="30" rows="10"  ><?php echo $krow['isi']; ?></textarea>
+                    						<textarea class="ckeditor" name="isi" id="ckedtor"><?php echo $krow['isi']; ?></textarea>
 										</div>
 										<div class="form-group">
-                                            <label>Gambar:</label>
+											<label>Gambar:</label>
+											<img src="foto/foto_artikel.php?id_artikel=<?php echo $krow['id_artikel']; ?>"
+											alt="<?php echo "Belum upload foto"; ?>" height="100"></img>
                                             <input type="file" name="gambar" id="gambar" class="form-control">
 										</div>     
 										<div class="form-group">
@@ -352,13 +383,16 @@ session_start();
 									<div class="modal-body">
 									<div class="form-group">
 										<label>Kategori Hewan</label><br>
-										<?php 
-										$query_kat = mysqli_query($koneksi,"SELECT * FROM kategori_artikel");
-										while ($rw = mysqli_fetch_array($query_kat)) { ?>
-                                            <div class="radio-inline">
-												<input type="radio" name="id_kategori" id="$id_kategori" value="$id_kategori" selected> 1 (Admin)
-											</div>
-											<?php } ?>
+										<select name="id_ktg" class="form-control" id="default-select">
+										<option disabled selected> Pilih </option>
+											<?php 
+												include "koneksi.php";
+												$query_kat = mysqli_query($koneksi,"SELECT * FROM kategori_artikel");
+													while($data = mysqli_fetch_array($query_kat))
+												{ ?>
+													<option value="<?php echo $data['id_ktg']?>"><?=$data['kategori_artikel']?></option> 
+												<?php } ?>
+										</select><br>
 									</div>
 									<div class="form-group">
                                             <label>Tanggal :</label>
@@ -375,10 +409,10 @@ session_start();
 										</div>
 										<div class="form-group">
 											<label>Isi :</label>
-											<textarea name="isi" id="isi" cols="30" rows="10" ></textarea>
+											<textarea class="ckeditor" name="isi" id="ckedtor"></textarea>
 										</div>
 										<div class="form-group">
-                                            <label>Gambar:</label>
+											<label>Gambar:</label>
                                             <input type="file" name="gambar" id="gambar" class="form-control">
 										</div>     
 										<div class="form-group">
@@ -388,7 +422,7 @@ session_start();
 												
 												<div class="modal-footer">
 													<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-													<input type="submit" class="btn btn-info" value="Save" name="edit">
+													<input type="submit" class="btn btn-info" value="Save" name="tambah">
 												</div>
 									</div>
 								</form>
@@ -426,5 +460,7 @@ session_start();
 			});
 		</script>
 
+		<!-- Link Js CkEditor -->
+        <script type="text/javascript" src="../assets/ckeditor/ckeditor.js"></script>
     </body>
 </html>

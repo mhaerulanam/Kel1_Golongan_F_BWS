@@ -53,7 +53,12 @@
                                 <a href="Dashboard.php"><i class="fa fa-table fa-fw"> </i> DASHBOARD</a>
                             </li>
                             <li>
-                                <a href="tabel_user.php"><i class="fa fa-table fa-fw"> </i> Data User</a>
+                                <a><i class="fa fa-table fa-fw"> </i> Data User</a>
+                                <ul>
+                                    <li><a href="tabel_useradmin.php">Data User Admin</a></li>
+                                    <li><a href="tabel_userdokter.php">Data User Dokter</a></li>
+                                    <li><a href="tabel_userpeternak.php">Data User Peternak</a></li>
+                                </ul>
                             </li>
                             <li>
                                 <a><i class="fa fa-table fa-fw"> </i> Data Dokter</a>
@@ -69,8 +74,16 @@
                                 <a href="tabel_tutorial.php"><i class="fa fa-table fa-fw"> </i> Data Tutorial</a>
                             </li>
                             <li>
-                                <a href="tabel_dokumentasi.php"><i class="fa fa-table fa-fw"> </i> Data Dokumentasi</a>
+                                <a href="tabel_puskeswan.php"><i class="fa fa-table fa-fw"> </i> Data Puskeswan</a>
                             </li>
+                            <li>
+                                <a><i class="fa fa-table fa-fw"> </i> Data Dokumentasi</a>
+                                <ul>
+                                    <li><a href="tabel_dokumentasi.php">Data Dokumentasi</a></li>
+                                    <li><a href="tabel_dokumentasipuskeswan.php">Data Dokumentasi Puskeswan</a></li>
+                                </ul>
+                            </li>
+                            
                 </ul>
             </div>
         </div>

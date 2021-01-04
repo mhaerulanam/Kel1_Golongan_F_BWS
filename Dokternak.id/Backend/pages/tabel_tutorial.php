@@ -99,6 +99,7 @@ session_start();
 						$id_tutorial = $_POST['id_tutorial'];
 						$judul_tutorial = $_POST['judul_tutorial'];
 						$isi = $_POST['isi'];
+						$icon = $_POST['icon'];
 
 					//Code tombol tambah	
 					if(isset($_POST['tambah'])){
@@ -113,7 +114,7 @@ session_start();
 						}
 						else{
 							//tambah
-							$sql = "INSERT INTO tutorial VALUES ('','$id_tutorial','$judul_tutorial','$isi')";
+							$sql = "INSERT INTO tutorial VALUES ('$id_tutorial','$judul_tutorial','$isi','$icon')";
 							if(mysqli_query($koneksi, $sql)){
 								$nilaihasil = "Records inserted successfully.";
 							} 
@@ -126,7 +127,15 @@ session_start();
 					// code tombol edit
 					if(isset($_POST['edit'])){
 						//edit
-						$sql = "UPDATE tutorial SET id_tutorial = '$id_tutorial', judul_tutorial = '$judul_tutorial', isi = '$isi' WHERE id_tutorial = '$id_tutorial'";
+						$lokasiDok = $_FILES['icon']['tmp_name'];
+						
+						if($lokasiDok==""){
+							$sql = "UPDATE tutorial SET judul_tutorial = '$judul_tutorial', isi = '$isi' WHERE id_tutorial = '$id_tutorial'";
+						}else{
+							$ambilDok   = addslashes(file_get_contents($_FILES['icon']['tmp_name']));
+							$sql = "UPDATE tutorial SET judul_tutorial = '$judul_tutorial', isi = '$isi', icon = '$ambilDok' WHERE id_tutorial = '$id_tutorial'";
+						}
+						
 						if(mysqli_query($koneksi, $sql)){
 							$nilaihasil = "Records updated successfully.";
 						} 
@@ -134,6 +143,7 @@ session_start();
 							echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
 						}
 					}
+
 
 					//code delete per item
 					if(isset($_POST['delete'])){
@@ -194,6 +204,7 @@ session_start();
                         <th>ID Tutorial</th>
 						<th>Judul Tutorial</th>
 						<th>Isi</th>
+						<th>Icon</th>
 						<th>Actions</th>
                     </tr>
                 </thead>
@@ -215,10 +226,14 @@ session_start();
 						</td>
 						<td><?= $i ?></td>
 
-						<!-- Code menampilkan data -->
+						<!-- Code menampilkan data --> 
 						<td><?php echo $krow['id_tutorial']; ?></td>
 						<td><?php echo $krow['judul_tutorial']; ?></td>
 						<td><?php echo $krow['isi']; ?></td>
+						<td>
+							<img src="foto/gambartutorial.php?id_tutorial=<?php echo $krow['id_tutorial']; ?>"
+											alt="<?php echo $krow['Belum upload foto']; ?>"></img>
+						</td>
 						<!-- Tombol Action -->
                         <td>
                             <a href="#editEmployeeModal<?php echo $krow['id_tutorial']; ?>" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
@@ -232,24 +247,31 @@ session_start();
 					<div id="editEmployeeModal<?php echo $krow['id_tutorial']; ?>" class="modal fade">
 						<div class="modal-dialog">
 							<div class="modal-content">
-								<form role="form" method="POST">
+								<form role="form" method="POST" enctype="multipart/form-data">
 									<input type="hidden" class="form-control" value="<?php echo $krow['id_tutorial']; ?>" name="id_tutorial" required>
 									<div class="modal-header">
 										<h4 class="modal-title">Edit</h4>
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 									</div>
-									<div class="form-group">
+									<div class="modal-body">
+										<div class="form-group">
                                             <label>Judul Tutorial :</label>
-                                            <input type="text" name="judul_tutorial" id="judul_tutorial" class="form-control" value="<?php echo $krow['judul_tutorial']; ?>" >
+                                            <input type="text" name="judul_tutorial" id="judul_tutorial" class="form-control" value="<?php echo $krow['judul_tutorial']; ?>" required>
                                         </div>
-                                        <div class="form-group">
-											<label>Isi :</label>
-											<textarea name="isi" id="isi" cols="30" rows="10"  ><?php echo $krow['isi']; ?></textarea>
+										<div class="form-group">
+                                            <label>Isi :</label>
+											<textarea name="isi" id="isi" class="form-control" ><?php echo $krow['isi']; ?></textarea>
 										</div>
-												<div class="modal-footer">
-													<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-													<input type="submit" class="btn btn-info" value="Save" name="edit">
-												</div>
+										<div class="form-group">
+                                            <label>Icon :</label>
+											<img src="foto/gambartutorial.php?id_tutorial=<?php echo $krow['id_tutorial']; ?>"
+											alt="<?php echo "Belum upload icon"; ?>" height="100"></img>
+											<input type="file" name="icon" id="icon" class="form-control"> 
+                                        </div> 
+										<div class="modal-footer">
+											<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+											<input type="submit" class="btn btn-info" value="Save" name="edit">
+										</div>
 									</div>
 								</form>
 							</div>
@@ -301,19 +323,27 @@ session_start();
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 									</div>
 									<div class="modal-body">
+										<div class="form-group">
+                                            <label>ID Tutorial :</label>
+                                            <input type="text" name="id_tutorial" id="id_tutorial" class="form-control" required>
+                                        </div>
+									<div class="modal-body">
 									<div class="form-group">
                                             <label>Judul Tutorial :</label>
-                                            <input type="text" name="judul_tutorial" id="judul_tutorial" class="form-control" >
+                                            <input type="text" name="judul_tutorial" id="judul_tutorial" class="form-control" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Isi :</label>
-                                            <textarea name="isi" id="isi" class="form-control" ></textarea>
+                                            <textarea name="isi" id="isi" class="form-control" required></textarea>
                                         </div>
-
+										<div class="form-group">
+                                            <label>Icon:</label>
+                                            <input type="file" name="icon" id="icon" class="form-control">
+										</div>     
 												
 												<div class="modal-footer">
 													<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-													<input type="submit" class="btn btn-info" value="Save" name="edit">
+													<input type="submit" class="btn btn-success" value="Save" name="tambah">
 												</div>
 									</div>
 								</form>

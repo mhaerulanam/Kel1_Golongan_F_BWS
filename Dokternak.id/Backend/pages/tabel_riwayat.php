@@ -195,7 +195,7 @@ session_start();
                 <tbody>
 					<?php
 					// $i = 1;
-					$ksql="SELECT * FROM riwayat_konsultasi INNER JOIN konsultasi ON riwayat_konsultasi.id_konsultasi = konsultasi.id_konsultasi INNER JOIN respon_konsultasi ON respon_konsultasi.id_respon = respon_konsultasi.id_respon ";
+					$ksql="SELECT * FROM riwayat_konsultasi INNER JOIN konsultasi ON riwayat_konsultasi.id_konsultasi = konsultasi.id_konsultasi INNER JOIN respon_konsultasi ON riwayat_konsultasi.id_respon = respon_konsultasi.id_respon ORDER BY id_riwayat";
 					$khasil = mysqli_query($koneksi,$ksql);
 					while($krow = mysqli_fetch_array($khasil))
 					{

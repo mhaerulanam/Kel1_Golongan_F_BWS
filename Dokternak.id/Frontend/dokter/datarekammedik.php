@@ -210,6 +210,24 @@ session_start();
 					}
 
 					?>
+
+<div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+					<form method="POST" action="cetak/cetak_datarekammedik.php" target="_blank">
+									<div class="form-group">
+                                            <label>Tanggal Awal:</label>
+                                            <input type="date" name="tanggal_awal" id="tanggal_awal" class="form-control" required>
+                                        </div>
+										<div class="form-group">
+                                            <label>Tanggal Akhir:</label>
+                                            <input type="date" name="tanggal_akhir" id="tanggal_akhir" class="form-control" required>
+                                        </div>
+										<input type="submit" class="btn btn-info" value="Cetak" name="submit">
+					</form>
+					</div>
+
 <div class="col-lg-12">
 <form method="post" action="">
         <div class="table-wrapper">

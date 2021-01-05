@@ -86,7 +86,7 @@
                             <li>
                                 <a><i class="fa fa-table fa-fw"> </i> Data Konsultasi</a>
                                 <ul>
-                                    <li><a href="tabel_keluhan.php">Data Keluhan</a></li>
+                                    <li><a href="tabel_keluhan.php">Data konsultasi</a></li>
                                     <li><a href="tabel_riwayat.php">Data Riwayat Konsultasi</a></li>
                                 </ul>
                             </li>

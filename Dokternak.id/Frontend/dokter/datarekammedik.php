@@ -100,7 +100,7 @@ session_start();
     ?>
 			<div class="table-wrapper">
             <div class="table-title">
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-sm-6">
 					<form method="POST" action="cetak/cetak_datarekammedik.php" target="_blank">
 									<div class="form-group">
@@ -113,7 +113,7 @@ session_start();
                                         </div>
 										<input type="submit" class="btn btn-info" value="Cetak" name="submit">
 					</form>
-					</div>
+					</div> -->
     </navbar>
 <section>
 <div class="container">
@@ -430,6 +430,7 @@ session_start();
 										    
 												<div class="modal-footer">
 													<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+													<a href="cetak/cetak_datarekammedik.php" target="_blank" class="btn btn-info">Cetak</a>
 													<input type="submit" class="btn btn-success" value="Tambah" name="tambah">
 												</div>
 									</div>

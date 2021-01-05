@@ -89,7 +89,7 @@ session_start();
 						</div>
 						<div class="table-wrapper">
             <div class="table-title">
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-sm-6">
 					<form method="POST" action="cetak/cetak_datakritik.php" target="_blank">
 									<div class="form-group">
@@ -102,7 +102,7 @@ session_start();
                                         </div>
 										<input type="submit" class="btn btn-info" value="Cetak" name="submit">
 					</form>
-					</div>
+					</div> -->
 						
 
 					<?php
@@ -370,6 +370,7 @@ session_start();
 
 										<div class="modal-footer">
 											<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+											<a href="cetak/cetak_datakritik.php" target="_blank" class="btn btn-info">Cetak</a>
 											<input type="submit" class="btn btn-info" value="Save" name="edit">
 										</div>
 									</div>

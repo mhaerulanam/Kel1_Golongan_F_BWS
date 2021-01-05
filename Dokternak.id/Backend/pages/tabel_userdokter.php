@@ -87,10 +87,7 @@ session_start();
                         <div class="col-lg-12">
                             <h1 class="page-header">Data User - Dokter</h1>
 						</div>
-						
-
 					<?php
-
 					//kode untuk menampilkan data pada tabel  
 					error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 					ini_set('max_execution_time', 0);
@@ -102,7 +99,7 @@ session_start();
 						$id_user = $_POST['id_user'];
 						$username = $_POST['username'];
 						$password = $_POST['password'];
-						$id_role = $_POST['id_role'];
+						$id_role = 2;
 						
 
 					//Code tombol tambah	
@@ -117,46 +114,69 @@ session_start();
 							echo "<script>alert(' Id User yang sama sudah digunakan');history.go(-1);</script>";
 						}
 						else{
-							$ksql="SELECT * FROM dokter_user, dokter, user  where  dokter_user.id_user=user.id_user and  dokter_user.id_dokter=dokter.id_dokter and dokter.nama='$nama'";
-							$khasil = mysqli_query($koneksi,$ksql);
-							$krow = mysqli_fetch_array($khasil);
-							$id_dokter1 = $krow['id_dokter'];
-							
-							//tambah
-							$sql = "INSERT INTO user VALUES ('',$username','$password')";
-							$sql2 = "INSERT INTO dokter_user VALUES ('','$id_dokter1','$id_user')";
+							$ambildata1=mysqli_query($koneksi, "SELECT * FROM dokter where id_dokter= '$id_dokter'");
+							$row1 = mysqli_fetch_array($ambildata1);
+							$usrname = $row1['username'];
+							$pass = $row1['password'];
 
-							if(mysqli_query($koneksi, $sql2)){
+							// $sql = "INSERT INTO user VALUES ('','$username','$password','$id_role')";
+							$sql = "INSERT INTO user VALUES ('','$usrname','$pass','$id_role')";
+							mysqli_query($koneksi,$sql);
+							$ambilfoto   = addslashes(file_get_contents($_FILES['foto']['tmp_name']));
+							//cek keberhasilan
+							if(mysqli_affected_rows($koneksi) > 0){
+							  $data = "";
+							  $ambildata=mysqli_query($koneksi, "SELECT * FROM user order by id_user DESC LIMIT 1");
+							  $row = mysqli_fetch_array($ambildata);
+							  $id = $row['id_user'];
+							$sql = "INSERT INTO dokter_user VALUES ('','$id_dokter','$id')";
+							if(mysqli_query($koneksi, $sql)){
 								$nilaihasil = "Records inserted successfully.";
 							} 
 							else{
 								echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+							}
 							}
 						}
 					}
 
 					// code tombol edit
 					if(isset($_POST['edit'])){
-						//edit
-						$ksql="SELECT * FROM dokter_user, dokter, user  where  dokter_user.id_user=user.id_user and  dokter_user.id_dokter=dokter.id_dokter and dokter.nama='$nama'";
-						$khasil = mysqli_query($koneksi,$ksql);
-						$krow = mysqli_fetch_array($khasil);
-						$id_dokter1 = $krow['id_dokter'];
-						$sql = "UPDATE user SET  username = '$username', password = '$password' WHERE id_user = '$id_user'";
-						$sql = "UPDATE dokter_user SET  id_dokter = '$id_dokter1', id_user = '$id_user'";
-
-						if(mysqli_query($koneksi, $sql)){
-							$nilaihasil = "Records updated successfully.";
-						} 
-						else{
-							echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
-						}
+							//edit
+							$sql = "UPDATE dokter_user SET id_dokter = '$id_dokter' WHERE id_dokteruser = '$id_dokteruser'";
+							include 'koneksi.php';
+							if(mysqli_query($koneksi, $sql)){
+								$ambildata=mysqli_query($koneksi, "SELECT * FROM dokter_user where id_dokteruser = '$id_dokteruser'");
+								$row = mysqli_fetch_array($ambildata);
+								$id = $row['id_user'];
+								$sql1 = "UPDATE user SET  username = '$username', password = '$password', id_role = '$id_role' WHERE id_user = '$id'";
+								if(mysqli_query($koneksi, $sql1)){
+									$ambildata1=mysqli_query($koneksi, "SELECT * FROM dokter where id_dokter= '$id_dokter'");
+									$row1 = mysqli_fetch_array($ambildata1);
+									$ids = $row1['id_dokter'];
+									$sql2 = "UPDATE dokter SET username = '$username', password = '$password' WHERE id_dokter = '$ids'";
+									if(mysqli_query($koneksi, $sql2)){
+									$nilaihasil = "Records updated successfully.";
+									}else{
+										echo "ERROR: Could not able to execute $sql2. " . mysqli_error($koneksi);
+									}
+								}else{
+									echo "ERROR: Could not able to execute $sql1. " . mysqli_error($koneksi);
+								}
+							} 
+							else{
+								echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+							}
 					}
 
 					//code delete per item
 					if(isset($_POST['delete'])){
 						//delete
-						$sql = "DELETE FROM user WHERE id_dokteruser = '$id_dokteruser'";
+							$sql = "DELETE FROM dokter_user WHERE  id_dokteruser = '$id_dokteruser'";
+							$ambildata=mysqli_query($koneksi, "SELECT * FROM dokter_user WHERE  id_dokteruser = '$id_dokteruser'");
+							$row = mysqli_fetch_array($ambildata);
+							$id = $row['id_user'];
+							$sql2 = "DELETE FROM user WHERE id_user = '$id'";
 						if(mysqli_query($koneksi, $sql)){
 							$nilaihasil = "Records deleted successfully.";
 						} 
@@ -171,7 +191,7 @@ session_start();
 					{
 						//delete
 						$pilih = $_POST['pilih'];
-							$sql = "DELETE FROM user WHERE id_dokteruser IN (".implode(",", $pilih).")";
+							$sql = "DELETE FROM dokter_user WHERE id_dokteruser IN (".implode(",", $pilih).")";
 							if(mysqli_query($koneksi, $sql))
 							{
 								$nilaihasil = "Records deleted successfully.";
@@ -254,7 +274,7 @@ session_start();
 					<div id="editEmployeeModal<?php echo $krow['id_dokteruser']; ?>" class="modal fade">
 						<div class="modal-dialog">
 							<div class="modal-content">
-								<form role="form" method="POST">
+								<form role="form" method="POST" enctype="multipart/form-data">
 									<input type="hidden" class="form-control" value="<?php echo $krow['id_dokteruser']; ?>" name="id_dokteruser" required>
 									<div class="modal-header">
 										<h4 class="modal-title">Edit</h4>
@@ -263,7 +283,7 @@ session_start();
 									<div class="modal-body">
 									<div class="form-group">
                                             <label>ID Jabatan :</label>
-											<select name="nama" class="form-control" id="default-select">
+											<select name="id_dokter" class="form-control" id="default-select">
 												<option disabled selected> Pilih </option>
 												<?php 
 												include "koneksi.php";
@@ -271,7 +291,7 @@ session_start();
 												$jab = mysqli_query($koneksi,$sql);
 												while($data = mysqli_fetch_array($jab))
 												{ ?>
-												<option value="<?=$data['nama']?>"  <?php if($data['id_dokter']==$krow['id_dokter']) echo 'selected' ?>><?=$data['nama']?></option> 
+												<option value="<?=$data['id_dokter']?>"  <?php if($data['id_dokter']==$krow['id_dokter']) echo 'selected' ?>><?=$data['nama']?></option> 
 												<?php } ?>
 											</select><br>
 										</div>  
@@ -332,7 +352,7 @@ session_start();
 					<div id="addEmployeeModal" class="modal fade">
 						<div class="modal-dialog">
 							<div class="modal-content">
-							<form role="form" method="POST" action="">
+							<form role="form" method="POST" action="" enctype="multipart/form-data">
 									<div class="modal-header">
 										<h4 class="modal-title">Tambah Data</h4>
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -340,7 +360,7 @@ session_start();
 									<div class="modal-body">
 									<div class="form-group">
                                             <label>ID Jabatan :</label>
-											<select name="nama" class="form-control" id="default-select">
+											<select name="id_dokter" class="form-control" id="default-select">
 												<option disabled selected> Pilih </option>
 												<?php 
 												include "koneksi.php";
@@ -348,18 +368,18 @@ session_start();
 												$jab = mysqli_query($koneksi,$sql);
 												while($data = mysqli_fetch_array($jab))
 												{ ?>
-												<option value="<?=$data['nama']?>"><?=$data['nama']?></option> 
+												<option value="<?=$data['id_dokter']?>"><?=$data['nama']?></option> 
 												<?php } ?>
 											</select><br>
 										</div>  
-                                        <div class="form-group">
+                                        <!-- <div class="form-group">
                                             <label>Username :</label>
                                             <input type="text" name="username" id="username" class="form-control" value="<?php echo $krow['username']; ?>"  required>
 										</div>
 										<div class="form-group">
                                             <label>Password :</label>
                                             <input type="password" name="password" id="password" class="form-control" value="<?php echo $krow['password']; ?>" required>
-										</div>
+										</div> -->
 												<div class="modal-footer">
 													<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
 													<input type="submit" class="btn btn-success" value="Tambah" name="tambah">
@@ -372,6 +392,27 @@ session_start();
 				</div>
 				</table>
 				</div>
+				<br><br>
+				<h3 class="page-header">Data Dokter (Baru) / Belum Terverifikasi</h3>
+
+				<table  class="table table-striped table-hover" >
+					<th>No</th>
+					<th>Nama</th>
+						<?php
+						$i =1;
+							include "koneksi.php";
+							$sql="SELECT * FROM dokter_user RIGHT JOIN dokter ON dokter_user.id_dokter=dokter.id_dokter WHERE dokter_user.id_dokter IS NULL";
+							$jab = mysqli_query($koneksi,$sql);
+							while($data = mysqli_fetch_array($jab))
+							{ ?>
+							<tr>
+							<td><?= $i?> </td>
+							<td><?=$data['nama']?> </td>
+							</tr>
+							<?php
+							$i++;
+						} ?>
+				</table>
 				</div>
                 </div>
                 <!-- /.container-fluid -->

@@ -165,6 +165,7 @@ session_start();
 					</div>
 					<div class="col-sm-6">
 						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">++ Tambah Data	</a>
+						<a href="./cetak/cetak_dokterpuskeswan.php" target="_blank" class="btn btn-info">Cetak</a>
 						<input type="submit" name="deleteall" value="Delete Selected" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
 					</div>
 				</div>
@@ -182,17 +183,20 @@ session_start();
 							</span>
 						</th>
 
+						<th>No</th>
 						<th>ID DP</th>
 						<th>ID Puskeswan</th>
+						<th>Nama Puskeswan</th>
 						<th>ID Dokter</th>
+						<th>Nama Dokter</th>
                         <th>Actions</th>
 
                     </tr>
                 </thead>
                 <tbody>
 					<?php
-					// $i = 1;
-					$ksql="SELECT * FROM dokter_puskeswan";
+					$i = 1;
+					$ksql="SELECT * FROM dokter_puskeswan INNER JOIN puskeswan ON dokter_puskeswan.id_puskeswan = puskeswan.id_puskeswan INNER JOIN dokter ON dokter_puskeswan.id_dokter = dokter.id_dokter ORDER BY id_dp";
 					$khasil = mysqli_query($koneksi,$ksql);
 					while($krow = mysqli_fetch_array($khasil))
 					{
@@ -205,12 +209,14 @@ session_start();
 								<label for="checkbox5"></label>
 							</span>
 						</td>
-						<!-- <td><?= $i ?></td> -->
+						<td><?= $i ?></td>
 
 						<!-- Code menampilkan data -->
 						<td><?php echo $krow['id_dp']; ?></td>
 						<td><?php echo $krow['id_puskeswan']; ?></td>
+						<td><?php echo $krow['nama_puskeswan']; ?></td>
 						<td><?php echo $krow['id_dokter']; ?></td>
+						<td><?php echo $krow['nama']; ?></td>
 
 						<!-- Tombol Action -->
                         <td>

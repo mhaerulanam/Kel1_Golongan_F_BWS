@@ -87,19 +87,21 @@ session_start();
 
                 // ambilData adalah variabel untuk menampilkan data dari 2 tabel, yaitu artikel dan kategori_artikel. 
                 // Sehingga kita dapat menampilkan kategorinya, sesuai id_ktg di kedua tabel
-                $ambilData=mysqli_query($koneksi, "SELECT * FROM artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg order by id_artikel DESC
+                $ambilData=mysqli_query($koneksi, "SELECT * FROM artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg and artikel.status='tampil' order by id_artikel DESC
                 LIMIT $awalData,$jdataperhalaman");
 
-                $datakat=mysqli_query($koneksi, "SELECT *, COUNT( * ) as total FROM artikel inner join kategori_artikel on artikel.id_ktg=kategori_artikel.id_ktg GROUP BY kategori_artikel");
+                $datakat=mysqli_query($koneksi, "SELECT *, COUNT( * ) as total FROM artikel inner join kategori_artikel on artikel.id_ktg=kategori_artikel.id_ktg and artikel.status='tampil' GROUP BY kategori_artikel");
                 $jumlahkat = mysqli_num_rows($datakat);
                 if (ISSET($_POST['submit'])){
                     $cari = $_POST['nt'];
                    
-                    $query2 = " SELECT * FROM artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg AND judul LIKE '%$cari%' AND isi LIKE'%$cari%'";
+                    $query2 = " SELECT * FROM artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg and artikel.status='tampil' AND judul LIKE '%$cari%' AND isi LIKE'%$cari%'";
                     // $query2 = "SELECT * FROM artikel WHERE judul LIKE '%$cari%'";
 
                     $sql = mysqli_query($koneksi, $query2);
-
+                        // menghitung data
+                    $jumlah_data = mysqli_num_rows($sql);
+                    if ( $jumlah_data> 0) {
                     while ($dt = mysqli_fetch_array($sql)) { ?>
                         <?php
                         $isi = $dt['isi'];
@@ -124,10 +126,15 @@ session_start();
                                     </ul>
                                 </div>
                         </article>
-                        <?php }
+                        
+                        <?php }}
+                    else {?>
+                        <center><img src="assets/img/icon/error.png" alt=""></center>
+                        <?php        
+                    }
                 }elseif(isset($_GET["tampil"])){
                 $ktg = $_GET["tampil"];
-                $kat=mysqli_query($koneksi, "SELECT * FROM artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg AND artikel.id_ktg='$ktg'");      
+                $kat=mysqli_query($koneksi, "SELECT * FROM artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg and artikel.status='tampil' AND artikel.id_ktg='$ktg'");      
                 while ($dat = mysqli_fetch_assoc($kat)) { ?>
                 <?php
                 $isi = $dat['isi'];

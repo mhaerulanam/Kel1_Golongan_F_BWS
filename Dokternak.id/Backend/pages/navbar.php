@@ -90,6 +90,9 @@
                                     <li><a href="tabel_riwayat.php">Data Riwayat Konsultasi</a></li>
                                 </ul>
                             </li>
+                            <li>
+                                <a href="tabel_kritikdansaran.php"><i class="fa fa-table fa-fw"> </i> Kritik dan Saran</a>
+                            </li>
                             
                 </ul>
             </div>

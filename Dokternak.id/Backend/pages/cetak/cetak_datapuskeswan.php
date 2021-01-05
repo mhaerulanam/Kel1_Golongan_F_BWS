@@ -52,6 +52,7 @@
 							<img src="../foto/gambarpuskeswan.php?id_puskeswan=<?php echo $krow['id_puskeswan']; ?>"
 											alt="<?php echo "Belum upload foto" ?>" ></img>
 						</td>  
+						<td><?php echo $krow['maps']; ?></td>
                     </tr> 
 					<?php 
 						$i++;

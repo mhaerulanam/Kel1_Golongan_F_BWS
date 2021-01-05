@@ -110,7 +110,7 @@ session_start();
 					if(isset($_POST['tambah'])){
 						include "koneksi.php";
 						/* cek input NIM apakah sudah ada nim yang digunakan */
-						$pilih="select * from artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg and artikel.id_artikel='$id_artikel'";
+						$pilih="select * from artikel where id_artikel='$id_artikel'";
 						$cek=mysqli_query($koneksi, $pilih);
 					
 						$jumlah_data = mysqli_num_rows($cek);
@@ -120,51 +120,46 @@ session_start();
 						}
 						else{
 							//tambah
-							$gambar2   = addslashes(file_get_contents($_FILES['gambar']['tmp_name']));
-							$sql = "INSERT INTO artikel VALUES ('','$id_kategori','$tanggal','$nama_penulis','$judul','$isi','$gambar2','$sumber')";
+							$lokasiGbr = $_FILES['gambar']['tmp_name'];
+						
+							if($lokasiGbr==""){
+								echo "<script>alert(' Anda harus memasukkan gambar, silahkan ulangi input data.');
+								header('location:../tabel_artikel.php');</script>";
+							}else{
+							$ambilGambar   = addslashes(file_get_contents($_FILES['gambar']['tmp_name']));
+							$sql = "INSERT INTO artikel VALUES ('','$id_kategori','$tanggal','$nama_penulis','$judul','$isi','$ambilGambar','$sumber')";
 							if(mysqli_query($koneksi, $sql)){
 								$nilaihasil = "Records inserted successfully.";
 							} 
 							else{
 								echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+								}
 							}
 						}
 					}
 
 					// code tombol edit
 					if(isset($_POST['edit'])){
-						$cek_tabel = mysqli_query($koneksi, "SELECT * FROM artikel WHERE id_artikel='$id_artikel'");
-						while ($cek_gambar = mysqli_fetch_array($cek_tabel)) {
-							$fotoDatabase = $cek_gambar['gambar'];
-						}
+						// $cek_tabel = mysqli_query($koneksi, "SELECT * FROM artikel WHERE id_artikel='$id_artikel'");
+						// while ($cek_gambar = mysqli_fetch_array($cek_tabel)) {
+						// 	$fotoDatabase = $cek_gambar['gambar'];
+						// }
 						$lokasiFoto = $_FILES['gambar']['tmp_name'];
 						//edit
-						if (!isset($fotoDatabase)){
-							if (!$lokasiFoto==""){
-							$gambar   = addslashes(file_get_contents($_FILES['gambar']['tmp_name']));
-							$sql = "UPDATE artikel SET id_ktg = '$id_kategori', tanggal = '$tanggal', nama_penulis = '$nama_penulis', judul = '$judul', isi = '$isi', gambar = '$gambar', sumber = '$sumber' WHERE id_artikel = '$id_artikel'";
-								if(mysqli_query($koneksi, $sql)){
-									$nilaihasil = "Records updated successfully.";
-								} 
-								else{
-									echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
-								}
-							}else{
-								?><script> alert ("Masukkan Gambar terlebih dahulu"); </script><?php
-							}
-						}
-						elseif(isset($fotoDatabase)){
-							$gambar   = addslashes(file_get_contents($_FILES['gambar']['tmp_name']));
-							$sql = "UPDATE artikel SET id_ktg = '$id_kategori', tanggal = '$tanggal', nama_penulis = '$nama_penulis', judul = '$judul', isi = '$isi', gambar = '$gambar', sumber = '$sumber' WHERE id_artikel = '$id_artikel'";
-								if(mysqli_query($koneksi, $sql)){
-									$nilaihasil = "Records updated successfully.";
-								} 
-								else{
-									echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
-								}
+						if($lokasiFoto==""){
+							$sql = "UPDATE artikel SET id_ktg = '$id_kategori', tanggal = '$tanggal', nama_penulis = '$nama_penulis', judul = '$judul', isi = '$isi', sumber = '$sumber' WHERE id_artikel = '$id_artikel'";
 						}else{
-								?><script> alert ("Anda harus mengupload foto/sertifikat"); </script><?php
+							$ambilGbr   = addslashes(file_get_contents($_FILES['gambar']['tmp_name']));
+							$sql = "UPDATE artikel SET id_ktg = '$id_kategori', tanggal = '$tanggal', nama_penulis = '$nama_penulis', judul = '$judul', isi = '$isi', gambar = '$ambilGbr', sumber = '$sumber' WHERE id_artikel = '$id_artikel'";
 						}
+						
+						if(mysqli_query($koneksi, $sql)){
+							$nilaihasil = "Records updated successfully.";
+						} 
+						else{
+							echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+						}
+
 					}
 
 					//code delete per item
@@ -261,7 +256,7 @@ session_start();
 						<td><?php echo $krow['isi']; ?></td>
 						<td>
 							<img src="foto/foto_artikel.php?id_artikel=<?php echo $krow['id_artikel']; ?>"
-											alt="<?php echo $krow['nama']; ?>" height="200"></img>
+											alt="<?php echo "Belum upload foto" ?>" height="200"></img>
 						</td>
 						<td><?php echo $krow['sumber']; ?></td>
 
@@ -278,7 +273,7 @@ session_start();
 					<div id="editEmployeeModal<?php echo $krow['id_artikel']; ?>" class="modal fade">
 						<div class="modal-dialog">
 							<div class="modal-content">
-								<form role="form" method="POST">
+								<form role="form" method="POST" enctype="multipart/form-data">
 									<input type="hidden" class="form-control" value="<?php echo $krow['id_artikel']; ?>" name="id_artikel" required>
 									<div class="modal-header">
 										<h4 class="modal-title">Edit</h4>
@@ -375,7 +370,7 @@ session_start();
 					<div id="addEmployeeModal" class="modal fade">
 						<div class="modal-dialog">
 							<div class="modal-content">
-							<form role="form" method="POST" action="">
+							<form role="form" method="POST" action="" enctype="multipart/form-data">
 									<div class="modal-header">
 										<h4 class="modal-title">Tambah Data</h4>
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

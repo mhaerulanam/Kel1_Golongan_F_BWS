@@ -204,25 +204,24 @@ session_start();
             include '../koneksi.php';
 
             if(isset($_POST['sfoto'])){
-                if(isset($_FILES['file_foto']['tmp_name'])){
-                $id = $_SESSION["id"];;
-                $fp_name = $_FILES['file_foto']['name'];
-                $fp_size = $_FILES['file_foto']['size'];
-                $fp_type = $_FILES['file_foto']['type'];
-                $fp = addslashes(file_get_contents($_FILES['file_foto']['tmp_name']));
-                // $fp = $_POST['file_foto'];
+                $id = $_SESSION["id"];
+                $fp  = addslashes(file_get_contents($_FILES['foto']['tmp_name']));
                 $sql1 = "UPDATE dokter SET foto = '$fp' WHERE id_dokter = '$id'";
-                echo $id, $fp;
-                }
+                if(mysqli_query($koneksi, $sql1)){
+                   echo "<script type='text/javascript'>alert('Records updated successfully.');</script>";
+                }else{
+                    echo "<script type='text/javascript'>alert('Records updated Failed.');</script>";
+                } 
+                
             }
             ?>
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
                             <img src="fotoakun.php?id_dokter=<?php echo $_SESSION['id']; ?>" alt=""/>
                             <div class="file btn btn-lg btn-primary">
-                                <input type="file" name="file_foto" id="file_foto">
+                                <input type="file" name="foto" id="foto">
                                 Change Photo
                             </div>
                         </div>

@@ -128,14 +128,22 @@ session_start();
 						}
 						else{
 							//tambah
-							$ambilFoto   = addslashes(file_get_contents($_FILES['foto']['tmp_name']));
-							$ambilSertif   = addslashes(file_get_contents($_FILES['sertifikasi']['tmp_name']));
-							$sql = "INSERT INTO dokter VALUES ('$id_dok','$nama','$email','$jk','$alamat','$tempat','$telpon','$ambilFoto','$ambilSertif','$id_jabatan','$jadwal_kerja','$username','$password')";
-							if(mysqli_query($koneksi, $sql)){
-								$nilaihasil = "Records inserted successfully.";
-							} 
-							else{
-								echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+							$lokasiFoto = $_FILES['foto']['tmp_name'];
+							$lokasiSertif = $_FILES['sertifikasi']['tmp_name'];
+						
+							if($lokasiFoto=="" || $lokasiSertif==""){
+								echo "<script>alert(' Anda harus memasukkan foto/sertifikasi, silahkan ulangi input data.');
+								header('location:../tabel_dokter.php');</script>";
+							}else{
+								$ambilFoto   = addslashes(file_get_contents($_FILES['foto']['tmp_name']));
+								$ambilSertif   = addslashes(file_get_contents($_FILES['sertifikasi']['tmp_name']));
+								$sql = "INSERT INTO dokter VALUES ('$id_dok','$nama','$email','$jk','$alamat','$tempat','$telpon','$ambilFoto','$ambilSertif','$id_jabatan','$jadwal_kerja','$username','$password')";
+								if(mysqli_query($koneksi, $sql)){
+									$nilaihasil = "Records inserted successfully.";
+								} 
+								else{
+									echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+								}
 							}
 						}
 					}

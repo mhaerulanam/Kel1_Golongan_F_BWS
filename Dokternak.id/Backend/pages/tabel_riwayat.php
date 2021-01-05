@@ -183,6 +183,7 @@ session_start();
 							</span>
 						</th>
 
+						<th>No</th>
 						<th>ID Riwayat</th>
 						<th>ID Konsultasi</th>
 						<th>ID Respon</th>
@@ -194,7 +195,7 @@ session_start();
                 </thead>
                 <tbody>
 					<?php
-					// $i = 1;
+					$i = 1;
 					$ksql="SELECT * FROM riwayat_konsultasi INNER JOIN konsultasi ON riwayat_konsultasi.id_konsultasi = konsultasi.id_konsultasi INNER JOIN respon_konsultasi ON riwayat_konsultasi.id_respon = respon_konsultasi.id_respon ORDER BY id_riwayat";
 					$khasil = mysqli_query($koneksi,$ksql);
 					while($krow = mysqli_fetch_array($khasil))
@@ -208,7 +209,7 @@ session_start();
 								<label for="checkbox5"></label>
 							</span>
 						</td>
-						<!-- <td><?= $i ?></td> -->
+						<td><?= $i ?></td>
 
 						<!-- Code menampilkan data -->
 						<td><?php echo $krow['id_riwayat']; ?></td>

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>CETAK DATA DOKUMENTASI - DOKTERNAK.ID</title>
+	<title>CETAK DATA DOKUMENTASI PUSKESWAN - DOKTERNAK.ID</title>
 </head>
 <body>
  
 	<center>
  
-		<h2>DATA DOKUMENTASI</h2>
+		<h2>DATA DOKUMENTASI PUSKESWAN</h2>
 		<h4>Dokternak.id</h4>
  
 	</center>
@@ -88,7 +88,7 @@
 						<td>
 						<?php
 							$j = 1;
-							include 'koneksi.php';
+							include '../koneksi.php';
 							$id = $krow['id_puskeswan'];
 							$ksql2="SELECT * FROM dokumentasi_puskeswan, puskeswan, dokumentasi WHERE dokumentasi_puskeswan.id_puskeswan=puskeswan.id_puskeswan AND dokumentasi_puskeswan.id_dokumentasi=dokumentasi.id_dokumentasi AND dokumentasi_puskeswan.id_puskeswan='$id'";
 							$khasil2 = mysqli_query($koneksi,$ksql2);	

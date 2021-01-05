@@ -104,7 +104,7 @@ session_start();
 						$id_user = $_POST['id_user'];
 						$username = $_POST['username'];
 						$password = $_POST['password'];
-						$id_role = $_POST['id_role'];
+						$id_role = 1;
 						
 
 					//Code tombol tambah	
@@ -121,7 +121,15 @@ session_start();
 						else{
 							//tambah
 							$sql = "INSERT INTO user VALUES ('','$username','$password','$id_role')";
-							$sql = "INSERT INTO admin VALUES ('','$nama','$jenis_kelamin','$alamat','$foto','$id_user')";
+							mysqli_query($koneksi,$sql);
+							$ambilfoto   = addslashes(file_get_contents($_FILES['foto']['tmp_name']));
+							//cek keberhasilan
+							if(mysqli_affected_rows($koneksi) > 0){
+							  $data = "";
+							  $ambildata=mysqli_query($koneksi, "SELECT * FROM user order by id_user DESC LIMIT 1");
+							  $row = mysqli_fetch_array($ambildata);
+							  $id = $row['id_user'];
+							$sql = "INSERT INTO admin VALUES ('','$nama','$jenis_kelamin','$alamat','$ambilfoto','$id')";
 							if(mysqli_query($koneksi, $sql)){
 								$nilaihasil = "Records inserted successfully.";
 							} 
@@ -129,26 +137,63 @@ session_start();
 								echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
 							}
 						}
+						}
 					}
 
 					// code tombol edit
 					if(isset($_POST['edit'])){
 						//edit
-						$sql = "UPDATE user SET  username = '$username', password = '$password', id_role = '$id_role' WHERE id_user = '$id_user'";
-						$sql2 = "UPDATE admin SET  nama = '$nama', jenis_kelamin = '$jenis_kelamin', alamat = '$alamat', foto = '$foto', id_user = '$id_user' WHERE id_admin = '$id_admin'";
-						if(mysqli_query($koneksi, $sql)){
-							$nilaihasil = "Records updated successfully.";
-						} 
-						else{
-							echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+						$lokasiFoto = $_FILES['foto']['tmp_name'];
+						if($lokasiFoto==""){
+							echo $lokasiFoto;
+							$sql1 = "UPDATE admin SET  nama = '$nama', jenis_kelamin = '$jenis_kelamin', alamat = '$alamat' WHERE id_admin = '$id_admin'";
+							if(mysqli_query($koneksi, $sql1)){
+								$data = "";
+								$ambildata=mysqli_query($koneksi, "SELECT * FROM admin where id_admin='$id_admin'");
+								$row = mysqli_fetch_array($ambildata);
+								$id = $row['id_user'];
+								  $sql = "UPDATE user SET  username = '$username', password = '$password', id_role = '$id_role' WHERE id_user = '$id'";
+								if(mysqli_query($koneksi, $sql)){
+									$nilaihasil = "Records updated successfully bukan.";
+								}else{
+									echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+								}
+							} 
+							else{
+								echo "ERROR: Could not able to execute $sql1. " . mysqli_error($koneksi);
+							}		 
+						}else{
+							$ambilfoto1   = addslashes(file_get_contents($_FILES['foto']['tmp_name']));
+							$sql1= "UPDATE admin SET  nama = '$nama', jenis_kelamin = '$jenis_kelamin', alamat = '$alamat', foto = '$ambilfoto1' WHERE id_admin = '$id_admin'";
+							if(mysqli_query($koneksi, $sql1)){
+								$data = "";
+								$ambildata=mysqli_query($koneksi, "SELECT * FROM admin where id_admin='$id_admin'");
+								$row = mysqli_fetch_array($ambildata);
+								$id = $row['id_user'];
+								  $sql = "UPDATE user SET  username = '$username', password = '$password', id_role = '$id_role' WHERE id_user = '$id'";
+								if(mysqli_query($koneksi, $sql)){
+									$nilaihasil = "Records updated successfully dan foto.";
+								}else{
+									echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+								}
+							} 
+							else{
+								echo "ERROR: Could not able to execute $sql1. " . mysqli_error($koneksi);
+							}
 						}
+						
+						
 					}
 
 					//code delete per item
 					if(isset($_POST['delete'])){
 						//delete
-						$sql = "DELETE FROM user WHERE id_admin = '$id_admin'";
-						if(mysqli_query($koneksi, $sql)){
+						$sql = "DELETE FROM admin WHERE id_admin = '$id_admin'";
+							$ambildata=mysqli_query($koneksi, "SELECT * FROM admin where id_admin='$id_admin'");
+							$row = mysqli_fetch_array($ambildata);
+							$id = $row['id_user'];
+							$sql2 = "DELETE FROM user WHERE id_user = '$id'";
+						if(mysqli_query($koneksi, $sql2)){
 							$nilaihasil = "Records deleted successfully.";
 						} 
 						else{
@@ -162,8 +207,8 @@ session_start();
 					{
 						//delete
 						$pilih = $_POST['pilih'];
-							$sql = "DELETE FROM user WHERE id_admin IN (".implode(",", $pilih).")";
-							if(mysqli_query($koneksi, $sql))
+							$sql = "DELETE FROM admin WHERE id_admin IN (".implode(",", $pilih).")";
+							if(mysqli_query($koneksi, $sql2))
 							{
 								$nilaihasil = "Records deleted successfully.";
 							} 
@@ -209,7 +254,6 @@ session_start();
                         <th>ID User</th>
 						<th>Username</th>
 						<th>Password</th>
-						<th>ID Role</th>
 						<th>Actions</th>
                     </tr>
                 </thead>
@@ -243,7 +287,6 @@ session_start();
 						<td><?php echo $krow['id_user']; ?></td>
 						<td><?php echo $krow['username']; ?></td>
 						<td><?php echo $krow['password']; ?></td>
-						<td><?php echo $krow['id_role']; ?></td>
 
 						<!-- Tombol Action -->
                         <td>
@@ -258,8 +301,16 @@ session_start();
 					<div id="editEmployeeModal<?php echo $krow['id_admin']; ?>" class="modal fade">
 						<div class="modal-dialog">
 							<div class="modal-content">
-								<form role="form" method="POST">
+								<form role="form" method="POST" enctype="multipart/form-data">
 									<input type="hidden" class="form-control" value="<?php echo $krow['id_admin']; ?>" name="id_admin" required>
+									<?php
+									$ida=$krow['id_admin'];;
+									$ksql2="SELECT * FROM admin, user where admin.id_user=user.id_user and admin.id_admin=$ida";
+									$khasil2 = mysqli_query($koneksi,$ksql2);
+									while($krow2 = mysqli_fetch_array($khasi2))
+									{?>
+									<input type="hidden" class="form-control" value="<?php echo $krow2['id_user']; ?>" name="id_user" required>
+									<?php } ?>
 									<div class="modal-header">
 										<h4 class="modal-title">Edit</h4>
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -297,20 +348,7 @@ session_start();
                                             <label>Password :</label>
                                             <input type="password" name="password" id="password" class="form-control" value="<?php echo $krow['password']; ?>" required>
 										</div>
-										
-												<div class="form-group">
-                                                    <label>Role</label><br>
-                                                    <div class="radio-inline">
-														<input type="radio" name="id_role" id="l" value="1" <?php if($krow['id_role']=='1') echo 'checked' ?>> 1 (Admin)
-                                                    </div>
-                                                    <div class="radio-inline">
-													<input type="radio" name="id_role" id="2" value="2" <?php if($krow['id_role']=='2') echo 'checked' ?>> 2 (Dokter)
-													</div>
-													<div class="radio-inline">
-													<input type="radio" name="id_role" id="3" value="3" <?php if($krow['id_role']=='3') echo 'checked' ?>> 3 (Peternak)
-													</div>
-												</div>
-												<div class="modal-footer">
+										<div class="modal-footer">
 													<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
 													<input type="submit" class="btn btn-info" value="Save" name="edit">
 												</div>
@@ -327,6 +365,7 @@ session_start();
 							<div class="modal-content">
 							<form method="post" action="">
 								<input type="text" class="form-control" value="<?php echo $krow['id_admin']; ?>" name="id_admin" required>
+								<input type="text" class="form-control" value="<?php echo $krow['id_user']; ?>" name="id_user" required>
 									<div class="modal-header">
 										<h4 class="modal-title">Delete</h4>
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -359,53 +398,42 @@ session_start();
 					<div id="addEmployeeModal" class="modal fade">
 						<div class="modal-dialog">
 							<div class="modal-content">
-							<form role="form" method="POST" action="">
+							<form role="form" method="POST" action="" enctype="multipart/form-data">
 									<div class="modal-header">
 										<h4 class="modal-title">Tambah Data</h4>
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 									</div>
 									<div class="modal-body">
-                                        <!-- <div class="form-group">
+									<div class="form-group">
                                             <label>Nama :</label>
-                                            <input type="text" name="nama" id="nama" class="form-control" required >
-                                        </div> -->
-
-                                        <div class="form-group">
-                                            <label>Username :</label>
-                                            <input type="text" name="username" id="username" class="form-control" required>
-										<!-- </div>
+                                            <input type="text" name="nama" id="nama" class="form-control" required>
+                                        </div>
 										<div class="form-group">
-                                            <label>Email :</label>
-                                            <input type="email" name="email" id="email" class="form-control" required>
-										</div>
-										<div class="form-group">
-                                            <label>Tempat :</label>
-                                            <input type="text" name="address" id="address" class="form-control" required>
-										</div> 
-										<div class="form-group">
-                                            <label>Telepone :</label>
-                                            <input type="number" name="telepon" id="telepon" class="form-control" required>
-										</div> -->
-										<div class="form-group">
-                                            <label>Password :</label>
-                                            <input type="password" name="password" id="password" class="form-control"  required>
-										</div>
-										<!-- <div class="form-group">
-                                            <label>Foto :</label>
-                                            <input type="file" name="foto" id="foto" class="form-control">
-                                        </div>      -->
-												<div class="form-group">
-                                                    <label>Role</label><br>
-                                                    <div class="radio-inline">
-														<input type="radio" name="id_role" id="l" value="1" selected> 1 (Admin)
+                                            <label>Jenis Kelamin :</label><br>
+                                            		<div class="radio-inline">
+													<input type="radio" name="jenis_kelamin" id="jenis_kelamin" value="Laki-Laki" > Laki-Laki
                                                     </div>
                                                     <div class="radio-inline">
-													<input type="radio" name="id_role" id="2" value="2" selected> 2 (Dokter)
+													<input type="radio" name="jenis_kelamin" id="jenis_kelamin" value="Perempuan"> Perempuan
 													</div>
-													<div class="radio-inline">
-													<input type="radio" name="id_role" id="3" value="3" selected> 3 (Peternak)
-													</div>
-												</div>
+										</div>
+										<div class="form-group">
+                                            <label>Alamat :</label>
+                                            <textarea name="alamat" id="alamat" class="form-control" required></textarea>
+										</div>
+										<div class="form-group">
+											<label>Foto :</label>
+                                            <input type="file" name="foto" id="foto" class="form-control">
+                                        </div>     
+                                        <div class="form-group">
+                                            <label>Username :</label>
+                                            <input type="text" name="username" id="username" class="form-control"  required>
+										</div>
+									
+										<div class="form-group">
+                                            <label>Password :</label>
+                                            <input type="password" name="password" id="password" class="form-control" v required>
+										</div>
 												<div class="modal-footer">
 													<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
 													<input type="submit" class="btn btn-success" value="Tambah" name="tambah">

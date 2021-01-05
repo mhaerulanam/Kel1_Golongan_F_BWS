@@ -107,7 +107,7 @@ session_start();
 						$id_user = $_POST['id_user'];
 						$username = $_POST['username'];
 						$password = $_POST['password'];
-						$id_role = $_POST['id_role'];
+						$id_role = 3;
 						
 
 					//Code tombol tambah	
@@ -123,7 +123,18 @@ session_start();
 						}
 						else{
 							//tambah
-							$sql = "INSERT INTO peternak VALUES ('','$username','$password','$id_role')";
+							$sql = "INSERT INTO user VALUES ('','$username','$password','$id_role')";
+							mysqli_query($koneksi,$sql);
+							//cek keberhasilan
+							if(mysqli_affected_rows($koneksi) > 0){
+								$kode = date('ymdHs'); 
+								$id_peternak = "$kode";
+							 	$data = "";
+							  	$ambildata=mysqli_query($koneksi, "SELECT * FROM user order by id_user DESC LIMIT 1");
+							  	$row = mysqli_fetch_array($ambildata);
+								$id = $row['id_user'];
+								$ambilfoto   = addslashes(file_get_contents($_FILES['foto']['tmp_name']));
+								$sql = "INSERT INTO peternak VALUES ('$id_peternak','$namadepan_peternak','$namabelakang_peternak','$email_peternak','$no_hp','$jenis_kelamin','$alamat','$ambilfoto','$id')";
 							if(mysqli_query($koneksi, $sql)){
 								$nilaihasil = "Records inserted successfully.";
 							} 
@@ -131,12 +142,53 @@ session_start();
 								echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
 							}
 						}
+						}
 					}
 
 					// code tombol edit
 					if(isset($_POST['edit'])){
 						//edit
-						$sql = "UPDATE peternak SET username = '$username', password = '$password', id_role = '$id_role' WHERE id_user = '$id_user'";
+						$lokasiFoto = $_FILES['foto']['tmp_name'];
+						if($lokasiFoto==""){
+							$sql = "UPDATE peternak SET  namadepan_peternak = '$namadepan_peternak', namabelakang_peternak = '$namabelakang_peternak', email_peternak = '$email_peternak', no_hp = '$no_hp', jenis_kelamin = '$jenis_kelamin', alamat = '$alamat' WHERE id_peternak = '$id_peternak'";
+							include 'koneksi.php';
+							if(mysqli_query($koneksi, $sql)){
+								$data = "";
+								$ambildata=mysqli_query($koneksi, "SELECT * FROM peternak where id_peternak='$id_peternak'");
+								$row = mysqli_fetch_array($ambildata);
+								$id = $row['id_user'];
+								  $sql1 = "UPDATE user SET  username = '$username', password = '$password', id_role = '$id_role' WHERE id_user = '$id'";
+								if(mysqli_query($koneksi, $sql1)){
+									$nilaihasil = "Records updated successfully.";
+								}else{
+									echo "ERROR: Could not able to execute $sql1. " . mysqli_error($koneksi);
+								}
+							} 
+							else{
+								echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+							}
+						}else{
+							$ambilfoto1   = addslashes(file_get_contents($_FILES['foto']['tmp_name']));
+							echo $ambilfoto1;
+							$sql = "UPDATE peternak SET  namadepan_peternak = '$namadepan_peternak', namabelakang_peternak = '$namabelakang_peternak', email_peternak = '$email_peternak', no_hp = '$no_hp', jenis_kelamin = '$jenis_kelamin', alamat = '$alamat', foto_peternak = '$ambilfoto1' WHERE id_peternak = '$id_peternak'";
+							include 'koneksi.php';
+							if(mysqli_query($koneksi, $sql)){
+								$data = "";
+								$ambildata=mysqli_query($koneksi, "SELECT * FROM peternak where id_peternak='$id_peternak'");
+								$row = mysqli_fetch_array($ambildata);
+								$id = $row['id_user'];
+								  $sql1 = "UPDATE user SET  username = '$username', password = '$password', id_role = '$id_role' WHERE id_user = '$id'";
+								if(mysqli_query($koneksi, $sql1)){
+									$nilaihasil = "Records updated successfully.";
+								}else{
+									echo "ERROR: Could not able to execute $sql1. " . mysqli_error($koneksi);
+								}
+							} 
+							else{
+								echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+							}
+						}
+
 						if(mysqli_query($koneksi, $sql)){
 							$nilaihasil = "Records updated successfully.";
 						} 
@@ -148,14 +200,17 @@ session_start();
 					//code delete per item
 					if(isset($_POST['delete'])){
 						//delete
-						$sql = "DELETE FROM peternak WHERE id_peternak = '$id_peternak'";
+						$sql = "DELETE FROM peternak WHERE  id_peternak = '$id_peternak'";
+							$ambildata=mysqli_query($koneksi, "SELECT * FROM peternak where  id_peternak = '$id_peternak'");
+							$row = mysqli_fetch_array($ambildata);
+							$id = $row['id_user'];
+							$sql2 = "DELETE FROM user WHERE id_user = '$id'";
 						if(mysqli_query($koneksi, $sql)){
 							$nilaihasil = "Records deleted successfully.";
 						} 
 						else{
 							echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
 						}
-
 					}
 
 					//code delete all
@@ -261,7 +316,7 @@ session_start();
 					<div id="editEmployeeModal<?php echo $krow['id_peternak']; ?>" class="modal fade">
 						<div class="modal-dialog">
 							<div class="modal-content">
-								<form role="form" method="POST">
+								<form role="form" method="POST" enctype="multipart/form-data">
 									<input type="hidden" class="form-control" value="<?php echo $krow['id_peternak']; ?>" name="id_peternak" required>
 									<div class="modal-header">
 										<h4 class="modal-title">Edit</h4>
@@ -327,8 +382,8 @@ session_start();
 					<div id="deleteEmployeeModal<?php echo $krow['id_peternak']; ?>" class="modal fade">
 						<div class="modal-dialog">
 							<div class="modal-content">
-							<form method="post" action="">
-								<input type="text" class="form-control" value="<?php echo $krow['id_peternak']; ?>" name="id_user" required>
+							<form method="post" action="" enctype="multipart/form-data">
+								<input type="text" class="form-control" value="<?php echo $krow['id_peternak']; ?>" name="id_peternak" required>
 									<div class="modal-header">
 										<h4 class="modal-title">Delete</h4>
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -361,7 +416,7 @@ session_start();
 					<div id="addEmployeeModal" class="modal fade">
 						<div class="modal-dialog">
 							<div class="modal-content">
-							<form role="form" method="POST" action="">
+							<form role="form" method="POST" action=""  enctype="multipart/form-data">
 									<div class="modal-header">
 										<h4 class="modal-title">Tambah Data</h4>
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

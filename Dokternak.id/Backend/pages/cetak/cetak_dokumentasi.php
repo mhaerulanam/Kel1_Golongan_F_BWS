@@ -13,7 +13,7 @@
 	</center>
  
 	<?php 
-	include 'koneksi.php';
+	include '../koneksi.php';
 	?>
 
 	<table border="1">
@@ -46,7 +46,7 @@
 						<td><?php echo $krow['judul']; ?></td>
 						<td><?php echo $krow['keterangan']; ?></td>
 						<td>
-							<img src="foto/foto_dokumentasi.php?id_dokumentasi=<?php echo $krow['id_dokumentasi']; ?>"
+							<img src="../foto/foto_dokumentasi.php?id_dokumentasi=<?php echo $krow['id_dokumentasi']; ?>"
 											alt="<?php echo "Belum upload foto" ?>" height="100"></img>
 						</td>  
                     </tr> 

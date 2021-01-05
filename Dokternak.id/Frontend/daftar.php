@@ -207,7 +207,8 @@ form {
 <?php include 'koneksi.php';?>
 <?php
 if(isset($_POST["daftarpeternak"])) {
-
+      $kode = date('ymdHs'); //jam,menit,detik
+      $id_peternak = "$kode";
       $namadepan_peternak = $_POST["namadepan_peternak"];
       $namabelakang_peternak = $_POST["namabelakang_peternak"];
       $namalengkap = "$namadepan_peternak $namabelakang_peternak"; 
@@ -239,7 +240,7 @@ if(isset($_POST["daftarpeternak"])) {
        $ambildata=mysqli_query($koneksi, "SELECT * FROM user order by id_user DESC LIMIT 1");
        $row = mysqli_fetch_array($ambildata);
        $id = $row['id_user'];
-       $query = "INSERT INTO peternak VALUES('','$namadepan_peternak','$namabelakang_peternak','$email_peternak','$no_hp','$jenis_kelamin','$alamat','$foto_peternak','$id')";
+       $query = "INSERT INTO peternak VALUES('$id_peternak','$namadepan_peternak','$namabelakang_peternak','$email_peternak','$no_hp','$jenis_kelamin','$alamat','$foto_peternak','$id')";
        mysqli_query($koneksi,$query);
         session_start();
         header("location:index.php?pesan=sukses");

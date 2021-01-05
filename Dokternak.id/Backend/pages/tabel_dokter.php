@@ -274,6 +274,7 @@ session_start();
 					</div>
 					<div class="col-sm-6">
 						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">++ Tambah Data	</a>
+						<a href="./cetak/cetak_datadokter.php" target="_blank" class="btn btn-info">Cetak</a>
 						<input type="submit" name="deleteall" value="Delete Selected" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
 					</div>
 				</div>
@@ -291,6 +292,7 @@ session_start();
 							</span>
 						</th>
 
+						<th>No</th>
 						<th>ID Dokter</th>
 						<th>Nama</th>
 						<th>Email</th>
@@ -310,7 +312,7 @@ session_start();
                 </thead>
                 <tbody>
 					<?php
-					// $i = 1;
+					$i = 1;
 					$ksql="SELECT * FROM dokter";
 					$khasil = mysqli_query($koneksi,$ksql);
 					while($krow = mysqli_fetch_array($khasil))
@@ -324,7 +326,7 @@ session_start();
 								<label for="checkbox5"></label>
 							</span>
 						</td>
-						<!-- <td><?= $i ?></td> -->
+						<td><?= $i ?></td>
 
 						<!-- Code menampilkan data -->
 						<td><?php echo $krow['id_dokter']; ?></td>

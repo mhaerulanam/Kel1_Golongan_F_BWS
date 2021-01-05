@@ -193,16 +193,30 @@ session_start();
 					}
 
 					?>
-<form method="post" action="">
+
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
+					<form method="POST" action="cetak/cetak_artikel.php" target="_blank">
+									<div class="form-group">
+                                            <label>Tanggal Awal:</label>
+                                            <input type="date" name="tanggal_awal" id="tanggal_awal" class="form-control" required>
+                                        </div>
+										<div class="form-group">
+                                            <label>Tanggal Akhir:</label>
+                                            <input type="date" name="tanggal_akhir" id="tanggal_akhir" class="form-control" required>
+                                        </div>
+										<input type="submit" class="btn btn-info" value="Cetak" name="submit">
+					</form>
 					</div>
+		<form method="post" action="">
 					<div class="col-sm-6">
 						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">++ Tambah Data	</a>
+						<!-- <a href="cetak/cetak_artikel.php" target="_blank" class="btn btn-info">Cetak</a> -->
 						<input type="submit" name="deleteall" value="Delete Selected" class="btn btn-danger" onclick="return confirm('Are you sure delete selected records?')">
 					</div>
+					
 				</div>
 				<div class="row">
 				</div>

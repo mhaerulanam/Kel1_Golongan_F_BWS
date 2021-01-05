@@ -301,6 +301,10 @@ session_start();
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 									</div>
 									<div class="modal-body">
+										<div class="form-group">
+                                            <label>ID Riwayat :</label>
+                                            <input type="text" name="id_tutorial" id="id_tutorial" class="form-control" required>
+                                        </div>
                                     <div class="form-group">
                                             <label>Konsultasi :</label>
                                             <input type="text" name="keluhan" id="keluhan" class="form-control" value="<?php echo $krow['keluhan']; ?>" >

@@ -55,13 +55,12 @@
                                             <li><a href="daftar_artikel.php">ARTIKEL </a></li>
                                             <li><a href="#">DATA</a>
                                             <ul class="submenu">
-                                                    <li><a href="#">REKAM MEDIK</a></li>
-                                                    <li><a href="#">OBAT</a></li>
-                                                    <li><a href="#">HEWAN</a></li>                                                 
+                                                    <li><a href="datarekammedik.php">REKAM MEDIK</a></li>
+                                                    <li><a href="dataobat.php">OBAT</a></li>
+                                                    <li><a href="data_hewan.php">HEWAN</a></li>                                                 
                                                 </ul>
                                             </li>
                                             <li><a href="respon_konsultasi.php">NOTIFIKASI</a></li>
-                                            <li><a href="#">LAPORAN</a></li>
                                             <li><a href="daftar_tutorial.php">TUTORIAL</a></li>
                                             
                                         </ul>

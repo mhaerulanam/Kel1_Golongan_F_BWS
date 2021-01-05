@@ -178,6 +178,23 @@ session_start();
 					}
 
 					?>
+					<div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+					<form method="POST" action="cetak/cetak_datapeternak.php" target="_blank">
+									<div class="form-group">
+                                            <label>Tanggal Awal:</label>
+                                            <input type="date" name="tanggal_awal" id="tanggal_awal" class="form-control" required>
+                                        </div>
+										<div class="form-group">
+                                            <label>Tanggal Akhir:</label>
+                                            <input type="date" name="tanggal_akhir" id="tanggal_akhir" class="form-control" required>
+                                        </div>
+										<input type="submit" class="btn btn-info" value="Cetak" name="submit">
+					</form>
+					</div>
+
 <form method="post" action="">
         <div class="table-wrapper">
             <div class="table-title">
@@ -242,7 +259,7 @@ session_start();
 						<td><?php echo $krow['alamat']; ?></td>
 						<td><?php echo $krow['no_hp']; ?></td>
 						<td><?php echo $krow['jenis_kelamin']; ?></td>
-						<td><img src="foto/foto_peternak.php?id_peternak=<?php echo $krow['id_peternak']; ?>" width=80px /> </td>
+						<td><img src="foto/foto_peternak1.php?id_peternak=<?php echo $krow['id_peternak']; ?>" width=80px /> </td>
 						<td><?php echo $krow['id_user']; ?></td>
 						<td><?php echo $krow['username']; ?></td>
 						<td><?php echo $krow['password']; ?></td>

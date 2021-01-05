@@ -4,13 +4,12 @@
 	<title>CETAK DATA PETERNAK - DOKTERNAK.ID</title>
 </head>
 <body>
-
 <?php
 	$tanggal_awal=$_POST['tanggal_awal'];
 	$tanggal_akhir=$_POST['tanggal_akhir'];
- ?>
+ ?> 
  
-	<center>
+ 	<center>
  
 		<h2>DATA PETERNAK</h2>
 		<h4>Dokternak.id</h4>
@@ -27,16 +26,19 @@
                         <th>No</th>
 						<th>ID </th>
 						<th>Tanggal</th>
-						<th>Komentar</th>
-						<th>Nama</th>
-						<th>Email</th>
-						<th>Pekerjaan</th>
+						<th>Kategori </th>
+						<th>Nama Hewan</th>
+						<th>Nama Pemilik</th>
+						<th>Alamat</th>
+						<th>Keluhan</th>
+                        <th>Diagnosa</th>
+						<th>Pelayanan</th>
                     </tr>
                 </thead>
                 <tbody>
 					<?php
 					$i = 1;
-					$ksql="SELECT * FROM kritikdansaran";
+					$ksql="SELECT * FROM rekam_medik";
 					$khasil = mysqli_query($koneksi,$ksql);
 					while($krow = mysqli_fetch_array($khasil))
 					{
@@ -48,12 +50,15 @@
 						</td>
 
 						<!-- Code menampilkan data -->
-						<td><?php echo $krow['id_ks']; ?></td>
+						<td><?php echo $krow['id_rmd']; ?></td>
 						<td><?php echo $krow['tanggal'];?></td>
-						<td><?php echo $krow['komentar']; ?></td>
-                        <td><?php echo $krow['nama']; ?></td>
-						<td><?php echo $krow['email_hp']; ?></td>
-                        <td><?php echo $krow['pekerjaan']; ?></td>
+						<td><?php echo $krow['kategori']; ?></td>
+                        <td><?php echo $krow['nama_hewan']; ?></td>
+						<td><?php echo $krow['nama_pemilik']; ?></td>
+                        <td><?php echo $krow['alamat']; ?></td>
+						<td><?php echo $krow['keluhan']; ?></td>
+						<td><?php echo $krow['diagnosa']; ?></td>
+						<td><?php echo $krow['pelayanan']; ?></td>
                     </tr> 
 					<?php 
 						$i++;

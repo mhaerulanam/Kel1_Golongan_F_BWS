@@ -17,7 +17,7 @@
 	</center>
  
 	<?php 
-	include '../koneksi.php';
+	include '../../koneksi.php';
 	?>
 
 	<table border="1">

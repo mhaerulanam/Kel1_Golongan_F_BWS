@@ -101,9 +101,6 @@ session_start();
     </navbar>
 <section>
 <div class="container">
-        <div id="wrapper">
-            <!-- Page Content -->
-            <div id="page-wrapper">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
@@ -190,6 +187,7 @@ session_start();
 					}
 
 					?>
+					      <div class="col-lg-12">
 <form method="post" action="">
         <div class="table-wrapper">
             <div class="table-title">
@@ -326,6 +324,7 @@ session_start();
 						mysqli_close($koneksi);
 					?>
 				</form>
+						  </div>
                 </tbody>
 			</table>
 			
@@ -373,10 +372,6 @@ session_start();
         </div>
         </div>
         <!-- /.container-fluid -->
-    </div>
-    <!-- /#page-wrapper -->
-
-</div>
 <!-- /#wrapper -->
 		</div>
 </section>

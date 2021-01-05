@@ -4,7 +4,10 @@
 	<title>CETAK DATA KONSULTASI - DOKTERNAK.ID</title>
 </head>
 <body>
- 
+<?php
+	$tanggal_awal=$_POST['tanggal_awal'];
+	$tanggal_akhir=$_POST['tanggal_akhir'];
+ ?>
 	<center>
  
 		<h2>DATA KONSULTASI</h2>
@@ -13,7 +16,7 @@
 	</center>
  
 	<?php 
-	include 'koneksi.php';
+	include '../koneksi.php';
 	?>
 
 	<table border="1">

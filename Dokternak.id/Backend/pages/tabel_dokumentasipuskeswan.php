@@ -85,7 +85,7 @@ session_start();
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h1 class="page-header">Data Dokter - Puskeswan</h1>
+                            <h1 class="page-header">Data Dokumentasi - Puskeswan</h1>
 						</div>
 						
 
@@ -165,6 +165,7 @@ session_start();
 					</div>
 					<div class="col-sm-6">
 						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">++ Tambah Data	</a>
+						<a href="cetak/cetak_dokumentasipuskeswan.php" target="_blank" class="btn btn-info">Cetak</a>
 						<input type="submit" name="deleteall" value="Delete Selected" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
 					</div>
 				</div>
@@ -182,17 +183,21 @@ session_start();
 							</span>
 						</th>
 
+						<th>No</th>
 						<th>ID DokPus</th>
 						<th>ID Puskeswan</th>
+						<th>Nama Puskeswan</th>
 						<th>ID Dokumentasi</th>
+						<th>Foto Dokumentasi</th>
                         <th>Actions</th>
 
                     </tr>
                 </thead>
                 <tbody>
 					<?php
-					// $i = 1;
-					$ksql="SELECT * FROM dokumentasi_puskeswan";
+					$i = 1;
+					$ksql="SELECT * FROM dokumentasi_puskeswan INNER JOIN puskeswan ON dokumentasi_puskeswan.id_puskeswan = puskeswan.id_puskeswan
+					INNER JOIN dokumentasi ON dokumentasi_puskeswan.id_dokumentasi = dokumentasi.id_dokumentasi ORDER BY id_dokpus";
 					$khasil = mysqli_query($koneksi,$ksql);
 					while($krow = mysqli_fetch_array($khasil))
 					{
@@ -205,12 +210,17 @@ session_start();
 								<label for="checkbox5"></label>
 							</span>
 						</td>
-						<!-- <td><?= $i ?></td> -->
+						<td><?= $i ?></td>
 
 						<!-- Code menampilkan data -->
 						<td><?php echo $krow['id_dokpus']; ?></td>
 						<td><?php echo $krow['id_puskeswan']; ?></td>
+						<td><?php echo $krow['nama_puskeswan']; ?></td>
 						<td><?php echo $krow['id_dokumentasi']; ?></td>
+						<td>
+							<img src="foto/foto_dokumentasi.php?id_dokumentasi=<?php echo $krow['id_dokumentasi']; ?>"
+											alt="<?php echo "Belum upload foto" ?>" height="100"></img>
+						</td>
 
 						<!-- Tombol Action -->
                         <td>

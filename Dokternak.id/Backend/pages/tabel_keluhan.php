@@ -175,6 +175,24 @@ session_start();
 					}
 
 					?>
+
+<div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+					<form method="POST" action="cetak/cetak_konsultasi.php" target="_blank">
+									<div class="form-group">
+                                            <label>Tanggal Awal:</label>
+                                            <input type="date" name="tanggal_awal" id="tanggal_awal" class="form-control" required>
+                                        </div>
+										<div class="form-group">
+                                            <label>Tanggal Akhir:</label>
+                                            <input type="date" name="tanggal_akhir" id="tanggal_akhir" class="form-control" required>
+                                        </div>
+										<input type="submit" class="btn btn-info" value="Cetak" name="submit">
+					</form>
+					</div>
+
 <form method="post" action="">
         <div class="table-wrapper">
             <div class="table-title">
@@ -359,47 +377,18 @@ session_start();
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 									</div>
 									<div class="modal-body">
-									<div class="mt-30">
-									<div class="mt-30">
+									<div class="modal-body">
+										<div class="form-group">
                                             <label>ID Konsultasi :</label>
-                                            <select name="id_dokter" class="form-control" id="default-select">
-												<option disabled selected> Pilih </option>
-												<?php 
-												include "koneksi.php";
-												$sql="SELECT * FROM konsultasi";
-												$dok = mysqli_query($koneksi,$sql);
-												while($data = mysqli_fetch_array($dok))
-												{ ?>
-												<option value="<?=$data['id_konsultasi']?>"><?=$data['keluhan']?></option> 
-												<?php } ?>
-											</select><br>
+                                            <input type="text" name="id_konsultasi" id="id_konsultasi" class="form-control" required>
                                         </div>
+										<div class="form-group">
                                             <label>ID Peternak :</label>
-                                            <select name="id_dokter" class="form-control" id="default-select">
-												<option disabled selected> Pilih </option>
-												<?php 
-												include "koneksi.php";
-												$sql="SELECT * FROM peternak";
-												$dok = mysqli_query($koneksi,$sql);
-												while($data = mysqli_fetch_array($dok))
-												{ ?>
-												<option value="<?=$data['id_peternak']?>"><?=$data['namadepan_peternak, namabelakang_peternak']?></option> 
-												<?php } ?>
-											</select><br>
+                                            <input type="text" name="id_peternak" id="id_peternak" class="form-control" required>
                                         </div>
-                                    <div class="mt-30">
+										<div class="form-group">
                                             <label>ID Dokter :</label>
-                                            <select name="id_dokter" class="form-control" id="default-select">
-												<option disabled selected> Pilih </option>
-												<?php 
-												include "koneksi.php";
-												$sql="SELECT * FROM dokter";
-												$dok = mysqli_query($koneksi,$sql);
-												while($data = mysqli_fetch_array($dok))
-												{ ?>
-												<option value="<?=$data['id_dokter']?>"><?=$data['nama']?></option> 
-												<?php } ?>
-											</select><br>
+                                            <input type="text" name="id_dokter" id="id_dokter" class="form-control" required>
                                         </div>
 
                                 

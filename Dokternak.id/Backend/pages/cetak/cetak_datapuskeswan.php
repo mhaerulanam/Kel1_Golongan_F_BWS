@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>CETAK DATA HEWAN - DOKTERNAK.ID</title>
+	<title>CETAK DATA PUSKESWAN - DOKTERNAK.ID</title>
 </head>
 <body>
  
 	<center>
  
-		<h2>DATA HEWAN</h2>
+		<h2>DATA PUSKESWAN</h2>
 		<h4>Dokternak.id</h4>
  
 	</center>
@@ -20,17 +20,19 @@
                 <thead>
                     <tr>
 						<th>No</th>
-						<th>ID Hewan</th>
-						<th>Nama Hewan</th>
-						<th>Ras Hewan</th>
-						<th>Usia</th>
-                        <th>Keterangan</th>
+						<th>ID Puskeswan</th>
+						<th>Nama Puskeswan</th>
+						<th>Alamat</th>
+                        <th>Jam Kerja</th>
+						<th>Icon</th>
+                        <th>Maps</th>
+
                     </tr>
                 </thead>
                 <tbody>
 					<?php
 					$i = 1;
-					$ksql="SELECT * FROM data_hewan";
+					$ksql="SELECT * FROM puskeswan";
 					$khasil = mysqli_query($koneksi,$ksql);
 					while($krow = mysqli_fetch_array($khasil))
 					{
@@ -42,11 +44,14 @@
 						</td>
 
 						<!-- Code menampilkan data -->
-                        <td><?php echo $krow['id_hewan']; ?></td>
-						<td><?php echo $krow['nama_hewan']; ?></td>
-						<td><?php echo $krow['ras_hewan']; ?></td>
-						<td><?php echo $krow['usia']; ?></td>
-						<td><?php echo $krow['keterangan']; ?></td>
+						<td><?php echo $krow['id_puskeswan']; ?></td>
+						<td><?php echo $krow['nama_puskeswan']; ?></td>
+						<td><?php echo $krow['alamat']; ?></td>
+                        <td><?php echo $krow['jam_kerja']; ?></td>
+						<td>
+							<img src="../foto/gambarpuskeswan.php?id_puskeswan=<?php echo $krow['id_puskeswan']; ?>"
+											alt="<?php echo "Belum upload foto" ?>" ></img>
+						</td>  
                     </tr> 
 					<?php 
 						$i++;

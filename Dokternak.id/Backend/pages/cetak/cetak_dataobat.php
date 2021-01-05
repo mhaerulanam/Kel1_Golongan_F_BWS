@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>CETAK DATA HEWAN - DOKTERNAK.ID</title>
+	<title>CETAK DATA OBAT - DOKTERNAK.ID</title>
 </head>
 <body>
  
 	<center>
  
-		<h2>DATA HEWAN</h2>
+		<h2>DATA OBAT</h2>
 		<h4>Dokternak.id</h4>
  
 	</center>
@@ -20,17 +20,19 @@
                 <thead>
                     <tr>
 						<th>No</th>
-						<th>ID Hewan</th>
-						<th>Nama Hewan</th>
-						<th>Ras Hewan</th>
-						<th>Usia</th>
+						<th>ID Obat</th>
+						<th>Nama Obat</th>
+						<th>Stok</th>
+						<th>Supplier</th>
+                        <th>Expired</th>
                         <th>Keterangan</th>
+
                     </tr>
                 </thead>
                 <tbody>
 					<?php
 					$i = 1;
-					$ksql="SELECT * FROM data_hewan";
+					$ksql="SELECT * FROM data_obat";
 					$khasil = mysqli_query($koneksi,$ksql);
 					while($krow = mysqli_fetch_array($khasil))
 					{
@@ -42,11 +44,12 @@
 						</td>
 
 						<!-- Code menampilkan data -->
-                        <td><?php echo $krow['id_hewan']; ?></td>
-						<td><?php echo $krow['nama_hewan']; ?></td>
-						<td><?php echo $krow['ras_hewan']; ?></td>
-						<td><?php echo $krow['usia']; ?></td>
-						<td><?php echo $krow['keterangan']; ?></td>
+						<td><?php echo $krow['id_obat']; ?></td>
+						<td><?php echo $krow['nama_obat']; ?></td>
+						<td><?php echo $krow['stok']; ?></td>
+						<td><?php echo $krow['supplier']; ?></td>
+                        <td><?php echo $krow['expired']; ?></td>
+                        <td><?php echo $krow['keterangan']; ?></td>
                     </tr> 
 					<?php 
 						$i++;

@@ -53,10 +53,10 @@ $level=$_SESSION["level"];
             include "navbar.php";
             include 'koneksi.php';
                 // mengambil data user
-                $a = mysqli_query($koneksi,"SELECT * FROM user");
+                $a = mysqli_query($koneksi,"SELECT * FROM tutorial");
                  
                 // menghitung data user
-                $data_user = mysqli_num_rows($a);
+                $data_tutorial = mysqli_num_rows($a);
 
                 // mengambil data dokter
                 $b = mysqli_query($koneksi,"SELECT * FROM dokter");
@@ -69,6 +69,42 @@ $level=$_SESSION["level"];
                  
                 // menghitung data Peternak
                 $data_peternak = mysqli_num_rows($c);
+
+                 // mengambil data Artikel
+                 $d = mysqli_query($koneksi,"SELECT * FROM artikel");
+                 
+                 // menghitung data Peternak
+                 $data_artikel = mysqli_num_rows($d);
+
+                // mengambil data Puskeswan
+                $e = mysqli_query($koneksi,"SELECT * FROM puskeswan");
+                 
+                // menghitung data Puskeswan
+                $data_puskeswan = mysqli_num_rows($e);
+
+                // mengambil data User Admin
+                $f = mysqli_query($koneksi,"SELECT * FROM admin,user where admin.id_user=user.id_user order by admin.id_admin");
+                 
+                // menghitung data User Admin
+                $data_useradmin = mysqli_num_rows($f);
+
+                // mengambil data User Dokter
+                $g = mysqli_query($koneksi,"SELECT * FROM dokter_user, dokter, user  where  dokter_user.id_user=user.id_user and  dokter_user.id_dokter=dokter.id_dokter  order by  dokter_user.id_dokteruser");
+                 
+                // menghitung data User Dokter
+                $data_userdokter = mysqli_num_rows($g);
+
+                // mengambil data User Peternak
+                $h = mysqli_query($koneksi,"SELECT * FROM peternak,user where peternak.id_user=user.id_user order by peternak.id_peternak");
+                 
+                // menghitung data Peternak
+                $data_userpeternak = mysqli_num_rows($h);
+
+                // mengambil data Dokumentasi
+                $i = mysqli_query($koneksi,"SELECT * FROM dokumentasi");
+                 
+                // menghitung data Dokumentasi
+                $data_dokumentasi = mysqli_num_rows($i);
             ?>
             <div id="page-wrapper">
                 <div class="container-fluid">
@@ -147,12 +183,156 @@ $level=$_SESSION["level"];
                                             <i class="fa fa-tasks fa-5x"></i>
                                         </div>
                                         <div class="col-xs-9 text-right">
-                                            <div class="huge"><?php echo $data_user;?></div>
-                                            <div>Data User</div>
+                                            <div class="huge"><?php echo $data_tutorial;?></div>
+                                            <div>Data Tutorial</div>
                                         </div>
                                     </div>
                                 </div>
-                                <a href="tabel_user.php">
+                                <a href="tabel_tutorial.php">
+                                    <div class="panel-footer">
+                                        <span class="pull-left">View Details</span>
+                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6">
+                            <div class="panel panel-green">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-tasks fa-5x"></i>
+                                        </div>
+                                        <div class="col-xs-9 text-right">
+                                            <div class="huge"><?php echo $data_artikel;?></div>
+                                            <div>Data Artikel</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="tabel_artikel.php">
+                                    <div class="panel-footer">
+                                        <span class="pull-left">View Details</span>
+                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-tasks fa-5x"></i>
+                                        </div>
+                                        <div class="col-xs-9 text-right">
+                                            <div class="huge"><?php echo $data_puskeswan;?></div>
+                                            <div>Data Puskeswan</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="tabel_puskeswan.php">
+                                    <div class="panel-footer">
+                                        <span class="pull-left">View Details</span>
+                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6">
+                            <div class="panel panel-yellow">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-tasks fa-5x"></i>
+                                        </div>
+                                        <div class="col-xs-9 text-right">
+                                            <div class="huge"><?php echo $data_useradmin;?></div>
+                                            <div>Data User Admin</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="tabel_useradmin.php">
+                                    <div class="panel-footer">
+                                        <span class="pull-left">View Details</span>
+                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-3 col-md-6">
+                            <div class="panel panel-red">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-tasks fa-5x"></i>
+                                        </div>
+                                        <div class="col-xs-9 text-right">
+                                            <div class="huge"><?php echo $data_userdokter;?></div>
+                                            <div>Data User Dokter</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="tabel_userdokter.php">
+                                    <div class="panel-footer">
+                                        <span class="pull-left">View Details</span>
+                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6">
+                            <div class="panel panel-green">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-tasks fa-5x"></i>
+                                        </div>
+                                        <div class="col-xs-9 text-right">
+                                            <div class="huge"><?php echo $data_userpeternak;?></div>
+                                            <div>Data User Peternak</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="tabel_userpeternak.php">
+                                    <div class="panel-footer">
+                                        <span class="pull-left">View Details</span>
+                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-tasks fa-5x"></i>
+                                        </div>
+                                        <div class="col-xs-9 text-right">
+                                            <div class="huge"><?php echo $data_dokumentasi;?></div>
+                                            <div>Data Dokumentasi</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="tabel_dokumentasi.php">
                                     <div class="panel-footer">
                                         <span class="pull-left">View Details</span>
                                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

@@ -192,15 +192,16 @@ session_start();
 
 					}
 
+
 					// aksi noverifikasi
 					if(isset($_POST['noverifikasi']))
 					{
 						$sql6 = "UPDATE artikel SET  status = 'notampil' WHERE id_artikel = '$id_artikel'";			
 						if(mysqli_query($koneksi, $sql6)){
-							echo "<script type='text/javascript'>alert('Verifikasi Berhasil');; window.location='tabel_artikel.php'</script>";
+							echo "<script type='text/javascript'>alert('Arsip Berhasil');; window.location='tabel_artikel.php'</script>";
 						} 
 						else{
-							echo "<script type='text/javascript'>alert('Verifikasi gagal'); window.location='tabel_artikel.php'</script>";
+							echo "<script type='text/javascript'>alert('Arsip gagal'); window.location='tabel_artikel.php'</script>";
 						}
 
 					}
@@ -252,7 +253,9 @@ session_start();
 						<th>Isi</th>
 						<th>Gambar</th>
 						<th>Sumber</th>
-						<th colspan="2">Actions</th>
+						<th>Actions</th>
+						<!-- <th></th> -->
+						
                     </tr>
                 </thead>
                 <tbody>
@@ -289,11 +292,13 @@ session_start();
 						<!-- Tombol Action -->
                         <td>
                             <a href="#editEmployeeModal<?php echo $krow['id_artikel']; ?>" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal<?php echo $krow['id_artikel']; ?>" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                            <a href="#deleteEmployeeModal<?php echo $krow['id_artikel']; ?>" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a> <br>
+							<a href="#arsipEmployeeModal<?php echo $krow['id_artikel']; ?>" class="btn btn-info" data-toggle="modal" >Arsip</a> 
+
                         </td>
-						<td>
+						<!-- <td>
 							<input type="submit" name="noverifikasi" class="btn btn-primary" onclick="return confirm('Apakah Anda yakin ingin tidak akan menampilkan artikel ini?')" value="Arsip"> 
-						</td>
+						</td> -->
                     </tr>
 					
 
@@ -378,6 +383,28 @@ session_start();
 									<div class="modal-footer">
 										<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
 										<input type="submit" class="btn btn-danger" value="Delete" name="delete">
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+
+					<!-- Arsip Modal HTML -->
+					<div id="arsipEmployeeModal<?php echo $krow['id_artikel']; ?>" class="modal fade">
+						<div class="modal-dialog">
+							<div class="modal-content">
+							<form method="post" action="">
+								<input type="text" class="form-control" value="<?php echo $krow['id_artikel']; ?>" name="id_artikel" required>
+									<div class="modal-header">
+										<h4 class="modal-title">Arsip Data</h4>
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									</div>
+									<div class="modal-body">
+										<p>Apakah Anda yakin ingin tidak akan menampilkan artikel ini??</p>
+									</div>
+									<div class="modal-footer">
+										<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+										<input type="submit" class="btn btn-primary" value="Setuju" name="noverifikasi">
 									</div>
 								</form>
 							</div>

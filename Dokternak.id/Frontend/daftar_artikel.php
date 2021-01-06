@@ -76,7 +76,7 @@ session_start();
 
                 // Paging - Konfigurasi
                 $jdataperhalaman = 3;
-                $result = mysqli_query($koneksi, "SELECT * FROM artikel");
+                $result = mysqli_query($koneksi, "SELECT * FROM artikel  where artikel.status='tampil'");
                 $jumlahData = mysqli_num_rows($result);
                 $jumlahHalaman = ceil($jumlahData / $jdataperhalaman);
                 $halamanAktif = ( isset($_GET["halaman"]) ) ? $_GET["halaman"] : 1 ;
@@ -90,7 +90,7 @@ session_start();
                 $ambilData=mysqli_query($koneksi, "SELECT * FROM artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg and artikel.status='tampil' order by id_artikel DESC
                 LIMIT $awalData,$jdataperhalaman");
 
-                $datakat=mysqli_query($koneksi, "SELECT *, COUNT( * ) as total FROM artikel inner join kategori_artikel on artikel.id_ktg=kategori_artikel.id_ktg and artikel.status='tampil' GROUP BY kategori_artikel");
+                $datakat=mysqli_query($koneksi, "SELECT *, COUNT( * ) as total FROM artikel inner join kategori_artikel on artikel.id_ktg=kategori_artikel.id_ktg WHERE artikel.status='tampil' GROUP BY kategori_artikel");
                 $jumlahkat = mysqli_num_rows($datakat);
                 if (ISSET($_POST['submit'])){
                     $cari = $_POST['nt'];

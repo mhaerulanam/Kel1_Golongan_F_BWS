@@ -60,7 +60,7 @@ session_start();
 
             // Konfigurasi menampilkan artikel lainnya
             $jumlahDataPerHalaman = 3;
-            $result = mysqli_query($koneksi, "SELECT * FROM artikel order by id_artikel desc");
+            $result = mysqli_query($koneksi, "SELECT * FROM artikel  where artikel.status='tampil' order by id_artikel desc");
             $jumlahData = mysqli_num_rows($result);
             $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
             $halamanAktif = ( isset($_GET["halaman"]) ) ? $_GET["halaman"] : 1;
@@ -78,14 +78,14 @@ session_start();
             }
             
             // Pendeklarasian variabel kategori
-            $datakat=mysqli_query($koneksi, "SELECT *, COUNT( * ) as total FROM artikel inner join kategori_artikel on artikel.id_ktg=kategori_artikel.id_ktg GROUP BY kategori_artikel");
+            $datakat=mysqli_query($koneksi, "SELECT *, COUNT( * ) as total FROM artikel inner join kategori_artikel on artikel.id_ktg=kategori_artikel.id_ktg  where artikel.status='tampil' GROUP BY kategori_artikel");
             $jumlahkat = mysqli_num_rows($datakat);
 
             // $id_artikel = $_GET['id_artikel'];
             // $artikelAktif = ( isset($_GET["id_artikel"]) ) ? $_GET["id_artikel"] : 1;
 
             $query_mysql = mysqli_query($koneksi,"SELECT * FROM artikel, kategori_artikel WHERE id_artikel = '$id_artikel'
-            AND artikel.id_ktg=kategori_artikel.id_ktg");
+            AND artikel.id_ktg=kategori_artikel.id_ktg  AND artikel.status='tampil'");
             while ($data = mysqli_fetch_array($query_mysql)) { ?>
             <div class="col-lg-8 posts-list">
                   <div class="single-post">
@@ -161,7 +161,7 @@ session_start();
 
                      <?php
                         $ambilData=mysqli_query($koneksi, "SELECT * FROM artikel, kategori_artikel 
-                            where artikel.id_ktg=kategori_artikel.id_ktg and id_artikel != '$id_artikel' order by id_artikel desc
+                            where artikel.id_ktg=kategori_artikel.id_ktg and id_artikel != '$id_artikel'  AND artikel.status='tampil' order by id_artikel desc
                             LIMIT $awalData,$jumlahDataPerHalaman"); 
                             
                         while ($data = mysqli_fetch_array($ambilData)) { 

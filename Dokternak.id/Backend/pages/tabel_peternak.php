@@ -85,7 +85,7 @@ session_start();
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h1 class="page-header">Data User Peternak</h1>
+                            <h1 class="page-header">Data Peternak</h1>
 						</div>
 						
 

@@ -21,13 +21,14 @@ if(isset($_POST['tombol']))
         $judul = $_POST['judul'];
         $isi = $_POST['isi'];
         $sumber = $_POST['Sumber'];
+        $status ="notampil";
         // $id_artikel= "A";
         // $id_ktg= "KAT01";
         $nama = $_SESSION['nama'];
         if ($file_size < 2048000 and ($file_type =='image/jpeg' or $file_type == 'image/png'))
         {
             $image   = addslashes(file_get_contents($_FILES['gambar']['tmp_name']));
-            mysqli_query($koneksi,"insert into artikel (id_ktg,tanggal,nama_penulis,judul,isi,gambar,sumber) values ('$id_ktg','$tanggal','$nama','$judul','$isi','$image','$sumber')");
+            mysqli_query($koneksi,"insert into artikel (id_ktg,tanggal,nama_penulis,judul,isi,gambar,sumber,status) values ('$id_ktg','$tanggal','$nama','$judul','$isi','$image','$sumber','$status')");
             header("location:tulis_artikel.php?pesan=berhasil");
         }
         else

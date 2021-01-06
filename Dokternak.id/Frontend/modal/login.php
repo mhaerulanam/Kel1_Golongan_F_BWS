@@ -141,7 +141,7 @@ body {
 			</div>
 			<div class="modal_footer">
                 <br>
-				<a href="modal/daftar.php">Daftar</a>
+				<a href="daftar.php">Daftar</a>
 			</div>
 		</div>
 	</div>

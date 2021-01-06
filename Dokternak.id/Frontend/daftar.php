@@ -384,7 +384,7 @@ if(isset($_POST["daftarpeternak"])) {
                 if ($pesan == 'berhasil') {
         ?>
                   <div class="alert alert-success">
-                    <center>Pendaftaran berhasil! Selanjutnya dimohon untuk menunggu verifikasi dari Admin via Gmail.
+                    <center>Pendaftaran berhasil! Selanjutnya dimohon untuk menunggu verifikasi dari Admin via Gmail (Proses 1-3 Hari).
                     <a href="daftar.php"><b>Kembali</b></a>
                     </center>
                   </div>

@@ -219,7 +219,7 @@ if(isset($_POST["daftarpeternak"])) {
       //$fp_name = $_FILES['foto_ternak']['name'];
       //$fp_size = $_FILES['foto_ternak']['size'];
       //$fp_type = $_FILES['foto_ternak']['type'];
-      $foto_peternak = $_POST["foto_peternak"];
+      // $foto_peternak = $_POST["foto_peternak"];
       $username_peternak = $_POST["username_peternak"];
       $password_peternak = $_POST["password_peternak"];
      // $id_role = $_POST["id_role"];
@@ -232,22 +232,25 @@ if(isset($_POST["daftarpeternak"])) {
      // $query = "INSERT INTO peternak VALUES('','$namadepan_peternak','$namabelakang_peternak','$email_peternak','$no_hp','$jenis_kelamin','$alamat','$foto_peternak','$username_peternak','$password_peternak')";
      // $query1 = "INSERT INTO user VALUES('','$namalengkap','$username_peternak','$email_peternak','$alamat','$no_hp','$password_peternak','$foto_peternak','$id_role')";
 
-     $query1 = "INSERT INTO user VALUES('','$username_peternak','$password_peternak','$id_role')";
-     mysqli_query($koneksi,$query1);
-     //cek keberhasilan
-     if(mysqli_affected_rows($koneksi) > 0){
-       $data = "";
-       $ambildata=mysqli_query($koneksi, "SELECT * FROM user order by id_user DESC LIMIT 1");
-       $row = mysqli_fetch_array($ambildata);
-       $id = $row['id_user'];
-       $query = "INSERT INTO peternak VALUES('$id_peternak','$namadepan_peternak','$namabelakang_peternak','$email_peternak','$no_hp','$jenis_kelamin','$alamat','$foto_peternak','$id')";
-       mysqli_query($koneksi,$query);
-        session_start();
-        header("location:index.php?pesan=sukses");
-      } else {
-        header("location:index.php?pesan=gagal");
-      }
-
+     $sql = "INSERT INTO user VALUES ('','$username_peternak','$password_peternak','$id_role')";
+							mysqli_query($koneksi,$sql);
+							//cek keberhasilan
+							if(mysqli_affected_rows($koneksi) > 0){
+								$kode = date('ymdHs'); 
+								$id_peternak = "$kode";
+							 	$data = "";
+							  $ambildata=mysqli_query($koneksi, "SELECT * FROM user order by id_user DESC LIMIT 1");
+							  $row = mysqli_fetch_array($ambildata);
+								$id = $row['id_user'];
+								$ambilfoto   = addslashes(file_get_contents($_FILES['foto_peternak']['tmp_name']));
+								$sql = "INSERT INTO peternak VALUES ('$id_peternak','$namadepan_peternak','$namabelakang_peternak','$email_peternak','$no_hp','$jenis_kelamin','$alamat','$ambilfoto','$id')";
+							if(mysqli_query($koneksi, $sql)){
+								$nilaihasil = "Records inserted successfully.";
+							} 
+							else{
+								echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+              }
+            }
       }
       //else
       //{
@@ -280,7 +283,7 @@ if(isset($_POST["daftarpeternak"])) {
           <label for="tab-1" class="tab-label">Peternak</label>
         <div class="tab-content">
         <div class="modal-body" style="padding:40px 50px;">
-        <form role="form" action="" method="post">
+        <form role="form" action="" method="post" enctype="multipart/form-data">
         <div class="left">
           <div class="form-group">
             <label for="namadepan_peternak"><span class="glyphicon glyphicon-user"></span> Nama Depan</label>

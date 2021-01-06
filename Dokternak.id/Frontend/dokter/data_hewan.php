@@ -187,7 +187,10 @@ session_start();
 					}
 
 					?>
-					      <div class="col-lg-12">
+
+
+					
+<div class="col-lg-12">
 <form method="post" action="">
         <div class="table-wrapper">
             <div class="table-title">
@@ -196,6 +199,7 @@ session_start();
 					</div>
 					<div class="col-sm-6">
 						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">++ Tambah Data	</a>
+						<a href="cetak/cetak_datahewan.php" target="_blank" class="btn btn-info">Cetak</a>
 						<input type="submit" name="deleteall" value="Delete Selected" class="btn btn-danger" onclick="return confirm('Are you sure delete selected records?')">
 					</div>
 				</div>

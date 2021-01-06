@@ -365,7 +365,7 @@ session_start();
 
                 // Paging - Konfigurasi
                 $jumlahDataPerHalaman = 2;
-                $result = mysqli_query($koneksi, "SELECT * FROM artikel");
+                $result = mysqli_query($koneksi, "SELECT * FROM artikel where artikel.status='tampil'");
                 $jumlahData = mysqli_num_rows($result);
                 $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
                 $halamanAktif = ( isset($_GET["halaman"]) ) ? $_GET["halaman"] : 1;
@@ -376,7 +376,7 @@ session_start();
 
                 // ambilData adalah variabel untuk menampilkan data dari 2 tabel, yaitu artikel dan kategori_artikel. 
                 // Sehingga kita dapat menampilkan kategorinya, sesuai id_ktg di kedua tabel
-                $ambilData=mysqli_query($koneksi, "SELECT * FROM artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg order by id_artikel desc
+                $ambilData=mysqli_query($koneksi, "SELECT * FROM artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg and artikel.status='tampil' order by id_artikel desc
                 LIMIT $awalData,$jumlahDataPerHalaman");
 
 

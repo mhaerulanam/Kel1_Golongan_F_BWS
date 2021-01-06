@@ -76,7 +76,7 @@ session_start();
 
                 // Paging - Konfigurasi
                 $jdataperhalaman = 3;
-                $result = mysqli_query($koneksi, "SELECT * FROM artikel");
+                $result = mysqli_query($koneksi, "SELECT * FROM artikel where artikel.status='tampil'");
                 $jumlahData = mysqli_num_rows($result);
                 $jumlahHalaman = ceil($jumlahData / $jdataperhalaman);
                 $halamanAktif = ( isset($_GET["halaman"]) ) ? $_GET["halaman"] : 1 ;
@@ -87,18 +87,51 @@ session_start();
 
                 // ambilData adalah variabel untuk menampilkan data dari 2 tabel, yaitu artikel dan kategori_artikel. 
                 // Sehingga kita dapat menampilkan kategorinya, sesuai id_ktg di kedua tabel
-                $ambilData=mysqli_query($koneksi, "SELECT * FROM artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg order by id_artikel DESC
+                $ambilData=mysqli_query($koneksi, "SELECT * FROM artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg and artikel.status='tampil' order by id_artikel DESC
                 LIMIT $awalData,$jdataperhalaman");
 
-                $datakat=mysqli_query($koneksi, "SELECT *, COUNT( * ) as total FROM artikel inner join kategori_artikel on artikel.id_ktg=kategori_artikel.id_ktg GROUP BY kategori_artikel");
+                $datakat=mysqli_query($koneksi, "SELECT *, COUNT( * ) as total FROM artikel inner join kategori_artikel on artikel.id_ktg=kategori_artikel.id_ktg where artikel.status='tampil' GROUP BY kategori_artikel");
                 $jumlahkat = mysqli_num_rows($datakat);
                 if (ISSET($_POST['submit'])){
                     $cari = $_POST['nt'];
                    
-                    $query2 = " SELECT * FROM artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg AND judul LIKE '%$cari%' AND isi LIKE'%$cari%'";
+                    $query2 = " SELECT * FROM artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg AND artikel.status='tampil' AND judul LIKE '%$cari%' AND isi LIKE'%$cari%'";
                     // $query2 = "SELECT * FROM artikel WHERE judul LIKE '%$cari%'";
 
                     $sql = mysqli_query($koneksi, $query2);
+                         // menghitung data
+                         $jumlah_data = mysqli_num_rows($sql);
+                         if ( $jumlah_data> 0) {
+                         while ($dt = mysqli_fetch_array($sql)) { ?>
+                             <?php
+                             $isi = $dt['isi'];
+                             $num_char  = 250;
+                             $isibts = substr($isi,0,$num_char)."...";
+                             ?>    
+                             <article class="blog_item">
+                                     <div class="blog_item_img">
+                                                 <img class="card-img rounded-0" src="../gambar.php?id_artikel=<?php echo $dt['id_artikel']; ?>" alt="">
+                                                 <a href="#" class="blog_item_date">
+                                                     <h3><?php echo $dt['nama_penulis']; ?></h3>
+                                                 </a>
+                                     </div>
+                                     <div class="blog_details">
+                                         <a class="d-inline-block" href="single-blog.html">
+                                             <h2><a href="detailartikel.php?id_artikel=<?php echo $dt['id_artikel']; ?>"><?php echo $dt['judul']; ?></a></h2>
+                                         </a>
+                                         <p><?php echo $isibts ?><a href="detailartikel.php?id_artikel=<?php echo $dt['id_artikel']; ?>" class="more-btn">  <strong> Read more » </strong></a></p>
+                                         <ul class="blog-info-link">
+                                             <li><a>Kategori : <?php echo $dt['kategori_artikel'];?></a></li>
+                                             <li><a><?php echo $dt['tanggal'];?></a></li>
+                                         </ul>
+                                     </div>
+                             </article>
+                             
+                             <?php }}
+                         else {?>
+                             <center><img src="../assets/img/icon/error.png" alt=""></center>
+                             <?php        
+                         }
 
                     while ($dt = mysqli_fetch_array($sql)) { ?>
                         <?php
@@ -127,7 +160,7 @@ session_start();
                         <?php }
                 }elseif(isset($_GET["tampil"])){
                 $ktg = $_GET["tampil"];
-                $kat=mysqli_query($koneksi, "SELECT * FROM artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg AND artikel.id_ktg='$ktg'");      
+                $kat=mysqli_query($koneksi, "SELECT * FROM artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg and artikel.status='tampil'  AND artikel.id_ktg='$ktg'");      
                 while ($dat = mysqli_fetch_assoc($kat)) { ?>
                 <?php
                 $isi = $dat['isi'];

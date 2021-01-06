@@ -192,6 +192,18 @@ session_start();
 
 					}
 
+					// aksi noverifikasi
+					if(isset($_POST['noverifikasi']))
+					{
+						$sql6 = "UPDATE artikel SET  status = 'notampil' WHERE id_artikel = '$id_artikel'";			
+						if(mysqli_query($koneksi, $sql6)){
+							echo "<script type='text/javascript'>alert('Verifikasi Berhasil');; window.location='tabel_artikel.php'</script>";
+						} 
+						else{
+							echo "<script type='text/javascript'>alert('Verifikasi gagal'); window.location='tabel_artikel.php'</script>";
+						}
+
+					}
 					?>
 
         <div class="table-wrapper">
@@ -240,13 +252,13 @@ session_start();
 						<th>Isi</th>
 						<th>Gambar</th>
 						<th>Sumber</th>
-						<th>Actions</th>
+						<th colspan="2">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
 					<?php
 					$i = 1;
-					$ksql="SELECT * FROM artikel";
+					$ksql="SELECT * FROM artikel, kategori_artikel WHERE artikel.id_ktg=kategori_artikel.id_ktg AND status='tampil'";
 					$khasil = mysqli_query($koneksi,$ksql);
 					while($krow = mysqli_fetch_array($khasil))
 					{
@@ -279,6 +291,9 @@ session_start();
                             <a href="#editEmployeeModal<?php echo $krow['id_artikel']; ?>" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                             <a href="#deleteEmployeeModal<?php echo $krow['id_artikel']; ?>" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
+						<td>
+							<input type="submit" name="noverifikasi" class="btn btn-primary" onclick="return confirm('Apakah Anda yakin ingin tidak akan menampilkan artikel ini?')" value="Arsip"> 
+						</td>
                     </tr>
 					
 
@@ -442,6 +457,84 @@ session_start();
 				</table>
 				</div>
 				</div>
+				<br><br>
+				<?php
+					// kode aksi verifikasi
+					if(isset($_POST['verifikasi']))
+					{
+						$id_artikel1 = $_POST['id_artikel'];
+						$sql5 = "UPDATE artikel SET  status = 'tampil' WHERE id_artikel = '$id_artikel1'";			
+						if(mysqli_query($koneksi, $sql5)){
+							echo "<script type='text/javascript'>alert('Verifikasi Berhasil');; window.location='tabel_artikel.php'</script>";
+						} 
+						else{
+							echo "<script type='text/javascript'>alert('Verifikasi gagal'); window.location='tabel_artikel.php'</script>";
+						}
+
+					}
+
+					//aksi hapus
+					if(isset($_POST['hapus'])){
+						include 'koneksi.php';
+						$id4 = $_POST['id_artikel'];
+						$sql = "DELETE FROM artikel WHERE id_artikel = '$id4'";
+						if(mysqli_query($koneksi, $sql)){
+							echo "<script>alert('Pesan Konsultasi Berhasil Dihapus ..');</script>";
+						} 
+						else{
+							echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+						}
+					  }
+				?>
+				<h3 class="page-header">Data Artikel (Baru) / Belum Terverifikasi</h3>
+
+				<table  class="table table-striped table-hover" >
+						<th>No</th>
+                        <th>ID artikel</th>
+						<th>ID Kategori</th>
+						<th>Tanggal</th>
+						<th>Nama Penulis</th>
+						<th>Judul</th>
+						<th>Isi</th>
+						<th>Gambar</th>
+						<th>Sumber</th>
+						<th colspan="2">Actions</th>
+						<?php
+						$i =1;
+							include "koneksi.php";
+							$sql="SELECT * FROM artikel, kategori_artikel WHERE artikel.id_ktg=kategori_artikel.id_ktg AND status='notampil'";
+							$jab = mysqli_query($koneksi,$sql);
+							while($data = mysqli_fetch_array($jab))
+							{ ?>
+							<form method="POST" >
+							<tr>
+							<td><?= $i?> </td>
+							<!-- Code menampilkan data -->
+							<td><?php echo $data['id_artikel']; ?></td>
+							<td><?php echo $data['id_ktg']; ?></td>
+							<td><?php echo $data['tanggal']; ?></td>
+							<td><?php echo $data['nama_penulis']; ?></td>
+							<td><?php echo $data['judul']; ?></td>
+							<td><?php echo $data['isi']; ?></td>
+							<td>
+								<img src="foto/foto_artikel.php?id_artikel=<?php echo $data['id_artikel']; ?>"
+												alt="<?php echo "Belum upload foto" ?>" height="200"></img>
+							</td>
+							<td><?php echo $data['sumber']; ?></td>
+							<td>
+								<input type="hidden" value="<?php echo $data['id_artikel']; ?>" name="id_artikel">
+								<input type="submit" class="btn btn-success" value="Verifikasi" name="verifikasi">
+							</td>
+							<td>
+								<input type="submit" name="hapus" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus pesan ini?')" value="HAPUS"> 
+							</td>
+							</tr>
+							</form>
+							<?php
+							$i++;
+						} ?>
+				</table>
+
                 </div>
                 <!-- /.container-fluid -->
             </div>

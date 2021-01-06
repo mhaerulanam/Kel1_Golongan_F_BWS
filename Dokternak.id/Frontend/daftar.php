@@ -245,17 +245,14 @@ if(isset($_POST["daftarpeternak"])) {
 								$ambilfoto   = addslashes(file_get_contents($_FILES['foto_peternak']['tmp_name']));
 								$sql = "INSERT INTO peternak VALUES ('$id_peternak','$namadepan_peternak','$namabelakang_peternak','$email_peternak','$no_hp','$jenis_kelamin','$alamat','$ambilfoto','$id')";
 							if(mysqli_query($koneksi, $sql)){
-								$nilaihasil = "Records inserted successfully.";
+                session_start();
+                header("location:index.php?pesan=sukses");
 							} 
 							else{
-								echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+                       header("location:registrasi_dokter.php?pesan=gagal");
               }
             }
       }
-      //else
-      //{
-      //  header("location:registrasi_dokter.php?pesan=gagal");
-      //}
   }
 
 

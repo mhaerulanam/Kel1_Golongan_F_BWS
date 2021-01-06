@@ -61,6 +61,9 @@
                                 </ul>
                             </li>
                             <li>
+                                <a href="tabel_peternak.php"><i class="fa fa-table fa-fw"> </i> Data Peternak</a>
+                            </li>
+                            <li>
                                 <a><i class="fa fa-table fa-fw"> </i> Data Dokter</a>
                                 <ul>
                                 <li><a href="tabel_dokter.php"> Data Dokter</a></li>

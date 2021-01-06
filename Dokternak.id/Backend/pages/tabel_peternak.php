@@ -85,7 +85,7 @@ session_start();
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
-                            <h1 class="page-header">Data Peternak</h1>
+                            <h1 class="page-header">Data User Peternak</h1>
 						</div>
 						
 
@@ -100,16 +100,14 @@ session_start();
 						$namadepan_peternak = $_POST['namadepan_peternak'];
 						$namabelakang_peternak = $_POST['namabelakang_peternak'];
 						$email_peternak = $_POST['email_peternak'];
-						$alamat = $_POST['alamat'];
 						$no_hp = $_POST['no_hp'];
 						$jenis_kelamin = $_POST['jenis_kelamin'];
-						$password = $_POST['password'];
+						$alamat = $_POST['alamat'];
 						$foto_peternak = $_POST['foto_peternak'];
 						$id_user = $_POST['id_user'];
 						$username = $_POST['username'];
 						$password = $_POST['password'];
-						$id_role = $_POST['id_role'];
-
+						$id_role = 3;
 						
 
 					//Code tombol tambah	
@@ -121,11 +119,22 @@ session_start();
 						$jumlah_data = mysqli_num_rows($cek);
 						if ($jumlah_data >= 1 ) {
 					
-							echo "<script>alert(' Id User yang sama sudah digunakan');history.go(-1);</script>";
+							echo "<script>alert(' Id peternak yang sama sudah digunakan');history.go(-1);</script>";
 						}
 						else{
 							//tambah
-							$sql = "INSERT INTO peternak VALUES ('','$namadepan_peternak','$namabelakang_peternak','$email_peternak','$no_hp','$jenis_kelamin','$alamat','$foto_peternak','')";
+							$sql = "INSERT INTO user VALUES ('','$username','$password','$id_role')";
+							mysqli_query($koneksi,$sql);
+							//cek keberhasilan
+							if(mysqli_affected_rows($koneksi) > 0){
+								$kode = date('ymdHs'); 
+								$id_peternak = "$kode";
+							 	$data = "";
+							  	$ambildata=mysqli_query($koneksi, "SELECT * FROM user order by id_user DESC LIMIT 1");
+							  	$row = mysqli_fetch_array($ambildata);
+								$id = $row['id_user'];
+								$ambilfoto   = addslashes(file_get_contents($_FILES['foto']['tmp_name']));
+								$sql = "INSERT INTO peternak VALUES ('$id_peternak','$namadepan_peternak','$namabelakang_peternak','$email_peternak','$no_hp','$jenis_kelamin','$alamat','$ambilfoto','$id')";
 							if(mysqli_query($koneksi, $sql)){
 								$nilaihasil = "Records inserted successfully.";
 							} 
@@ -133,13 +142,54 @@ session_start();
 								echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
 							}
 						}
+						}
 					}
 
 					// code tombol edit
 					if(isset($_POST['edit'])){
 						//edit
-						$sql = "UPDATE peternak SET namadepan_peternak = '$namadepan_peternak', namabelakang_peternak = '$namabelakang_peternak', email_peternak = '$email_peternak', no_hp = '$no_hp', jenis_kelamin = '$jenis_kelamin', alamat = '$alamat', foto_peternak = '$foto_peternak' WHERE id_peternak = '$id_peternak'";
-						if(mysqli_query($koneksi, $sql,$query1)){
+						$lokasiFoto = $_FILES['foto']['tmp_name'];
+						if($lokasiFoto==""){
+							$sql = "UPDATE peternak SET  namadepan_peternak = '$namadepan_peternak', namabelakang_peternak = '$namabelakang_peternak', email_peternak = '$email_peternak', no_hp = '$no_hp', jenis_kelamin = '$jenis_kelamin', alamat = '$alamat' WHERE id_peternak = '$id_peternak'";
+							include 'koneksi.php';
+							if(mysqli_query($koneksi, $sql)){
+								$data = "";
+								$ambildata=mysqli_query($koneksi, "SELECT * FROM peternak where id_peternak='$id_peternak'");
+								$row = mysqli_fetch_array($ambildata);
+								$id = $row['id_user'];
+								  $sql1 = "UPDATE user SET  username = '$username', password = '$password', id_role = '$id_role' WHERE id_user = '$id'";
+								if(mysqli_query($koneksi, $sql1)){
+									$nilaihasil = "Records updated successfully.";
+								}else{
+									echo "ERROR: Could not able to execute $sql1. " . mysqli_error($koneksi);
+								}
+							} 
+							else{
+								echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+							}
+						}else{
+							$ambilfoto1   = addslashes(file_get_contents($_FILES['foto']['tmp_name']));
+							echo $ambilfoto1;
+							$sql = "UPDATE peternak SET  namadepan_peternak = '$namadepan_peternak', namabelakang_peternak = '$namabelakang_peternak', email_peternak = '$email_peternak', no_hp = '$no_hp', jenis_kelamin = '$jenis_kelamin', alamat = '$alamat', foto_peternak = '$ambilfoto1' WHERE id_peternak = '$id_peternak'";
+							include 'koneksi.php';
+							if(mysqli_query($koneksi, $sql)){
+								$data = "";
+								$ambildata=mysqli_query($koneksi, "SELECT * FROM peternak where id_peternak='$id_peternak'");
+								$row = mysqli_fetch_array($ambildata);
+								$id = $row['id_user'];
+								  $sql1 = "UPDATE user SET  username = '$username', password = '$password', id_role = '$id_role' WHERE id_user = '$id'";
+								if(mysqli_query($koneksi, $sql1)){
+									$nilaihasil = "Records updated successfully.";
+								}else{
+									echo "ERROR: Could not able to execute $sql1. " . mysqli_error($koneksi);
+								}
+							} 
+							else{
+								echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+							}
+						}
+
+						if(mysqli_query($koneksi, $sql)){
 							$nilaihasil = "Records updated successfully.";
 						} 
 						else{
@@ -150,14 +200,17 @@ session_start();
 					//code delete per item
 					if(isset($_POST['delete'])){
 						//delete
-						$sql = "DELETE FROM peternak WHERE id_peternak = '$id_peternak'";
+						$sql = "DELETE FROM peternak WHERE  id_peternak = '$id_peternak'";
+							$ambildata=mysqli_query($koneksi, "SELECT * FROM peternak where  id_peternak = '$id_peternak'");
+							$row = mysqli_fetch_array($ambildata);
+							$id = $row['id_user'];
+							$sql2 = "DELETE FROM user WHERE id_user = '$id'";
 						if(mysqli_query($koneksi, $sql)){
 							$nilaihasil = "Records deleted successfully.";
 						} 
 						else{
 							echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
 						}
-
 					}
 
 					//code delete all
@@ -178,23 +231,6 @@ session_start();
 					}
 
 					?>
-					<div class="table-wrapper">
-            <!-- <div class="table-title">
-                <div class="row">
-                    <div class="col-sm-6">
-					<form method="POST" action="cetak/cetak_datapeternak.php" target="_blank">
-									<div class="form-group">
-                                            <label>Tanggal Awal:</label>
-                                            <input type="date" name="tanggal_awal" id="tanggal_awal" class="form-control" required>
-                                        </div>
-										<div class="form-group">
-                                            <label>Tanggal Akhir:</label>
-                                            <input type="date" name="tanggal_akhir" id="tanggal_akhir" class="form-control" required>
-                                        </div>
-										<input type="submit" class="btn btn-info" value="Cetak" name="submit">
-					</form>
-					</div> -->
-
 <form method="post" action="">
         <div class="table-wrapper">
             <div class="table-title">
@@ -203,6 +239,7 @@ session_start();
 					</div>
 					<div class="col-sm-6">
 						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">++ Tambah Data	</a>
+						<a href="cetak/cetak_userpeternak.php" target="_blank" class="btn btn-info">Cetak</a>
 						<input type="submit" name="deleteall" value="Delete Selected" class="btn btn-danger" onclick="return confirm('Are you sure delete selected records?')">
 					</div>
 				</div>
@@ -219,15 +256,15 @@ session_start();
 								<label for="selectAll"></label>
 							</span>
 						</th>
-                        <th>ID Peternak</th>
-						<th>Nama Depan</th>
-						<th>Nama Belakang</th>
-						<th>Email</th>
-						<th>Alamat</th>
+						<th>No</th>
+						<th>ID Peternak</th>
+						<th>Nama Lengkap</th>
+						<th>Email </th>
 						<th>No Hp</th>
 						<th>Jenis Kelamin</th>
+						<th>Alamat</th>
 						<th>Foto</th>
-						<th>ID User</th>
+                        <th>ID User</th>
 						<th>Username</th>
 						<th>Password</th>
 						<th>Actions</th>
@@ -235,35 +272,37 @@ session_start();
                 </thead>
                 <tbody>
 					<?php
-					// $i = 1;
-					$ksql="SELECT * FROM peternak";
-					$asql="SELECT * FROM user";
+					$i = 1;
+					$ksql="SELECT * FROM peternak,user where peternak.id_user=user.id_user order by peternak.id_peternak";
 					$khasil = mysqli_query($koneksi,$ksql);
-					$ahasil = mysqli_query($koneksi,$asql);
-					while($krow = mysqli_fetch_array($khasil)) :
+					while($krow = mysqli_fetch_array($khasil))
+					{
 					?>
 
 					<tr>
 						<td>
 							<span class="custom-checkbox">
-								<input type="checkbox" id="checkbox5" name="pilih[]" value="<?php echo $krow['id_peternak']; ?>">
+								<input type="checkbox" id="checkbox5" name="pilih[]" value="<?php echo $krow['id_user']; ?>">
 								<label for="checkbox5"></label>
 							</span>
 						</td>
+						<td><?= $i ?></td>
 
 						<!-- Code menampilkan data -->
 						<td><?php echo $krow['id_peternak']; ?></td>
-						<td><?php echo $krow['namadepan_peternak']; ?></td>
-						<td><?php echo $krow['namabelakang_peternak']; ?></td>
+						<td><?php echo $krow['namadepan_peternak']; ?> <?php echo $krow['namabelakang_peternak'];?></td>
 						<td><?php echo $krow['email_peternak']; ?></td>
-						<td><?php echo $krow['alamat']; ?></td>
 						<td><?php echo $krow['no_hp']; ?></td>
 						<td><?php echo $krow['jenis_kelamin']; ?></td>
-						<td><img src="foto/foto_peternak1.php?id_peternak=<?php echo $krow['id_peternak']; ?>" width=80px /> </td>
+						<td><?php echo $krow['alamat']; ?></td>
+						<td>
+							<img src="foto/foto_peternak.php?id_peternak=<?php echo $krow['id_peternak']; ?>"
+							alt="<?php echo "Belum upload foto" ?>" height="100"></img>
+						</td>
 						<td><?php echo $krow['id_user']; ?></td>
 						<td><?php echo $krow['username']; ?></td>
 						<td><?php echo $krow['password']; ?></td>
-						
+
 						<!-- Tombol Action -->
                         <td>
                             <a href="#editEmployeeModal<?php echo $krow['id_peternak']; ?>" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
@@ -277,7 +316,7 @@ session_start();
 					<div id="editEmployeeModal<?php echo $krow['id_peternak']; ?>" class="modal fade">
 						<div class="modal-dialog">
 							<div class="modal-content">
-								<form role="form" method="POST">
+								<form role="form" method="POST" enctype="multipart/form-data">
 									<input type="hidden" class="form-control" value="<?php echo $krow['id_peternak']; ?>" name="id_peternak" required>
 									<div class="modal-header">
 										<h4 class="modal-title">Edit</h4>
@@ -285,31 +324,49 @@ session_start();
 									</div>
 									<div class="modal-body">
                                         <div class="form-group">
-                                            <label>Nama Depan :</label>
+                                            <label>Nama Depan Peternak:</label>
                                             <input type="text" name="namadepan_peternak" id="namadepan_peternak" class="form-control" value="<?php echo $krow['namadepan_peternak']; ?>" >
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Nama Belakang :</label>
-                                            <input type="text" name="namabelakang_peternak" id="namabelakang_peternak" class="form-control" value="<?php echo $krow['namabelakang_peternak']; ?>"  required>
 										</div>
+										<div class="form-group">
+                                            <label>Nama Belakang Peternak:</label>
+                                            <input type="text" name="namabelakang_peternak" id="namabelakang_peternak" class="form-control" value="<?php echo $krow['namabelakang_peternak']; ?>" >
+                                        </div>
+                                       
 										<div class="form-group">
                                             <label>Email :</label>
                                             <input type="email" name="email_peternak" id="email_peternak" class="form-control" value="<?php echo $krow['email_peternak']; ?>" required>
 										</div>
 										<div class="form-group">
-                                            <label>No Hp:</label>
+                                            <label>Telepone :</label>
                                             <input type="number" name="no_hp" id="no_hp" class="form-control" value="<?php echo $krow['no_hp']; ?>" required>
 										</div>
 										<div class="form-group">
-                                            <label>Jenis Kelamin :</label>
-                                            <input type="text" name="jenis_kelamin" id="jenis_kelamin" class="form-control" value="<?php echo $krow['jenis_kelamin']; ?>" required>
+                                            <label>Jenis Kelamin :</label><br>
+                                            	<div class="radio-inline">
+													<input type="radio" name="jenis_kelamin" id="jenis_kelamin" value="Laki-Laki" <?php if($krow['jenis_kelamin']=='Laki-Laki') echo 'checked' ?>> Laki-Laki
+                                                </div>
+                                                <div class="radio-inline">
+													<input type="radio" name="jenis_kelamin" id="jenis_kelamin" value="Perempuan" <?php if($krow['jenis_kelamin']=='Perempuan') echo 'checked' ?>> Perempuan
+												</div>
+										</div> 
+										<div class="form-group">
+                                            <label>Tempat :</label>
+                                            <input type="text" name="alamat" id="alamat" class="form-control" value="<?php echo $krow['alamat']; ?>" required>
+										</div> 
+										<div class="form-group">
+											<label>Foto :</label>
+												<img src="foto/foto_peternak.php?id_peternak=<?php echo $krow['id_peternak']; ?>"
+												alt="<?php echo "Belum upload foto" ?>" height="100"></img>
+                                            <input type="file" name="foto" id="foto" class="form-control">
+                                        </div>     
+										<div class="form-group">
+                                            <label>Username :</label>
+                                            <input type="text" name="username" id="username" class="form-control" value="<?php echo $krow['username']; ?>"  required>
 										</div>
 										<div class="form-group">
-                                            <label>Foto :</label>
-                                            <input type="file" name="foto_peternak" id="foto_peternak" class="form-control">
-                                        </div>     
-										
+                                            <label>Password :</label>
+                                            <input type="password" name="password" id="password" class="form-control" value="<?php echo $krow['password']; ?>" required>
+										</div>
 												<div class="modal-footer">
 													<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
 													<input type="submit" class="btn btn-info" value="Save" name="edit">
@@ -325,7 +382,7 @@ session_start();
 					<div id="deleteEmployeeModal<?php echo $krow['id_peternak']; ?>" class="modal fade">
 						<div class="modal-dialog">
 							<div class="modal-content">
-							<form method="post" action="">
+							<form method="post" action="" enctype="multipart/form-data">
 								<input type="text" class="form-control" value="<?php echo $krow['id_peternak']; ?>" name="id_peternak" required>
 									<div class="modal-header">
 										<h4 class="modal-title">Delete</h4>
@@ -345,9 +402,8 @@ session_start();
 					</div>
 					<?php
 
-					//$i++;
-					endwhile;
-				
+					$i++;
+					}
 						// Close connection
 						mysqli_close($koneksi);
 					?>
@@ -360,43 +416,56 @@ session_start();
 					<div id="addEmployeeModal" class="modal fade">
 						<div class="modal-dialog">
 							<div class="modal-content">
-							<form role="form" method="POST" action="">
+							<form role="form" method="POST" action=""  enctype="multipart/form-data">
 									<div class="modal-header">
 										<h4 class="modal-title">Tambah Data</h4>
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 									</div>
 									<div class="modal-body">
-                                        <div class="form-group">
-                                            <label>Nama Depan :</label>
-                                            <input type="text" name="namadepan_peternak" id="namadepan_peternak" class="form-control" required >
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Nama Belakang:</label>
-                                            <input type="text" name="namabelakang_peternak" id="namabelakang_peternak" class="form-control" required>
+									<div class="form-group">
+                                            <label>Nama Depan Peternak:</label>
+                                            <input type="text" name="namadepan_peternak" id="namadepan_peternak" class="form-control" value="<?php echo $krow['namadepan_peternak']; ?>" >
 										</div>
+										<div class="form-group">
+                                            <label>Nama Belakang Peternak:</label>
+                                            <input type="text" name="namabelakang_peternak" id="namabelakang_peternak" class="form-control" value="<?php echo $krow['namabelakang_peternak']; ?>" >
+                                        </div>
+                                       
 										<div class="form-group">
                                             <label>Email :</label>
-                                            <input type="email" name="email_peternak" id="email_peternak" class="form-control" required>
+                                            <input type="email" name="email_peternak" id="email_peternak" class="form-control" value="<?php echo $krow['email_peternak']; ?>" required>
 										</div>
 										<div class="form-group">
-                                            <label>No Hp :</label>
-                                            <input type="number" name="no_hp" id="no_hp" class="form-control" required>
+                                            <label>Telepone :</label>
+                                            <input type="number" name="no_hp" id="no_hp" class="form-control" value="<?php echo $krow['no_hp']; ?>" required>
 										</div>
 										<div class="form-group">
-                                            <label>Jenis Kelamin :</label>
-                                            <input type="text" name="jenis_kelamin" id="jenis_kelamin" class="form-control"  required>
-										</div>
-										<div class="form-group">
-                                            <label>Alamat :</label>
-                                            <input type="text" name="alamat" id="alamat" class="form-control" required>
+                                            <label>Jenis Kelamin :</label><br>
+                                            		<div class="radio-inline">
+													<input type="radio" name="jenis_kelamin" id="jenis_kelamin" value="Laki-Laki" > Laki-Laki
+                                                    </div>
+                                                    <div class="radio-inline">
+													<input type="radio" name="jenis_kelamin" id="jenis_kelamin" value="Perempuan" > Perempuan
+												</div>
 										</div> 
-                                            <label>Foto :</label>
-                                            <input type="file" name="foto_peternak" id="foto_peternak" class="form-control">
-                                        
+										<div class="form-group">
+                                            <label>Tempat :</label>
+                                            <input type="text" name="alamat" id="alamat" class="form-control" value="<?php echo $krow['alamat']; ?>" required>
+										</div> 
+										<div class="form-group">
+											<label>Foto :</label>
+                                            <input type="file" name="foto" id="foto" class="form-control">
+                                        </div>     
+										<div class="form-group">
+                                            <label>Username :</label>
+                                            <input type="text" name="username" id="username" class="form-control" value="<?php echo $krow['username']; ?>"  required>
+										</div>
+										<div class="form-group">
+                                            <label>Password :</label>
+                                            <input type="password" name="password" id="password" class="form-control" value="<?php echo $krow['password']; ?>" required>
+										</div>
 												<div class="modal-footer">
 													<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-													<a href="cetak/cetak_datapeternak.php" target="_blank" class="btn btn-info">Cetak</a>
 													<input type="submit" class="btn btn-success" value="Tambah" name="tambah">
 												</div>
 									</div>

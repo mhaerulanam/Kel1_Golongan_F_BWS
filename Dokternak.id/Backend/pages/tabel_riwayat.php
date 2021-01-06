@@ -102,10 +102,11 @@ session_start();
 						$id_respon = $_POST['id_respon'];
 						$keluhan = $_POST['keluhan'];
 						$respon = $_POST['respon'];
+						$tanggal = $_POST['tanggal'];
 
 					//Code tombol tambah	
 					if(isset($_POST['tambah'])){
-							$sql = "INSERT INTO riwayat_konsultasi VALUES ('','$id_konsultasi','$id_respon','$keluhan','$respon')";
+							$sql = "INSERT INTO riwayat_konsultasi VALUES ('','$id_konsultasi','$id_respon','$keluhan','$respon','$tanggal')";
 							if(mysqli_query($koneksi, $sql)){
 								$nilaihasil = "Records inserted successfully.";
 							} 
@@ -118,7 +119,7 @@ session_start();
 					// code tombol edit 
 					if(isset($_POST['edit'])){
 						//edit
-						$sql = "UPDATE riwayat_konsultasi SET id_konsultasi = '$id_konsultasi', id_respon = '$id_respon', keluhan = '$keluhan', respon = '$respon' WHERE id_riwayat = '$id_riwayat'";
+						$sql = "UPDATE riwayat_konsultasi SET id_konsultasi = '$id_konsultasi', id_respon = '$id_respon', keluhan = '$keluhan', respon = '$respon', tanggal = '$tanggal' WHERE id_riwayat = '$id_riwayat'";
 						if(mysqli_query($koneksi, $sql)){
 							$nilaihasil = "Records updated successfully.";
 						} 
@@ -159,6 +160,22 @@ session_start();
 
 					?>
 
+<div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+					<form method="POST" action="cetak/cetak_konsultasi.php" target="_blank">
+									<div class="form-group">
+                                            <label>Tanggal Awal:</label>
+                                            <input type="date" name="tanggal_awal" id="tanggal_awal" class="form-control" required>
+                                        </div>
+										<div class="form-group">
+                                            <label>Tanggal Akhir:</label>
+                                            <input type="date" name="tanggal_akhir" id="tanggal_akhir" class="form-control" required>
+                                        </div>
+										<input type="submit" class="btn btn-info" value="Cetak" name="submit">
+					</form>
+					</div>
 
 <form method="post" action="">
         <div class="table-wrapper">
@@ -168,7 +185,6 @@ session_start();
 					</div>
 					<div class="col-sm-6">
 						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">++ Tambah Data	</a>
-						<a href="cetak/cetak_riwayat.php" target="_blank" class="btn btn-info">Cetak</a>
 						<input type="submit" name="deleteall" value="Delete Selected" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
 					</div>
 				</div>
@@ -192,6 +208,7 @@ session_start();
 						<th>ID Respon</th>
                         <th>Konsultasi</th>
 						<th>Respon</th>
+						<th>Tanggal</th>
                         <th>Actions</th>
 
                     </tr>
@@ -220,6 +237,7 @@ session_start();
 						<td><?php echo $krow['id_respon']; ?></td>
                         <td><?php echo $krow['keluhan']; ?></td>
                         <td><?php echo $krow['respon']; ?></td>
+						<td><?php echo $krow['tanggal']; ?></td>
 
 						<!-- Tombol Action -->
                         <td>
@@ -248,6 +266,10 @@ session_start();
 										<div class="form-group">
                                             <label>Respon :</label>
                                             <input type="text" name="respon" id="respon" class="form-control" value="<?php echo $krow['respon']; ?>" >
+                                        </div>
+										<div class="form-group">
+                                            <label>Tanggal :</label>
+                                            <input type="date" name="tanggal" id="tanggal" class="form-control" value="<?php echo $krow['tanggal']; ?>" >
                                         </div>
 										<div class="modal-footer">
 											<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
@@ -316,6 +338,10 @@ session_start();
 										<div class="form-group">
                                             <label>Respon :</label>
                                             <input type="text" name="respon" id="respon" class="form-control" value="<?php echo $krow['respon']; ?>" >
+                                        </div>
+										<div class="form-group">
+                                            <label>Tanggal :</label>
+                                            <input type="date" name="tanggal" id="tanggal" class="form-control" value="<?php echo $krow['tanggal']; ?>" >
                                         </div>
 										</div>
 										<div class="modal-footer">

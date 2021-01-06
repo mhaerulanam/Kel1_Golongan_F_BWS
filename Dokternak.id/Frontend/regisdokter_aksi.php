@@ -3,25 +3,25 @@ include "koneksi.php";
 
 // include('koneksi.php');
 
-if(isset($_POST['daftar']))
-{
-    echo $_POST['nama'];
-    if(!isset($_FILES['file_foto']['tmp_name'])) { 
+if(isset($_POST['daftar'])) {
+    // echo $_POST['nama'];
+    $lokasiFoto = $_FILES['file_foto']['tmp_name'];
+    $lokasiSertif = $_FILES['file_sertifikat']['tmp_name'];
+    if($lokasiFoto=="" || $lokasiSertif=="") { 
         header("location:index.php?pesan=kurang-foto");
-    }
-    elseif(!isset($_FILES['file_sertifikat']['tmp_name'])) { 
-        header("location:index.php?pesan=kurang-foto");
-    }
-    else
-    {
-        // $datadokter = mysqli_query($koneksi, "SELECT max(id_dokter) from dokter");
-        // $id_tertinggi = mysqli_fetch_array($datadokter);
+    } else{
 
         $kode = date('His'); //jam,menit,detik
         $id_dokter= "DOC$kode";
+
         $fp_name = $_FILES['file_foto']['name'];
         $fp_size = $_FILES['file_foto']['size'];
         $fp_type = $_FILES['file_foto']['type'];
+
+        // $fs_name = $_FILES['file_sertifikat']['name'];
+        // $fs_size = $_FILES['file_sertifikat']['size'];
+        // $fs_type = $_FILES['file_sertifikat']['type'];
+
         $nama = $_POST['nama'];
         $email = $_POST['email'];
         $jk = $_POST['jk'];
@@ -40,12 +40,11 @@ if(isset($_POST['daftar']))
             mysqli_query($koneksi,"insert into dokter values ('$id_dokter','$nama','$email','$jk','$alamat','$tempat','$telpon', '$fp', '$sertif', '$jabatan', '$jadwal_kerja', '$username', '$password')");
             // echo $jadwal_kerja, $username, $password,$id_dokter, $nama, $email, $jk, $alamat, $tempat, $telpon, $fp, $sertif, $jabatan ;
             header("location:index.php?pesan=berhasil");
-        }
-        else
-        {
+        }else{
             header("location:index.php?pesan=gagal");
         }
     }
 }
 ?>
 <!-- (id_dokter, nama, email, jenis_kelamin, alamat, tempat, telpon, foto, sertifikasi, id_jabatan, jadwal_kerja, username, password)  -->
+<!-- and $fs_size < 10000000 ($fs_type =='image/jpeg' or $fs_type == 'application/pdf') -->

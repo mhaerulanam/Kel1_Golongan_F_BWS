@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>CETAK DATA DOKUMENTASI - DOKTERNAK.ID</title>
+	<title>CETAK DATA USER ADMIN - DOKTERNAK.ID</title>
 </head>
 <body>
  
 	<center>
  
-		<h2>DATA DOKUMENTASI</h2>
+		<h2>DATA USER (ADMIN)</h2>
 		<h4>Dokternak.id</h4>
  
 	</center>

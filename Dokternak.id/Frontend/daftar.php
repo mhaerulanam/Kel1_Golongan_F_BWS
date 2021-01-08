@@ -302,10 +302,10 @@ if(isset($_POST["daftarpeternak"])) {
             <label for="password_peternak"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
             <input type="password" class="form-control" name="password_peternak" placeholder="Masukkan angka dan huruf" required>
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="psws"><span class="glyphicon glyphicon-eye-open"></span> Ketik Ulang Password</label>
             <input type="password" class="form-control" name="" placeholder="Ketik ulang password Anda" required>
-          </div>
+          </div> -->
         </div>
 
         <!-- Kanan Bang **************************************************************************************-->

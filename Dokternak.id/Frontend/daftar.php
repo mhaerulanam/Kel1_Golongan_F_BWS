@@ -359,11 +359,9 @@ if(isset($_POST["daftarpeternak"])) {
         
 
           <div class="form-group">
-          
-          
-          <!-- <div class="checkbox">
-            <label><input type="checkbox" value="" checked>Menerima Persyaratan Yang Berlaku</label>
-          </div> -->
+          <div class="checkbox">
+            <label><input type="checkbox" value="" checked>Dengan ini saya menyetujui segala ketentuan dalam website Dokternak.id</label>
+          </div>
           <button type="submit" class="btn btn-success btn-block" name="daftarpeternak"><span class="glyphicon glyphicon-check"></span> Daftar</button>
           </div>
           </form>

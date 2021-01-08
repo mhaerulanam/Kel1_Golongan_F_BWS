@@ -448,7 +448,6 @@ session_start();
 										    
 												<div class="modal-footer">
 													<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-													<a href="cetak/cetak_datarekammedik.php" target="_blank" class="btn btn-info">Cetak</a>
 													<input type="submit" class="btn btn-success" value="Tambah" name="tambah">
 												</div>
 									</div>

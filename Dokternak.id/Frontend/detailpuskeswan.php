@@ -32,6 +32,7 @@ session_start();
 
     <header>
       <?php include('navbar.php'); ?>
+      <?php include "modal/login.php"; ?>
     </header>
 
   <div class="page-content">

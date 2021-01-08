@@ -26,7 +26,7 @@ session_start();
       <link rel="stylesheet" href="../assets/css/style.css">
       <link rel="stylesheet" href="../assets/css/responsive.css">
 
-        <title>Dokter Data Obat</title>
+        <title>Data Rekam Medik</title>
 
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 		<link rel="stylesheet" href="/resources/demos/style.css">

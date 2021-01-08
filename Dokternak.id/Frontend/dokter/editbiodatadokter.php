@@ -254,7 +254,8 @@ form {
                   <label><input type="checkbox" value="" checked>Menerima Persyaratan Yang Berlaku</label>
                 </div> -->
                 <input type="submit" class="btn btn-info" value="Edit" name="edit">
-                <input type="reset" class="btn btn-info" value="Batal" name="edit">
+                <a href="landingpagedokter.php" class="btn btn-info">Batal</a>
+                <!-- <input type="reset"  class="btn btn-info" value="Batal" name="edit"> -->
                 </div>
               </div>
             </form>

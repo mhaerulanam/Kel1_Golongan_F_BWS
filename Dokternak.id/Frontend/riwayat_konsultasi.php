@@ -207,7 +207,7 @@ include "modal/ubah_password.php";
                             <div class="chat_ib">
                             <h5> Kepada : <?php echo $data['nama']; ?> <span class="chat_date" name="klik"><?php echo $data['tanggal_respon']; ?><br></span></h5>
                             <p><?php echo $isibts ?></p>
-                            <input type="submit" name="klik" class="lihat" value="Lihat">
+                            <input type="submit" name="klik" class="genric-btn primary-border" value="Lihat">
                             </div>
                         </div>
                         </div>
@@ -224,7 +224,7 @@ include "modal/ubah_password.php";
                                                         alt="<?php echo $data['nama']; ?>" height="50"></img></div>
                             <div class="chat_ib">
                             <h5> Kepada : <?php echo $data['nama']; ?> <span class="chat_date" name="klik"><?php echo $data['tanggal_respon']; ?></span></h5>
-                            <p name="klik"><?php echo $data['respon']; ?></p><input type="submit" name="klik" class="lihat" value="Lihat">
+                            <p name="klik"><?php echo $data['respon']; ?></p><input type="submit" name="klik" class="genric-btn primary-border" value="Lihat">
                             </div>
                         </div>
                         </div>
@@ -264,7 +264,7 @@ include "modal/ubah_password.php";
                     <div class="flex-grow-4 pl-1">
                     <input type="hidden" name="idkr" value="<?php echo $idr ?>">
                     <input type="hidden" name="idk" value="<?php echo $idd ?>">
-                    <input type="submit" name="hapus" class="genric-btn second" onclick="return confirm('Apakah Anda yakin ingin menghapus pesan ini?')" value="HAPUS"> 
+                    <input type="submit" name="hapus" class="genric-btn danger" onclick="return confirm('Apakah Anda yakin ingin menghapus pesan ini?')" value="HAPUS"> 
                     </div>
                 </div>
                 </form>
@@ -391,7 +391,7 @@ include "modal/ubah_password.php";
                                                         alt="<?php echo $data3['nama']; ?>" height="50"></img></div>
                             <div class="chat_ib">
                             <h5> Kepada : <?php echo $data3['nama']; ?> <span class="chat_date" name="klik"><?php echo $data3['tanggal']; ?><br></span></h5>
-                            <p name="klik">-- Belum Ada Balasan --</p><button name="klok" class="lihat" onclick="openCity(event, 'terkirim')"  id="defaultOpen"><p>Lihat</p></button>
+                            <p name="klik">-- Belum Ada Balasan --</p><button name="klok" class="genric-btn primary-border" onclick="openCity(event, 'terkirim')"  id="defaultOpen"><p>Lihat</p></button>
                             </div>
                         </div>
                         </div>
@@ -430,7 +430,7 @@ include "modal/ubah_password.php";
                     </div>
                     <div class="flex-grow-4 pl-1">
                     <input type="hidden" name="idk" value="<?php echo $idds ?>">
-                    <input type="submit" name="hps" class="genric-btn second" onclick="return confirm('Apakah Anda yakin ingin menghapus pesan ini?')" value="HAPUS"> 
+                    <input type="submit" name="hps" class="genric-btn danger" onclick="return confirm('Apakah Anda yakin ingin menghapus pesan ini?')" value="HAPUS"> 
                     </div>
                 </div>
                 </form>

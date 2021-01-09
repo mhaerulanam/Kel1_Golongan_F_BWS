@@ -51,11 +51,6 @@
                             }
                             ?> 
                         </div>
-                        <div class="col-lg-3 col-md-2">
-                            <!-- <div class="col-12"> -->
-                           <div class="mobile_menu d-block d-lg-none"></div>
-                        <!-- </div> -->
-                        </div>
                         <div class="col-lg-9 col-md-9">
                             <div class="menu-wrapper">
                                 <!-- Header-btn -->
@@ -127,6 +122,11 @@
                                     }
                                  ?>          
                             </div>
+                        </div>
+                        <div class="col-lg-3 col-md-2">
+                            <!-- <div class="col-12"> -->
+                           <div class="mobile_menu d-block d-lg-none"></div>
+                        <!-- </div> -->
                         </div>
                     </div>
                 </div>

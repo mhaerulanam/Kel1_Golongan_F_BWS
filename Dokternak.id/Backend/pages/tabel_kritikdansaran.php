@@ -134,6 +134,7 @@ session_start();
 						else{
 							//tambah ************ERRRROOOOORRRRRRR*****************
 							$sql = "INSERT INTO kritikdansaran VALUES ('','$tanggal','$komentar','$nama','$email_hp','$pekerjaan')";
+							// echo "$tanggal,$komentar,$nama,$email_hp,$pekerjaan";
 							if(mysqli_query($koneksi, $sql)){
 								$nilaihasil = "Records inserted successfully.";
 							} 
@@ -203,6 +204,7 @@ session_start();
 					</div>
 					<div class="col-sm-6">
 						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">++ Tambah Data	</a>
+						<a href="cetak/cetak_datakritik.php" target="_blank" class="btn btn-info">Cetak</a>
 						<input type="submit" name="deleteall" value="Delete Selected" class="btn btn-danger" onclick="return confirm('Are you sure delete selected records?')">
 					</div>
 				</div>
@@ -297,7 +299,7 @@ session_start();
                                         </div>
 
 										<div class="modal-footer">
-											<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+											<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel"> 	
 											<input type="submit" class="btn btn-info" value="Save" name="edit">
 										</div>
 									</div>
@@ -370,7 +372,6 @@ session_start();
 
 										<div class="modal-footer">
 											<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-											<a href="cetak/cetak_datakritik.php" target="_blank" class="btn btn-info">Cetak</a>
 											<input type="submit" class="btn btn-info" value="Save" name="edit">
 										</div>
 									</div>

@@ -211,7 +211,7 @@ include "../modal/ubah_password.php";
                                                         alt="<?php echo $data3['nama']; ?>" height="50"></img></div>
                             <div class="chat_ib">
                             <h5> Dari : <?php echo $nama; ?> <span class="chat_date" name="klik"><?php echo $data3['tanggal']; ?><br></span></h5>
-                            <p name="klik"><?php echo $isibts; ?></p><button name="klik" class="lihat" ><p>Lihat</p></button>
+                            <p name="klik"><?php echo $isibts; ?></p><button name="klik" class="genric-btn primary" ><p>Lihat</p></button>
                             </div>
                         </div>
                         </div>
@@ -228,7 +228,7 @@ include "../modal/ubah_password.php";
                                                         alt="<?php echo $data3['nama']; ?>" height="50"></img></div>
                             <div class="chat_ib">
                             <h5> Dari : <?php echo $nama; ?> <span class="chat_date" name="klik"><?php echo $data3['tanggal']; ?><br></span></h5>
-                            <p name="klik"><?php echo $isibts; ?></p><button name="klik" class="lihat" ><p>Lihat</p></button>
+                            <p name="klik"><?php echo $isibts; ?></p><button name="klik" class="genric-btn primary" ><p>Lihat</p></button>
                             </div>
                         </div>
                         </div>
@@ -250,7 +250,6 @@ include "../modal/ubah_password.php";
             $aData=mysqli_query($koneksi, "SELECT * FROM konsultasi,peternak, kategori_hewan, kategori_artikel, dokter WHERE konsultasi.id_peternak=peternak.id_peternak AND konsultasi.id_kategori=kategori_hewan.id_kategori AND konsultasi.id_ktg=kategori_artikel.id_ktg AND konsultasi.id_dokter=dokter.id_dokter AND
             konsultasi.id_konsultasi='$idds'");
             $dt = mysqli_fetch_array($aData);
-            $update_pwd=mysqli_query($koneksi,"update konsultasi set status_kirim='terespon' where id_konsultasi='$idds'");
         ?>
         
         
@@ -264,7 +263,7 @@ include "../modal/ubah_password.php";
                     </div>
                     <div class="flex-grow-4 pl-1">
                     <input type="hidden" name="idk" value="<?php echo $idds ?>">
-                    <input type="submit" name="hps" class="genric-btn second" onclick="return confirm('Apakah Anda yakin ingin menghapus pesan ini?')" value="HAPUS"> 
+                    <input type="submit" name="hps" class="genric-btn danger" onclick="return confirm('Apakah Anda yakin ingin menghapus pesan ini?')" value="HAPUS"> 
                     </div>
                 </div>
                 </form>
@@ -392,7 +391,7 @@ include "../modal/ubah_password.php";
                             <div class="chat_ib">
                             <h5> Kepada : <?php echo $nama; ?> <span class="chat_date" name="klik"><?php echo $data['tanggal_respon']; ?><br></span></h5>
                             <p><?php echo $isibts ?></p>
-                            <input type="submit" name="klok" class="lihat" value="Lihat">
+                            <input type="submit" name="klok" class="genric-btn primary" value="Lihat">
                             </div>
                         </div>
                         </div>
@@ -433,7 +432,7 @@ include "../modal/ubah_password.php";
                     <div class="flex-grow-4 pl-1">
                     <input type="hidden" name="idr" value="<?php echo $idr ?>">
                     <input type="hidden" name="idp" value="<?php echo $idp ?>">
-                    <input type="submit" name="hapus" class="genric-btn second" onclick="return confirm('Apakah Anda yakin ingin menghapus pesan ini?')" value="HAPUS"> 
+                    <input type="submit" name="hapus" class="genric-btn danger" onclick="return confirm('Apakah Anda yakin ingin menghapus pesan ini?')" value="HAPUS"> 
                     </div>
                 </div>
                 </form>

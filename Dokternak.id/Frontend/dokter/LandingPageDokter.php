@@ -204,13 +204,18 @@ session_start();
             include '../koneksi.php';
 
             if(isset($_POST['sfoto'])){
-                $id = $_SESSION["id"];
-                $fp  = addslashes(file_get_contents($_FILES['foto']['tmp_name']));
-                $sql1 = "UPDATE dokter SET foto = '$fp' WHERE id_dokter = '$id'";
-                if(mysqli_query($koneksi, $sql1)){
-                   echo "<script type='text/javascript'>alert('Records updated successfully.');</script>";
+                $lokasiFoto = $_FILES['foto']['tmp_name'];
+                if(!$lokasiFoto==""){
+                    $id = $_SESSION["id"];
+                    $fp  = addslashes(file_get_contents($_FILES['foto']['tmp_name']));
+                    $sql1 = "UPDATE dokter SET foto = '$fp' WHERE id_dokter = '$id'";
+                    if(mysqli_query($koneksi, $sql1)){
+                        echo "<script type='text/javascript'>alert('Foto Berhasil Diubah.');</script>";
+                    }else{
+                        echo "<script type='text/javascript'>alert('Foto Gagal Diubah.');</script>";
+                    }
                 }else{
-                    echo "<script type='text/javascript'>alert('Records updated Failed.');</script>";
+                    ?><script> alert ("Maaf! Anda Tidak melakukan perubahan foto profil terlebih dahulu"); </script><?php
                 } 
                 
             }
@@ -222,7 +227,7 @@ session_start();
                             <img src="fotoakun.php?id_dokter=<?php echo $_SESSION['id']; ?>" alt=""/>
                             <div class="file btn btn-lg btn-primary">
                                 <input type="file" name="foto" id="foto">
-                                Change Photo
+                                Ubah Foto Profil
                             </div>
                         </div>
                     </div>

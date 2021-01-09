@@ -30,7 +30,8 @@
            <div class="headder-top header-sticky">
                 <div class="container">
                     <div class="row align-items-center">
-                        <div class="col-lg-2 col-md-2">
+                         <!-- Mobile Menu -->
+                        <div class="col-lg-3 col-md-2">
                             <?php
                             if(isset($_SESSION['username'])){
                             $nama = $_SESSION['username'];
@@ -50,7 +51,12 @@
                             }
                             ?> 
                         </div>
-                        <div class="col-lg-10 col-md-13">
+                        <div class="col-lg-3 col-md-2">
+                            <!-- <div class="col-12"> -->
+                           <div class="mobile_menu d-block d-lg-none"></div>
+                        <!-- </div> -->
+                        </div>
+                        <div class="col-lg-9 col-md-9">
                             <div class="menu-wrapper">
                                 <!-- Header-btn -->
                                 <?php
@@ -113,18 +119,14 @@
                                                 </ul>
                                             </nav>
                                         </div>
-                                        <div class="header-btn d-none f-right d-lg-block">
-                                            <a href="daftar.php" class="btn head-btn1">DAFTAR</a>
-                                            <a href="#myModal" data-toggle="modal" class="btn head-btn2">MASUK</a>
+                                        <div class="main-menu right">
+                                                <a href="daftar.php" class="btn head-btn1">DAFTAR</a>
+                                                <a href="#myModal" data-toggle="modal" class="btn head-btn2">MASUK</a>
                                         </div>
                                     <?php
                                     }
                                  ?>          
                             </div>
-                        </div>
-                        <!-- Mobile Menu -->
-                        <div class="col-12">
-                            <div class="mobile_menu d-block d-lg-none"></div>
                         </div>
                     </div>
                 </div>

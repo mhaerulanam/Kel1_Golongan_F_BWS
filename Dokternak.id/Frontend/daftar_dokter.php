@@ -300,7 +300,7 @@ session_start();
                                                 </div>
                                                 <ul class="social"> 
                                                     <li>
-                                                    <a href="detaildokter.php?id_dokter=<?php echo $dat['id_dokter']; ?>"><b>Detail</b></a>
+                                                    <a href="detaildokter.php?id_dokter=<?php echo $row['id_dokter']; ?>"><b>Detail</b></a>
                                                     </li>
                                                 </ul>
                                                 </div>

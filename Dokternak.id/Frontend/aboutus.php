@@ -94,7 +94,7 @@ session_start();
                             <div class="support-caption">
                                 <p class="pera-top">Kami Pengembang Website Dokternak.id</p>
                                 <p>Dokternak.id Adalah
-Sistem Informasi Dokter Hewan merupakan sistem informasi berbasis website untuk mempermudah para peternak dalam mencari dokter hewan terdekat serta para peternak dapat berkonsultasi melalui website dengan dokter hewan yang sesuai tentang permasalahan yang dihadapi oleh para peternak seperti penyakit pada ternak. Di dalam website ini juga terdapat tips dan trik dalam berternak yang baik dan benar, sehingga para peternak dapat lebih mudah mengetahui atau menambah ilmu wawasan tentang peternakan. Para peternak juga dapat menulis sebuah catatan pengalaman untuk dibagikan ke website, agar para peternak lain mengetahui tentang pengalaman penulis.
+Sistem Informasi Dokter Hewan yang merupakan sistem informasi berbasis website untuk mempermudah para peternak dalam mencari dokter hewan terdekat serta para peternak dapat berkonsultasi melalui website dengan dokter hewan yang sesuai tentang permasalahan yang dihadapi oleh para peternak seperti penyakit pada ternak. Di dalam website ini juga terdapat tips dan trik dalam berternak yang baik dan benar, sehingga para peternak dapat lebih mudah mengetahui atau menambah ilmu wawasan tentang peternakan. Para peternak juga dapat menulis sebuah catatan pengalaman untuk dibagikan ke website, agar para peternak lain mengetahui tentang pengalaman penulis.
 </p>
                             </div>
                         </div>

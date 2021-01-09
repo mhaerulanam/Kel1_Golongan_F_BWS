@@ -80,7 +80,7 @@
                                             <li><a href="#" id="Nama" ><?php echo $_SESSION['nama'];?> <span> (</span><?php echo $_SESSION['jabatan'];?>)</a>
                                                 <ul class="submenu">
                                                     <li><a id="Nama"  href="#ubahModal"  data-toggle="modal">Ubah Password</a></li>
-                                                    <li><a id="Nama"  href="../modal/logout.php">Log Out</a></li>                                                 
+                                                    <li><a id="Nama"  href="../modal/logout.php" onclick="return confirm('Apakah Anda yakin ingin keluar Akun?')" >Keluar Akun</a></li>                                                 
                                                 </ul>
                                             </li>
                                         </ul>

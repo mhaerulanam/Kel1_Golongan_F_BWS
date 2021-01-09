@@ -38,7 +38,7 @@
                     <span><?php echo $_SESSION['nama'];?> <span> (</span><?php echo $_SESSION['id_role'];?>)</span>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
-                    <li><a href="logout.php" onclick="return confirm('Apakah anda yakin ingin keluar ?')"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    <li><a href="logout.php" onclick="return confirm('Apakah anda yakin ingin keluar ?')"><i class="fa fa-sign-out fa-fw"></i> Keluar Akun</a>
                     </li>
                 </ul>
             </li>

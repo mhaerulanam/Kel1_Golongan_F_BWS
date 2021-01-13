@@ -176,7 +176,7 @@ form {
   <!-- Modal content -->
   <div id="editModal">
     <div class="modal-content">
-    <a href="landingpagedokter.php" class="close">&times;</a>
+    <a href="LandingPageDokter.php" class="close">&times;</a>
     <!-- <span class="close">&times;</span> -->
       <div class="wrapper">
         <div class="tabs">
@@ -254,7 +254,7 @@ form {
                   <label><input type="checkbox" value="" checked>Menerima Persyaratan Yang Berlaku</label>
                 </div> -->
                 <input type="submit" class="btn btn-info" value="Edit" name="edit">
-                <a href="landingpagedokter.php" class="btn btn-info">Batal</a>
+                <a href="LandingPageDokter.php" class="btn btn-info">Batal</a>
                 <!-- <input type="reset"  class="btn btn-info" value="Batal" name="edit"> -->
                 </div>
               </div>

@@ -16,7 +16,7 @@ include "../koneksi.php";
             $username = $_POST['username'];
             
 			//edit
-			$sql1 = "UPDATE dokter SET nama = '$nama',  email = '$email',  jenis_kelamin = '$jk', alamat = '$alamat', telpon = '$telpon', jadwal_kerja = '$jadwal_kerja' WHERE id_dokter = '$id_dokter'";
+			$sql1 = "UPDATE dokter SET nama = '$nama',  email = '$email',  jenis_kelamin = '$jk', alamat = '$alamat', tempat = '$tempat', telpon = '$telpon', jadwal_kerja = '$jadwal_kerja' WHERE id_dokter = '$id_dokter'";
             $sql = "UPDATE user SET  username = '$username' WHERE id_user = '$id_user'";
             if(mysqli_query($koneksi, $sql1)){
               if(mysqli_query($koneksi, $sql)){

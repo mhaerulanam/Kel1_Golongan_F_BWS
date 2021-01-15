@@ -184,7 +184,6 @@ session_start();
                     <div class="col-sm-6">
 					</div>
 					<div class="col-sm-6">
-						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">++ Tambah Data	</a>
 						<input type="submit" name="deleteall" value="Delete Selected" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
 					</div>
 				</div>
@@ -241,46 +240,10 @@ session_start();
 
 						<!-- Tombol Action -->
                         <td>
-                            <a href="#editEmployeeModal<?php echo $krow['id_riwayat']; ?>" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                             <a href="#deleteEmployeeModal<?php echo $krow['id_riwayat']; ?>" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                     </tr>
 					
-
-
-					<!-- Edit Modal HTML -->
-					<div id="editEmployeeModal<?php echo $krow['id_riwayat']; ?>" class="modal fade">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<form role="form" method="POST" enctype="multipart/form-data">
-									<input type="hidden" class="form-control" value="<?php echo $krow['id_riwayat']; ?>" name="id_riwayat" required>
-									<div class="modal-header">
-										<h4 class="modal-title">Edit</h4>
-										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-									</div>
-									<div class="modal-body">
-									<div class="form-group">
-                                            <label>Konsultasi :</label>
-                                            <input type="text" name="keluhan" id="keluhan" class="form-control" value="<?php echo $krow['keluhan']; ?>" >
-                                        </div>
-										<div class="form-group">
-                                            <label>Respon :</label>
-                                            <input type="text" name="respon" id="respon" class="form-control" value="<?php echo $krow['respon']; ?>" >
-                                        </div>
-										<div class="form-group">
-                                            <label>Tanggal :</label>
-                                            <input type="date" name="tanggal" id="tanggal" class="form-control" value="<?php echo $krow['tanggal']; ?>" >
-                                        </div>
-										<div class="modal-footer">
-											<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-											<input type="submit" class="btn btn-info" value="Save" name="edit">
-										</div>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-
 
 					<!-- Delete Modal HTML -->
 					<div id="deleteEmployeeModal<?php echo $krow['id_riwayat']; ?>" class="modal fade">
@@ -317,53 +280,6 @@ session_start();
 			</table>
 			
 
-				<!-- Add Modal HTML -->
-					<div id="addEmployeeModal" class="modal fade">
-						<div class="modal-dialog">
-							<div class="modal-content">
-							<form role="form" method="POST" action="" enctype="multipart/form-data">
-									<div class="modal-header">
-										<h4 class="modal-title">Tambah Data</h4>
-										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-									</div>
-									<div class="modal-body">
-										<div class="form-group">
-                                            <label>ID Riwayat :</label>
-                                            <input type="text" name="id_tutorial" id="id_tutorial" class="form-control" required>
-                                        </div>
-                                    <div class="form-group">
-                                            <label>Konsultasi :</label>
-                                            <input type="text" name="keluhan" id="keluhan" class="form-control" value="<?php echo $krow['keluhan']; ?>" >
-                                        </div>
-										<div class="form-group">
-                                            <label>Respon :</label>
-                                            <input type="text" name="respon" id="respon" class="form-control" value="<?php echo $krow['respon']; ?>" >
-                                        </div>
-										<div class="form-group">
-                                            <label>Tanggal :</label>
-                                            <input type="date" name="tanggal" id="tanggal" class="form-control" value="<?php echo $krow['tanggal']; ?>" >
-                                        </div>
-										</div>
-										<div class="modal-footer">
-													<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-													<input type="submit" class="btn btn-success" value="Tambah" name="tambah">
-										</div>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-				</table>
-				</div>
-				</div>
-                </div>
-                <!-- /.container-fluid -->
-            </div>
-            <!-- /#page-wrapper -->
-
-        </div>
-        <!-- /#wrapper -->
 
         <!-- jQuery -->
         <script src="../js/jquery.min.js"></script>

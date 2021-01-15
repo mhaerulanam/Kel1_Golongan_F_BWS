@@ -207,7 +207,8 @@ session_start();
 						<th>ID Respon</th>
                         <th>Konsultasi</th>
 						<th>Respon</th>
-						<th>Tanggal</th>
+						<th>Tanggal Konsultasi</th>
+						<th>Tanggal Respon</th>
                         <th>Actions</th>
 
                     </tr>
@@ -237,6 +238,7 @@ session_start();
                         <td><?php echo $krow['keluhan']; ?></td>
                         <td><?php echo $krow['respon']; ?></td>
 						<td><?php echo $krow['tanggal']; ?></td>
+						<td><?php echo $krow['tanggal_respon']; ?></td>
 
 						<!-- Tombol Action -->
                         <td>

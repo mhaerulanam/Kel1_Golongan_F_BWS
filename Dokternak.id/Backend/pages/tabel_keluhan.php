@@ -121,8 +121,14 @@ session_start();
 							echo "<script>alert(' Id konsultasi yang sama sudah digunakan');history.go(-1);</script>";
 						}
 						else{
+							$kode = date('His'); //Hour,minutes,second
+
+							$id_konsultasi  = "KONS$kode";
+							$sk = "norespon";
 							//tambah
-							$sql = "INSERT INTO konsultasi VALUES ('','$id_peternak','$id_dokter','$id_kategori','$id_ktg','$nama_hewan','$keluhan','$tanggal')";
+							
+							
+							$sql = "INSERT INTO konsultasi VALUES ('$id_konsultasi','$id_peternak','$id_dokter','$id_kategori','$id_ktg','$nama_hewan','$keluhan','$tanggal','$sk')";
 							if(mysqli_query($koneksi, $sql)){
 								$nilaihasil = "Records inserted successfully.";
 							} 
@@ -135,7 +141,7 @@ session_start();
 					// code tombol edit
 					if(isset($_POST['edit'])){
 						//edit
-						$sql = "UPDATE konsultasi SET nama_hewan = '$nama_hewan', keluhan = '$keluhan', tanggal = '$tanggal'";
+						$sql = "UPDATE konsultasi SET  id_kategori = '$id_kategori' , id_ktg = '$id_ktg , nama_hewan = '$nama_hewan', keluhan = '$keluhan', tanggal = '$tanggal' WHERE id_konsultasi = '$id_konsultasi'";
 						if(mysqli_query($koneksi, $sql)){
 							$nilaihasil = "Records updated successfully.";
 						} 
@@ -277,7 +283,6 @@ session_start();
 									</div>
 									<div class="modal-body">
 									<div class="form-group">
-									<div class="form-group">
 									<div class="mt-30">
                                             <label>Kategori :</label>
                                             <select name="id_kategori" class="form-control" id="default-select">
@@ -378,48 +383,65 @@ session_start();
 									</div>
 									<div class="modal-body">
 									<div class="modal-body">
-										<div class="form-group">
-                                            <label>ID Konsultasi :</label>
-                                            <input type="text" name="id_konsultasi" id="id_konsultasi" class="form-control" required>
-                                        </div>
-										<div class="form-group">
+									<div class="form-group">
                                             <label>ID Peternak :</label>
-                                            <input type="text" name="id_peternak" id="id_peternak" class="form-control" required>
+                                            <select name="id_peternak" class="form-control" id="default-select">
+												<option disabled selected> Pilih </option>
+												<?php 
+												include "koneksi.php";
+												$sql="SELECT * FROM peternak";
+												$dok = mysqli_query($koneksi,$sql);
+												while($data = mysqli_fetch_array($dok))
+												{
+													$nmd = $data['namadepan_peternak'];
+													$nmb = $data['namabelakang_peternak'];
+													 ?>
+
+												<option value="<?=$data['id_peternak']?>"><?=$nmd?> <?=$nmb?></option> 
+												<?php } ?>
+											</select><br>
                                         </div>
 										<div class="form-group">
                                             <label>ID Dokter :</label>
-                                            <input type="text" name="id_dokter" id="id_dokter" class="form-control" required>
+                                            <select name="id_dokter" class="form-control" id="default-select">
+												<option disabled selected> Pilih </option>
+												<?php 
+												include "koneksi.php";
+												$sql="SELECT * FROM dokter";
+												$dok = mysqli_query($koneksi,$sql);
+												while($data = mysqli_fetch_array($dok))
+												{ ?>
+												<option value="<?=$data['id_dokter']?>"><?=$data['nama']?></option> 
+												<?php } ?>
+											</select><br>
                                         </div>
-
                                 
-                            <div class="mt-30">
-							<label>Kategori :</label>
-                                            <select name="id_ktg" class="form-control" id="default-select">
-												<option disabled selected> Pilih </option>
-												<?php 
+                            <div class="form-group">
+										<label>Kategori Hewan</label><br>
+										<select name="id_kategori" class="form-control" id="default-select">
+										<option disabled selected> Pilih </option>
+											<?php 
 												include "koneksi.php";
-												$sql="SELECT * FROM kategori_hewan";
-												$dok = mysqli_query($koneksi,$sql);
-												while($data = mysqli_fetch_array($dok))
+												$query_kat = mysqli_query($koneksi,"SELECT * FROM kategori_hewan");
+													while($data = mysqli_fetch_array($query_kat))
 												{ ?>
-												<option value="<?=$data['id_ktg']?>"><?=$data['kategori_hewan']?></option> 
+													<option value="<?php echo $data['id_kategori']?>"><?=$data['kategori_hewan']?></option> 
 												<?php } ?>
-											</select><br>
-                                        </div>
-										<div class="mt-30">
-                                            <label>Jenis Hewan :</label>
-                                            <select name="id_kategori" class="form-control" id="default-select">
-												<option disabled selected> Pilih </option>
-												<?php 
+										</select><br>
+									</div>
+									<div class="form-group">
+										<label>Jenis Hewan</label><br>
+										<select name="id_ktg" class="form-control" id="default-select">
+										<option disabled selected> Pilih </option>
+											<?php 
 												include "koneksi.php";
-												$sql="SELECT * FROM kategori_artikel";
-												$dok = mysqli_query($koneksi,$sql);
-												while($data = mysqli_fetch_array($dok))
+												$query_kat = mysqli_query($koneksi,"SELECT * FROM kategori_artikel");
+													while($data = mysqli_fetch_array($query_kat))
 												{ ?>
-												<option value="<?=$data['id_kategori']?>"><?=$data['kategori_artikel']?></option> 
+													<option value="<?php echo $data['id_ktg']?>"><?=$data['kategori_artikel']?></option> 
 												<?php } ?>
-											</select><br>
-                                        </div>
+										</select><br>
+									</div>
                                     
 									<div class="form-group">
                                             <label>Nama Hewan :</label>
@@ -438,7 +460,7 @@ session_start();
 												
 												<div class="modal-footer">
 													<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-													<input type="submit" class="btn btn-info" value="Save" name="edit">
+													<input type="submit" class="btn btn-info" value="Save" name="tambah">
 												</div>
 									</div>
 								</form>

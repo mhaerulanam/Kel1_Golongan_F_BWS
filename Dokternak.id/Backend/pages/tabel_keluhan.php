@@ -141,7 +141,7 @@ session_start();
 					// code tombol edit
 					if(isset($_POST['edit'])){
 						//edit
-						$sql = "UPDATE konsultasi SET  id_kategori = '$id_kategori' , id_ktg = '$id_ktg , nama_hewan = '$nama_hewan', keluhan = '$keluhan', tanggal = '$tanggal' WHERE id_konsultasi = '$id_konsultasi'";
+						$sql = "UPDATE konsultasi SET  id_kategori = '$id_kategori' , id_ktg = '$id_ktg' , nama_hewan = '$nama_hewan', keluhan = '$keluhan', tanggal = '$tanggal' WHERE id_konsultasi = '$id_konsultasi'";
 						if(mysqli_query($koneksi, $sql)){
 							$nilaihasil = "Records updated successfully.";
 						} 

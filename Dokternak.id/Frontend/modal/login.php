@@ -123,8 +123,10 @@ body {
 				<div class="avatar">
 					<img src="assets/img/icon/Akun.png" alt="Avatar">
 				</div>				
-				<h4 class="modal-title">Login</h4>	
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Login</h4>
+				<!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+				<a href="index.php" class="close">&times;</a>
+                <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
 			</div>
 			<div class="modal-body">
 				<form action="../Frontend/modal/aksi_login.php" method="POST">
@@ -141,7 +143,7 @@ body {
 			</div>
 			<div class="modal_footer">
                 <br>
-				<a href="daftar.php">Daftar</a>
+				<a href="daftar.php"><span><b>Daftar</b></span></a>
 			</div>
 		</div>
 	</div>

@@ -243,7 +243,7 @@ form {
                 </div>
 
                 <div class="form-group">
-                  <label for="username_peternak"><span class="glyphicon glyphicon-user"></span> Username</label>
+                  <label for="username"><span class="glyphicon glyphicon-user"></span> Username</label>
                   <input type="text" class="form-control" name="username" value="<?php echo $data['username'];?>">
                 </div>
                 <?php } ?>

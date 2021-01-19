@@ -44,10 +44,6 @@
                         <div class="col-lg-9 col-md-9">
                             <div class="menu-wrapper">
                                 <!-- Header-btn -->
-                                <?php
-                                    if(isset($_SESSION['username'])){
-                                        $nama = $_SESSION['username'];
-                                        ?>
                                          <!-- Main-menu -->
                                         <div class="main-menu">
                                             <nav class="d-none d-lg-block">
@@ -66,44 +62,31 @@
                                                 </ul>
                                             </nav>
                                         </div>
-                                        <div class="main-menu f-right">
-                                        <ul id="navigation">
-                                        <a href="#">
-                                        <img src="fotoakun.php?id_peternak=<?php echo $_SESSION['id']; ?>" class="rounded-circle z-depth-0"
-                                            alt="fotoakun" height="35"></img>
-                                        <!-- <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="rounded-circle z-depth-0"
-                                            alt="avatar image" height="35"></img> -->
-                                        </a> 
-                                            <li><a href="#" id="Nama" ><?php echo $_SESSION['nama'];?> <span> (</span><?php echo $_SESSION['id_role'];?>)</a>
-                                                <ul class="submenu">
-                                                    <li><a id="Nama"  href="profil_akun.php">Akun Profile</a></li>
-                                                    <li><a id="Nama"  href="#ubahModal"  data-toggle="modal">Ubah Password</a></li>
-                                                    <li><a id="Nama"  href="modal/logout.php" onclick="return confirm('Apakah Anda yakin ingin keluar Akun?')">Keluar Akun</a></li>                                                 
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                </div>
+                                        
+                                <?php
+                                    if(isset($_SESSION['username'])){
+                                        $nama = $_SESSION['username'];
+                                        ?>
+                                        <div class="main-menu right">
+                                            <ul >
+                                            <a href="#">
+                                            <img src="fotoakun.php?id_peternak=<?php echo $_SESSION['id']; ?>" class="rounded-circle z-depth-0"
+                                                alt="fotoakun" height="35"></img>
+                                            <!-- <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="rounded-circle z-depth-0"
+                                                alt="avatar image" height="35"></img> -->
+                                            </a> 
+                                                <li><a href="#" id="Nama" ><?php echo $_SESSION['nama'];?> <span> (</span><?php echo $_SESSION['id_role'];?>)</a>
+                                                    <ul class="submenu">
+                                                        <li><a id="Nama"  href="profil_akun.php">Akun Profile</a></li>
+                                                        <li><a id="Nama"  href="#ubahModal"  data-toggle="modal">Ubah Password</a></li>
+                                                        <li><a id="Nama"  href="modal/logout.php" onclick="return confirm('Apakah Anda yakin ingin keluar Akun?')">Keluar Akun</a></li>                                                 
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     <?php    
                                     }else{
                                         ?>
-                                        <!-- Main-menu -->
-                                        <div class="main-menu">
-                                            <nav class="d-none d-lg-block">
-                                                <ul id="navigation">
-                                                    <li><a href="index.php">HOME</a></li>
-                                                    <li><a href="daftar_artikel.php">ARTIKEL </a></li>
-                                                    <li><a href="riwayat_konsultasi.php">KONSULTASI</a></li>
-                                                    <li><a href="daftar_dokter.php">DOKTER</a></li>
-                                                    <li><a href="#">INFORMASI</a>
-                                                        <ul class="submenu">
-                                                            <li><a href="daftarpuskeswan.php">PUSKESWAN</a></li>
-                                                            <li><a href="daftar_tutorial.php">TUTORIAL</a></li>
-                                                            <li><a href="aboutus.php">TENTANG KAMI</a></li>                                                 
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </nav>
-                                        </div>
                                         <div class="main-menu right">
                                                 <a href="daftar.php" class="btn head-btn1">DAFTAR</a>
                                                 <a href="#myModal" data-toggle="modal" class="btn head-btn2">MASUK</a>

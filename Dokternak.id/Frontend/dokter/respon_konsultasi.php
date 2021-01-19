@@ -81,6 +81,46 @@ if (!isset($_SESSION["username"])) {
         border: 1px solid #ccc;
         border-top: none;
         }
+
+        /* responsif */
+        .back{
+            visibility: hidden;
+        }
+        .inbox2,.inbox1{
+                display: block !important;
+        }
+        @media(max-width:768px){
+            <?php
+                if(isset($_POST['klik'])){
+                    ?>
+                    .inbox1{
+                        display: none !important;
+                    }
+                    .inbox_people{
+                        width: 100%;
+                    }
+                    <?php
+                }else if(isset($_POST['klok'])){
+                    ?>
+                    .inbox2{
+                        display: none !important;
+                    }
+                    .inbox_people{
+                        width: 100%;
+                    }
+                    <?php
+                }
+            ?>
+            .back{
+                visibility: visible;
+            }
+            .inbox_people{
+                width: 100%;
+            }
+            .mesgs{
+                width: 100% !important;
+            }
+        }
 	</style>
 
 </head>
@@ -153,7 +193,7 @@ include "../modal/ubah_password.php";
 </section>
 <div class="container">
 <div class="tab">
-    <?php if(isset($_POST['klok'])){?>
+    <?php if(isset($_POST['klok']) || isset($_POST['tampilkan']) ){?>
         <button class="tablinks" onclick="openCity(event, 'masuk')"  >Kotak Masuk</button>
         <button class="tablinks" onclick="openCity(event, 'terkirim')" id="defaultOpen">Kotak Terkirim</button>
     <?php } 
@@ -170,7 +210,7 @@ include "../modal/ubah_password.php";
 <div class="container">
 <div class="messaging">
       <div class="inbox_msg">
-        <div class="inbox_people">
+        <div class="inbox_people  inbox1">
           <div class="headind_srch">
             <div class="recent_heading">
               <h4><b>Kotak Masuk</b></h4>
@@ -338,6 +378,13 @@ include "../modal/ubah_password.php";
                 <!--- Post Form Ends -->
                 </section>
             </div>
+            <div class="back">
+                <center>
+                    <form action="respon_konsultasi.php" method="POST">
+                        <button type="submit" class="genric-btn primary-border" >KEMBALI</button>
+                    </form>
+                </center>
+            </div>
         </div>
 <?php endif; ?> 
 
@@ -355,7 +402,7 @@ include "../modal/ubah_password.php";
 <div class="container">
 <div class="messaging">
       <div class="inbox_msg">
-        <div class="inbox_people">
+        <div class="inbox_people  inbox2">
           <div class="headind_srch">
             <div class="recent_heading">
               <h4><b>Kotak Masuk</b></h4>
@@ -510,7 +557,14 @@ include "../modal/ubah_password.php";
 						<!-- post footer ends -->
 					</div>
 				</section>
-				<!-- Post Ends -->
+                <!-- Post Ends -->
+                <div class="back">
+                    <center>
+                        <form action="respon_konsultasi.php" method="POST">
+                            <button type="submit" name="tampilkan" class="genric-btn primary-border" >KEMBALI</button>
+                        </form>
+                    </center>
+                </div>
             </div>
             <?php endif; ?>
         </div>
@@ -550,7 +604,8 @@ include "../modal/ubah_password.php";
             evt.currentTarget.className += " active";
             }
         </script>
-
+      <!-- JS here -->
+	
 		<!-- All JS Custom Plugins Link Here here -->
         <script src="../assets/js/vendor/modernizr-3.5.0.min.js"></script>
 		<!-- Jquery, Popper, Bootstrap -->
@@ -564,17 +619,17 @@ include "../modal/ubah_password.php";
         <script src="../assets/js/owl.carousel.min.js"></script>
         <script src="../assets/js/slick.min.js"></script>
         <script src="../assets/js/price_rangs.js"></script>
-
+        
 		<!-- One Page, Animated-HeadLin -->
         <script src="../assets/js/wow.min.js"></script>
 		<script src="../assets/js/animated.headline.js"></script>
-		
+        <script src="../assets/js/jquery.magnific-popup.js"></script>
+
 		<!-- Scrollup, nice-select, sticky -->
         <script src="../assets/js/jquery.scrollUp.min.js"></script>
         <script src="../assets/js/jquery.nice-select.min.js"></script>
 		<script src="../assets/js/jquery.sticky.js"></script>
-        <script src="../assets/js/jquery.magnific-popup.js"></script>
-
+        
         <!-- contact js -->
         <script src="../assets/js/contact.js"></script>
         <script src="../assets/js/jquery.form.js"></script>
@@ -583,8 +638,8 @@ include "../modal/ubah_password.php";
         <script src="../assets/js/jquery.ajaxchimp.min.js"></script>
         
 		<!-- Jquery Plugins, main Jquery -->	
-        <script src="./assets/js/plugins.js"></script>
-        <script src="./assets/js/main.js"></script>
+        <script src="../assets/js/plugins.js"></script>
+        <script src="../assets/js/main.js"></script>
         
         <footer>
             <?php 
@@ -595,6 +650,29 @@ include "../modal/ubah_password.php";
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            <?php
+                if(isset($_POST['klik'])){
+                    ?>
+                    if($(window).width()<768){
+                        $(".inbox1").css({'display':'none'})
+                    }else{
+                        $(".inbox1").css({'display':'block'})
+                    }
+                    <?php
+                }else if(isset($_POST['klok'])){
+                    ?>
+                    if($(window).width()<768){
+                        $(".inbox2").css({'display':'none'})
+                    }else{
+                        $(".inbox2").css({'display':'block'})
+                    }
+                    <?php
+                }
+            ?>
+        })
+    </script>
     </body>
     </html>

@@ -39,9 +39,9 @@ if (!isset($_SESSION["username"])) {
     include "navbar.php";
     
     ?>
-    <h1>
-            Tulis Artikel
-    </h1>
+    <h2>
+            <center><b>Tulis Artikel</b></center>
+    </h2>
     <?php
         if (isset($_GET['pesan'])){
             $pesan = $_GET['pesan'];

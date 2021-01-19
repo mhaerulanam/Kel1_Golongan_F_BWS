@@ -58,7 +58,7 @@
                                             <li><a href="LandingPageDokter.php">HOME</a></li>
                                             <li><a href="daftar_artikel.php">ARTIKEL </a></li>
                                             <li><a href="#">DATA</a>
-                                            <ul>
+                                            <ul class="submenu">
                                                     <li><a href="datarekammedik.php">REKAM MEDIK</a></li>
                                                     <li><a href="dataobat.php">OBAT</a></li>
                                                     <li><a href="data_hewan.php">HEWAN</a></li>                                                 

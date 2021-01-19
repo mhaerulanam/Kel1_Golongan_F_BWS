@@ -48,6 +48,7 @@
                                 <div class="mobile_menu d-block d-lg-none"></div>
                             </div>
                         </div>
+
                         <div class="col-lg-9 col-md-9">
                                 <div class="menu-wrapper">
                                 <!-- Main-menu -->
@@ -57,7 +58,7 @@
                                             <li><a href="LandingPageDokter.php">HOME</a></li>
                                             <li><a href="daftar_artikel.php">ARTIKEL </a></li>
                                             <li><a href="#">DATA</a>
-                                            <ul class="submenu">
+                                            <ul>
                                                     <li><a href="datarekammedik.php">REKAM MEDIK</a></li>
                                                     <li><a href="dataobat.php">OBAT</a></li>
                                                     <li><a href="data_hewan.php">HEWAN</a></li>                                                 
@@ -65,15 +66,12 @@
                                             </li>
                                             <li><a href="respon_konsultasi.php">NOTIFIKASI</a></li>
                                             <li><a href="daftar_tutorial.php">TUTORIAL</a></li>
-                                            
                                         </ul>
                                     </nav>
                                 </div>
                                 <!-- Header-btn -->
-                                <?php
-                                    if(isset($_SESSION['username'])):?>
-                                        <div class="main-menu f-right">
-                                        <ul id="navigation">  
+                                <div class="main-menu f-right">
+                                        <ul>  
                                         <a href="#">
                                         <img src="fotoakun.php?id_dokter=<?php echo $_SESSION['id']; ?>" class="rounded-circle z-depth-0"
                                             alt="fotoakun" height="35"></img>
@@ -87,21 +85,12 @@
                                                 </ul>
                                             </li>
                                         </ul>
-                                </div>
-                                    <?php    
-                                    else:
-                                        ?>
-                                        <div class="header-btn d-none f-right d-lg-block">
-                                            <a href="#" class="btn head-btn1">DAFTAR</a>
-                                            <a href="#myModal" data-toggle="modal" class="btn head-btn2">MASUK</a>
-                                        </div>
-                                    <?php
-                                    endif
-                                 ?>          
+                                    </div>        
                             </div>
                         </div>
                         <!-- Mobile Menu -->
-                      
+                        <div class="col-lg-3 col-md-2">                 
+                        </div>
                     </div>
                 </div>
            </div>

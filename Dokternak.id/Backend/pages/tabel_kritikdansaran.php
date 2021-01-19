@@ -348,6 +348,10 @@ session_start();
 						<div class="modal-dialog">
 							<div class="modal-content">
 							<form role="form" method="POST" action="">
+							<div class="modal-header">
+										<h4 class="modal-title">Tambah Data</h4>
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									</div>
                             <div class="modal-body">
 										<div class="form-group">
                                             <label>Tanggal :</label>

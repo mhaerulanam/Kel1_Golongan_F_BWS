@@ -244,7 +244,7 @@ include "modal/ubah_password.php";
                             <div class="chat_img" name="klik"> <img src="profil.php?id_dokter=<?php echo $data['id_dokter']; ?>" class="rounded-circle z-depth-0"
                                                         alt="<?php echo $data['nama']; ?>" height="50"></img></div>
                             <div class="chat_ib">
-                            <h5> Kepada : <?php echo $data['nama']; ?> <span class="    chat_date" name="klik"><?php echo $data['tanggal_respon']; ?><br></span></h5>
+                            <h5> Dari : <?php echo $data['nama']; ?> <span class="    chat_date" name="klik"><?php echo $data['tanggal_respon']; ?><br></span></h5>
                             <p><?php echo $isibts ?></p>
                             <input type="submit" name="klik" class="genric-btn primary-border" value="Lihat">
                             </div>
@@ -298,7 +298,7 @@ include "modal/ubah_password.php";
                 <form method="POST" action="">
                 <div class="row m-0">
                     <div class="flex-grow-1 pl-3">
-                    <h5>Kepada : <?php echo $dt['nama']; ?></h5></h5>
+                    <h5>Dari : <?php echo $dt['nama']; ?></h5></h5>
                     </div>
                     <div class="flex-grow-4 pl-1">
                     <input type="hidden" name="idkr" value="<?php echo $idr ?>">

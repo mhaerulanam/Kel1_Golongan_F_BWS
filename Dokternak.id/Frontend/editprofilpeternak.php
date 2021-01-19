@@ -189,7 +189,7 @@ $nmd = $data["namadepan_peternak"];
 $nmb = $data["namabelakang_peternak"];
 $nama = "$nmd $nmb";
 $id_peternak = $data['id_peternak'];
-$id_user = $data['id_user']
+$id_user = $data['id_user'];
 
 ?>
 
@@ -197,25 +197,32 @@ $id_user = $data['id_user']
 <?php
 					if(isset($_POST['edit'])){
             $id = $_SESSION['id'];
+            // $id_peternak = $_POST['id_peternak'];
+            // $id_user = $_POST['id_user'];
             $namadepan = $_POST['namadepan_peternak'];
             $namabelakang = $_POST['namabelakang_peternak'];
-						$username = $_POST['username'];
             $email = $_POST['email_peternak'];
             $no_telpon = $_POST['no_hp'];
             $jk = $_POST['jenis_kelamin'];
             $alamat = $_POST['alamat'];
-
+            $username = $_POST['username'];
             
-						//edit
+            //edit
+            // $sql1 = "UPDATE dokter SET nama = '$nama',  email = '$email',  jenis_kelamin = '$jk', alamat = '$alamat', tempat = '$tempat', telpon = '$telpon', jadwal_kerja = '$jadwal_kerja' WHERE id_dokter = '$id_dokter'";
+            // $sql = "UPDATE user SET  username = '$username' WHERE id_user = '$id_user'";
+
 						$sql1 = "UPDATE peternak SET namadepan_peternak = '$namadepan', namabelakang_peternak = '$namabelakang', email_peternak = '$email',  no_hp = '$no_telpon', jenis_kelamin = '$jk', alamat = '$alamat' WHERE id_peternak = '$id_peternak'";
             $sql = "UPDATE user SET  username = '$username' WHERE id_user = '$id_user'";
             if(mysqli_query($koneksi, $sql1)){
+              if(mysqli_query($koneksi, $sql)){
+                $nilaihasil = "Records updated successfully.";
 							header("location:profil_akun.php?pesan=berhasil");
-						} 
-						else{
+						}else{
+                header("location:profil_akun.php?pesan=gagal");
+              }	
+            }else{
 							echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
-						}
-          }
+            } };
           ?>
 <section>
   <!-- Modal content -->
@@ -281,7 +288,7 @@ $id_user = $data['id_user']
             <!--<input type="text" class="form-control" name="alamat" value="<?php echo $data['alamat'];?>">-->
           </div>
            <div class="form-group">
-            <label for="username_peternak"><span class="glyphicon glyphicon-user"></span> Username</label>
+            <label for="username"><span class="glyphicon glyphicon-user"></span> Username</label>
             <input type="text" class="form-control" name="username" value="<?php echo $data['username'];?>">
           </div>
 

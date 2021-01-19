@@ -55,7 +55,7 @@ body {
   margin: 2rem 0;
   background: #ffffff;
   height: 40rem; */
-  margin-left: 10%;
+  margin: 0% 10%;
 }
 .tabs::before,
 .tabs::after {
@@ -66,7 +66,7 @@ body {
   clear: both;
 }
 .tab {
-  float: left;
+  /*float: left;*/
 }
 .tab-switch {
   display: none;
@@ -182,7 +182,7 @@ form {
         <div class="tabs">
           <div class="tab">
 
-            <center><h1> Edit Biodata</h1></center>
+            <center><h1> Edit Biodata</h1></center><hr><br>
             <form method="POST" action="editbiodokter_aksi.php">
               <?php while($data = mysqli_fetch_assoc($query)) { ?>
 
@@ -214,7 +214,7 @@ form {
                       </div>
                   </div>
                   </div>
-                </div>
+                </div><br><br><br>
 
                 <div class="form-group">
                   <label for="alamat"><span class="glyphicon glyphicon-road"></span> Alamat </label>
@@ -234,7 +234,7 @@ form {
                 
                 <div class="form-group">
                   <label for="jadwal_kerja"><span class="glyphicon glyphicon-briefcase"></span> Jadwal_Kerja</label>
-                  <textarea class="form-control" name="jadwal_kerja"><?php echo $data['jadwal_kerja'];?></textarea>
+                  <textarea class="form-control" name="jadwal_kerja" rows="9"><?php echo $data['jadwal_kerja'];?></textarea>
                 </div>
 
                 <div class="form-group">

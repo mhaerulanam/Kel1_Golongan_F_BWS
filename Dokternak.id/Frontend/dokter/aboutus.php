@@ -35,34 +35,11 @@ session_start();
    </head>
 
    <body>
-   <navbar>
     <?php include "../modal/login.php"; ?>
     <?php include "../modal/ubah_password.php"; ?>
     <?php
         include 'navbar.php';
     ?>
-    </navbar>
-    <header>
-        <!-- Header Start -->
-       <div class="header-area header-transparrent">
-           <div class="headder-top header-sticky">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-lg-3 col-md-2">
-                            <!-- Logo -->
-                                <!-- Main-menu -->
-                                
-                                <!-- Header-btn -->
-                        <!-- Mobile Menu -->
-                        <div class="col-12">
-                            <div class="mobile_menu d-block d-lg-none"></div>
-                        </div>
-                    </div>
-                </div>
-           </div>
-       </div>
-        <!-- Header End -->
-    </header>
     <main>
 
         <!-- Hero Area Start-->
@@ -223,8 +200,8 @@ Sistem Informasi Dokter Hewan merupakan sistem informasi berbasis website untuk 
                                     <!-- founder -->
                                     <div class="testimonial-founder  ">
                                         <div class="founder-img mb-30">
-                                            <img src="../aboutus/profil/widya.png" class="radiuz" alt="">
-                                            <span>Yuristika Widya</span>
+                                            <img src="../aboutus/profil/widya1.png" class="radiuz" alt="">
+                                            <span>Widya Yuristika Oktavia</span>
                                             <p>Developer Team</p>
                                         </div>
                                     </div>

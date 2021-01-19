@@ -290,6 +290,9 @@ include "../modal/ubah_password.php";
             $aData=mysqli_query($koneksi, "SELECT * FROM konsultasi,peternak, kategori_hewan, kategori_artikel, dokter WHERE konsultasi.id_peternak=peternak.id_peternak AND konsultasi.id_kategori=kategori_hewan.id_kategori AND konsultasi.id_ktg=kategori_artikel.id_ktg AND konsultasi.id_dokter=dokter.id_dokter AND
             konsultasi.id_konsultasi='$idds'");
             $dt = mysqli_fetch_array($aData);
+            $nmd1 = $dt['namadepan_peternak'];
+            $nmb1 = $dt['namabelakang_peternak'];
+            $nama1 = "$nmd1 $nmb1"; 
         ?>
         
         
@@ -320,7 +323,7 @@ include "../modal/ubah_password.php";
 							</div>
 							<div class="flex-grow-1 pl-2">
 								<!-- <a class="text-decoration-none" href="#"> -->
-									<h2 class="text-capitalize h5 mb-0"><b> <?php echo $nama; ?></b></h2>
+									<h2 class="text-capitalize h5 mb-0"><b> <?php echo $nama1; ?></b></h2>
 								<!-- </a>  -->
 								<p class="small text-secondary m-0 mt-1"> <?php echo $dt['tanggal']; ?></p>
                             </div>
@@ -381,7 +384,7 @@ include "../modal/ubah_password.php";
             <div class="back">
                 <center>
                     <form action="respon_konsultasi.php" method="POST">
-                        <button type="submit" class="genric-btn primary-border" >KEMBALI</button>
+                        <button type="submit"  class="genric-btn primary-border" >KEMBALI</button>
                     </form>
                 </center>
             </div>
@@ -405,7 +408,7 @@ include "../modal/ubah_password.php";
         <div class="inbox_people  inbox2">
           <div class="headind_srch">
             <div class="recent_heading">
-              <h4><b>Kotak Masuk</b></h4>
+              <h4><b>Kotak Terkirim</b></h4>
             </div>
             <div class="srch_bar">
               <div class="stylish-input-group">
@@ -460,6 +463,9 @@ include "../modal/ubah_password.php";
             $dt = mysqli_fetch_array($aData);
             $idr = $dt['id_riwayat'];
             $idp = $dt['id_respon'];
+            $nmd1 = $dt['namadepan_peternak'];
+            $nmb1 = $dt['namabelakang_peternak'];
+            $nama1 = "$nmd1 $nmb1"; 
             $update_pwd=mysqli_query($koneksi,"update riwayat_konsultasi set status='$st' where id_konsultasi='$idd'");
 
             //     $R=mysqli_query($koneksi, "SELECT * FROM konsultasi WHERE id_peternak='$id' AND status_kirim='norespon' ORDER by tanggal DESC");
@@ -496,7 +502,7 @@ include "../modal/ubah_password.php";
 							</div>
 							<div class="flex-grow-1 pl-2">
 								<!-- <a class="text-decoration-none" href="#"> -->
-									<h2 class="text-capitalize h5 mb-0"><b><?php echo $nama; ?></b></h2>
+									<h2 class="text-capitalize h5 mb-0"><b><?php echo $nama1;  ?></b></h2>
 								<!-- </a>  -->
 								<p class="small text-secondary m-0 mt-1"> <?php echo $dt['tanggal']; ?></p>
                             </div>
@@ -532,7 +538,7 @@ include "../modal/ubah_password.php";
 												<div class="">
 													<a class="text-decoration-none" href="#">
 													<img src="../profil.php?id_dokter=<?php echo $dt['id_dokter']; ?>" class="rounded-circle z-depth-0"
-                                                        alt="<?php echo $data['nama']; ?>" height="40"></img>
+                                                        alt="<?php echo $dt['nama']; ?>" height="40"></img>
 													</a>
 												</div>
 												<div class="flex-grow-1 pl-2">

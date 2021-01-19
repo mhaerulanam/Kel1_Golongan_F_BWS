@@ -36,7 +36,7 @@ session_start();
     include "navbar.php";
     
     ?>
-    <h1>Konsultasi</h1>
+    <h2><center><b>Konsultasi</b></center></h2>
     <p align="center">Temukan jawaban atas masalahmu, dengan berkonsultasi kepada dokter ahli.</p>
     <div class="slider-active">
         <div class="section-top-border">

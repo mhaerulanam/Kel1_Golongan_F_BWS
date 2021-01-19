@@ -39,9 +39,9 @@ if (!isset($_SESSION["username"])) {
     include "navbar.php";
     
     ?>
-    <h1>
-            Tulis Artikel
-    </h1>
+    <h2>
+            <center><b>Tulis Artikel</b></center>
+    </h2>
     <?php
         if (isset($_GET['pesan'])){
             $pesan = $_GET['pesan'];
@@ -110,7 +110,7 @@ if (!isset($_SESSION["username"])) {
                 <br/>
                 <div id="container_btn">
                     <input type="submit" name="tombol" class="genric-btn primary" value="POSTING">             
-                    <a href="#" class="genric-btn default">BATAL</button>
+                    <a href="daftar_artikel.php" class="genric-btn default">BATAL</button>
                 </div>
                 </form>
             </div>

@@ -30,13 +30,10 @@ session_start();
 
 </head>
 <body>
-<?php include "modal/login.php"; ?>
 <?php include "modal/ubah_password.php"; ?>
-    <header>
         <?php
             include 'navbar.php';
         ?>
-    </header>
     <?php
         if (isset($_GET['pesan'])){
             $pesan = $_GET['pesan'];
@@ -267,9 +264,8 @@ session_start();
 
         </section>
 
-        <footer>
         <?php include 'footer.php'; ?>
-        </footer>
+
 
         <!-- All JS Custom Plugins Link Here here -->
         <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>

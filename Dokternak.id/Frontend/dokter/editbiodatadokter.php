@@ -22,7 +22,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
   margin-top: 5%;
   padding: 20px;
   border: 1px solid #888;
-  width: 50%;
+  width: 600px;
   height: fit-content;
 }
 
@@ -250,14 +250,15 @@ form {
                 <div class="form-group">
                 
                 
-                <!-- <div class="checkbox">
-                  <label><input type="checkbox" value="" checked>Menerima Persyaratan Yang Berlaku</label>
-                </div> -->
-                <input type="submit" class="btn btn-info" value="Edit" name="edit">
-                <a href="LandingPageDokter.php" class="btn btn-info">Batal</a>
+                <div class="checkbox">
+                  <!--<label><input type="checkbox" value="" checked>Menerima Persyaratan Yang Berlaku</label>-->
+                </div> 
+               
                 <!-- <input type="reset"  class="btn btn-info" value="Batal" name="edit"> -->
                 </div>
               </div>
+               <input type="submit" class="btn btn-info" value="Edit" name="edit">
+                <a href="LandingPageDokter.php" class="btn btn info-border">Batal</a>
             </form>
           </div> 
         </div>

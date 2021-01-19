@@ -28,7 +28,7 @@ session_start();
             <link rel="stylesheet" href="../assets/css/style.css">
             <link rel="stylesheet" href="../assets/css/style2.css">
 
-    <<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">  -->
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
@@ -251,7 +251,7 @@ session_start();
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <a href="editbiodatadokter.php" class="genric-btn primary">Edit Profile</a>
+                        <a href="editbiodatadokter.php" class="genric-btn primary">Edit Profile</a> <br><br><br>
                         <!-- <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/> -->
                     </div>
                 </div>
@@ -401,8 +401,8 @@ session_start();
                                 </div>
                                 <div class="blog-cap">
                                     <p>|   <?php echo $data['nama_penulis']; ?></p>
-                                    <h3><a href="../detailartikel.php?id_artikel=<?php echo $data['id_artikel']; ?>"><?php echo $data['judul']; ?></a></h3>
-                                    <a href="../detailartikel.php?id_artikel=<?php echo $data['id_artikel']; ?>" class="more-btn">Read more »</a>
+                                    <h3><a href="detailartikel.php?id_artikel=<?php echo $data['id_artikel']; ?>"><?php echo $data['judul']; ?></a></h3>
+                                    <a href="detailartikel.php?id_artikel=<?php echo $data['id_artikel']; ?>" class="more-btn">Read more »</a>
                                 </div>
                             </div>
                         </div> 

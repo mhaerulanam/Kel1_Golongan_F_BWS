@@ -44,8 +44,9 @@ h4{
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
-  height: 880px;
+  /* width: 90%; */
+  width: 900px;
+  height:900px;
 }
 
 /* The Close Button */
@@ -164,15 +165,6 @@ form {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
-
-.left{
-  position: absolute;
-  top: 0;
-  left: 0;
-  box-sizing: border-box;
-  padding: 40px;
-  width: 300px;
-  height: 400px;
 }
 .right{
   position: absolute;
@@ -353,22 +345,21 @@ if(isset($_POST["daftarpeternak"])) {
                                 <div class="input-group js-input-file">
                                     <input class="input-file" type="file" name="foto_peternak">
                                 </div>
-                                <div class="label--desc">Upload foto profil dengan ukuran maksimal 10 MB</div>
+                                <span>Upload foto profil dengan ukuran maksimal 10 MB</span>
                             </div>
           </div>
         
 
           <div class="form-group">
-          <div class="checkbox">
+          </div>
+        </div>
+        <div class="checkbox">
             <label><input type="checkbox" value="" checked>Dengan ini saya menyetujui segala ketentuan dalam website Dokternak.id</label>
           </div>
+      </div>
           <button type="submit" class="btn btn-success btn-block" name="daftarpeternak"><span class="glyphicon glyphicon-check"></span> Daftar</button>
-          </div>
-          </form>
-          </div>
         </form>
       </div>
-        </div>
         </div>
 
         <!-- ************************************************************************************************************* -->
@@ -472,7 +463,7 @@ if(isset($_POST["daftarpeternak"])) {
                                 <div class="input-group js-input-file">
                                     <input class="input-file" type="file" name="file_foto" id="file_foto">
                                 </div>
-                                <div class="label--desc">Upload foto profil dengan ukuran maksimal 10 MB</div>
+                                <span> Upload foto profil dengan ukuran maksimal 10 MB</span>
                             </div>
           </div>
           <div class="form-group">
@@ -481,7 +472,7 @@ if(isset($_POST["daftarpeternak"])) {
                                 <div class="input-group js-input-file">
                                     <input class="input-file" type="file" name="file_sertifikat" id="file_sertifikat">
                                 </div>
-                                <div class="label--desc">Upload scan sertifikat dengan ukuran maksimal 10 MB</div>
+                                <span> Upload scan sertifikat dengan ukuran maksimal 10 MB</span>
                             </div>
           </div>
 
@@ -522,7 +513,9 @@ if(isset($_POST["daftarpeternak"])) {
           <div class="checkbox">
             <label><input type="checkbox" value="" checked>Dengan ini saya menyetujui segala ketentuan dalam website Dokternak.id</label>
           </div>
+      </div>
             <button type="submit" class="btn btn-success btn-block" name="daftar"><span class="glyphicon glyphicon-check"></span> Daftar</button>
+          </div>
         </form>
       </div>
         </div>

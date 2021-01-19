@@ -1,3 +1,7 @@
+<?php
+// Start the session
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +27,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
   margin-right: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 45%;
+  width: 450px;
   height: fit-content;
 }
 
@@ -182,8 +186,7 @@ form {
 <?php
   session_start();
 
-// $id = $_SESSION['id'];
-$id ='3';
+$id = $_SESSION['id'];
 $query = mysqli_query($koneksi,"select * from peternak, user where peternak.id_user=user.id_user AND id_peternak=$id");
 $data = mysqli_fetch_assoc($query);
 $nmd = $data["namadepan_peternak"];
@@ -197,8 +200,7 @@ $id_user = $data['id_user']
 
 <?php
 					if(isset($_POST['edit'])){
-
-            $id ='3';
+            $id = $_SESSION['id'];
             $namadepan = $_POST['namadepan_peternak'];
             $namabelakang = $_POST['namabelakang_peternak'];
 						$username = $_POST['username'];
@@ -294,11 +296,11 @@ $id_user = $data['id_user']
           <!-- <div class="form-group"> -->
           
           
-          <!-- <div class="checkbox">
-            <label><input type="checkbox" value="" checked>Menerima Persyaratan Yang Berlaku</label>
-          </div> -->
+          <div class="checkbox">
+            <!--<label><input type="checkbox" value="" checked>Menerima Persyaratan Yang Berlaku</label>-->
+          </div>
           <input type="submit" class="btn btn-info" value="Edit" name="edit">
-          <a href="profil_akun.php" class="btn btn-info" >Batal</a>
+          <a href="profil_akun.php" class="btn btn info-border" >Batal</a>
           <!-- <input type="reset" class="btn btn-info" value="Batal" name=""> -->
           <!-- </div> -->
         </form>

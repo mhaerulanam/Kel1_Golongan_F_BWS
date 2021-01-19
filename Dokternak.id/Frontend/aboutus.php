@@ -241,7 +241,11 @@ Sistem Informasi Dokter Hewan yang merupakan sistem informasi berbasis website u
         <!-- Testimonial End -->
         
         <!-- Blog Area End -->
-
+    <section>
+        <?php
+            include 'kritikdansaran.php';
+        ?>
+    </section>
     </main>
     <footer>
         <!-- Footer Start-->

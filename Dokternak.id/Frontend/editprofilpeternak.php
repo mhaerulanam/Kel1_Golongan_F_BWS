@@ -27,7 +27,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
   margin-right: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 450px;
+  width: 500px;
   height: fit-content;
 }
 
@@ -54,13 +54,13 @@ body {
   color: #000000;
   line-height: 1.618em;
 }
-
-/* .tabs {
-  position: relative;
-  margin: 3rem 0;
+.tabs {
+  /* position: relative;
+  margin: 2rem 0;
   background: #ffffff;
-  height: 40rem;
-} */
+  height: 40rem; */
+  margin: 0% 10%;
+}
 .tabs::before,
 .tabs::after {
   content: "";
@@ -70,11 +70,7 @@ body {
   clear: both;
 }
 .tab {
-  width: 100%;
-  margin-right: auto;
-  margin-left: auto;
-  float: left;
-  position: relative;
+  /*float: left;*/
 }
 .tab-switch {
   display: none;
@@ -234,7 +230,7 @@ $id_user = $data['id_user']
           <div class="modal-body" style="padding:40px 50px;">
         <form role="form" action="" method="post"> -->
 
-        <center><h1> Edit Profil</h1></center>
+        <center><h1> Edit Profil</h1></center><hr><br>
         <form method="post" action="">
           <div class="form-group">
             <label for="namadepan_peternak"><span class="glyphicon glyphicon-user"></span> Nama Depan</label>
@@ -243,10 +239,6 @@ $id_user = $data['id_user']
           <div class="form-group">
             <label for="namabelakang_peternak"><span class="glyphicon glyphicon-user"></span> Nama Belakang</label>
             <input type="text" class="form-control" name="namabelakang_peternak"  value="<?php echo $nmb;?>">
-          </div>
-          <div class="form-group">
-            <label for="username_peternak"><span class="glyphicon glyphicon-user"></span> Username</label>
-            <input type="text" class="form-control" name="username" value="<?php echo $data['username'];?>">
           </div>
           <div class="form-group">
             <label for="email_peternak"><span class="glyphicon glyphicon-envelope"></span> Email</label>
@@ -285,7 +277,12 @@ $id_user = $data['id_user']
 
           <div class="form-group">
             <label for="alamat"><span class="glyphicon glyphicon-road"></span> Alamat Lengkap</label>
-            <input type="text" class="form-control" name="alamat" value="<?php echo $data['alamat'];?>">
+            <textarea class="form-control" name="alamat" rows="5"><?php echo $data['alamat'];?></textarea>
+            <!--<input type="text" class="form-control" name="alamat" value="<?php echo $data['alamat'];?>">-->
+          </div>
+           <div class="form-group">
+            <label for="username_peternak"><span class="glyphicon glyphicon-user"></span> Username</label>
+            <input type="text" class="form-control" name="username" value="<?php echo $data['username'];?>">
           </div>
 
           <!-- <div class="form-group">

@@ -29,13 +29,10 @@ session_start();
 </head>
 
 <body>
-    <navbar>
-    <?php include "../modal/login.php"; ?>
     <?php include "../modal/ubah_password.php"; ?>
     <?php
         include 'navbar.php';
     ?>
-    </navbar>
     
     <?php
         if (isset($_GET['pesan'])){
@@ -310,8 +307,7 @@ session_start();
             </div>
         </div>
         <?php endif; ?>
-        
-    <!-- JS here -->
+         <!-- JS here -->
 	
 		<!-- All JS Custom Plugins Link Here here -->
         <script src="../assets/js/vendor/modernizr-3.5.0.min.js"></script>
@@ -320,23 +316,23 @@ session_start();
         <script src="../assets/js/popper.min.js"></script>
         <script src="../assets/js/bootstrap.min.js"></script>
 	    <!-- Jquery Mobile Menu -->
-        <script src="./assets/js/jquery.slicknav.min.js"></script>
+        <script src="../assets/js/jquery.slicknav.min.js"></script>
 
 		<!-- Jquery Slick , Owl-Carousel Plugins -->
         <script src="../assets/js/owl.carousel.min.js"></script>
         <script src="../assets/js/slick.min.js"></script>
         <script src="../assets/js/price_rangs.js"></script>
-
+        
 		<!-- One Page, Animated-HeadLin -->
         <script src="../assets/js/wow.min.js"></script>
 		<script src="../assets/js/animated.headline.js"></script>
-		
+        <script src="../assets/js/jquery.magnific-popup.js"></script>
+
 		<!-- Scrollup, nice-select, sticky -->
         <script src="../assets/js/jquery.scrollUp.min.js"></script>
         <script src="../assets/js/jquery.nice-select.min.js"></script>
 		<script src="../assets/js/jquery.sticky.js"></script>
-        <script src="../assets/js/jquery.magnific-popup.js"></script>
-
+        
         <!-- contact js -->
         <script src="../assets/js/contact.js"></script>
         <script src="../assets/js/jquery.form.js"></script>

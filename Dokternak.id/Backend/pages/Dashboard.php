@@ -6,8 +6,7 @@ if (!isset($_SESSION["username"])) {
 	echo "Anda harus login dulu <br><a href='login.php'>Klik disini</a>";
 	exit;
 }
-
-$level=$_SESSION["level"];
+// $level=$_SESSION["level"];
 ?>
 <!DOCTYPE html>
 <html lang="en">

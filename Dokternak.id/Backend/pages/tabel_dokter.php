@@ -371,11 +371,11 @@ session_start();
 									<div class="modal-body">
 										<div class="form-group">
                                             <label>Nama :</label>
-                                            <input type="text" name="nama" id="nama" class="form-control" value="<?php echo $krow['nama']; ?>" required>
+                                            <input type="text" name="nama" id="nama" class="form-control" value="<?php echo $krow['nama']; ?>" >
                                         </div>
 										<div class="form-group">
                                             <label>Email :</label>
-                                            <input type="email" name="email" id="email" class="form-control" value="<?php echo $krow['email']; ?>" required>
+                                            <input type="email" name="email" id="email" class="form-control" value="<?php echo $krow['email']; ?>" >
 										</div>
                                         <div class="form-group">
                                             <label>Jenis Kelamin :</label><br>
@@ -388,15 +388,15 @@ session_start();
 										</div>
                                         <div class="form-group">
                                             <label>Alamat :</label>
-                                            <textarea name="alamat" id="alamat" class="form-control" required><?php echo $krow['alamat']; ?></textarea>
+                                            <textarea name="alamat" id="alamat" class="form-control" ><?php echo $krow['alamat']; ?></textarea>
 										</div>
 										<div class="form-group">
                                             <label>Tempat :</label>
-                                            <input type="text" name="tempat" id="tempat" class="form-control" value="<?php echo $krow['tempat']; ?>" required>
+                                            <input type="text" name="tempat" id="tempat" class="form-control" value="<?php echo $krow['tempat']; ?>" >
 										</div> 
 										<div class="form-group">
                                             <label>Telpon :</label>
-                                            <input type="number" name="telpon" id="telpon" class="form-control" value="<?php echo $krow['telpon']; ?>" required>
+                                            <input type="number" name="telpon" id="telpon" class="form-control" value="<?php echo $krow['telpon']; ?>" >
 										</div>
                                         <div class="form-group">
                                             <label>Foto :</label>
@@ -424,15 +424,15 @@ session_start();
 										</div>  
                                         <div class="form-group">
                                             <label>Jadwal Kerja :</label>
-                                            <textarea name="jadwal_kerja" id="jadwal_kerja" class="form-control" required><?php echo $krow['jadwal_kerja']; ?></textarea>
+                                            <textarea name="jadwal_kerja" id="jadwal_kerja" class="form-control" ><?php echo $krow['jadwal_kerja']; ?></textarea>
 										</div>
                                         <div class="form-group">
                                             <label>Username :</label>
-                                            <input type="text" name="username" id="username" class="form-control" value="<?php echo $krow['username']; ?>"  required>
+                                            <input type="text" name="username" id="username" class="form-control" value="<?php echo $krow['username']; ?>"  >
 										</div>    
 										<div class="form-group">
                                             <label>Password :</label>
-                                            <input type="password" name="password" id="password" class="form-control" value="<?php echo $krow['password']; ?>" required>
+                                            <input type="password" name="password" id="password" class="form-control" value="<?php echo $krow['password']; ?>" >
 										</div>
 										<div class="modal-footer">
 											<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">

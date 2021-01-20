@@ -14,11 +14,14 @@ if(isset($_SESSION["id_role"])){
 
     
     if($_SESSION["id_role"] == "Admin"){
-        header("location:../Backend/pages/Dashboard.php"); 
+        // header("location:../Backend/pages/Dashboard.php"); 
+        echo "<script>alert('Anda pernah login sebelumnya sebagai Admin'); window.location='../Backend/pages/Dashboard.php'</script>"; 
     }else if($_SESSION["id_role"] == "Peternak"){
-        header("location:LandingPagePeternak.php");
+        // header("location:LandingPagePeternak.php");
+        echo "<script>alert('Anda pernah login sebelumnya sebagai Peternak'); window.location='LandingPagePeternak.php'</script>"; 
     }else{
-        header("location:./dokter/LandingPageDokter.php");
+        // header("location:./dokter/LandingPageDokter.php");
+        echo "<script>alert('Anda pernah login sebelumnya sebagai Petugas Medis Hewan'); window.location='./dokter/LandingPageDokter.php'</script>"; 
     }
 
 }else{

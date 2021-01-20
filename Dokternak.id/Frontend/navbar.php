@@ -84,7 +84,7 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                    <?php    
+                                    <?php
                                     }else{
                                         ?>
                                         <div class="main-menu right">

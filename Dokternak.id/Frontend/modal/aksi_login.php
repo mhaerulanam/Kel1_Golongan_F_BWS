@@ -48,6 +48,7 @@
 					$jabatan = $row2["jabatan"];
 					$_SESSION["nama"]=$nama;
 					$_SESSION["jabatan"]=$jabatan;
+					$_SESSION["id_role"] = $jabatan;
 					$_SESSION["id"]=$id;
 					echo "<script>alert('Selamat $nama, Anda Berhasil Login sebagai $jabatan'); window.location='../dokter/LandingPageDokter.php'</script>"; 
                 }

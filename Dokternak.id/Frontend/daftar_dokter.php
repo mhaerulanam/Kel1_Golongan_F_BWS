@@ -169,14 +169,7 @@ session_start();
             $nt = $_POST['nt'];
             $s_keyword = $_POST['s_keyword'];
         }
-    ?>
-
-                <form method="POST">
-                  
-                            
-                </form>
-    
-                            
+    ?>                      
 
     <div class="pagination-area pb-200 text-center">
                 <div class="blog_right_sidebar">          
@@ -186,19 +179,19 @@ session_start();
                                 <div class="wrapper">
                                 <div class="tabs-2">
                                     <div class="tab">
-                                    <input type="radio" name="jabatan" id="tab-param" class="tab-switch" value="J01" selected>
-                                    <label for="tab-param" class="tab-label">Dokter</label>
+                                        <input type="radio" name="jabatan" id="tab-param" class="tab-switch" value="J01" selected>
+                                        <label for="tab-param" class="tab-label">Dokter</label>
                                     </div>
                                     <div class="tab">
-                                    <input type="radio" name="jabatan" id="tab-dok" class="tab-switch" value="J02" selected>
-                                    <label for="tab-dok" class="tab-label">Paramedis</label>
+                                        <input type="radio" name="jabatan" id="tab-dok" class="tab-switch" value="J02" selected>
+                                        <label for="tab-dok" class="tab-label">Paramedis</label>
                                     </div>
                                     <div class="tab">
-                                    <input type="radio" name="jabatan" id="tab-ib" class="tab-switch" value="J03" selected>
-                                    <label for="tab-ib" class="tab-label">Petugas IB</label>
+                                        <input type="radio" name="jabatan" id="tab-ib" class="tab-switch" value="J03" selected>
+                                        <label for="tab-ib" class="tab-label">Petugas IB</label>
                                     </div>
                                     <div class="input-group-append">
-                                            <button type="submit" name="pilih" class="genric-btn primary">CEK</button> 
+                                        <button type="submit" name="pilih" class="genric-btn primary">CEK</button> 
                                     </div> 
                                 </div>
                                 </div>
@@ -239,6 +232,20 @@ session_start();
                             </form>
                         </aside>
                 </div>
+                <?php
+                    if(isset($_POST['pilih'])){ ?>
+                        <h1>
+                            <b>
+                                <?php 
+                                $kat = $_POST['jabatan'];
+                                $ambilDataa=mysqli_query($koneksi, "SELECT * FROM jabatan WHERE id_jabatan = '$kat'");
+                                $dta = mysqli_fetch_array($ambilDataa);
+                                echo $dta['jabatan']; ?>
+                            </b>
+                        </h1>
+                    <?php
+                    }
+                ?>
                 </div>
 
     <div class="row blog">
@@ -284,6 +291,12 @@ session_start();
                                         // $dewan1->bind_param('sss', $cari, '%$cari%', $cari);
                                         // $dewan1->execute();
                                         // $res1 = $dewan1->get_result(); 
+
+                                        $sql = mysqli_query($koneksi, $dewan1);
+                                        // menghitung data
+                                        $jumlah_data = mysqli_num_rows($sql);
+                                        $pages = $jumlah_data;
+                                        if ( $jumlah_data> 0) {
                                         while ($row = mysqli_fetch_array($dewan)) {
                                         ?>
                                             <div class="col-lg-3 col-md-6 col-sm-6">
@@ -305,40 +318,63 @@ session_start();
                                                 </ul>
                                                 </div>
                                             </div>
-                                            <?php }?>
+                                            <?php }}
+                                            else {?>
+                                            <section>
+                                            <center>
+                                                <img src="assets/img/icon/error.png" class="datatidakada" alt="">
+                                            </center>
+                                            </section>
+                                                <?php        
+                                            }?>
                                     <?php
                                     }elseif(ISSET($_POST['pilih'])){
                                         if (ISSET($_POST['jabatan'])):
                                         include 'koneksi.php';
                                         $kat = $_POST['jabatan'];
-                                        $dataa = mysqli_query($koneksi, "SELECT dokter.*, jabatan.jabatan FROM dokter LEFT JOIN jabatan ON dokter.id_jabatan=jabatan.id_jabatan WHERE dokter.id_jabatan = '$kat' LIMIT $awalData,$jdataperhalaman ");
-                                        while ($dat = mysqli_fetch_array($dataa)) {
-                                            ?>
-                                            <div class="col-lg-3 col-md-6 col-sm-6">
-                                                <div class="our-team">
-                                                <div class="pic">
-                                                    <img src="profil.php?id_dokter=<?php echo $dat['id_dokter']; ?>">
-                                                </div>
-                                                <div class="team-content">
-                                                    <h4 class="title"><?php echo $dat['nama']; ?></h4>
-                                                    <span class="post"><?php echo $dat['jabatan']; ?></span>
-                                                    <span class="post"><?php echo $dat['tempat']; ?></span>
-                                                    <span class="post"><?php echo $dat['telpon']; ?></span><br>
+                                        $dataa1 = mysqli_query($koneksi, "SELECT dokter.*, jabatan.jabatan FROM dokter LEFT JOIN jabatan ON dokter.id_jabatan=jabatan.id_jabatan WHERE dokter.id_jabatan = '$kat' LIMIT $awalData,$jdataperhalaman ");
+                                        // menghitung data
+                                        $jumlah_data1 = mysqli_num_rows($dataa1);
+                                        $pages = $jumlah_data1;
+                                            if ( $jumlah_data1 > 0) { 
+                                            while ($dat = mysqli_fetch_array($dataa1)) {
+                                                ?>
+                                                <div class="col-lg-3 col-md-6 col-sm-6">
+                                                    <div class="our-team">
+                                                    <div class="pic">
+                                                        <img src="profil.php?id_dokter=<?php echo $dat['id_dokter']; ?>">
+                                                    </div>
+                                                    <div class="team-content">
+                                                        <h4 class="title"><?php echo $dat['nama']; ?></h4>
+                                                        <span class="post"><?php echo $dat['jabatan']; ?></span>
+                                                        <span class="post"><?php echo $dat['tempat']; ?></span>
+                                                        <span class="post"><?php echo $dat['telpon']; ?></span><br>
 
+                                                    </div>
+                                                    <ul class="social"> 
+                                                        <li>
+                                                        <a href="detaildokter.php?id_dokter=<?php echo $dat['id_dokter']; ?>"><b>Detail</b></a>
+                                                        </li>
+                                                    </ul>
+                                                    </div>
                                                 </div>
-                                                <ul class="social"> 
-                                                    <li>
-                                                    <a href="detaildokter.php?id_dokter=<?php echo $dat['id_dokter']; ?>"><b>Detail</b></a>
-                                                    </li>
-                                                </ul>
-                                                </div>
-                                            </div>
-                                            <?php                       
-                                            }?><?php
+                                                <?php                      
+                                            }}
+                                            else {?>
+                                            <section>
+                                            <center>
+                                                <img src="assets/img/icon/error.png" class="datatidakada" alt="">
+                                            </center>
+                                            </section>
+                                                <?php        
+                                            }?>
+                                            <?php
                                         else:
 					                        echo "<script>alert('Maaf!, Pilih Jabatan terlebih dahulu'); window.location='daftar_dokter.php'</script>"; 
                                         endif;
-                                    }else{ 
+                                    }else{
+                                    $jumlah_data2 = 5;
+                                    $pages = $jumlah_data2; 
                                     while ($dt = mysqli_fetch_array($ambilData)) { ?>
                                             <div class="col-lg-3 col-md-6 col-sm-6">
                                                 <div class="our-team">
@@ -367,12 +403,13 @@ session_start();
                 </div>
             <!--.Carousel-->
             </div>
-        </div>   
+        </div>  
     </div>
 </section>
 <?php
     if(isset($_POST['submit'])) :
-    else  :?>
+    elseif($pages <= 4) :
+    else:?>
 <!--Pagination Start  -->
 <div class="pagination-area pb-115 text-center">
             <div class="container">

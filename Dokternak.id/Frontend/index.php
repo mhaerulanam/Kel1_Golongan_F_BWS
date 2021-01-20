@@ -6,22 +6,14 @@ if(isset($_SESSION["id_role"])){
     // $username = $_SESSION["username"];
     $id_role = $_SESSION["id_role"];
     include "koneksi.php";
-
-
-    // $sql = "select * from user WHERE username='".$username."' AND id_role='".$id_role."' limit 1";
-    // $hasil = mysqli_query($koneksi,$sql);
-    // $row = mysqli_fetch_assoc($hasil);
-
+    
     
     if($_SESSION["id_role"] == "Admin"){
-        // header("location:../Backend/pages/Dashboard.php"); 
         echo "<script>alert('Anda pernah login sebelumnya sebagai Admin'); window.location='../Backend/pages/Dashboard.php'</script>"; 
     }else if($_SESSION["id_role"] == "Peternak"){
-        // header("location:LandingPagePeternak.php");
         echo "<script>alert('Anda pernah login sebelumnya sebagai Peternak'); window.location='LandingPagePeternak.php'</script>"; 
     }else{
-        // header("location:./dokter/LandingPageDokter.php");
-        echo "<script>alert('Anda pernah login sebelumnya sebagai Petugas Medis Hewan'); window.location='./dokter/LandingPageDokter.php'</script>"; 
+        echo "<script>alert('Anda pernah login sebelumnya sebagai Petugas Medis Hewan'); window.location='dokter/LandingPageDokter.php'</script>"; 
     }
 
 }else{

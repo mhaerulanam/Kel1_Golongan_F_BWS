@@ -122,11 +122,19 @@ session_start();
 							$kode = date('His'); //Hour,minutes,second
 
 							$id_respon = "RES$kode";
-							$id = $_POST['id_dokter'];
 							$idk = $_POST['id_konsultasi'];
 							$respon = $_POST['respon'];
 							$tanggal = $_POST['tanggal'];
 							$status = "on";
+							
+							if (isset($_POST['id_dokter'])){
+								$dokter = $_POST['id_dokter'];
+								$query = mysqli_query($koneksi,"select * from dokter where nama='$dokter'");
+								$data = mysqli_fetch_assoc($query);
+								$id = $data['id_dokter'];
+						 }else{
+								 echo 'no value';
+						}
 							// $id_konsultasi  = "KONS$kode";
 							// $id_respon  = "RES$kode";
 							//tambah
@@ -371,29 +379,20 @@ session_start();
 											</select><br>
                                         </div>
 										<div class="mt-30">
-                            <h5 class="mb-15">Dokter:</h5>
-                            <?php if(isset($_GET['id_dokter'])){
-                                $nama = $_GET['id_dokter'];
-                                $query_dok = mysqli_query($koneksi,"SELECT * FROM dokter WHERE nama='$nama'");
-                                $dok = mysqli_fetch_array($query_dok)
-                                ?>
-                            <input list="id_dokter" class="form-control" placeholder='Masukkan nama Dokter tujuan' value="<?= $dok['nama']; ?>" name="id_dokter">
-                            <?php } 
-                            else{?>
-
-                            <input list="id_dokter" class="form-control" placeholder='Masukkan nama Dokter tujuan' value="<?php echo $search_keyword; ?>" name="id_dokter">
-                            <datalist id="id_dokter" name="id_dokter">
-                                <?php 
-                                $query_dok = mysqli_query($koneksi,"SELECT * FROM dokter");
-                                while ($dok = mysqli_fetch_array($query_dok)) { ?>
-                                    
-                                <option value="<?= $dok['id_dokter']; ?>" ><?php echo $dok['nama']; ?></option> 
-                                <!-- <option value="<?= $dok['nama']; ?>" ></option> -->
-
-                            
-                                <?php } }?>
-                                </datalist>
-                            </div>
+										<h5 class="mb-15">Kepada</h5>
+										<?php 
+										$nama = $_GET['id_dokter'];
+										$query_dok = mysqli_query($koneksi,"SELECT * FROM dokter WHERE nama='$nama'");
+										$dok = mysqli_fetch_array($query_dok)
+										?>
+										<input list="id_dokter" class="form-control" placeholder='Masukkan nama Dokter tujuan' value="<?php echo $search_keyword; ?>" name="id_dokter">
+										<datalist id="id_dokter" name="id_dokter">
+											<?php 
+											$query_dok = mysqli_query($koneksi,"SELECT * FROM dokter");
+											while ($dok = mysqli_fetch_array($query_dok)) { ?>
+												<option value="<?= $dok['nama']; ?>" ></option>
+											<?php } ?>
+										</datalist>
 										<!-- <div class="form-group">
                                             <label>ID Dokter :</label>
                                             <select name="id_dokter" class="form-control" id="default-select">

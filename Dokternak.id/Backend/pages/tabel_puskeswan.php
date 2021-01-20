@@ -246,7 +246,7 @@ session_start();
 						<!-- Tombol Action -->
                         <td>
                             <a href="#editEmployeeModal<?php echo $krow['id_puskeswan']; ?>" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="hapus.php?id_puskeswan=<?php echo $krow['id_puskeswan']; ?>" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a> <br>
+                            <a href="hapus.php?id_puskeswan=<?php echo $krow['id_puskeswan']; ?>"onClick="return confirm('Hapus Data Puskeswan?')" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a> <br>
                         	<!-- <a href="#deleteEmployeeModal<?php //echo $krow['id_puskeswan']; ?>" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a> -->
                         </td>
                     </tr>

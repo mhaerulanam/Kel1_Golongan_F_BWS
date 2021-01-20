@@ -114,6 +114,20 @@ session_start();
   clear: both;
 }
 
+.tab-label1 {
+  position: relative;
+  display: block;
+  line-height: 2.75em;
+  height: 3em;
+  padding: 0 1.618em;
+  background: #502b00;
+  /* border: 0.25rem solid #502b00; */
+  color: #fff;
+  cursor: pointer;
+  top: 0;
+  transition: all 0.25s;
+}
+
 </style>
 </head>
 
@@ -178,18 +192,56 @@ session_start();
                             <div class="input-group mb-3">
                                 <div class="wrapper">
                                 <div class="tabs-2">
-                                    <div class="tab">
-                                        <input type="radio" name="jabatan" id="tab-param" class="tab-switch" value="J01" selected>
-                                        <label for="tab-param" class="tab-label">Dokter</label>
-                                    </div>
-                                    <div class="tab">
-                                        <input type="radio" name="jabatan" id="tab-dok" class="tab-switch" value="J02" selected>
-                                        <label for="tab-dok" class="tab-label">Paramedis</label>
-                                    </div>
-                                    <div class="tab">
-                                        <input type="radio" name="jabatan" id="tab-ib" class="tab-switch" value="J03" selected>
-                                        <label for="tab-ib" class="tab-label">Petugas IB</label>
-                                    </div>
+                                    <?php
+                                    if(isset($_POST['pilih']) && $_POST['jabatan'] == "J01"){
+                                        ?>
+                                        <div class="tab">
+                                            <input type="radio" name="jabatan" id="tab-param" class="tab-switch" value="J01" selected>
+                                            <label for="tab-param" class="tab-label1">Dokter</label>
+                                        </div>
+                                        <?php
+                                    }
+                                    else{ ?>
+                                        <div class="tab">
+                                            <input type="radio" name="jabatan" id="tab-param" class="tab-switch" value="J01" selected>
+                                            <label for="tab-param" class="tab-label">Dokter</label>
+                                        </div>
+                                    <?php
+                                    } 
+
+                                    if(isset($_POST['pilih']) && $_POST['jabatan'] == "J02"){
+                                        ?>
+                                        <div class="tab">
+                                            <input type="radio" name="jabatan" id="tab-dok" class="tab-switch" value="J02" selected>
+                                            <label for="tab-dok" class="tab-label1">Paramedis</label>
+                                        </div>
+                                        <?php
+                                    }
+                                    else{ ?>
+                                        <div class="tab">
+                                            <input type="radio" name="jabatan" id="tab-dok" class="tab-switch" value="J02" selected>
+                                            <label for="tab-dok" class="tab-label">Paramedis</label>
+                                        </div>
+                                    <?php
+                                    } 
+
+                                    if(isset($_POST['pilih']) && $_POST['jabatan'] == "J03"){
+                                        ?>
+                                        <div class="tab">
+                                            <input type="radio" name="jabatan" id="tab-ib" class="tab-switch" value="J03" selected>
+                                            <label for="tab-ib" class="tab-label1">Petugas IB</label>
+                                        </div>
+                                        <?php
+                                    }
+                                    else{ 
+                                        ?>
+                                        <div class="tab">
+                                            <input type="radio" name="jabatan" id="tab-ib" class="tab-switch" value="J03" selected>
+                                            <label for="tab-ib" class="tab-label">Petugas IB</label>
+                                        </div>
+                                    <?php
+                                    } ?>
+
                                     <div class="input-group-append">
                                         <button type="submit" name="pilih" class="genric-btn primary">CEK</button> 
                                     </div> 
@@ -322,19 +374,26 @@ session_start();
                                             else {?>
                                             <section>
                                             <center>
-                                                <img src="assets/img/icon/error.png" class="datatidakada" alt="">
+                                                <img src="assets/img/icon/error1.png" class="datatidakada" alt="">
                                             </center>
                                             </section>
                                                 <?php        
                                             }?>
                                     <?php
                                     }elseif(ISSET($_POST['pilih'])){
+                                        $jdataperhalaman = 4;
+                                        $result = mysqli_query($koneksi, "SELECT dokter.*, jabatan.jabatan FROM dokter LEFT JOIN jabatan ON dokter.id_jabatan=jabatan.id_jabatan WHERE dokter.id_jabatan = '$kat'");
+                                        $jumlahData = mysqli_num_rows($result);
+                                        $jmlhlm = ceil($jumlahData / $jdataperhalaman);
+                                        $halamanAktif = ( isset($_POST["hlm"]) ) ? $_POST["hlm"] : 1 ;
+                                        $awalData = ( $jdataperhalaman * $halamanAktif ) - $jdataperhalaman;
                                         if (ISSET($_POST['jabatan'])):
                                         include 'koneksi.php';
                                         $kat = $_POST['jabatan'];
-                                        $dataa1 = mysqli_query($koneksi, "SELECT dokter.*, jabatan.jabatan FROM dokter LEFT JOIN jabatan ON dokter.id_jabatan=jabatan.id_jabatan WHERE dokter.id_jabatan = '$kat' LIMIT $awalData,$jdataperhalaman ");
+                                        $dataa11 = mysqli_query($koneksi, "SELECT dokter.*, jabatan.jabatan FROM dokter LEFT JOIN jabatan ON dokter.id_jabatan=jabatan.id_jabatan WHERE dokter.id_jabatan = '$kat'");
+                                        $dataa1 = mysqli_query($koneksi, "SELECT dokter.*, jabatan.jabatan FROM dokter LEFT JOIN jabatan ON dokter.id_jabatan=jabatan.id_jabatan WHERE dokter.id_jabatan = '$kat'  LIMIT $awalData,$jdataperhalaman");
                                         // menghitung data
-                                        $jumlah_data1 = mysqli_num_rows($dataa1);
+                                        $jumlah_data1 = mysqli_num_rows($dataa11);
                                         $pages = $jumlah_data1;
                                             if ( $jumlah_data1 > 0) { 
                                             while ($dat = mysqli_fetch_array($dataa1)) {
@@ -363,7 +422,7 @@ session_start();
                                             else {?>
                                             <section>
                                             <center>
-                                                <img src="assets/img/icon/error.png" class="datatidakada" alt="">
+                                                <img src="assets/img/icon/error1.png" class="datatidakada" alt="">
                                             </center>
                                             </section>
                                                 <?php        
@@ -407,7 +466,49 @@ session_start();
     </div>
 </section>
 <?php
-    if(isset($_POST['submit'])) :
+    if(isset($_POST['pilih'])) : 
+        if($pages > 4) : ?>
+        <div class="pagination-area pb-115 text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="single-wrap d-flex justify-content-center">
+                            <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-start">
+                            <?php
+                            for($i = 1; $i <= $jmlhlm; $i++){
+                                $jabatani = $_POST['jabatan']; 
+                            if ($i == $halamanAktif ) : ?>
+                                <li class="page-item active">
+                                    <form action="" method="POST">
+                                        <input type="hidden" name="jabatan" value="<?php echo $jabatani ?>">
+                                        <input type="hidden" name="hlm" value="<?= $i; ?>">                         
+                                        <input type="submit" name="pilih" class="page-link" value="<?= $i; ?>">
+                                    </form>
+                                </li>
+                            <?php else : ?>
+                                <li class="page-item">
+                                    <form action="" method="POST">
+                                        <input type="hidden" name="jabatan" value="<?php echo $jabatani ?>">
+                                        <input type="hidden" name="hlm" value="<?= $i; ?>">                         
+                                        <input type="submit" name="pilih" class="page-link" value="<?= $i; ?>">
+                                    </form>
+                                </li>
+                            <?php endif; ?>
+
+                            <?php
+                            }?>
+                            </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <?php
+        else:?>
+
+        <?php endif;
+    elseif(isset($_POST['submit'])) :
     elseif($pages <= 4) :
     else:?>
 <!--Pagination Start  -->
@@ -454,7 +555,6 @@ session_start();
             </div>
         </div>
         <?php endif; ?>
-
         
     <!-- JS here -->
 	

@@ -2,22 +2,26 @@
 // Start the session
 session_start();
 
-if(isset($_SESSION["username"])){
-    $nama = $_SESSION["username"];
+if(isset($_SESSION["id_role"])){
+    // $username = $_SESSION["username"];
     $id_role = $_SESSION["id_role"];
+    include "koneksi.php";
 
-    // $sql = "select * from user, role where user.id_role=role.id_role AND username='".$nama."' AND id_role='".$id_role."'";
+
+    // $sql = "select * from user WHERE username='".$username."' AND id_role='".$id_role."' limit 1";
     // $hasil = mysqli_query($koneksi,$sql);
     // $row = mysqli_fetch_assoc($hasil);
-    // $_SESSION["id_role"]=$row["role"];
+
     
-    
-    if($_SESSION["id_role"] == 1 ){
-        header("location:../Backend/pages/Dashboard.php");
-    }else if($_SESSION["id_role"] == 2){
-        header("location:./dokter/LandingPageDokter.php");
+    if($_SESSION["id_role"] == "Admin"){
+        // header("location:../Backend/pages/Dashboard.php"); 
+        echo "<script>alert('Anda pernah login sebelumnya sebagai Admin'); window.location='../Backend/pages/Dashboard.php'</script>"; 
+    }else if($_SESSION["id_role"] == "Peternak"){
+        // header("location:LandingPagePeternak.php");
+        echo "<script>alert('Anda pernah login sebelumnya sebagai Peternak'); window.location='LandingPagePeternak.php'</script>"; 
     }else{
-        header("location:LandingPagePeternak.php");
+        // header("location:./dokter/LandingPageDokter.php");
+        echo "<script>alert('Anda pernah login sebelumnya sebagai Petugas Medis Hewan'); window.location='./dokter/LandingPageDokter.php'</script>"; 
     }
 
 }else{

@@ -90,7 +90,6 @@
                                 <a><i class="fa fa-table fa-fw"> </i> Data Konsultasi</a>
                                 <ul>
                                     <li><a href="tabel_keluhan.php">Data Konsultasi</a></li>
-                                    <li><a href="tabel_respon.php">Data Respon Konsultasi</a></li>
                                     <li><a href="tabel_riwayat.php">Data Riwayat Konsultasi</a></li>
                                 </ul>
                             </li>

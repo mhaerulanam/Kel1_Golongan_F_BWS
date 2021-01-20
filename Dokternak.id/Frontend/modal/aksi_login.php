@@ -69,7 +69,7 @@
 				}				
 			}else {
                 // alihkan ke halaman login kembali
-                echo "<script>alert('Maaf, Login Anda gagal'); window.location='../LandingPagePeternak.php'</script>"; 
+                echo "<script>alert('Maaf, Login Anda gagal'); window.location='../index.php'</script>"; 
 			}
 		}
 	?>

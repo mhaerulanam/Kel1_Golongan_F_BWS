@@ -293,7 +293,7 @@ session_start();
 												$dok = mysqli_query($koneksi,$sql);
 												while($data = mysqli_fetch_array($dok))
 												{ ?>
-												<option value="<?=$data['id_kategori']?>"><?=$data['kategori_hewan']?></option> 
+												<option value="<?php echo $data['id_kategori']?>" <?php if($data['id_kategori']==$krow['id_kategori']) echo 'selected' ?>><?=$data['kategori_hewan']?></option> 
 												<?php } ?>
 											</select><br>
                                         </div>
@@ -307,7 +307,7 @@ session_start();
 												$dok = mysqli_query($koneksi,$sql);
 												while($data = mysqli_fetch_array($dok))
 												{ ?>
-												<option value="<?=$data['id_ktg']?>"><?=$data['kategori_artikel']?></option> 
+												<option value="<?php echo $data['id_ktg']?>" <?php if($data['id_ktg']==$krow['id_ktg']) echo 'selected' ?>><?=$data['kategori_artikel']?></option> 
 												<?php } ?>
 											</select><br>
                                         </div>
@@ -326,8 +326,7 @@ session_start();
                                             <label>Tanggal :</label>
                                             <input type="date" name="tanggal" id="tanggal" class="form-control" value="<?php echo $krow['tanggal']; ?>" >
                                         </div>
-												
-												<div class="modal-footer">
+											<div class="modal-footer">
 													<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
 													<input type="submit" class="btn btn-info" value="Save" name="edit">
 												</div>

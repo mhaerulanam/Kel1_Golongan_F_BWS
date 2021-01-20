@@ -1,6 +1,26 @@
 <?php
 // Start the session
 session_start();
+
+if(isset($_SESSION["username"])){
+    $nama = $_SESSION["username"];
+    $id_role = $_SESSION["id_role"];
+
+    // $sql = "select * from user, role where user.id_role=role.id_role AND username='".$nama."' AND id_role='".$id_role."'";
+    // $hasil = mysqli_query($koneksi,$sql);
+    // $row = mysqli_fetch_assoc($hasil);
+    // $_SESSION["id_role"]=$row["role"];
+    
+    
+    if($_SESSION["id_role"] == 1 ){
+        header("location:../Backend/pages/Dashboard.php");
+    }else if($_SESSION["id_role"] == 2){
+        header("location:./dokter/LandingPageDokter.php");
+    }else{
+        header("location:LandingPagePeternak.php");
+    }
+
+}else{
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -332,3 +352,4 @@ session_start();
         <script src="./assets/js/main.js"></script>
 </body>
 </html>
+<?php } ?>

@@ -208,23 +208,26 @@ session_start();
                         $cari = $_POST['nt'];
                     
                         $query2 = " SELECT * FROM puskeswan WHERE nama_puskeswan LIKE '%$cari%' OR alamat LIKE'%$cari%'";
-
+                        
                         $sql = mysqli_query($koneksi, $query2);
-                        while ($data = mysqli_fetch_array($sql)) {?>
-                
-                            <div class="col-lg-4 col-md-6">
-                                <div class="item-box-blog">
-                                <div class="item-box-blog-image">
-                                    <!--Image-->
-                                    <figure> <img alt="" src="gambarpuskeswan.php?id_puskeswan=<?php echo $data['id_puskeswan']; ?>" > </figure>
-                                </div>
-                                <div class="item-box-blog-body">
-                                    <!--Heading-->
-                                    <div class="item-box-blog-heading">
-                                    <a href="#" tabindex="0">
-                                        <h4><b><?= $data['nama_puskeswan']; ?></b></h4>
-                                    </a>
-                                    </div>
+                        $jumlah_data1 = mysqli_num_rows($sql);
+                        $pages = $jumlah_data1;
+                            if ( $jumlah_data1 > 0) { 
+                                while ($data = mysqli_fetch_array($sql)) {?>
+
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="item-box-blog">
+                                        <div class="item-box-blog-image">
+                                            <!--Image-->
+                                            <figure> <img alt="" src="gambarpuskeswan.php?id_puskeswan=<?php echo $data['id_puskeswan']; ?>" > </figure>
+                                        </div>
+                                        <div class="item-box-blog-body">
+                                            <!--Heading-->
+                                            <div class="item-box-blog-heading">
+                                            <a href="#" tabindex="0">
+                                                <h4><b><?= $data['nama_puskeswan']; ?></b></h4>
+                                            </a>
+                                            </div>
                                 
                                     <!--Text-->
                                     <div class="item-box-blog-text">
@@ -236,7 +239,15 @@ session_start();
                                 </div>
                                 </div>
                             </div> 
-                            <?php }
+                            <?php }}
+                        else {?>
+                            <section>
+                            <center>
+                            <img src="assets/img/icon/error1.png" class="datatidakada" alt="">
+                            </center>
+                            </section>
+                        <?php        
+                        }
                     }else{
                 ?> 
                 <?php while ($data = mysqli_fetch_array($datapuskeswan)) {?>

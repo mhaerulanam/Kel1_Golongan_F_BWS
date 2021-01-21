@@ -87,6 +87,7 @@ session_start();
 
                 // ambilData adalah variabel untuk menampilkan data dari 2 tabel, yaitu artikel dan kategori_artikel. 
                 // Sehingga kita dapat menampilkan kategorinya, sesuai id_ktg di kedua tabel
+                $ambilDataku=mysqli_query($koneksi, "SELECT * FROM artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg and artikel.status='tampil' order by id_artikel DESC");
                 $ambilData=mysqli_query($koneksi, "SELECT * FROM artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg and artikel.status='tampil' order by id_artikel DESC
                 LIMIT $awalData,$jdataperhalaman");
 
@@ -133,21 +134,36 @@ session_start();
                         <?php        
                     }
                 }elseif(isset($_GET["tampil"])){
+                                    
                 $ktg = $_GET["tampil"];
-                $kat=mysqli_query($koneksi, "SELECT * FROM artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg and artikel.status='tampil' AND artikel.id_ktg='$ktg'");      
-                while ($dat = mysqli_fetch_assoc($kat)) { ?>
-                <?php
-                $isi = $dat['isi'];
-                $num_char  = 250;
-                $isibts = substr($isi,0,$num_char)."...";
-                ?>
-                 <article class="blog_item">
-                            <div class="blog_item_img">
+                $jdataperhalaman = 3;
+                $result = mysqli_query($koneksi, "SELECT * FROM artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg and artikel.status='tampil' AND artikel.id_ktg='$ktg'");
+                $jumlahData = mysqli_num_rows($result);
+                $jmlhlm = ceil($jumlahData / $jdataperhalaman);
+                $halamanAktif = ( isset($_POST["hlm"]) ) ? $_POST["hlm"] : 1 ;
+                // halaman 2, awalDatanya = 2. Dimulai indeks 0,1,2,3, dst
+                $awalData = ( $jdataperhalaman * $halamanAktif ) - $jdataperhalaman;
+
+                $kat1=mysqli_query($koneksi, "SELECT * FROM artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg and artikel.status='tampil' AND artikel.id_ktg='$ktg'");      
+                $kat=mysqli_query($koneksi, "SELECT * FROM artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg and artikel.status='tampil' AND artikel.id_ktg='$ktg' LIMIT $awalData,$jdataperhalaman");      
+                 // menghitung data
+                 $jumlah_data1 = mysqli_num_rows($kat1);
+                 $pages = $jumlah_data1;
+                     if ( $jumlah_data1 > 0) { 
+                
+                        while ($dat = mysqli_fetch_assoc($kat)) { ?>
+                        <?php
+                        $isi = $dat['isi'];
+                        $num_char  = 250;
+                        $isibts = substr($isi,0,$num_char)."...";
+                        ?>
+                        <article class="blog_item">
+                                    <div class="blog_item_img">
                                         <img class="card-img rounded-0" src="gambar.php?id_artikel=<?php echo $dat['id_artikel']; ?>" alt="">
                                         <a href="#" class="blog_item_date">
                                             <h3><?php echo $dat['nama_penulis']; ?></h3>
                                         </a>
-                            </div>
+                                    </div>
                                     <div class="blog_details">
                                         <a class="d-inline-block" href="single-blog.html">
                                             <h2><a href="detailartikel.php?id_artikel=<?php echo $dat['id_artikel']; ?>"><?php echo $dat['judul']; ?></a></h2>
@@ -158,9 +174,20 @@ session_start();
                                             <li><a><?php echo $dat['tanggal'];?></a></li>
                                         </ul>
                                     </div>
-                    </article>
-                        <?php } ?><?php
+                            </article>
+                        <?php } } 
+                        else {?>
+                            <div class="col">
+                                <center>
+                                    <img src="assets/img/icon/error.png" class="datatidakada" alt="">
+                                </center>
+                            </div>
+                        <?php        
+                        }
                 }else{ 
+                // menghitung data
+                $jumlah_data2 = mysqli_num_rows($ambilDataku);
+                $pages = $jumlah_data2; 
                 while ($data = mysqli_fetch_array($ambilData)) { ?>
                     <?php
                     $isi = $data['isi'];
@@ -238,7 +265,50 @@ session_start();
         </div>
     </section>
 <?php
-    if(isset($_POST['submit'])||isset($_GET['tampil'])) :
+    if(isset($_POST['submit'])) :
+    elseif(isset($_GET['tampil'])) :
+        if($pages > 3) : ?>
+            <div class="pagination-area pb-115 text-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="single-wrap d-flex justify-content-center">
+                                <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-start">
+                                <?php
+                                for($i = 1; $i <= $jmlhlm; $i++){
+                                    $tampilin = $_GET['tampil']; 
+                                if ($i == $halamanAktif ) : ?>
+                                    <li class="page-item active">
+                                        <form action="" method="POST">
+                                            <input type="hidden" name="tampil" value="<?php echo $tampilin ?>">
+                                            <input type="hidden" name="hlm" value="<?= $i; ?>">                         
+                                            <input type="submit" name="pilih" class="page-link" value="<?= $i; ?>">
+                                        </form>
+                                    </li>
+                                <?php else : ?>
+                                    <li class="page-item">
+                                        <form action="" method="POST">
+                                        <input type="hidden" name="tampil" value="<?php echo $tampilin ?>">
+                                            <input type="hidden" name="hlm" value="<?= $i; ?>">                         
+                                            <input type="submit" name="pilih" class="page-link" value="<?= $i; ?>">
+                                        </form>
+                                    </li>
+                                <?php endif; ?>
+    
+                                <?php
+                                }?>
+                                </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <?php
+            else:?>
+    
+        <?php endif;
+    elseif($pages <= 3) :
     else  :?>
 <!--Pagination Start  -->
 <div class="pagination-area pb-115 text-center">

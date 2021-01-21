@@ -134,8 +134,11 @@ session_start();
 							echo "<script>alert(' Id obat yang sama sudah digunakan');history.go(-1);</script>";
 						}
 						else{
+							$kode = date('His'); //Hour,minutes,second
+
+							$id_obat  = "OB$kode";
 							//tambah
-							$sql = "INSERT INTO data_obat VALUES ('','$nama_obat','$stok','$supplier','$expired','$keterangan')";
+							$sql = "INSERT INTO data_obat VALUES ('$id_obat','$nama_obat','$stok','$supplier','$expired','$keterangan')";
 							if(mysqli_query($koneksi, $sql)){
 								$nilaihasil = "Records inserted successfully.";
 							} 
@@ -362,7 +365,7 @@ session_start();
 										</div>
 										<div class="form-group">
                                             <label>Expired :</label>
-                                            <input type="text" name="expired" id="expired" class="form-control" required>
+                                            <input type="date" name="expired" id="expired" class="form-control" required>
 										</div> 
 										<div class="form-group">
                                             <label>Keterangan :</label>

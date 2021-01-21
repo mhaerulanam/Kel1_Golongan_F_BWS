@@ -64,7 +64,7 @@
                             </li>
                             <li>
                                 <a><i class="fa fa-table fa-fw"> </i> Data User <span class="fa arrow"></a>
-                                <ul>
+                                <ul class="nav nav-second-level">
                                     <li><a href="tabel_useradmin.php">Data User Admin</a></li>
                                     <li><a href="tabel_userdokter.php">Data User Dokter</a></li>
                                     <li><a href="tabel_userpeternak.php">Data User Peternak</a></li>
@@ -75,7 +75,7 @@
                             </li>
                             <li>
                                 <a><i class="fa fa-table fa-fw"> </i> Data Dokter <span class="fa arrow"></a>
-                                <ul>
+                                <ul class="nav nav-second-level">
                                 <li><a href="tabel_dokter.php"> Data Dokter</a></li>
                                 <li><a href="tabel_dokterpuskeswan.php"> Data Dokter Puskeswan</a></li>
                                 </ul>
@@ -91,14 +91,14 @@
                             </li>
                             <li>
                                 <a><i class="fa fa-table fa-fw"> </i> Data Dokumentasi <span class="fa arrow"></a>
-                                <ul>
+                                <ul class="nav nav-second-level">
                                     <li><a href="tabel_dokumentasi.php">Data Dokumentasi</a></li>
                                     <li><a href="tabel_dokumentasipuskeswan.php">Data Dokumentasi Puskeswan</a></li>
                                 </ul>
                             </li>
                             <li>
                                 <a><i class="fa fa-table fa-fw"> </i> Data Konsultasi <span class="fa arrow"></a>
-                                <ul>
+                                <ul class="nav nav-second-level">
                                     <li><a href="tabel_keluhan.php">Data Konsultasi</a></li>
                                     <li><a href="tabel_riwayat.php">Data Riwayat Konsultasi</a></li>
                                 </ul>

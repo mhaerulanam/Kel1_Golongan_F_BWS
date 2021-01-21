@@ -177,11 +177,11 @@ session_start();
                             </article>
                         <?php } } 
                         else {?>
-                            <section>
-                            <center>
-                                <img src="assets/img/icon/error1.png" class="datatidakada" alt="">
-                            </center>
-                            </section>
+                            <div class="col">
+                                <center>
+                                    <img src="assets/img/icon/error.png" class="datatidakada" alt="">
+                                </center>
+                            </div>
                         <?php        
                         }
                 }else{ 

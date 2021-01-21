@@ -87,6 +87,7 @@ session_start();
 
                 // ambilData adalah variabel untuk menampilkan data dari 2 tabel, yaitu artikel dan kategori_artikel. 
                 // Sehingga kita dapat menampilkan kategorinya, sesuai id_ktg di kedua tabel
+                $ambilDataku=mysqli_query($koneksi, "SELECT * FROM artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg and artikel.status='tampil' order by id_artikel DESC");
                 $ambilData=mysqli_query($koneksi, "SELECT * FROM artikel, kategori_artikel where artikel.id_ktg=kategori_artikel.id_ktg and artikel.status='tampil' order by id_artikel DESC
                 LIMIT $awalData,$jdataperhalaman");
 
@@ -184,6 +185,9 @@ session_start();
                         <?php        
                         }
                 }else{ 
+                // menghitung data
+                $jumlah_data2 = mysqli_num_rows($ambilDataku);
+                $pages = $jumlah_data2; 
                 while ($data = mysqli_fetch_array($ambilData)) { ?>
                     <?php
                     $isi = $data['isi'];
@@ -304,6 +308,7 @@ session_start();
             else:?>
     
         <?php endif;
+    elseif($pages <= 3) :
     else  :?>
 <!--Pagination Start  -->
 <div class="pagination-area pb-115 text-center">

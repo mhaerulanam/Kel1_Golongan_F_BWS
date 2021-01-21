@@ -122,7 +122,7 @@ if (!isset($_SESSION["username"])) {
                 <div class="row mt-3">
                   <div class="col-sm-4"><strong class="text-uppercase">Telepon</strong></div>
                   <div class="col-sm-8">
-                  <a class="genric-btn primary" href="tel:<?php echo $d2['telpon']; ?>" rel="tooltip" title="Telpon Langsung"><span class="fa fa-phone"></span></a>
+                  <a class="genric-btn primary" href="tel:<?php echo $data['telpon']; ?>" rel="tooltip" title="Telpon Langsung"><span class="fa fa-phone"></span></a>
                   <?= $data['telpon']; ?><br>
                   <p class="label-telpon">Tekan tombol telpon untuk melakukan panggilan langsung</p>
                   </div>

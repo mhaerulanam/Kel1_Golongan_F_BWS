@@ -17,7 +17,7 @@ if (!isset($_SESSION["username"])) {
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Dokternak.id-Dashboard</title>
+        <title>Dokternak - Dashboard</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -25,14 +25,8 @@ if (!isset($_SESSION["username"])) {
         <!-- MetisMenu CSS -->
         <link href="../css/metisMenu.min.css" rel="stylesheet">
 
-        <!-- Timeline CSS -->
-        <link href="../css/timeline.css" rel="stylesheet">
-
         <!-- Custom CSS -->
         <link href="../css/startmin.css" rel="stylesheet">
-
-        <!-- Morris Charts CSS -->
-        <link href="../css/morris.css" rel="stylesheet">
 
         <!-- Custom Fonts -->
         <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -40,92 +34,97 @@ if (!isset($_SESSION["username"])) {
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
     <body>
 
         <div id="wrapper">
 
-            <?php 
-            include "navbar.php";
+            <!-- Navigation -->
+            <?php include "navbar.php"; 
             include 'koneksi.php';
-                // mengambil data user
-                $a = mysqli_query($koneksi,"SELECT * FROM tutorial");
-                 
-                // menghitung data user
-                $data_tutorial = mysqli_num_rows($a);
+            // mengambil data user
+            $a = mysqli_query($koneksi,"SELECT * FROM tutorial");
+             
+            // menghitung data user
+            $data_tutorial = mysqli_num_rows($a);
 
-                // mengambil data dokter
-                $b = mysqli_query($koneksi,"SELECT * FROM dokter");
-                 
-                // menghitung data dokter
-                $data_dokter = mysqli_num_rows($b);
+            // mengambil data dokter
+            $b = mysqli_query($koneksi,"SELECT * FROM dokter");
+             
+            // menghitung data dokter
+            $data_dokter = mysqli_num_rows($b);
 
-                // mengambil data Peternak
-                $c = mysqli_query($koneksi,"SELECT * FROM peternak");
-                 
-                // menghitung data Peternak
-                $data_peternak = mysqli_num_rows($c);
+            // mengambil data Peternak
+            $c = mysqli_query($koneksi,"SELECT * FROM peternak");
+             
+            // menghitung data Peternak
+            $data_peternak = mysqli_num_rows($c);
 
-                 // mengambil data Artikel
-                 $d = mysqli_query($koneksi,"SELECT * FROM artikel");
-                 
-                 // menghitung data Peternak
-                 $data_artikel = mysqli_num_rows($d);
+             // mengambil data Artikel
+             $d = mysqli_query($koneksi,"SELECT * FROM artikel");
+             
+             // menghitung data Peternak
+             $data_artikel = mysqli_num_rows($d);
 
-                // mengambil data Puskeswan
-                $e = mysqli_query($koneksi,"SELECT * FROM puskeswan");
-                 
-                // menghitung data Puskeswan
-                $data_puskeswan = mysqli_num_rows($e);
+            // mengambil data Puskeswan
+            $e = mysqli_query($koneksi,"SELECT * FROM puskeswan");
+             
+            // menghitung data Puskeswan
+            $data_puskeswan = mysqli_num_rows($e);
 
-                // mengambil data User Admin
-                $f = mysqli_query($koneksi,"SELECT * FROM admin,user where admin.id_user=user.id_user order by admin.id_admin");
-                 
-                // menghitung data User Admin
-                $data_useradmin = mysqli_num_rows($f);
+            // mengambil data User Admin
+            $f = mysqli_query($koneksi,"SELECT * FROM admin,user where admin.id_user=user.id_user order by admin.id_admin");
+             
+            // menghitung data User Admin
+            $data_useradmin = mysqli_num_rows($f);
 
-                // mengambil data User Dokter
-                $g = mysqli_query($koneksi,"SELECT * FROM dokter_user, dokter, user  where  dokter_user.id_user=user.id_user and  dokter_user.id_dokter=dokter.id_dokter  order by  dokter_user.id_dokteruser");
-                 
-                // menghitung data User Dokter
-                $data_userdokter = mysqli_num_rows($g);
+            // mengambil data User Dokter
+            $g = mysqli_query($koneksi,"SELECT * FROM dokter_user, dokter, user  where  dokter_user.id_user=user.id_user and  dokter_user.id_dokter=dokter.id_dokter  order by  dokter_user.id_dokteruser");
+             
+            // menghitung data User Dokter
+            $data_userdokter = mysqli_num_rows($g);
 
-                // mengambil data User Peternak
-                $h = mysqli_query($koneksi,"SELECT * FROM peternak,user where peternak.id_user=user.id_user order by peternak.id_peternak");
-                 
-                // menghitung data Peternak
-                $data_userpeternak = mysqli_num_rows($h);
+            // mengambil data User Peternak
+            $h = mysqli_query($koneksi,"SELECT * FROM peternak,user where peternak.id_user=user.id_user order by peternak.id_peternak");
+             
+            // menghitung data Peternak
+            $data_userpeternak = mysqli_num_rows($h);
 
-                // mengambil data Dokumentasi
-                $i = mysqli_query($koneksi,"SELECT * FROM dokumentasi");
-                 
-                // menghitung data Dokumentasi
-                $data_dokumentasi = mysqli_num_rows($i);
+            // mengambil data Dokumentasi
+            $i = mysqli_query($koneksi,"SELECT * FROM dokumentasi");
+             
+            // menghitung data Dokumentasi
+            $data_dokumentasi = mysqli_num_rows($i);
             ?>
+
+            <!-- Page Content -->
             <div id="page-wrapper">
                 <div class="container-fluid">
                     <div class="row">
-                    <div class="col-lg-12">
-                   
-                    <h1 class="page-header">Dashboard</h1>
-                         <?php
-                        if (isset($_GET['pesan'])){
-                            $pesan = $_GET['pesan'];
-                            if ($pesan == 'berhasil') {
-                                ?>
-                                <div class="alert alert-success">
-                                    <strong>Success! </strong>Selamat <?php echo $_SESSION['username'];?>, Anda berhasil login Sebagai <?php echo $_SESSION['level'];?> 
-                                </div>
-                                <?php
+                        <div class="col-lg-12">
+                            <h1 class="page-header">Dashboard</h1>
+
+                            <?php
+                            if (isset($_GET['pesan'])){
+                                $pesan = $_GET['pesan'];
+                                if ($pesan == 'berhasil') {
+                                    ?>
+                                    <div class="alert alert-success">
+                                        <strong>Success! </strong>Selamat <?php echo $_SESSION['username'];?>, Anda berhasil login Sebagai <?php echo $_SESSION['level'];?> 
+                                    </div>
+                                    <?php
+                                }
                             }
-                        }
-                        ?>
+                            ?>
+                        </div>
                         <!-- /.col-lg-12 -->
                     </div>
                     <!-- /.row -->
+
+                    <!-- Dashboard -->
                     <div class="row">
                         <div class="col-lg-3 col-md-6">
                             <div class="panel panel-primary">
@@ -359,11 +358,6 @@ if (!isset($_SESSION["username"])) {
 
         <!-- Metis Menu Plugin JavaScript -->
         <script src="../js/metisMenu.min.js"></script>
-
-        <!-- Morris Charts JavaScript -->
-        <script src="../js/raphael.min.js"></script>
-        <script src="../js/morris.min.js"></script>
-        <script src="../js/morris-data.js"></script>
 
         <!-- Custom Theme JavaScript -->
         <script src="../js/startmin.js"></script>

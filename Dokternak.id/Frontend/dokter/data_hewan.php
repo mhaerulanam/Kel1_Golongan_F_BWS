@@ -133,8 +133,12 @@ session_start();
 							echo "<script>alert(' Id hewan yang sama sudah digunakan');history.go(-1);</script>";
 						}
 						else{
+							$kode = date('His'); //Hour,minutes,second
+
+							$id_hewan  = "HEW$kode";
+
 							//tambah
-							$sql = "INSERT INTO data_hewan VALUES ('','$nama_hewan','$ras_hewan','$usia','$keterangan')";
+							$sql = "INSERT INTO data_hewan VALUES ('$id_hewan','$nama_hewan','$ras_hewan','$usia','$keterangan')";
 							if(mysqli_query($koneksi, $sql)){
 								$nilaihasil = "Records inserted successfully.";
 							} 

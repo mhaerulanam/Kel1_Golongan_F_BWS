@@ -21,15 +21,18 @@
     
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="navbar-header">
+
+        
+        <!-- Sidebar Toggle (Topbar) -->
+        <!-- <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3" data-toggle="collapse" data-target=".navbar-collapse">
+            <i class="fa fa-bars"></i>
+        </button> -->
+        
         <a href="Dashboard.php" class="logo"><img src="../assets/img/logo1.png" alt=""></a>
         </div>
-
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
+        
+        
+        
         <ul class="nav navbar-right navbar-top-links">
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -42,7 +45,14 @@
                     </li>
                 </ul>
             </li>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
         </ul>
+
 
         <!-- /.navbar-top-links -->
 
@@ -50,11 +60,11 @@
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
                              <li>
-                                <a href="Dashboard.php"><i class="fa fa-table fa-fw"> </i> DASHBOARD</a>
+                                <a href="Dashboard.php" class="active"><i class="fa fa-dashboard fa-fw"> </i> DASHBOARD</a>
                             </li>
                             <li>
-                                <a><i class="fa fa-table fa-fw"> </i> Data User</a>
-                                <ul>
+                                <a><i class="fa fa-table fa-fw"> </i> Data User <span class="fa arrow"></a>
+                                <ul class="nav nav-second-level">
                                     <li><a href="tabel_useradmin.php">Data User Admin</a></li>
                                     <li><a href="tabel_userdokter.php">Data User Dokter</a></li>
                                     <li><a href="tabel_userpeternak.php">Data User Peternak</a></li>
@@ -64,8 +74,8 @@
                                 <a href="tabel_peternak.php"><i class="fa fa-table fa-fw"> </i> Data Peternak</a>
                             </li>
                             <li>
-                                <a><i class="fa fa-table fa-fw"> </i> Data Dokter</a>
-                                <ul>
+                                <a><i class="fa fa-table fa-fw"> </i> Data Dokter <span class="fa arrow"></a>
+                                <ul class="nav nav-second-level">
                                 <li><a href="tabel_dokter.php"> Data Dokter</a></li>
                                 <li><a href="tabel_dokterpuskeswan.php"> Data Dokter Puskeswan</a></li>
                                 </ul>
@@ -80,15 +90,15 @@
                                 <a href="tabel_puskeswan.php"><i class="fa fa-table fa-fw"> </i> Data Puskeswan</a>
                             </li>
                             <li>
-                                <a><i class="fa fa-table fa-fw"> </i> Data Dokumentasi</a>
-                                <ul>
+                                <a><i class="fa fa-table fa-fw"> </i> Data Dokumentasi <span class="fa arrow"></a>
+                                <ul class="nav nav-second-level">
                                     <li><a href="tabel_dokumentasi.php">Data Dokumentasi</a></li>
                                     <li><a href="tabel_dokumentasipuskeswan.php">Data Dokumentasi Puskeswan</a></li>
                                 </ul>
                             </li>
                             <li>
-                                <a><i class="fa fa-table fa-fw"> </i> Data Konsultasi</a>
-                                <ul>
+                                <a><i class="fa fa-table fa-fw"> </i> Data Konsultasi <span class="fa arrow"></a>
+                                <ul class="nav nav-second-level">
                                     <li><a href="tabel_keluhan.php">Data Konsultasi</a></li>
                                     <li><a href="tabel_riwayat.php">Data Riwayat Konsultasi</a></li>
                                 </ul>

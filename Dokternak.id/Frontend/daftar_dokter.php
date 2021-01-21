@@ -372,11 +372,11 @@ session_start();
                                             </div>
                                             <?php }}
                                             else {?>
-                                            <section>
-                                            <center>
-                                                <img src="assets/img/icon/error1.png" class="datatidakada" alt="">
-                                            </center>
-                                            </section>
+                                            <div class="col">
+                                                <center>
+                                                    <img src="assets/img/icon/error.png" class="datatidakada" alt="">
+                                                </center>
+                                            </div>
                                                 <?php        
                                             }?>
                                     <?php
@@ -420,11 +420,11 @@ session_start();
                                                 <?php                      
                                             }}
                                             else {?>
-                                            <section>
-                                            <center>
-                                                <img src="assets/img/icon/error1.png" class="datatidakada" alt="">
-                                            </center>
-                                            </section>
+                                            <div class="col">
+                                                <center>
+                                                    <img src="assets/img/icon/error.png" class="datatidakada" alt="">
+                                                </center>
+                                            </div>
                                                 <?php        
                                             }?>
                                             <?php

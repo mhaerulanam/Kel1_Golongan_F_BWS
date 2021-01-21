@@ -12,7 +12,7 @@ session_start();
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Admin Akademik</title>
+        <title>Dokternak - Data User Dokter</title>
 
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 		<link rel="stylesheet" href="/resources/demos/style.css">
@@ -359,7 +359,7 @@ session_start();
 									</div>
 									<div class="modal-body">
 									<div class="form-group">
-                                            <label>ID Jabatan :</label>
+                                            <label>Nama Dokter:</label>
 											<select name="id_dokter" class="form-control" id="default-select">
 												<option disabled selected> Pilih </option>
 												<?php 

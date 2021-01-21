@@ -21,15 +21,18 @@
     
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="navbar-header">
+
+        
+        <!-- Sidebar Toggle (Topbar) -->
+        <!-- <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3" data-toggle="collapse" data-target=".navbar-collapse">
+            <i class="fa fa-bars"></i>
+        </button> -->
+        
         <a href="Dashboard.php" class="logo"><img src="../assets/img/logo1.png" alt=""></a>
         </div>
-
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
+        
+        
+        
         <ul class="nav navbar-right navbar-top-links">
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -42,7 +45,14 @@
                     </li>
                 </ul>
             </li>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
         </ul>
+
 
         <!-- /.navbar-top-links -->
 
@@ -90,6 +100,7 @@
                                 <a><i class="fa fa-table fa-fw"> </i> Data Konsultasi</a>
                                 <ul>
                                     <li><a href="tabel_keluhan.php">Data Konsultasi</a></li>
+                                    <li><a href="tabel_respon.php">Data Respon Konsultasi</a></li>
                                     <li><a href="tabel_riwayat.php">Data Riwayat Konsultasi</a></li>
                                 </ul>
                             </li>

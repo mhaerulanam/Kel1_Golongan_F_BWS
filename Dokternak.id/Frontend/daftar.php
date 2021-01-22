@@ -386,6 +386,14 @@ if(isset($_POST["daftarpeternak"])) {
                     </center>
                   </div>
         <?php
+                }elseif($pesan == 'cek-foto'){
+        ?>
+                  <div class="alert alert-danger">
+                    <center>Mohon periksa ukuran atau jenis foto. Foto harus bertipe jpg/png.
+                    <a href="daftar.php"><b>Ulangi Mendaftar</b></a>
+                    </center>
+                  </div>
+        <?php
                 }elseif($pesan == 'gagal'){
         ?>
                   <div class="alert alert-danger">

@@ -600,7 +600,7 @@ session_start();
 							<td><?=$data['telpon']?> </td>
 							<td><img src="foto/foto_dokter.php?id_dokter=<?php echo $data['id_dokter']; ?>"
 											alt="<?php echo "Belum upload foto"; ?>" height="50"></img></td>
-							<td><img src="foto/sertifikasi.php?id_dokter=<?php echo $krow['id_dokter']; ?>"
+							<td><img src="foto/sertifikasi.php?id_dokter=<?php echo $data['id_dokter']; ?>"
 											alt="<?php echo "Belum upload sertifikasi"; ?>" height="50"></img></td>
 							<td><?=$data['id_jabatan']?> </td>
 							<td><?=$data['jadwal_kerja']?> </td>

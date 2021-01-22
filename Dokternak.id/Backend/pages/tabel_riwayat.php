@@ -379,7 +379,7 @@ session_start();
 											</select><br>
                                         </div>
 										<div class="mt-30">
-										<h5 class="mb-15">Kepada</h5>
+										<h5 class="mb-15">Dokter</h5>
 										<?php 
 										$nama = $_GET['id_dokter'];
 										$query_dok = mysqli_query($koneksi,"SELECT * FROM dokter WHERE nama='$nama'");

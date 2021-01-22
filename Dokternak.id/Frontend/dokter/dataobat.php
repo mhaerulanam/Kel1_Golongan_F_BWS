@@ -11,6 +11,20 @@ session_start();
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
+		 
+		 <!-- CSS here -->
+	  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+      <link rel="stylesheet" href="../assets/css/owl.carousel.min.css">
+      <link rel="stylesheet" href="../assets/css/slicknav.css">
+      <link rel="stylesheet" href="../assets/css/price_rangs.css">
+      <link rel="stylesheet" href="../assets/css/animate.min.css">
+      <link rel="stylesheet" href="../assets/css/magnific-popup.css">
+      <link rel="stylesheet" href="../assets/css/fontawesome-all.min.css">
+      <link rel="stylesheet" href="../assets/css/themify-icons.css">
+      <link rel="stylesheet" href="../assets/css/slick.css">
+      <link rel="stylesheet" href="../assets/css/nice-select.css">
+      <link rel="stylesheet" href="../assets/css/style.css">
+      <link rel="stylesheet" href="../assets/css/responsive.css">
 
         <title>Dokter Data Obat</title>
 
@@ -120,8 +134,11 @@ session_start();
 							echo "<script>alert(' Id obat yang sama sudah digunakan');history.go(-1);</script>";
 						}
 						else{
+							$kode = date('His'); //Hour,minutes,second
+
+							$id_obat  = "OB$kode";
 							//tambah
-							$sql = "INSERT INTO data_obat VALUES ('','$nama_obat','$stok','$supplier','$expired','$keterangan')";
+							$sql = "INSERT INTO data_obat VALUES ('$id_obat','$nama_obat','$stok','$supplier','$expired','$keterangan')";
 							if(mysqli_query($koneksi, $sql)){
 								$nilaihasil = "Records inserted successfully.";
 							} 
@@ -348,7 +365,7 @@ session_start();
 										</div>
 										<div class="form-group">
                                             <label>Expired :</label>
-                                            <input type="text" name="expired" id="expired" class="form-control" required>
+                                            <input type="date" name="expired" id="expired" class="form-control" required>
 										</div> 
 										<div class="form-group">
                                             <label>Keterangan :</label>

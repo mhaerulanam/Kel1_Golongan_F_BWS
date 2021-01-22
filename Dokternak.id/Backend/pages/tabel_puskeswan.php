@@ -12,7 +12,7 @@ session_start();
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Admin Akademik</title>
+        <title>Dokternak - Data Puskeswan</title>
 
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 		<link rel="stylesheet" href="/resources/demos/style.css">
@@ -116,18 +116,26 @@ session_start();
 							echo "<script>alert(' Id puskeswan yang sama sudah digunakan');history.go(-1);</script>";
 						}
 						else{
-							//tambah
-							$sql = "INSERT INTO puskeswan VALUES ('$id_puskeswan','$nama_puskeswan','$alamat','$jam_kerja','$gambar','$maps')";
-							if(mysqli_query($koneksi, $sql)){
-								$nilaihasil = "Records inserted successfully.";
-							} 
-							else{
-								echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+							$kode = date('His'); //Hour,minutes,second
+							$id_puskeswan  = "P0$kode";
+							$lokasi = $_FILES['gambar']['tmp_name'];
+							if($lokasi==""){
+								echo "<script>alert(' Anda harus memasukkan foto puskeswan, silahkan ulangi input data.');
+								header('location:../tabel_puskeswan.php');</script>";
+							}else{
+								$ambil   = addslashes(file_get_contents($_FILES['gambar']['tmp_name']));
+								$sql = "INSERT INTO puskeswan VALUES ('$id_puskeswan','$nama_puskeswan','$alamat','$jam_kerja','$ambil','$maps')";
+								
+								if(mysqli_query($koneksi, $sql)){
+									$nilaihasil = "Records inserted successfully.";
+								} 
+								else{
+									echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+								}
 							}
 						}
 					}
 
-					// code tombol edit
 					// code tombol edit 
 					if(isset($_POST['edit'])){
 						//edit
@@ -303,7 +311,7 @@ session_start();
 					<div id="deleteEmployeeModal<?php echo $krow['id_puskeswan']; ?>" class="modal fade">
 						<div class="modal-dialog">
 							<div class="modal-content">
-							<form method="post" action="">
+							<form method="post" action="" >
 								<input type="text" class="form-control" value="<?php echo $krow['id_puskeswan']; ?>" name="id_puskeswan" required>
 									<div class="modal-header">
 										<h4 class="modal-title">Delete</h4>
@@ -337,16 +345,11 @@ session_start();
 					<div id="addEmployeeModal" class="modal fade">
 						<div class="modal-dialog">
 							<div class="modal-content">
-							<form role="form" method="POST" action="">
+							<form role="form" method="POST" action="" enctype="multipart/form-data">
 									<div class="modal-header">
 										<h4 class="modal-title">Tambah Data</h4>
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 									</div>
-									<div class="modal-body">
-										<div class="form-group">
-                                            <label>ID Puskeswan :</label>
-                                            <input type="text" name="id_puskeswan" id="id_puskeswan" class="form-control" required>
-                                        </div>
 									<div class="modal-body">
 									<div class="form-group">
                                             <label>Nama Puskeswan :</label>
@@ -362,9 +365,9 @@ session_start();
 											<textarea name="jam_kerja" id="jam_kerja" cols="30" rows="10" required></textarea>
 										</div>
 										<div class="form-group">
-                                            <label>Gambar:</label>
-                                            <input type="file" name="gambar" id="gambar" class="form-control">
-										</div>     
+                                            <label>Gambar :</label>
+											<input type="file" name="gambar" id="gambar" class="form-control"> 
+                                        </div>   
 										<div class="form-group">
                                             <label>Maps :</label>
                                             <input type="text" name="maps" id="maps" class="form-control" required>

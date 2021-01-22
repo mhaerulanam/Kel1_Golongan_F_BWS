@@ -110,18 +110,18 @@
                         include 'koneksi.php';
                         //Penampilan daftar data dokter dan dibatasi 2 halaman
                         $jumPage = 3;
-                        $result = mysqli_query($koneksi, "SELECT * FROM dokter");
+                        $result = mysqli_query($koneksi, "SELECT * FROM dokter WHERE verifikasi='yes' ");
                         $jum = mysqli_num_rows($result);
                         $jumHlmn = ceil($jum / $jumPage);
                         $hlmnAktif = ( isset($_GET["hal"]) ) ? $_GET["hal"] : 1;
                         $awalData = ( $jumPage * $hlmnAktif ) - $jumPage;
-                        $ambilData=mysqli_query($koneksi, "SELECT * FROM dokter, jabatan WHERE dokter.id_jabatan=jabatan.id_jabatan order by id_dokter LIMIT $awalData,$jumPage");
+                        $ambilData=mysqli_query($koneksi, "SELECT * FROM dokter, jabatan WHERE dokter.id_jabatan=jabatan.id_jabatan AND dokter.verifikasi='yes' order by id_dokter LIMIT $awalData,$jumPage");
 
                         //pencarian berdasarkan kategori kecamatan
                         $search_kecamatan = '%'. $s_kecamatan .'%';
                         $search_keyword = '%'. $s_keyword .'%';
                         $no = 1;
-                        $query = "SELECT * FROM dokter, jabatan WHERE dokter.id_jabatan=jabatan.id_jabatan AND alamat LIKE ? AND (nama LIKE ? OR tempat LIKE ? OR email LIKE ?) ORDER BY id_dokter DESC";
+                        $query = "SELECT * FROM dokter, jabatan WHERE dokter.id_jabatan=jabatan.id_jabatan AND dokter.verifikasi='yes' AND alamat LIKE ? AND (nama LIKE ? OR tempat LIKE ? OR email LIKE ?) ORDER BY id_dokter DESC";
                         $dewan1 = $koneksi->prepare($query);
                         $dewan1->bind_param('ssss', $search_kecamatan, $search_keyword, $search_keyword, $search_keyword);
                         $dewan1->execute();

@@ -321,7 +321,7 @@ session_start();
                                     // Paging - Konfigurasi
                                     $s_nama ="";
                                     $jdataperhalaman = 4;
-                                    $result = mysqli_query($koneksi, "SELECT * FROM dokter");
+                                    $result = mysqli_query($koneksi, "SELECT * FROM dokter WHERE verifikasi='yes' ");
                                     $jumlahData = mysqli_num_rows($result);
                                     $jumlahHalaman = ceil($jumlahData / $jdataperhalaman);
                                     $halamanAktif = ( isset($_GET["halaman"]) ) ? $_GET["halaman"] : 1 ;
@@ -332,12 +332,12 @@ session_start();
 
                                     // ambilData adalah variabel untuk menampilkan data dari 2 tabel, yaitu artikel dan kategori_artikel. 
                                     // Sehingga kita dapat menampilkan kategorinya, sesuai id_ktg di kedua tabel
-                                    $ambilData=mysqli_query($koneksi, "SELECT * FROM dokter, jabatan WHERE dokter.id_jabatan=jabatan.id_jabatan order by id_dokter LIMIT $awalData,$jdataperhalaman");
+                                    $ambilData=mysqli_query($koneksi, "SELECT * FROM dokter, jabatan WHERE dokter.id_jabatan=jabatan.id_jabatan AND dokter.verifikasi='yes' order by id_dokter LIMIT $awalData,$jdataperhalaman");
                                     if (ISSET($_POST['submit'])){
                                         include 'koneksi.php';
                                         $cari = $_POST['nt'];
                                         // echo $cari;
-                                        $dewan1 = "SELECT * FROM dokter, jabatan WHERE dokter.id_jabatan=jabatan.id_jabatan AND (nama LIKE '%$cari%' OR alamat LIKE '%$cari%' OR tempat LIKE '%$cari%') ORDER BY id_dokter LIMIT $awalData,$jdataperhalaman";
+                                        $dewan1 = "SELECT * FROM dokter, jabatan WHERE dokter.id_jabatan=jabatan.id_jabatan AND dokter.verifikasi='yes' AND (nama LIKE '%$cari%' OR alamat LIKE '%$cari%' OR tempat LIKE '%$cari%') ORDER BY id_dokter LIMIT $awalData,$jdataperhalaman";
                                         $dewan = mysqli_query($koneksi, $dewan1);
                                         // $dewan1 = $koneksi->prepare($query);
                                         // $dewan1->bind_param('sss', $cari, '%$cari%', $cari);
@@ -382,7 +382,7 @@ session_start();
                                     <?php
                                     }elseif(ISSET($_POST['pilih'])){
                                         $jdataperhalaman = 4;
-                                        $result = mysqli_query($koneksi, "SELECT dokter.*, jabatan.jabatan FROM dokter LEFT JOIN jabatan ON dokter.id_jabatan=jabatan.id_jabatan WHERE dokter.id_jabatan = '$kat'");
+                                        $result = mysqli_query($koneksi, "SELECT dokter.*, jabatan.jabatan FROM dokter LEFT JOIN jabatan ON dokter.id_jabatan=jabatan.id_jabatan WHERE dokter.id_jabatan = '$kat' AND dokter.verifikasi='yes'");
                                         $jumlahData = mysqli_num_rows($result);
                                         $jmlhlm = ceil($jumlahData / $jdataperhalaman);
                                         $halamanAktif = ( isset($_POST["hlm"]) ) ? $_POST["hlm"] : 1 ;
@@ -390,8 +390,8 @@ session_start();
                                         if (ISSET($_POST['jabatan'])):
                                         include 'koneksi.php';
                                         $kat = $_POST['jabatan'];
-                                        $dataa11 = mysqli_query($koneksi, "SELECT dokter.*, jabatan.jabatan FROM dokter LEFT JOIN jabatan ON dokter.id_jabatan=jabatan.id_jabatan WHERE dokter.id_jabatan = '$kat'");
-                                        $dataa1 = mysqli_query($koneksi, "SELECT dokter.*, jabatan.jabatan FROM dokter LEFT JOIN jabatan ON dokter.id_jabatan=jabatan.id_jabatan WHERE dokter.id_jabatan = '$kat'  LIMIT $awalData,$jdataperhalaman");
+                                        $dataa11 = mysqli_query($koneksi, "SELECT dokter.*, jabatan.jabatan FROM dokter LEFT JOIN jabatan ON dokter.id_jabatan=jabatan.id_jabatan WHERE dokter.id_jabatan = '$kat' AND dokter.verifikasi='yes' ");
+                                        $dataa1 = mysqli_query($koneksi, "SELECT dokter.*, jabatan.jabatan FROM dokter LEFT JOIN jabatan ON dokter.id_jabatan=jabatan.id_jabatan WHERE dokter.id_jabatan = '$kat' AND dokter.verifikasi='yes' LIMIT $awalData,$jdataperhalaman");
                                         // menghitung data
                                         $jumlah_data1 = mysqli_num_rows($dataa11);
                                         $pages = $jumlah_data1;

@@ -99,8 +99,9 @@ session_start();
 
 						$kode = date('His');
 						$id_dok = "DOC$kode";
+						$verifikasi = "yes";
 
-						$id_dokter= $_POST['id_dokter'];
+						$id_dokter = $_POST['id_dokter'];
 						$nama = $_POST['nama'];
 						$email = $_POST['email'];
 						$jk = $_POST['jenis_kelamin'];
@@ -117,8 +118,8 @@ session_start();
 
 					//Code tombol tambah	
 					if(isset($_POST['tambah'])){
-						/* cek input NIM apakah sudah ada nim yang digunakan */
-						$pilih="select * from dokter where id_dokter='$id_dokter'";
+						/* cek input id apakah sudah ada id yang digunakan */
+						$pilih="select * from dokter where id_dokter='$id_dok'";
 						$cek=mysqli_query($koneksi, $pilih);
 					
 						$jumlah_data = mysqli_num_rows($cek);
@@ -131,13 +132,13 @@ session_start();
 							$lokasiFoto = $_FILES['foto']['tmp_name'];
 							$lokasiSertif = $_FILES['sertifikasi']['tmp_name'];
 						
-							if($lokasiFoto=="" || $lokasiSertif==""){
+							if($lokasiFoto=="" && $lokasiSertif==""){
 								echo "<script>alert(' Anda harus memasukkan foto/sertifikasi, silahkan ulangi input data.');
 								header('location:../tabel_dokter.php');</script>";
 							}else{
 								$ambilFoto   = addslashes(file_get_contents($_FILES['foto']['tmp_name']));
 								$ambilSertif   = addslashes(file_get_contents($_FILES['sertifikasi']['tmp_name']));
-								$sql = "INSERT INTO dokter VALUES ('$id_dok','$nama','$email','$jk','$alamat','$tempat','$telpon','$ambilFoto','$ambilSertif','$id_jabatan','$jadwal_kerja','$username','$password')";
+								$sql = "INSERT INTO dokter VALUES ('$id_dok','$nama','$email','$jk','$alamat','$tempat','$telpon','$ambilFoto','$ambilSertif','$id_jabatan','$jadwal_kerja','$username','$password','$verifikasi')";
 								if(mysqli_query($koneksi, $sql)){
 									$nilaihasil = "Records inserted successfully.";
 								} 
@@ -313,7 +314,7 @@ session_start();
                 <tbody>
 					<?php
 					$i = 1;
-					$ksql="SELECT * FROM dokter";
+					$ksql="SELECT * FROM dokter WHERE verifikasi='yes'";
 					$khasil = mysqli_query($koneksi,$ksql);
 					while($krow = mysqli_fetch_array($khasil))
 					{
@@ -396,7 +397,7 @@ session_start();
 										</div> 
 										<div class="form-group">
                                             <label>Telpon :</label>
-                                            <input type="number" name="telpon" id="telpon" class="form-control" value="<?php echo $krow['telpon']; ?>" >
+                                            <input type="text" name="telpon" id="telpon" class="form-control" value="<?php echo $krow['telpon']; ?>" >
 										</div>
                                         <div class="form-group">
                                             <label>Foto :</label>
@@ -516,7 +517,7 @@ session_start();
 										</div> 
 										<div class="form-group">
                                             <label>Telpon :</label>
-                                            <input type="number" name="telpon" id="telpon" class="form-control" required>
+                                            <input type="text" name="telpon" id="telpon" class="form-control" required>
 										</div>
                                         <div class="form-group">
                                             <label>Foto :</label>
@@ -564,6 +565,56 @@ session_start();
 				</div>
 				</table>
 				</div>
+				<br><br>
+				<h3 class="page-header">Data Dokter (Baru) / Belum Terverifikasi</h3>
+
+				<table  class="table table-striped table-hover" >
+					<th>No</th>
+					<th>Nama</th>
+					<th>Email</th>
+					<th>Jenis Kelamin</th>
+					<th>Alamat</th>
+					<th>Tempat</th>
+					<th>Telpon</th>
+					<th>Foto</th>
+					<th>Sertifikasi</th>
+					<th>ID Jabatan</th>
+					<th>Jadwal Kerja</th>
+					<th>Username</th>
+					<th>Password</th>
+					<th>Action</th>
+						<?php
+						$i =1;
+							include "koneksi.php";
+							$sql="SELECT * FROM dokter WHERE verifikasi='no'";
+							$jab = mysqli_query($koneksi,$sql);
+							while($data = mysqli_fetch_array($jab))
+							{ ?>
+							<tr>
+							<td><?= $i?> </td>
+							<td><?=$data['nama']?> </td>
+							<td><?=$data['email']?> </td>
+							<td><?=$data['jenis_kelamin']?> </td>
+							<td><?=$data['alamat']?> </td>
+							<td><?=$data['tempat']?> </td>
+							<td><?=$data['telpon']?> </td>
+							<td><img src="foto/foto_dokter.php?id_dokter=<?php echo $data['id_dokter']; ?>"
+											alt="<?php echo "Belum upload foto"; ?>" height="50"></img></td>
+							<td><img src="foto/sertifikasi.php?id_dokter=<?php echo $krow['id_dokter']; ?>"
+											alt="<?php echo "Belum upload sertifikasi"; ?>" height="50"></img></td>
+							<td><?=$data['id_jabatan']?> </td>
+							<td><?=$data['jadwal_kerja']?> </td>
+							<td><?=$data['username']?> </td>
+							<td><?=$data['password']?> </td>
+							<td>
+                            <a href="#editEmployeeModal<?php echo $krow['id_dokter']; ?>" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                            <a href="#deleteEmployeeModal<?php echo $krow['id_dokter']; ?>" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                        	</td>
+							</tr>
+							<?php
+							$i++;
+						} ?>
+				</table>
 				</div>
                 </div>
                 <!-- /.container-fluid -->

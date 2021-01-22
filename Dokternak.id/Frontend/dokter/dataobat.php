@@ -113,6 +113,9 @@ session_start();
 					ini_set('max_execution_time', 0);
 					date_default_timezone_set('Asia/Jakarta');
 					include "../koneksi.php";
+					$id = $_SESSION['id'];
+      				$query = mysqli_query($koneksi,"select * from dokter_user, dokter, user  where dokter_user.id_user=user.id_user AND dokter_user.id_dokter= dokter.id_dokter and dokter_user.id_dokter='$id'");
+
 						$id_obat = $_POST['id_obat'];
 						$nama_obat = $_POST['nama_obat'];
 						$stok = $_POST['stok'];
@@ -135,16 +138,23 @@ session_start();
 						}
 						else{
 							$kode = date('His'); //Hour,minutes,second
-
+							
+							$id_detail = "DO$kode";
 							$id_obat  = "OB$kode";
+
 							//tambah
-							$sql = "INSERT INTO data_obat VALUES ('$id_obat','$nama_obat','$stok','$supplier','$expired','$keterangan')";
-							if(mysqli_query($koneksi, $sql)){
+							$sql1 = "INSERT INTO data_obat VALUES('$id_obat','$nama_obat','$stok','$supplier','$expired','$keterangan')";
+							mysqli_query($koneksi,$sql1);
+							$sql2 = "INSERT INTO detail_dataobat VALUES('$id_detail','$id','$id_obat')";
+							mysqli_query($koneksi,$sql2);
+
+							// $sql = "INSERT INTO data_obat VALUES ('$id_obat','$nama_obat','$stok','$supplier','$expired','$keterangan')";
+							// if(mysqli_query($koneksi, $sql)){
 								$nilaihasil = "Records inserted successfully.";
-							} 
-							else{
-								echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
-							}
+							// } 
+							// else{
+							// 	echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+							// }
 						}
 					}
 
@@ -191,6 +201,7 @@ session_start();
 					}
 
 					?>
+					<?= $id ?>
 <div class="col-lg-12">
 <form method="post" action="">
         <div class="table-wrapper">
@@ -230,7 +241,8 @@ session_start();
                 <tbody>
 					<?php
 					// $i = 1;
-					$ksql="SELECT * FROM data_obat";
+					$ksql="SELECT * FROM detail_dataobat INNER JOIN data_obat ON detail_dataobat.id_obat = data_obat.id_obat where id_dokter='$id'";
+					// $ksql="SELECT * FROM data_obat";
 					$khasil = mysqli_query($koneksi,$ksql);
 					while($krow = mysqli_fetch_array($khasil))
 					{

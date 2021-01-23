@@ -201,7 +201,7 @@ session_start();
 					}
 
 					?>
-					<?= $id ?>
+					<!-- <?= $id ?> -->
 <div class="col-lg-12">
 <form method="post" action="">
         <div class="table-wrapper">

@@ -506,7 +506,7 @@ session_start();
 						$id4 = $_POST['id_artikel'];
 						$sql = "DELETE FROM artikel WHERE id_artikel = '$id4'";
 						if(mysqli_query($koneksi, $sql)){
-							echo "<script>alert('Pesan Konsultasi Berhasil Dihapus ..');</script>";
+							echo "<script>alert('Artikel Berhasil Dihapus ..');</script>";
 						} 
 						else{
 							echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
@@ -553,7 +553,7 @@ session_start();
 								<input type="submit" class="btn btn-success" value="Verifikasi" name="verifikasi">
 							</td>
 							<td>
-								<input type="submit" name="hapus" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus pesan ini?')" value="HAPUS"> 
+								<input type="submit" name="hapus" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus artikel ini?')" value="HAPUS"> 
 							</td>
 							</tr>
 							</form>

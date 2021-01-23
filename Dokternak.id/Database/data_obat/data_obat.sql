@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 05 Des 2020 pada 15.35
+-- Waktu pembuatan: 23 Jan 2021 pada 15.41
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.3
 
@@ -36,6 +36,16 @@ CREATE TABLE `data_obat` (
   `expired` date NOT NULL,
   `keterangan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `data_obat`
+--
+
+INSERT INTO `data_obat` (`id_obat`, `nama_obat`, `stok`, `supplier`, `expired`, `keterangan`) VALUES
+('OB002648', 'Kumpit Oil', 15, 'Ani', '2021-05-12', 'Vitamin bulu kucing dan obat pembunuh pitak rontok'),
+('OB002904', 'pulmotil Oil AC', 30, 'Oktavia', '2021-06-17', 'Obat hewan untuk mengatasi Mycoplasma pada hewan'),
+('OB210655', 'Pet Mitonidazole', 50, 'Oktavia', '2021-06-04', 'Obat Kucing dan anjing yang mecret atau diare'),
+('OB210740', 'Supravit Vitamin', 20, 'rara', '2021-06-11', 'Obat hewan ayam burung unggas multivitamin kapsul');
 
 --
 -- Indexes for dumped tables

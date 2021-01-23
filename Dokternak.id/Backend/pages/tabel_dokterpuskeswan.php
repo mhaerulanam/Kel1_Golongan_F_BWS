@@ -196,7 +196,7 @@ session_start();
                 <tbody>
 					<?php
 					$i = 1;
-					$ksql="SELECT * FROM dokter_puskeswan INNER JOIN puskeswan ON dokter_puskeswan.id_puskeswan = puskeswan.id_puskeswan INNER JOIN dokter ON dokter_puskeswan.id_dokter = dokter.id_dokter ORDER BY id_dp";
+					$ksql="SELECT * FROM dokter_puskeswan INNER JOIN puskeswan ON dokter_puskeswan.id_puskeswan = puskeswan.id_puskeswan INNER JOIN dokter ON dokter_puskeswan.id_dokter = dokter.id_dokter AND dokter.verifikasi='yes' ORDER BY id_dp";
 					$khasil = mysqli_query($koneksi,$ksql);
 					while($krow = mysqli_fetch_array($khasil))
 					{
@@ -361,6 +361,124 @@ session_start();
 				</div>
 				</table>
 				</div>
+				<br><br>
+				<h3 class="page-header">Data Dokter <b>Sudah Terverifikasi</b> dan Belum Ditempatkan di Puskeswan</h3>
+
+				<table  class="table table-striped table-hover" >
+					<th>No</th>
+					<th>Nama</th>
+					<th>Tempat / Kecamatan</th>
+					<th>Alamat</th>
+					<th>Jabatan</th>
+						<?php
+						$i =1;
+							include "koneksi.php";
+							$sql="SELECT * FROM dokter_puskeswan RIGHT JOIN puskeswan ON dokter_puskeswan.id_puskeswan = puskeswan.id_puskeswan 
+							RIGHT JOIN dokter ON dokter_puskeswan.id_dokter = dokter.id_dokter 
+							WHERE dokter_puskeswan.id_puskeswan IS NULL
+							AND dokter_puskeswan.id_dokter IS NULL
+							AND dokter.verifikasi='yes' ORDER BY id_dp";
+							$jab = mysqli_query($koneksi,$sql);
+							while($data = mysqli_fetch_array($jab))
+							{ 
+							?>
+							<tr>
+							<td><?= $i?> </td>
+							<td><?=$data['nama']?> </td>
+							<td><?=$data['tempat']?> </td>
+							<td><?=$data['alamat']?> </td>
+							<?php 
+							include "koneksi.php";
+							$id_dokter = $data['id_dokter'];
+							$sql2 = "SELECT * FROM dokter INNER JOIN jabatan ON dokter.id_jabatan = jabatan.id_jabatan WHERE id_dokter='$id_dokter'";
+							$jabatan=mysqli_query($koneksi, $sql2);
+							while($datajab = mysqli_fetch_array($jabatan)){
+							?>
+							<td><?=$datajab['jabatan']?></td>
+							<?php } ?>
+							</tr>
+							<?php
+							$i++;
+						} ?>
+				</table>
+
+				<br><br>
+				<h3 class="page-header">Data Dokter <b>Batal Terverifikasi</b></h3>
+
+				<table  class="table table-striped table-hover" >
+					<th>No</th>
+					<th>Nama</th>
+					<th>Jabatan</th>
+					<th>Puskeswan</th>
+					<th>Keterangan</th>
+					<th>Action</th>
+						<?php
+						$i =1;
+							include "koneksi.php";
+							$sql="SELECT * FROM dokter_puskeswan INNER JOIN puskeswan ON dokter_puskeswan.id_puskeswan = puskeswan.id_puskeswan INNER JOIN dokter ON dokter_puskeswan.id_dokter = dokter.id_dokter AND dokter.verifikasi='no' ORDER BY id_dp";
+							$jab = mysqli_query($koneksi,$sql);
+							while($data = mysqli_fetch_array($jab))
+							{ ?>
+							<tr>
+							<td><?= $i?> </td>
+							<td><?=$data['nama']?> </td>
+							<?php 
+							include "koneksi.php";
+							$id_dokter = $data['id_dokter'];
+							$sql2 = "SELECT * FROM dokter INNER JOIN jabatan ON dokter.id_jabatan = jabatan.id_jabatan WHERE id_dokter='$id_dokter'";
+							$jabatan=mysqli_query($koneksi, $sql2);
+							while($datajab = mysqli_fetch_array($jabatan)){
+							?>
+							<td><?=$datajab['jabatan']?></td>
+							<?php } ?>
+							<td><?=$data['nama_puskeswan']?> </td>
+							<td>Dokter ini Batal Terverifikasi</td>
+							<td>Verifikasi ulang di <a href="tabel_dokter.php">Data Dokter</a></td>
+							</tr>
+							<?php
+							$i++;
+						} ?>
+				</table>
+
+				<br><br>
+				<h3 class="page-header">Data Dokter Baru/<b>Belum Terverifikasi</b> dan Belum Ditempatkan di Puskeswan</h3>
+
+				<table  class="table table-striped table-hover" >
+					<th>No</th>
+					<th>Nama</th>
+					<th>Tempat/Kecamatan</th>
+					<th>Alamat</th>
+					<th>Jabatan</th>
+						<?php
+						$i =1;
+							include "koneksi.php";
+							$sql= "SELECT * FROM dokter_puskeswan RIGHT JOIN puskeswan ON dokter_puskeswan.id_puskeswan = puskeswan.id_puskeswan
+							RIGHT JOIN dokter ON dokter_puskeswan.id_dokter = dokter.id_dokter
+							WHERE dokter_puskeswan.id_puskeswan IS NULL
+							AND dokter_puskeswan.id_dokter IS NULL
+							AND dokter.verifikasi='no' ORDER BY id_dp";
+							$jab = mysqli_query($koneksi,$sql);
+							while($data = mysqli_fetch_array($jab))
+							{ ?>
+							<tr>
+							<td><?= $i?> </td>
+							<td><?=$data['nama']?> </td>
+							<td><?=$data['tempat']?> </td>
+							<td><?=$data['alamat']?> </td>
+							<?php 
+							include "koneksi.php";
+							$id_dokter = $data['id_dokter'];
+							$sql2 = "SELECT * FROM dokter INNER JOIN jabatan ON dokter.id_jabatan = jabatan.id_jabatan WHERE id_dokter='$id_dokter'";
+							$jabatan=mysqli_query($koneksi, $sql2);
+							while($datajab = mysqli_fetch_array($jabatan)){
+							?>
+							<td><?=$datajab['jabatan']?></td>
+							<?php } ?>
+							</tr>
+							<?php
+							$i++;
+						} ?>
+				</table>
 				</div>
                 </div>
                 <!-- /.container-fluid -->

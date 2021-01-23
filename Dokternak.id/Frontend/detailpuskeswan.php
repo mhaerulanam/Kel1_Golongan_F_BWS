@@ -55,7 +55,8 @@ session_start();
             $query_dp = mysqli_query($koneksi, "SELECT * FROM dokter_puskeswan,dokter,jabatan
             WHERE id_puskeswan = '$id_puskeswan'
             AND dokter_puskeswan.id_dokter = dokter.id_dokter
-            AND dokter.id_jabatan = jabatan.id_jabatan");
+            AND dokter.id_jabatan = jabatan.id_jabatan
+            AND dokter.verifikasi='yes' ");
 
             $query_dokpus = mysqli_query($koneksi, "SELECT * FROM dokumentasi_puskeswan,dokumentasi
             WHERE id_puskeswan = '$id_puskeswan'

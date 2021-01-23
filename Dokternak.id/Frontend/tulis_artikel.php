@@ -91,19 +91,11 @@ if (!isset($_SESSION["username"])) {
                         <!-- </div> -->
                         <div class="single-element-widget mt-10">
                         <h5 class="mb-15">Kategori</h5>
-                        <?php if(isset($_GET['id_ktg'])){
-                                $kategori_arikel = $_GET['id_ktg'];
-                                $query_kat = mysqli_query($koneksi,"SELECT * FROM kategori_artikel WHERE kategori_artikel=' $kategori_arikel'");
-                                $kat_2 = mysqli_fetch_array($query_kat)
-                                ?>
-                            <input list="id_ktg" class="form-control" placeholder='Masukkan Jenis Hewan' value="<?= $kat_2['kategori_artikel']; ?>" name="id_ktg">
-                            <?php } 
-                            else{?>
-
+                        
                             <input list="id_ktg" class="form-control" placeholder='Masukkan Jenis Hewan' value="<?php echo $search_keyword; ?>" name="id_ktg">
                             <datalist id="id_ktg" name="id_ktg">
                             <div class="form-select" id="default-select">
-                                <select name="s_kategori" class="form-control" id="exampleFormControlSelect1">  
+                                <select name="id_ktg" class="form-control" id="exampleFormControlSelect1">  
                                     
                                     <?php 
                                     $sql_2 = mysqli_query($koneksi, "SELECT * FROM kategori_artikel");
@@ -112,7 +104,7 @@ if (!isset($_SESSION["username"])) {
                                     <option value="<?= $kat_2['kategori_artikel']; ?>" ></option>
 
                                     <!-- Menggunakan tabel kategori artikel, karena isinya adalah jenis hewan, jadi bisa dipake di form ini juga selain di tulis artikel -->
-                                    <?php }} ?>
+                                    <?php } ?>
                                     </select><br>
                             </div>
                         </div>

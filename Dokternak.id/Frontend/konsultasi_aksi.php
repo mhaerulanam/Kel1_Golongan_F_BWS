@@ -16,21 +16,6 @@ include "koneksi.php";
                  echo 'no value';
         }
 
-        // $id_dokter = $_POST['id_dokter'];
-        $id_kategori = $_POST['id_kategori']; // ternak atau pets
-        $id_ktg = $_POST['id_ktg']; //Dengan kata lain, ktg disini adalah jenis hewan seperti kucing, kambing, dll
-        $nama_hewan = $_POST['nama_hewan'];
-        $keluhan = $_POST['keluhan'];
-        $tanggal = $_POST['tanggal'];
-        $status_kirim = "norespon";
-
-        mysqli_query($koneksi,"insert into konsultasi values 
-        ('$id_konsultasi','$id_peternak','$id_dokter','$id_kategori','$id_ktg','$nama_hewan','$keluhan','$tanggal','$status_kirim')");
-        
-        // echo $id_konsultasi, $id_peternak, $id_dokter, $id_kategori, $id_ktg, $nama_hewan, $keluhan, $tanggal;
-
-        header("location:riwayat_konsultasi.php?pesan=berhasil");
-
         // aksi mengisi jenis hewan
         if (isset($_POST['id_ktg'])){
                 $kategori = $_POST['id_ktg'];
@@ -49,5 +34,22 @@ include "koneksi.php";
             }else{
                     echo 'no value';
             }
+
+        // $id_dokter = $_POST['id_dokter'];
+        $id_kategori = $_POST['id_kategori']; // ternak atau pets
+        $id_ktg = $_POST['id_ktg']; //Dengan kata lain, ktg disini adalah jenis hewan seperti kucing, kambing, dll
+        $nama_hewan = $_POST['nama_hewan'];
+        $keluhan = $_POST['keluhan'];
+        $tanggal = $_POST['tanggal'];
+        $status_kirim = "norespon";
+
+        mysqli_query($koneksi,"insert into konsultasi values 
+        ('$id_konsultasi','$id_peternak','$id_dokter','$id_kategori','$id_ktg','$nama_hewan','$keluhan','$tanggal','$status_kirim')");
+        
+        // echo $id_konsultasi, $id_peternak, $id_dokter, $id_kategori, $id_ktg, $nama_hewan, $keluhan, $tanggal;
+
+        header("location:riwayat_konsultasi.php?pesan=berhasil");
+
+        
 ?>
 

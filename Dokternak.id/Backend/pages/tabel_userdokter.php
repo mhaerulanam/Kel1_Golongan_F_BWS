@@ -364,7 +364,7 @@ session_start();
 												<option disabled selected> Pilih </option>
 												<?php 
 												include "koneksi.php";
-												$sql="SELECT * FROM dokter";
+												$sql="SELECT * FROM dokter WHERE verifikasi='yes'";
 												$jab = mysqli_query($koneksi,$sql);
 												while($data = mysqli_fetch_array($jab))
 												{ ?>
@@ -393,7 +393,7 @@ session_start();
 				</table>
 				</div>
 				<br><br>
-				<h3 class="page-header">Data Dokter (Baru) / Belum Terverifikasi</h3>
+				<h3 class="page-header">Data Dokter <b>Sudah Terverifikasi</b> Namun Akun Belum Diaktifkan</h3>
 
 				<table  class="table table-striped table-hover" >
 					<th>No</th>
@@ -401,7 +401,9 @@ session_start();
 						<?php
 						$i =1;
 							include "koneksi.php";
-							$sql="SELECT * FROM dokter_user RIGHT JOIN dokter ON dokter_user.id_dokter=dokter.id_dokter WHERE dokter_user.id_dokter IS NULL";
+							$sql="SELECT * FROM dokter_user RIGHT JOIN dokter ON dokter_user.id_dokter=dokter.id_dokter 
+							WHERE dokter.verifikasi='yes'
+							AND dokter_user.id_dokter IS NULL";
 							$jab = mysqli_query($koneksi,$sql);
 							while($data = mysqli_fetch_array($jab))
 							{ ?>
@@ -409,6 +411,60 @@ session_start();
 							<td><?= $i?> </td>
 							<td><?=$data['nama']?> </td>
 							</tr>
+							<?php
+							$i++;
+						} ?>
+				</table>
+				<br><br>
+				<h3 class="page-header">Data Dokter <b>Batal Terverifikasi</b> Namun Akun Telah Diaktifkan</h3>
+
+				<table  class="table table-striped table-hover" >
+					<th>No</th>
+					<th>ID Dokteruser</th>
+					<th>Nama</th>
+					<th>Tempat/Kecamatan</th>
+					<th colspan="2">Action</th>
+						<?php
+						$i =1;
+							include "koneksi.php";
+							$sql="SELECT * FROM dokter_user, dokter, user  
+							WHERE  dokter_user.id_user=user.id_user AND dokter_user.id_dokter=dokter.id_dokter
+							AND dokter.verifikasi='no'
+							ORDER BY dokter_user.id_dokteruser";
+							$jab = mysqli_query($koneksi,$sql);
+							while($data = mysqli_fetch_array($jab))
+							{ ?>
+							<tr>
+							<td><?= $i?> </td>
+							<td><?=$data['id_dokteruser']?> </td>
+							<td><?=$data['nama']?> </td>
+							<td><?=$data['tempat']?> </td>
+							<td colspan="2">Anda perlu memeriksa ulang data dokter ini, lalu verifikasi data melalui <a href="tabel_dokter.php">Data Dokter</a>. Untuk menghapus akun, tekan ikon hapus di Tabel Dokter User paling atas.</td>
+							</tr>
+							</tr>
+							<?php
+							$i++;
+						} ?>
+				</table>
+				<br><br>
+				<h3 class="page-header">Data Dokter Baru/<b>Belum Terverifikasi</b></h3>
+
+				<table  class="table table-striped table-hover" >
+					<th>No</th>
+					<th>Nama</th>
+					<th colspan="2">Action</th>
+						<?php
+						$i =1;
+							include "koneksi.php";
+							$sql="SELECT * FROM dokter_user RIGHT JOIN dokter ON dokter_user.id_dokter=dokter.id_dokter WHERE dokter_user.id_dokter IS NULL
+							AND dokter.verifikasi='no'";
+							$jab = mysqli_query($koneksi,$sql);
+							while($data = mysqli_fetch_array($jab))
+							{ ?>
+							<tr>
+							<td><?= $i?> </td>
+							<td><?=$data['nama']?> </td>
+							<td colspan="2">Verifikasi data terlebih dahulu di halaman <a href="tabel_dokter.php">Data Dokter</a></td>
 							<?php
 							$i++;
 						} ?>

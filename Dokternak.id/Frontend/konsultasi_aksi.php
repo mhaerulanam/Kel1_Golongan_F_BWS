@@ -31,13 +31,13 @@ include "koneksi.php";
 
         header("location:riwayat_konsultasi.php?pesan=berhasil");
 
-        // aksi jenis hewan
+        // aksi mengisi jenis hewan
         if (isset($_POST['id_ktg'])){
                 $kategori = $_POST['id_ktg'];
-                $query = mysqli_query($koneksi,"select * from kategori_artikel where kategori_artikel='$kategori'");
-                $data = mysqli_fetch_assoc($query);
+                $query1 = mysqli_query($koneksi,"select * from kategori_artikel where kategori_artikel='$kategori'");
+                $data = mysqli_fetch_assoc($query1);
                 // menghitung data
-                $jumlah_data1 = mysqli_num_rows($query);
+                $jumlah_data1 = mysqli_num_rows($query1);
                     if ( $jumlah_data1 > 0) { 
                         $id_ktg = $data['id_ktg'];
                     }else{

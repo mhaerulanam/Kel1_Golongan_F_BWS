@@ -19,18 +19,17 @@
 	<table border="1">
                 <thead>
                     <tr>
-						<th>No</th>
-						<th>ID Hewan</th>
+					<th>No .</th>
+					<th>Pemilik</th>
 						<th>Nama Hewan</th>
-						<th>Ras Hewan</th>
-						<th>Usia</th>
-                        <th>Keterangan</th>
+						<th>Jenis Hewan</th>
+						<th>Kategori Hewan</th>
                     </tr>
                 </thead>
                 <tbody>
 					<?php
 					$i = 1;
-					$ksql="SELECT * FROM data_hewan";
+					$ksql="SELECT * FROM konsultasi INNER JOIN peternak ON konsultasi.id_peternak = peternak.id_peternak INNER JOIN kategori_artikel ON konsultasi.id_ktg = kategori_artikel.id_ktg INNER JOIN kategori_hewan ON konsultasi.id_kategori = kategori_hewan.id_kategori ";
 					$khasil = mysqli_query($koneksi,$ksql);
 					while($krow = mysqli_fetch_array($khasil))
 					{
@@ -40,13 +39,15 @@
 						<td>
 						<?= $i ?>
 						</td>
-
+						<td>
 						<!-- Code menampilkan data -->
-                        <td><?php echo $krow['id_hewan']; ?></td>
+						<?php echo $krow['namadepan_peternak'];
+						?>
+						</td>
 						<td><?php echo $krow['nama_hewan']; ?></td>
-						<td><?php echo $krow['ras_hewan']; ?></td>
-						<td><?php echo $krow['usia']; ?></td>
-						<td><?php echo $krow['keterangan']; ?></td>
+						<td><?php echo $krow['kategori_artikel']; ?></td>
+						<td><?php echo $krow['kategori_hewan']; ?></td>
+					
                     </tr> 
 					<?php 
 						$i++;

@@ -113,45 +113,53 @@ session_start();
 					ini_set('max_execution_time', 0);
 					date_default_timezone_set('Asia/Jakarta');
 					include "../koneksi.php";
-						$id_hewan = $_POST['id_hewan'];
-						$nama_hewan = $_POST['nama_hewan'];
-						$ras_hewan = $_POST['ras_hewan'];
-						$usia = $_POST['usia'];
-						$keterangan = $_POST['keterangan'];
+					$kode = date('His');
+					$id_dok = "DOC$kode";
+					
+					$id_konsultasi= $_POST['id_konsultasi'];
+					$nama_hewan = $_POST['nama_hewan'];
+					$id_peternak= $_POST['id_peternak'];
+					$id_kategori= $_POST['id_kategori'];
+					$namadepan_peternak = $_POST['namadepan_peternak'];
+					$namabelakang_peternak = $_POST['namabelakang_peternak'];
+					$jenis_hewan = $_POST['kategori_artikel'];
+					$kategori_hewan = $_POST["kategori_hewan"];
+					$id_ktg= $_POST['id_ktg'];
+						// $keterangan = $_POST['keterangan'];
 						
 						
 
 					//Code tombol tambah	
-					if(isset($_POST['tambah'])){
-						/* cek input NIM apakah sudah ada nim yang digunakan */
-						$pilih="select * from data_hewan where id_hewan='$id_hewan'";
-						$cek=mysqli_query($koneksi, $pilih);
+					// if(isset($_POST['tambah'])){
+					// 	/* cek input NIM apakah sudah ada nim yang digunakan */
+					// 	$pilih="select * from konsultasi, kategori_artikel where konsultasi.id_ktg=kategori_artikel.id_ktg and konsultasi.id_konsultasi='$id_konsultasi'";
+					// 	$cek=mysqli_query($koneksi, $pilih);
 					
-						$jumlah_data = mysqli_num_rows($cek);
-						if ($jumlah_data >= 1 ) {
+					// 	$jumlah_data = mysqli_num_rows($cek);
+					// 	if ($jumlah_data >= 1 ) {
 					
-							echo "<script>alert(' Id hewan yang sama sudah digunakan');history.go(-1);</script>";
-						}
-						else{
-							$kode = date('His'); //Hour,minutes,second
+					// 		echo "<script>alert(' Id Konsultasi yang sama sudah digunakan');history.go(-1);</script>";
+					// 	}
+					// 	else{
+					// 		$kode = date('His'); //Hour,minutes,second
 
-							$id_hewan  = "HEW$kode";
+					// 		$id_konsultasi  = "HEW$kode";
 
-							//tambah
-							$sql = "INSERT INTO data_hewan VALUES ('$id_hewan','$nama_hewan','$ras_hewan','$usia','$keterangan')";
-							if(mysqli_query($koneksi, $sql)){
-								$nilaihasil = "Records inserted successfully.";
-							} 
-							else{
-								echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
-							}
-						}
-					}
+					// 		//tambah
+					// 		$sql = "INSERT INTO konsultasi VALUES ('$id_konsultasi','$id_peternak','$id_kategori','$id_ktg',$nama_hewan)";
+					// 		if(mysqli_query($koneksi, $sql)){
+					// 			$nilaihasil = "Records inserted successfully.";
+					// 		} 
+					// 		else{
+					// 			echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
+					// 		}
+					// 	}
+					// }
 
 					// code tombol edit
 					if(isset($_POST['edit'])){
 						//edit
-						$sql = "UPDATE data_hewan SET nama_hewan = '$nama_hewan', ras_hewan = '$ras_hewan', usia = '$usia', keterangan = '$keterangan' WHERE id_hewan = '$id_hewan'";
+						$sql = "UPDATE konsultasi SET  id_kategori = '$id_kategori' , id_ktg = '$id_ktg' , nama_hewan = '$nama_hewan' WHERE id_konsultasi = '$id_konsultasi'";
 						if(mysqli_query($koneksi, $sql)){
 							$nilaihasil = "Records updated successfully.";
 						} 
@@ -163,7 +171,7 @@ session_start();
 					//code delete per item
 					if(isset($_POST['delete'])){
 						//delete
-						$sql = "DELETE FROM data_hewan WHERE id_hewan = '$id_hewan'";
+						$sql = "DELETE FROM konsultasi WHERE id_konsultasi = '$id_konsultasi'";
 						if(mysqli_query($koneksi, $sql)){
 							$nilaihasil = "Records deleted successfully.";
 						} 
@@ -178,7 +186,7 @@ session_start();
 					{
 						//delete
 						$pilih = $_POST['pilih'];
-                            $sql = "DELETE FROM data_hewan WHERE id_hewan IN (".implode(",", $pilih).")";
+						$sql = "DELETE FROM konsultasi WHERE id_konsultasi IN (".implode(",", $pilih).")";
 							if(mysqli_query($koneksi, $sql))
 							{
 								$nilaihasil = "Records deleted successfully.";
@@ -202,9 +210,9 @@ session_start();
                     <div class="col-sm-6">
 					</div>
 					<div class="col-sm-6">
-						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">++ Tambah Data	</a>
+						<!-- <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">++ Tambah Data	</a> -->
 						<a href="cetak/cetak_datahewan.php" target="_blank" class="btn btn-info">Cetak</a>
-						<input type="submit" name="deleteall" value="Delete Selected" class="btn btn-danger" onclick="return confirm('Are you sure delete selected records?')">
+						<!-- <input type="submit" name="deleteall" value="Delete Selected" class="btn btn-danger" onclick="return confirm('Are you sure delete selected records?')"> -->
 					</div>
 				</div>
 				<div class="row">
@@ -221,17 +229,17 @@ session_start();
 							</span>
 						</th>
 						<!-- <th>No</th> -->
-                        <th>Id Hewan</th>
+                        <th>Pemilik</th>
 						<th>Nama Hewan</th>
-						<th>Ras Hewan</th>
-						<th>Usia</th>
-						<th>Keterangan</th>
+						<th>Jenis Hewan</th>
+						<th>Kategori Hewan</th>
+						<th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
 					<?php
-					// $i = 1;
-					$ksql="SELECT * FROM data_hewan";
+					$i = 1;
+					$ksql="SELECT * FROM konsultasi INNER JOIN peternak ON konsultasi.id_peternak = peternak.id_peternak INNER JOIN kategori_artikel ON konsultasi.id_ktg = kategori_artikel.id_ktg INNER JOIN kategori_hewan ON konsultasi.id_kategori = kategori_hewan.id_kategori ";
 					$khasil = mysqli_query($koneksi,$ksql);
 					while($krow = mysqli_fetch_array($khasil))
 					{
@@ -240,81 +248,101 @@ session_start();
 					<tr>
 						<td>
 							<span class="custom-checkbox">
-								<input type="checkbox" id="checkbox5" name="pilih[]" value="<?php echo $krow['id_hewan']; ?>">
+								<input type="checkbox" id="checkbox5" name="pilih[]" value="<?php echo $krow['id_konsultasi']; ?>">
 								<label for="checkbox5"></label>
 							</span>
 						</td>
-						<!-- <td><?= $i ?></td> -->
+						<!-- <td><?php echo $i ?></td> -->
 
 						<!-- Code menampilkan data -->
-						<td><?php echo $krow['id_hewan']; ?></td>
+						<td>
+						
+						<?php echo $krow['namadepan_peternak'];
+						?>
+						</td>
 						<td><?php echo $krow['nama_hewan']; ?></td>
-						<td><?php echo $krow['ras_hewan']; ?></td>
-						<td><?php echo $krow['usia']; ?></td>
-						<td><?php echo $krow['keterangan']; ?></td>
+						<td><?php echo $krow['kategori_artikel']; ?></td>
+						<td><?php echo $krow['kategori_hewan']; ?></td>
 					
 						<!-- Tombol Action -->
                         <td>
-                            <a href="#editEmployeeModal<?php echo $krow['id_hewan']; ?>" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal<?php echo $krow['id_hewan']; ?>" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                            <a href="#editEmployeeModal<?php echo $krow['id_konsultasi']; ?>" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                            <!-- <a href="#deleteEmployeeModal<?php echo $krow['id_konsultasi']; ?>" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a> -->
                         </td>
                     </tr>
 					
 
 
 					<!-- Edit Modal HTML -->
-					<div id="editEmployeeModal<?php echo $krow['id_hewan']; ?>" class="modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <form role="form" method="POST">
-                            <input type="hidden" class="form-control" value="<?php echo $krow['id_hewan']; ?>" name="id_hewan" required>
-                            <div class="modal-header">
-                                <h4 class="modal-title">Edit</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label>Nama Hewan :</label>
-                                    <input type="text" name="nama_hewan" id="nama_hewan" class="form-control" value="<?php echo $krow['nama_hewan']; ?>" >
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Ras Hewan :</label>
-                                    <input type="text" name="ras_hewan" id="ras_hewan" class="form-control" value="<?php echo $krow['ras_hewan']; ?>"  required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Usia :</label>
-                                    <input type="number" name="usia" id="usia" class="form-control" value="<?php echo $krow['usia']; ?>" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Keterangan :</label>
-                                    <input type="text"name="keterangan" id="keterangan" class="form-control" value="<?php echo $krow['keterangan']; ?>" required>
-                                </div> 
-                                
-                                        <div class="modal-footer">
-                                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                                            <input type="submit" class="btn btn-info" value="Save" name="edit">
+					<div id="editEmployeeModal<?php echo $krow['id_konsultasi']; ?>" class="modal fade">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<form role="form" method="POST">
+									<input type="hidden" class="form-control" value="<?php echo $krow['id_konsultasi']; ?>" name="id_konsultasi" required>
+									<div class="modal-header">
+										<h4 class="modal-title">Edit</h4>
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									</div>
+									<div class="modal-body">
+									<div class="form-group">
+                                            <label>Kategori :</label>
+                                            <select name="id_kategori" class="form-control" id="default-select">
+												<option disabled selected> Pilih </option>
+												<?php 
+												include "koneksi.php";
+												$sql="SELECT * FROM kategori_hewan";
+												$dok = mysqli_query($koneksi,$sql);
+												while($data = mysqli_fetch_array($dok))
+												{ ?>
+												<option value="<?php echo $data['id_kategori']?>" <?php if($data['id_kategori']==$krow['id_kategori']) echo 'selected' ?>><?=$data['kategori_hewan']?></option> 
+												<?php } ?>
+											</select><br>
                                         </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+									<div class="mt-30">
+                                            <label>Jenis Hewan :</label>
+                                            <select name="id_ktg" class="form-control" id="default-select">
+												<option disabled selected> Pilih </option>
+												<?php 
+												include "koneksi.php";
+												$sql="SELECT * FROM kategori_artikel";
+												$dok = mysqli_query($koneksi,$sql);
+												while($data = mysqli_fetch_array($dok))
+												{ ?>
+												<option value="<?php echo $data['id_ktg']?>" <?php if($data['id_ktg']==$krow['id_ktg']) echo 'selected' ?>><?=$data['kategori_artikel']?></option> 
+												<?php } ?>
+											</select><br>
+                                        </div>
+                                    <div class="form-group">
+									<div class="form-group">
+                                            <label>Nama Hewan :</label>
+                                            <input type="text" name="nama_hewan" id="nama_hewan" class="form-control" value="<?php echo $krow['nama_hewan']; ?>" >
+                                        </div>
+											<div class="modal-footer">
+													<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+													<input type="submit" class="btn btn-info" value="Save" name="edit">
+												</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+
+
 
 
 					<!-- Delete Modal HTML -->
-					<div id="deleteEmployeeModal<?php echo $krow['id_hewan']; ?>" class="modal fade">
+					<!-- <div id="deleteEmployeeModal<?php echo $krow['id_konsultasi']; ?>" class="modal fade">
 						<div class="modal-dialog">
 							<div class="modal-content">
 							<form method="post" action="">
-								<input type="text" class="form-control" value="<?php echo $krow['id_hewan']; ?>" name="id_hewan" required>
+								<input type="text" class="form-control" value="<?php echo $krow['id_konsultasi']; ?>" name="id_konsultasi" required>
 									<div class="modal-header">
 										<h4 class="modal-title">Delete</h4>
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 									</div>
 									<div class="modal-body">
-										<p>Are you sure you want to delete these Records <?php echo $krow['nama_hewan']; ?>?</p>
-										<p class="text-warning"><small>This action cannot be undone.</small></p>
+										<p>Apakah anda yakin ingin menghapus data Hewan <?php echo $krow['id_hewan']; ?> 
+										<p class="text-warning"><small>Data yang terhapus tidak dapat dikembalikan.</small></p>
 									</div>
 									<div class="modal-footer">
 										<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
@@ -323,7 +351,7 @@ session_start();
 								</form>
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<?php
 
 					$i++;
@@ -338,41 +366,58 @@ session_start();
 			
 
 				<!-- Add Modal HTML -->
-				<div id="addEmployeeModal" class="modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                    <form role="form" method="POST" action="">
-                            <div class="modal-header">
-                                <h4 class="modal-title">Tambah Data</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label>Nama Hewan:</label>
-                                    <input type="text" name="nama_hewan" id="nama_hewan" class="form-control" required >
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Ras Hewan:</label>
-                                    <input type="text" name="ras_hewan" id="ras_hewan" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Usia :</label>
-                                    <input type="number" name="usia" id="usia" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Keterangan :</label>
-                                    <input type="text" name="keterangan" id="keterangan" class="form-control" required>
-                                </div> 
-                                
-                                        <div class="modal-footer">
-                                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                                            <input type="submit" class="btn btn-success" value="Tambah" name="tambah">
+				<!-- <div id="addEmployeeModal" class="modal fade">
+						<div class="modal-dialog">
+							<div class="modal-content">
+							<form role="form" method="POST" action="">
+									<div class="modal-header">
+										<h4 class="modal-title">Tambah Data</h4>
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									</div>
+									<div class="modal-body">
+									<div class="modal-body">
+		
+                            <div class="form-group">
+										<label>Kategori Hewan</label><br>
+										<select name="id_kategori" class="form-control" id="default-select">
+										<option disabled selected> Pilih </option>
+											<?php 
+												include "koneksi.php";
+												$query_kat = mysqli_query($koneksi,"SELECT * FROM kategori_hewan");
+													while($data = mysqli_fetch_array($query_kat))
+												{ ?>
+													<option value="<?php echo $data['id_kategori']?>"><?=$data['kategori_hewan']?></option> 
+												<?php } ?>
+										</select><br>
+									</div>
+									<div class="form-group">
+										<label>Jenis Hewan</label><br>
+										<select name="id_ktg" class="form-control" id="default-select">
+										<option disabled selected> Pilih </option>
+											<?php 
+												include "koneksi.php";
+												$query_kat = mysqli_query($koneksi,"SELECT * FROM kategori_artikel");
+													while($data = mysqli_fetch_array($query_kat))
+												{ ?>
+													<option value="<?php echo $data['id_ktg']?>"><?=$data['kategori_artikel']?></option> 
+												<?php } ?>
+										</select><br>
+									</div>
+                                    
+									<div class="form-group">
+                                            <label>Nama Hewan :</label>
+                                            <input type="text" name="nama_hewan" id="nama_hewan" class="form-control" >
                                         </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+										
+												<div class="modal-footer">
+													<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+													<input type="submit" class="btn btn-info" value="Save" name="tambah">
+												</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div> -->
             </div>
         </div>
         </table>

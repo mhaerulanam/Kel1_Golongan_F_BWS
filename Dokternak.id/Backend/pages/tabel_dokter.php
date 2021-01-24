@@ -676,15 +676,48 @@ session_start();
 					// kode aksi verifikasi
 					if(isset($_POST['verifikasi']))
 					{	
-						$sql1 = "UPDATE dokter SET verifikasi = 'yes' WHERE id_dokter = '$id_dokter'";			
-						if(mysqli_query($koneksi, $sql1)){
-							echo "<script type='text/javascript'>alert('Verifikasi Berhasil');; window.location='tabel_dokter.php'</script>";
-						} 
-						else{
-							echo "<script type='text/javascript'>alert('Verifikasi gagal'); window.location='tabel_dokter.php'</script>";
+						$cek = mysqli_query($koneksi, "SELECT * FROM dokter WHERE id_dokter='$id_dokter'");
+						while ($cek_telp = mysqli_fetch_array($cek)) {
+							$telpon = $cek_telp['telpon'];
+							$telpon2 = $cek_telp['telpon'];
+							// $nama = $cek_telp['nama'];
+						} //End while
+
+						$telpon0 = mysqli_query($koneksi, "SELECT * FROM dokter WHERE id_dokter='$id_dokter' AND telpon LIKE '08%'");
+						while($telp0 = mysqli_fetch_array($telpon0)){
+							$t0 = $telp0['telpon'];
 						}
 
-					}
+						$telpon62 = mysqli_query($koneksi, "SELECT * FROM dokter WHERE id_dokter='$id_dokter' AND telpon LIKE '+62%'");
+						while($telp62 = mysqli_fetch_array($telpon62)){
+							$t62 = $telp62['telpon'];
+						}
+						
+						
+						if($telpon = $t0){
+							$str= ltrim ($telpon2,'0');
+							$telpon_baru = "+62$str";
+							$sql1 = "UPDATE dokter SET verifikasi = 'yes', telpon = '$telpon_baru' WHERE id_dokter = '$id_dokter'";			
+							if(mysqli_query($koneksi, $sql1)){
+								echo "<script type='text/javascript'>alert('Verifikasi Berhasil');; window.location='tabel_dokter.php'</script>";
+							} 
+							else{
+								echo "<script type='text/javascript'>alert('Verifikasi gagal'); window.location='tabel_dokter.php'</script>";
+							}
+							// echo "<script type='text/javascript'>alert('Nomor Telpon Belum Diperbaiki. Ubah 0 menjadi +62'); window.location='tabel_dokter.php'</script>";
+						}else if($telpon = $t62){
+							$sql1 = "UPDATE dokter SET verifikasi = 'yes' WHERE id_dokter = '$id_dokter'";			
+							if(mysqli_query($koneksi, $sql1)){
+								echo "<script type='text/javascript'>alert('Verifikasi Berhasil');; window.location='tabel_dokter.php'</script>";
+							} 
+							else{
+								echo "<script type='text/javascript'>alert('Verifikasi gagal'); window.location='tabel_dokter.php'</script>";
+							}
+						}else{
+							echo "<script type='text/javascript'>alert('Nomor telpon tidak terdaftar. Mohon perbaiki nomor telpon terlebih dahulu!'); window.location='tabel_dokter.php'</script>";
+						} // End else
+
+					} //End if isset
 				?>
 
 				<h3 class="page-header">Data Dokter Baru/<b>Belum Terverifikasi</b></h3>

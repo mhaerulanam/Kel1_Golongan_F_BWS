@@ -116,14 +116,15 @@ session_start();
 					date_default_timezone_set('Asia/Jakarta');
                     include "../koneksi.php";
 
+					$id_dokter = $_SESSION['id'];
 					$id_rmd = $_POST['id_rmd'];
+					$id_kategori = $_POST['id_kategori'];
+					$id_ktg = $_POST['id_ktg'];
 					$nama_hewan = $_POST['nama_hewan'];
-					$nama_pemilik = $_POST['nama_pemilik'];
-					$kategori = $_POST['kategori'];
+					$nama_peternak = $_POST['nama_peternak'];
 					$keluhan = $_POST['keluhan'];
-					$tanggal = date('y / M  / d');
+					$tanggal = $_POST['tanggal'];
 					$alamat = $_POST['alamat'];
-					$kategori = $_POST['kategori'];
 					$diagnosa = $_POST['diagnosa'];
 					$pelayanan = $_POST['pelayanan'];
 						
@@ -141,10 +142,34 @@ session_start();
 						}
 						else{
 							//tambah
+							// aksi mengisi jenis hewan
+							if (isset($_POST['id_ktg'])){
+								$kategori = $_POST['id_ktg'];
+								$query1 = mysqli_query($koneksi,"select * from kategori_artikel where kategori_artikel='$kategori'");
+								$data = mysqli_fetch_assoc($query1);
+								// menghitung data
+								$jumlah_data1 = mysqli_num_rows($query1);
+									if ( $jumlah_data1 > 0) { 
+										$id_ktg = $data['id_ktg'];
+									}else{
+										$kode = date('His'); //Hour,minutes,second
+										$id_ktg  = "KAT$kode";
+										mysqli_query($koneksi,"insert into kategori_artikel  values ('$id_ktg','$kategori')");
+									}
+								
+							}else{
+									echo 'no value';
+							}
+
 							$sql = "INSERT INTO rekam_medik VALUES 
-                            (null,'$tanggal', '$kategori','$nama_hewan','$nama_pemilik','$alamat','$keluhan','$diagnosa','$pelayanan')";
+                            (null,'$tanggal', '$id_kategori', '$id_ktg','$nama_hewan','$nama_peternak','$alamat','$keluhan','$diagnosa','$pelayanan')";
 							if(mysqli_query($koneksi, $sql)){
-								$nilaihasil = "Records inserted successfully.";
+								$ambildata=mysqli_query($koneksi, "SELECT * FROM rekam_medik order by id_rmd DESC LIMIT 1");
+								$row = mysqli_fetch_array($ambildata);
+								$id = $row['id_rmd'];
+								$id_dokter = $_SESSION['id'];
+								$sql = mysqli_query($koneksi, "INSERT INTO detail_rekammedik VALUES (NULL, '$id_dokter', '$id')");
+								$nilaihasil = "$id $id_dokter";
 							} 
 							else{
 								echo "ERROR: Could not able to execute $sql. " . mysqli_error($koneksi);
@@ -155,8 +180,28 @@ session_start();
 					// code tombol edit
 					if(isset($_POST['edit'])){
 						//edit
+						
+						// aksi mengisi jenis hewan
+						if (isset($_POST['id_ktg'])){
+							$kategori = $_POST['id_ktg'];
+							$query1 = mysqli_query($koneksi,"select * from kategori_artikel where kategori_artikel='$kategori'");
+							$data = mysqli_fetch_assoc($query1);
+							// menghitung data
+							$jumlah_data1 = mysqli_num_rows($query1);
+								if ( $jumlah_data1 > 0) { 
+									$id_ktg = $data['id_ktg'];
+								}else{
+									$kode = date('His'); //Hour,minutes,second
+									$id_ktg  = "KAT$kode";
+									mysqli_query($koneksi,"insert into kategori_artikel  values ('$id_ktg','$kategori')");
+								}
+							
+						}else{
+								echo 'no value';
+						}
+
 						$sql = "UPDATE rekam_medik SET nama_hewan =
-                         '$nama_hewan', nama_pemilik = '$nama_pemilik', keluhan = '$keluhan', tanggal = '$tanggal', alamat = '$alamat', diagnosa = '$diagnosa', pelayanan = '$pelayanan', kategori = '$kategori' WHERE id_rmd = '$id_rmd'";
+                         '$nama_hewan', nama_peternak = '$nama_peternak', keluhan = '$keluhan', tanggal = '$tanggal', alamat = '$alamat', diagnosa = '$diagnosa', pelayanan = '$pelayanan', id_kategori = '$id_kategori' , id_ktg= '$id_ktg' WHERE id_rmd = '$id_rmd'";
 						if(mysqli_query($koneksi, $sql)){
 							$nilaihasil = "Records updated successfully.";
 						} 
@@ -170,6 +215,7 @@ session_start();
 						//delete
 						$sql = "DELETE FROM rekam_medik WHERE id_rmd = '$id_rmd'";
 						if(mysqli_query($koneksi, $sql)){
+							$sql = "DELETE FROM detail_rekammedik WHERE id_detailRM = '$id_detailRM'";
 							$nilaihasil = "Records deleted successfully.";
 						} 
 						else{
@@ -183,7 +229,7 @@ session_start();
 					{
 						//delete
 						$pilih = $_POST['pilih'];
-							$sql = "DELETE FROM rekam_medik WHERE id_rmd IN (".implode(",", $pilih).")";
+							$sql = "DELETE FROM detail_rekammedik WHERE id_detailRM IN (".implode(",", $pilih).")";
 							if(mysqli_query($koneksi, $sql))
 							{
 								$nilaihasil = "Records deleted successfully.";
@@ -210,6 +256,7 @@ session_start();
                                             <label>Tanggal Akhir:</label>
                                             <input type="date" name="tanggal_akhir" id="tanggal_akhir" class="form-control" required>
                                         </div>
+										<input type="hidden" name="id_dokter" value="<?php 	echo $_SESSION['id']; ?>">
 										<input type="submit" class="btn btn-info" value="Cetak" name="submit">
 					</form>
 					</div>
@@ -257,13 +304,10 @@ session_start();
 					<?php
 					$i = 1;
 					$dokter = $_SESSION['id'];
-					$ksql="SELECT detail_rekammedik.*, rekam_medik.*, kategori_artikel.*, kategori_hewan.*, dokter.id_dokter, peternak.* FROM detail_rekammedik, rekam_medik, kategori_hewan, kategori_artikel, dokter, peternak WHERE detail_rekammedik.id_rmd = rekam_medik.id_rmd AND rekam_medik.id_kategori = kategori_hewan.id_kategori AND rekam_medik.id_ktg = kategori_artikel.id_ktg AND detail_rekammedik.id_dokter = dokter.id_dokter AND rekam_medik.id_peternak = peternak.id_peternak AND dokter.id_dokter='$dokter'";
+					$ksql="SELECT detail_rekammedik.*, rekam_medik.*, kategori_artikel.*, kategori_hewan.*, dokter.id_dokter FROM detail_rekammedik, rekam_medik, kategori_hewan, kategori_artikel, dokter WHERE detail_rekammedik.id_rmd = rekam_medik.id_rmd AND rekam_medik.id_kategori = kategori_hewan.id_kategori AND rekam_medik.id_ktg = kategori_artikel.id_ktg AND detail_rekammedik.id_dokter = dokter.id_dokter AND dokter.id_dokter='$dokter'";
 					$khasil = mysqli_query($koneksi,$ksql);
 					while($krow = mysqli_fetch_array($khasil))
 					{
-						$nmd = $krow['namadepan_peternak'];
-						$nmb = $krow['namabelakang_peternak'];
-						$nama_lengkap = "$nmd $nmb";
 					?>
 
 					<tr>
@@ -281,7 +325,7 @@ session_start();
                         <td><?php echo $krow['kategori_hewan']; ?></td>
 						<td><?php echo $krow['kategori_artikel']; ?></td>
 						<td><?php echo $krow['nama_hewan']; ?></td>
-						<td><?php echo $nama_lengkap ?></td>
+						<td><?php echo $krow['nama_peternak']; ?></td>
 						<td><?php echo $krow['alamat']; ?></td>
 						<td><?php echo $krow['keluhan']; ?></td>
                         <td><?php echo $krow['diagnosa']; ?></td>
@@ -312,17 +356,43 @@ session_start();
                                             <label>Tanggal :</label>
                                             <input type="date" name="tanggal" id="tanggal" class="form-control" value="<?php echo $krow['tanggal']; ?>" required >
 										</div> 
-                                        <div class="form-group">
-                                            <label>Kategori Hewan :</label>
-                                            <input type="text" name="kategori" id="kategori" class="form-control" value="<?php echo $krow['kategori']; ?>" required>
+                                        <div class="wrapper">
+                                            <div class="tabs-2">
+                                                <div class="tab">
+                                                <label>Kategori : </label> <br>
+                                                <input type="radio" name="id_kategori" id="tab-l" class="tab-switch" value="KAT001"  <?php if($krow['id_kategori']=='KAT001') echo 'checked' ?>>
+                                                <label for="tab-l" class="tab-label">Hewan Ternak</label>
+                                                </div>
+                                                <div class="tab">
+                                                <input type="radio" name="id_kategori" id="tab-p" class="tab-switch" value="KAT002"  <?php if($krow['id_kategori']=='KAT002') echo 'checked' ?>>
+                                                <label for="tab-p" class="tab-label">Hewan Kesayangan</label>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="form-group">
+										<div class="form-group">
+										<label>Jenis Hewan :</label>
+										<input list="id_ktg" class="form-control" placeholder='Masukkan jenis Hewan' value="<?php echo $krow['kategori_artikel']; ?>" name="id_ktg">
+											<datalist id="id_ktg" name="id_ktg">
+											<option value="Kucing" ></option>
+											<option value="kambing" ></option>
+											<option value="Sapi" ></option>
+											<option value="Domba" ></option>
+											<option value="Kelinci" ></option>								
+										</div>
+										<div class="form-group">
                                             <label>Nama Hewan :</label>
-                                            <input type="text" name="nama_hewan" id="nama_hewan" class="form-control" value="<?php echo $krow['nama_hewan']; ?>" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Nama Pemilik :</label>
-                                            <input type="text" name="nama_pemilik" id="nama_pemilik" class="form-control" value="<?php echo $krow['nama_pemilik']; ?>"  required>
+											<input list="nama_hewan" class="form-control" placeholder='Masukkan nama Hewan' value="<?php echo $krow['nama_hewan']; ?>" name="nama_hewan">
+											<datalist id="nama_hewan" name="id_kateg">
+												<?php 
+												$query1 = mysqli_query($koneksi,"SELECT * FROM konsultasi, peternak WHERE konsultasi.id_konsultasi = peternak.id_peternak ");
+												while ($hewan = mysqli_fetch_array($query1)) { ?>	
+													<option value="<?= $hewan['nama_hewan']; ?>" ></option>
+												<?php } ?>
+											</datalist>
+                                        </div>  
+										<div class="form-group">
+                                            <label>Nama Peternak :</label>
+                                            <input type="text" name="nama_peternak" id="nama_peternak" class="form-control" value="<?php echo $krow['nama_peternak']; ?>" required>
 										</div>
                                         <div class="form-group">
                                             <label>Alamat :</label>
@@ -396,34 +466,32 @@ session_start();
 										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 									</div>
 									<div class="modal-body">
+										<div class="form-group">
+                                            <label>Tanggal :</label>
+                                            <input type="date" name="tanggal" id="tanggal" class="form-control" required >
+										</div> 
                                         <div class="wrapper">
                                             <div class="tabs-2">
                                                 <div class="tab">
                                                 <label>Kategori : </label> <br>
-                                                <input type="radio" name="kategori" id="tab-l" class="tab-switch" value="KAT001" selected>
+                                                <input type="radio" name="id_kategori" id="tab-l" class="tab-switch" value="KAT001" selected>
                                                 <label for="tab-l" class="tab-label">Hewan Ternak</label>
                                                 </div>
                                                 <div class="tab">
-                                                <input type="radio" name="kategori" id="tab-p" class="tab-switch" value="KAT002" selected>
+                                                <input type="radio" name="id_kategori" id="tab-p" class="tab-switch" value="KAT002" selected>
                                                 <label for="tab-p" class="tab-label">Hewan Kesayangan</label>
                                                 </div>
                                             </div>
                                         </div>
 										<div class="form-group">
 										<label>Jenis Hewan :</label>
-										<input list="jenis_hewan" class="form-control" placeholder='Masukkan nama Hewan' value="<?php echo $search_keyword; ?>" name="jenis_hewan">
-											<datalist id="jenis_hewan" name="jenis_hewan">
-											<!-- <option value="Kucing" ></option>
+										<input list="jenis_hewan" class="form-control" placeholder='Masukkan jenis Hewan' value="<?php echo $search_keyword; ?>" name="id_ktg">
+											<datalist id="jenis_hewan" name="id_ktg">
+											<option value="Kucing" ></option>
 											<option value="kambing" ></option>
 											<option value="Sapi" ></option>
 											<option value="Domba" ></option>
-											<option value="Kelinci" ></option> -->
-											<?php 
-												$query2 = mysqli_query($koneksi,"SELECT * FROM kategori_artikel");
-												while ($hewan2 = mysqli_fetch_array($query2)) { ?>	
-													<option value="<?= $hewan2['kategori_artikel']; ?>" ><?= $hewan2['kategori_artikel']; ?></option>
-												<?php } ?>
-											</datalist>
+											<option value="Kelinci" ></option>								
                                         </div>
 										<div class="form-group">
                                             <label>Nama Hewan :</label>
@@ -435,24 +503,10 @@ session_start();
 													<option value="<?= $hewan['nama_hewan']; ?>" ></option>
 												<?php } ?>
 											</datalist>
-                                        </div>  
-										<div class="form-group">
-											<label>Jenis Hewan nyoba :</label>
-											<input list="id_ktg" class="form-control" placeholder='Masukkan Jenis Hewan' value="<?php echo $search_keyword; ?>" name="id_ktg">
-											<datalist id="id_ktg" name="id_ktg">
-												<?php 
-												$sql_2 = mysqli_query($koneksi, "SELECT * FROM kategori_artikel");
-												while ($kat_2 = mysqli_fetch_array($sql_2)) { ?>
-												<!-- <option value="<?=$kat_2['id_ktg']?>"><?=$kat_2['kategori_artikel']?></option>  -->
-												<option value="<?= $kat_2['kategori_artikel']; ?>" ></option>
-
-												<!-- Menggunakan tabel kategori artikel, karena isinya adalah jenis hewan, jadi bisa dipake di form ini juga selain di tulis artikel -->
-												<?php } ?>
-											</datalist>
-										</div>   
+                                        </div>    
                                         <div class="form-group">
                                             <label>Nama Pemilik :</label>
-                                            <input type="text" name="nama_pemilik" id="nama_pemilik" class="form-control" required>
+                                            <input type="text" name="nama_peternak" id="nama_peternak" class="form-control" required>
 										</div>
                                         <div class="form-group">
                                             <label>Alamat :</label>
@@ -470,11 +524,10 @@ session_start();
                                             <label>Pelayanan :</label>
                                             <textarea name="pelayanan" id="pelayanan" class="form-control" required></textarea>
 										</div>
-										    
-												<div class="modal-footer">
-													<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-													<input type="submit" class="btn btn-success" value="Tambah" name="tambah">
-												</div>
+										<div class="modal-footer">
+											<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+											<input type="submit" class="btn btn-success" value="Tambah" name="tambah">
+										</div>
 									</div>
 								</form>
 							</div>

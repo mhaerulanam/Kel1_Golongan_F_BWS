@@ -37,7 +37,6 @@ include "koneksi.php";
 
         // $id_dokter = $_POST['id_dokter'];
         $id_kategori = $_POST['id_kategori']; // ternak atau pets
-        $id_ktg = $_POST['id_ktg']; //Dengan kata lain, ktg disini adalah jenis hewan seperti kucing, kambing, dll
         $nama_hewan = $_POST['nama_hewan'];
         $keluhan = $_POST['keluhan'];
         $tanggal = $_POST['tanggal'];

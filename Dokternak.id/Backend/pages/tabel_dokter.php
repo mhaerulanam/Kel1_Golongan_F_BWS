@@ -676,15 +676,35 @@ session_start();
 					// kode aksi verifikasi
 					if(isset($_POST['verifikasi']))
 					{	
-						$sql1 = "UPDATE dokter SET verifikasi = 'yes' WHERE id_dokter = '$id_dokter'";			
-						if(mysqli_query($koneksi, $sql1)){
-							echo "<script type='text/javascript'>alert('Verifikasi Berhasil');; window.location='tabel_dokter.php'</script>";
-						} 
-						else{
-							echo "<script type='text/javascript'>alert('Verifikasi gagal'); window.location='tabel_dokter.php'</script>";
-						}
+						$cek = mysqli_query($koneksi, "SELECT * FROM dokter WHERE id_dokter='$id_dokter'");
+						while ($cek_telp = mysqli_fetch_array($cek)) {
+							$telpon = $cek_telp['telpon'];
+							$telpon2 = $cek_telp['telpon'];
+							// $nama = $cek_telp['nama'];
+						} //End while
+						
+						if($telpon = "08%"){
+							$str= ltrim ($telpon2,'0');
+							$telpon_baru = "+62$str";
+							$sql1 = "UPDATE dokter SET verifikasi = 'yes', telpon = '$telpon_baru' WHERE id_dokter = '$id_dokter'";			
+							if(mysqli_query($koneksi, $sql1)){
+								echo "<script type='text/javascript'>alert('Verifikasi Berhasil');; window.location='tabel_dokter.php'</script>";
+							} 
+							else{
+								echo "<script type='text/javascript'>alert('Verifikasi gagal'); window.location='tabel_dokter.php'</script>";
+							}
+							// echo "<script type='text/javascript'>alert('Nomor Telpon Belum Diperbaiki. Ubah 0 menjadi +62'); window.location='tabel_dokter.php'</script>";
+						}else{
+							$sql1 = "UPDATE dokter SET verifikasi = 'yes' WHERE id_dokter = '$id_dokter'";			
+							if(mysqli_query($koneksi, $sql1)){
+								echo "<script type='text/javascript'>alert('Verifikasi Berhasil');; window.location='tabel_dokter.php'</script>";
+							} 
+							else{
+								echo "<script type='text/javascript'>alert('Verifikasi gagal'); window.location='tabel_dokter.php'</script>";
+							}
+						} // End else
 
-					}
+					} //End if isset
 				?>
 
 				<h3 class="page-header">Data Dokter Baru/<b>Belum Terverifikasi</b></h3>

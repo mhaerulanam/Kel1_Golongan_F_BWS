@@ -39,7 +39,7 @@
                 <tbody>
 					<?php
 					$i = 1;
-					$ksql="SELECT * FROM dokter";
+					$ksql="SELECT * FROM dokter WHERE verifikasi='yes'";
 					$khasil = mysqli_query($koneksi,$ksql);
 					while($krow = mysqli_fetch_array($khasil))
 					{

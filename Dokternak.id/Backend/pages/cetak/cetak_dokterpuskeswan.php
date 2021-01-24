@@ -31,7 +31,8 @@
                 <tbody>
 					<?php
 					$i = 1;
-					$ksql="SELECT * FROM dokter_puskeswan INNER JOIN puskeswan ON dokter_puskeswan.id_puskeswan = puskeswan.id_puskeswan INNER JOIN dokter ON dokter_puskeswan.id_dokter = dokter.id_dokter ORDER BY id_dp";
+					$ksql="SELECT * FROM dokter_puskeswan INNER JOIN puskeswan ON dokter_puskeswan.id_puskeswan = puskeswan.id_puskeswan INNER JOIN dokter ON dokter_puskeswan.id_dokter = dokter.id_dokter 
+					AND dokter.verifikasi='yes' ORDER BY id_dp";
 					$khasil = mysqli_query($koneksi,$ksql);
 					while($krow = mysqli_fetch_array($khasil))
 					{

@@ -104,7 +104,7 @@ session_start();
 						$id_dokter = $_POST['id_dokter'];
 						$respon = $_POST['respon'];
 						$tanggal = $_POST['tanggal'];
-						$tanggal_respon = $_POST['tanggal_konsultasi'];
+						$tanggal_respon = $_POST['tanggal_respon'];
 
 
 					//Code tombol tambah	

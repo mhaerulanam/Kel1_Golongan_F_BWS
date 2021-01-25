@@ -42,6 +42,15 @@ if (!isset($_SESSION["username"])) {
     <h2>
             <center><b>Tulis Artikel</b></center>
     </h2>
+
+    <?php
+                   
+                   $s_nama="";
+                   $search_keyword="";
+                   if (isset($_POST['search'])) {
+                       $search_keyword = $_POST['nama'];
+                   }
+                   ?>
     <?php
         if (isset($_GET['pesan'])){
             $pesan = $_GET['pesan'];
@@ -73,11 +82,20 @@ if (!isset($_SESSION["username"])) {
                         <!-- </div> -->
                         <div class="single-element-widget mt-10">
                         <h5 class="mb-15">Kategori</h5>
-                            <div class="form-select" id="default-select"">
-                                <select name="s_kategori" class="form-control" id="exampleFormControlSelect1">
-                                    <option value="KAT02" <?php if ($s_kategori=="Kambing"){ echo "selected"; } ?>>Kambing</option>
-                                    <option value="KAT01" <?php if ($s_kategori=="Kucing"){ echo "selected"; } ?>>Kucing</option>
-                                </select>
+                            <input list="id_ktg" class="form-control" placeholder='Masukkan Kategori Hewan' value="<?php echo $search_keyword; ?>" name="id_ktg">
+                            <datalist id="id_ktg" name="id_ktg">
+                            <div class="form-select" id="default-select">
+                                <select name="s_kategori" class="form-control" id="exampleFormControlSelect1">  
+                                    
+                                    <?php 
+                                    $sql_2 = mysqli_query($koneksi, "SELECT * FROM kategori_artikel");
+                                    while ($kat_2 = mysqli_fetch_array($sql_2)) { ?>
+                                    <!-- <option value="<?=$kat_2['id_ktg']?>"><?=$kat_2['kategori_artikel']?></option>  -->
+                                    <option value="<?= $kat_2['kategori_artikel']; ?>" ></option>
+
+                                    <!-- Menggunakan tabel kategori artikel, karena isinya adalah jenis hewan, jadi bisa dipake di form ini juga selain di tulis artikel -->
+                                    <?php } ?>
+                                    </select><br>
                             </div>
                         </div>
                         <div class="mt-30">

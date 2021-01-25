@@ -32,7 +32,8 @@
                 <tbody>
 					<?php
 					$i = 1;
-					$ksql="SELECT * FROM data_obat";
+					$id = $_GET['id_dokter'];
+					$ksql="SELECT * FROM detail_dataobat INNER JOIN data_obat ON detail_dataobat.id_obat = data_obat.id_obat where id_dokter='$id'";
 					$khasil = mysqli_query($koneksi,$ksql);
 					while($krow = mysqli_fetch_array($khasil))
 					{

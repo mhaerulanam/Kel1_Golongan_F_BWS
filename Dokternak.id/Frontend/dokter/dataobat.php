@@ -211,7 +211,8 @@ session_start();
 					</div>
 					<div class="col-sm-6">
 						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">++ Tambah Data	</a>
-						<a href="cetak/cetak_dataobat.php" target="_blank" class="btn btn-info">Cetak</a>
+						<!-- <a href="detaildokter.php?id_dokter=<?php echo $row['id_dokter']; ?>"><b>Detail</b></a> -->
+						<a href="cetak/cetak_dataobat.php ?id_dokter=<?php 	echo $_SESSION['id']; ?>" target="_blank" class="btn btn-info">Cetak</a>
 						<input type="submit" name="deleteall" value="Delete Selected" class="btn btn-danger" onclick="return confirm('Are you sure delete selected records?')">
 					</div>
 				</div>
